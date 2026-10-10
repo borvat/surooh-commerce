@@ -57,6 +57,26 @@ describe("warehouse audit prerequisites", () => {
     expect(r.valid).toBe(true);
     expect(r.readyForHandoff).toBe(false);
   });
+  test("distinguishes handoff readiness from an evidenced completed handoff", () => {
+    const checked = [
+      event("PICKING_STARTED","1"), event("PICKING_COMPLETED","2"),
+      event("PACKING_CHECKED","3"), event("CARRIER_LABEL_VERIFIED","4")
+    ];
+    const ready = reviewWarehouseEvents(checked, scope);
+    expect(ready).toMatchObject({ valid: true, readyForHandoff: true, handedOff: false });
+    const handedOff = reviewWarehouseEvents([...checked, event("HANDOFF_RECORDED","5")], scope);
+    expect(handedOff).toMatchObject({ valid: true, readyForHandoff: false, handedOff: true });
+    const duplicate = reviewWarehouseEvents([...checked, event("HANDOFF_RECORDED","5"), event("HANDOFF_RECORDED","6")], scope);
+    expect(duplicate).toMatchObject({ valid: false, readyForHandoff: false, handedOff: false });
+  });
+  test("handoff with missing evidence cannot be marked completed", () => {
+    const events = [
+      event("PICKING_STARTED","1"), event("PICKING_COMPLETED","2"),
+      event("PACKING_CHECKED","3"), event("CARRIER_LABEL_VERIFIED","4"),
+      { ...event("HANDOFF_RECORDED","5"), evidenceRef: "" }
+    ];
+    expect(reviewWarehouseEvents(events, scope).handedOff).toBe(false);
+  });
   test("duplicate event and missing carrier evidence fail closed", () => {
     const a=event("PACKING_CHECKED","1");
     expect(reviewWarehouseEvents([a,a],scope).valid).toBe(false);

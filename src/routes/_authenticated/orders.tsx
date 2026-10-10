@@ -47,12 +47,16 @@ function OrdersPage() {
   });
   const pages = Math.max(1, Math.ceil((q.data?.count ?? 0) / PAGE_SIZE));
   const filtered = useMemo(() => filterLoadedOrders(q.data?.rows ?? [], { query, fulfillment }), [q.data?.rows, query, fulfillment]);
-  const batchCandidates = filtered.filter(o => selectedOrderIds.includes(o.id) && o.status === "placed");
+  const batchCandidates = filtered.filter(o => selectedOrderIds.includes(o.id) && o.status === "placed" && o.channel_id === account && !!o.external_ref);
   async function prepareBatch() {
-    if (!perm.canOperate || account === "all" || batchCandidates.length === 0) return;
+    if (!perm.canOperate || account === "all" || batchCandidates.length === 0 || q.isFetching || q.isError) return;
     try {
       const organizationId = await orgId();
-      const orders: PickOrder[] = batchCandidates.map(o => ({
+      // Re-read selected orders before printing; stale browser snapshots are not shipment evidence.
+      const fresh = await listOrders({ page, status, accountId: account, from: from || undefined, to: to || undefined, externalRef: reference || undefined });
+      const chosen = fresh.rows.filter(o => selectedOrderIds.includes(o.id));
+      if (chosen.length !== batchCandidates.length) { toast.error("تغيّرت الطلبات أثناء التجهيز. أعد تحميل الصفحة وحددها مجدداً."); setSelectedOrderIds([]); return; }
+      const orders: PickOrder[] = chosen.map(o => ({
         id: o.id, organizationId: o.organization_id,
         channelId: o.channel_id ?? "",
         externalOrderId: o.external_ref ?? "",
@@ -77,28 +81,28 @@ function OrdersPage() {
     >
       <div className="mb-4 flex gap-1">
         {[["all", "الكل"], ["placed", "بانتظار الشحن"], ["fulfilled", "تم الشحن"], ["cancelled", "ملغى"]].map(([k, l]) => (
-          <Button key={k} size="sm" variant={status === k ? "default" : "outline"} onClick={() => { setStatus(k!); setPage(0); }}>{l}</Button>
+          <Button key={k} size="sm" variant={status === k ? "default" : "outline"} onClick={() => { setStatus(k!); setPage(0); setSelectedOrderIds([]); }}>{l}</Button>
         ))}
       </div>
       <div className="mb-4 grid gap-2 rounded border p-3 md:grid-cols-5">
-        <input aria-label="بحث الطلبات" className="rounded border p-2" placeholder="رقم الطلب، SKU، المنتج..." value={query} onChange={e => { setQuery(e.target.value); setPage(0); }} />
-        <select aria-label="حساب البيع" className="rounded border p-2" value={account} onChange={e => { setAccount(e.target.value); setPage(0); }}><option value="all">كل الحسابات</option>{(channels.data ?? []).map(a => <option key={a.id} value={a.id}>{a.name}</option>)}</select>
-        <select aria-label="طريقة الشحن" className="rounded border p-2" value={fulfillment} onChange={e => { setFulfillment(e.target.value as "all" | "FBR" | "FBB"); setPage(0); }}><option value="all">كل طرق الشحن</option><option value="FBR">شحن المستودع</option><option value="FBB">شحن bol</option></select>
-        <input aria-label="من تاريخ" type="date" className="rounded border p-2" value={from} onChange={e => { setFrom(e.target.value); setPage(0); }} />
-        <input aria-label="إلى تاريخ" type="date" className="rounded border p-2" value={to} onChange={e => { setTo(e.target.value); setPage(0); }} />
-        <input aria-label="مرجع الطلب الخارجي" className="rounded border p-2" placeholder="مرجع طلب bol" value={reference} onChange={e => { setReference(e.target.value); setPage(0); }} />
+        <input aria-label="بحث الطلبات" className="rounded border p-2" placeholder="رقم الطلب، SKU، المنتج..." value={query} onChange={e => { setQuery(e.target.value); setPage(0); setSelectedOrderIds([]); }} />
+        <select aria-label="حساب البيع" className="rounded border p-2" value={account} onChange={e => { setAccount(e.target.value); setPage(0); setSelectedOrderIds([]); }}><option value="all">كل الحسابات</option>{(channels.data ?? []).map(a => <option key={a.id} value={a.id}>{a.name}</option>)}</select>
+        <select aria-label="طريقة الشحن" className="rounded border p-2" value={fulfillment} onChange={e => { setFulfillment(e.target.value as "all" | "FBR" | "FBB"); setPage(0); setSelectedOrderIds([]); }}><option value="all">كل طرق الشحن</option><option value="FBR">شحن المستودع</option><option value="FBB">شحن bol</option></select>
+        <input aria-label="من تاريخ" type="date" className="rounded border p-2" value={from} onChange={e => { setFrom(e.target.value); setPage(0); setSelectedOrderIds([]); }} />
+        <input aria-label="إلى تاريخ" type="date" className="rounded border p-2" value={to} onChange={e => { setTo(e.target.value); setPage(0); setSelectedOrderIds([]); }} />
+        <input aria-label="مرجع الطلب الخارجي" className="rounded border p-2" placeholder="مرجع طلب bol" value={reference} onChange={e => { setReference(e.target.value); setPage(0); setSelectedOrderIds([]); }} />
         <p className="text-xs text-muted-foreground md:col-span-5">الحساب والتاريخ ومرجع الطلب تُفلتر على مستوى قاعدة البيانات ({q.data?.count ?? 0} طلب مطابق). البحث باسم المنتج أو SKU وطريقة الشحن يفحص الصفحة المحمّلة فقط؛ لا يمثل مجموع النتائج.</p>
       </div>
       <div className="mb-3 flex items-center justify-between gap-3 text-sm">
         <span aria-live="polite">{q.isFetching ? "جارٍ تحديث النتائج…" : `مطابقة استعلام الحساب والتاريخ: ${q.data?.count ?? 0}`}</span>
-        <Button size="sm" variant="outline" onClick={() => { setPage(0); setStatus("all"); setQuery(""); setAccount("all"); setFulfillment("all"); setFrom(""); setTo(""); setReference(""); }}>مسح كل الفلاتر</Button>
+        <Button size="sm" variant="outline" onClick={() => { setPage(0); setStatus("all"); setQuery(""); setAccount("all"); setFulfillment("all"); setFrom(""); setTo(""); setReference(""); setSelectedOrderIds([]); }}>مسح كل الفلاتر</Button>
       </div>
       {q.isError && <p role="alert" className="mb-3 rounded border border-destructive p-3 text-sm text-destructive">تعذّر تحميل الطلبات. لا تعتمد العدد المعروض، وأعد المحاولة.</p>}
       {perm.canOperate && <div className="mb-3 flex flex-wrap items-center gap-2 rounded border p-3 text-sm">
         <span>مختار من هذه الصفحة: {batchCandidates.length} طلب</span>
         <Button size="sm" variant="outline" onClick={() => setSelectedOrderIds(filtered.filter(o => o.status === "placed" && o.channel_id === account && o.external_ref && o.order_lines?.some(l => l.fulfillment_method !== "FBB")).map(o => o.id))} disabled={account === "all" || q.isFetching}>تحديد طلبات المستودع بهذه الصفحة</Button>
         <Button size="sm" variant="outline" onClick={() => setSelectedOrderIds([])}>إلغاء التحديد</Button>
-        <Button size="sm" disabled={account === "all" || !batchCandidates.length || q.isFetching} onClick={prepareBatch}>تجهيز وطباعة مجموعة</Button>
+        <Button size="sm" disabled={account === "all" || !batchCandidates.length || q.isFetching || q.isError} onClick={prepareBatch}>تجهيز وطباعة مجموعة</Button>
         <span className="text-muted-foreground">اختر حساباً واحداً أولاً. الطباعة لا تغيّر حالة الشحن.</span>
       </div>}
       <Table head={["تحديد", "الطلب", "الحساب", "التاريخ", "المنتجات", "طريقة الشحن", "الحالة", ""]}>
@@ -130,9 +134,9 @@ function OrdersPage() {
         })}
       </Table>
       {pages > 1 && <div className="mt-3 flex items-center gap-2 text-sm">
-        <Button size="sm" variant="outline" disabled={page === 0} onClick={() => setPage(page - 1)}>السابق</Button>
+        <Button size="sm" variant="outline" disabled={page === 0} onClick={() => { setPage(page - 1); setSelectedOrderIds([]); }}>السابق</Button>
         <span>{page + 1} / {pages}</span>
-        <Button size="sm" variant="outline" disabled={page + 1 >= pages} onClick={() => setPage(page + 1)}>التالي</Button>
+        <Button size="sm" variant="outline" disabled={page + 1 >= pages} onClick={() => { setPage(page + 1); setSelectedOrderIds([]); }}>التالي</Button>
       </div>}
       <div className="mt-4 rounded-lg border border-dashed p-3 text-sm text-muted-foreground">سحب الطلبات من bol.com غير مفعّل بعد — ستظهر الطلبات هنا تلقائياً عند تفعيله.</div>
       {perm.isAdmin && <details className="mt-4 rounded-lg border p-3 text-sm">

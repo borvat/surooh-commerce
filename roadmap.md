@@ -1,0 +1,12 @@
+- [x] Show bol colour and pack count on our merged card and on standalone product cards.
+- [x] Allow selections across merge suggestion groups and show variant details for safer comparisons.
+- [x] Verify the product cards and cross-group merge preview in the browser.
+- [x] Separate different pack sizes from merge suggestions and show them as bundle candidates.
+- [x] Prevent merging known different pack sizes, including cross-group selections.
+- [x] Verify suggestions and bundle editor in the browser.
+- [x] Open an imported product from suggestions on its own correction page; save internal name, color and pack independently of bol.
+- [x] Reclassify corrected products into merge or bundle suggestions immediately; verify in the browser.
+- [x] Rework product details so price, warehouse and bol quantities, EAN count, and dependent bundles are visible immediately.
+- [x] Verify source product and bundle detail pages in the browser without changing bol data.
+- [x] Let the owner correct physical stock and send the capped shared quantity to every warehouse-shipped offer from the product page.
+- [x] Verify stock editing controls on the product and bundle pages without sending live changes.

@@ -40,8 +40,8 @@ export function resolveStockitupIdentity(
   const targets = [...new Set(matches.map(m => m.suroohProductId.trim()))];
   // Duplicate mapping rows are not verified evidence, even if the target agrees.
   // Require exactly one explicit association for an automatic MATCHED preview.
-  if (matches.length > 1 || (matches.length === 1 && !matches[0].suroohProductId.trim())) return { status: "NEEDS_REVIEW", reason: "AMBIGUOUS_MAP", suggestedEans };
+  if (matches.length > 1 || (matches.length === 1 && !matches[0]!.suroohProductId.trim())) return { status: "NEEDS_REVIEW", reason: "AMBIGUOUS_MAP", suggestedEans };
   if (targets.length > 1) return { status: "NEEDS_REVIEW", reason: "AMBIGUOUS_MAP", suggestedEans };
-  if (targets.length === 1) return { status: "MATCHED", suroohProductId: targets[0], evidence: "EXPLICIT_MAP" };
+  if (targets.length === 1) return { status: "MATCHED", suroohProductId: targets[0]!, evidence: "EXPLICIT_MAP" };
   return { status: "NEEDS_REVIEW", reason: "UNMAPPED", suggestedEans };
 }

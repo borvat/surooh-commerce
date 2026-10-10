@@ -32,6 +32,8 @@ export function reviewWarehouseEvents(events: WarehouseEvent[], scope: { orgId: 
     if (!kinds.includes(e.kind)) errors.push("UNKNOWN_EVENT");
     if ((e.kind === "CARRIER_LABEL_VERIFIED" || e.kind === "HANDOFF_RECORDED") && !e.evidenceRef?.trim()) errors.push("MISSING_EVIDENCE");
     if (handoffSeen) errors.push("EVENT_AFTER_HANDOFF");
+    // Each workflow milestone is unique; only pick-list reprints may repeat.
+    if (e.kind !== "PICK_LIST_PRINTED" && done.has(e.kind)) errors.push("DUPLICATE_WORKFLOW_STEP");
     if (e.kind === "HANDOFF_RECORDED") {
       if (!done.has("PICKING_COMPLETED") || !done.has("PACKING_CHECKED") || !done.has("CARRIER_LABEL_VERIFIED")) errors.push("HANDOFF_BEFORE_CHECKS");
       handoffSeen = true;

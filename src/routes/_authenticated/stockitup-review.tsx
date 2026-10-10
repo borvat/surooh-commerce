@@ -23,6 +23,8 @@ function StockitupReviewPage() {
       if (!Array.isArray(products) || !Array.isArray(mappings) || products.length > 2000 || mappings.length > 10000)
         throw new Error("المطلوب مصفوفتان JSON وبحد أقصى 2000 منتج");
       if (!products.every(p => p && typeof p.sellerId === "string" && typeof p.productId === "string" &&
+          (p.sku == null || typeof p.sku === "string") &&
+          (p.ean == null || typeof p.ean === "string") &&
           (p.extraEans == null || (Array.isArray(p.extraEans) && p.extraEans.every((e: unknown) => typeof e === "string")))) ||
           !mappings.every(m => m && ["organizationId", "sellerId", "productId", "suroohProductId"].every(k => typeof m[k] === "string")))
         throw new Error("حقول البيانات لا تطابق العقد المطلوب");

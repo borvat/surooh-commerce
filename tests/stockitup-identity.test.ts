@@ -3,6 +3,9 @@ import { resolveStockitupIdentity } from "../src/lib/stockitup-identity";
 const source = { sellerId: "seller-1", productId: "product-21", sku: "EAN-AS-SKU", ean: "8711252955193", extraEans: ["8711252459424"] };
 const map = { organizationId: "org-a", sellerId: "seller-1", productId: "product-21", suroohProductId: "master-a" };
 describe("Stockitup product identity", () => {
+  test("ignores incidental whitespace around verified external IDs", () => {
+    expect(resolveStockitupIdentity(" org-a ", { ...source, sellerId: " seller-1 ", productId: " product-21 " }, [map]).status).toBe("MATCHED");
+  });
   test("only explicit mapping is authoritative", () => {
     expect(resolveStockitupIdentity("org-a", source, [map])).toEqual({ status:"MATCHED", suroohProductId:"master-a", evidence:"EXPLICIT_MAP" });
   });

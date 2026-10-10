@@ -191,14 +191,28 @@ export async function postMovement(input: {
 }
 
 // ---------- Orders ----------
-export async function listOrders(opts: { page?: number; status?: string }) {
+export type OrderSearchOptions = {
+  page?: number; status?: string; accountId?: string;
+  externalRef?: string; from?: string; to?: string;
+};
+/** Server-filtered through tenant-scoped Supabase RLS.
+ * Product text and SKU require a verified server-side search RPC and are not supported here.
+ */
+export async function listOrders(opts: OrderSearchOptions) {
   const page = opts.page ?? 0;
   let q = supabase
     .from("orders")
-    .select("*, sales_channels(name), order_lines(quantity, fulfillment_method, inventory_owner, remote_status, products(sku, name))", { count: "exact" })
+    .select("*, sales_channels(name), order_lines(quantity, fulfillment_method, inventory_owner, remote_status, products(sku, name, ean, master_reference))", { count: "exact" })
     .order("created_at", { ascending: false })
     .range(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE - 1);
   if (opts.status && opts.status !== "all") q = q.eq("status", opts.status as "placed" | "fulfilled" | "cancelled");
+  if (opts.accountId) q = q.eq("channel_id", opts.accountId);
+  if (opts.externalRef?.trim()) q = q.ilike("external_ref", `%${opts.externalRef.trim().replaceAll("%", "\\%").replaceAll("_", "\\_")}%`);
+  if (opts.from) q = q.gte("created_at", opts.from + "T00:00:00Z");
+  if (opts.to) {
+    const nextDay = new Date(opts.to + "T00:00:00Z");
+    if (!Number.isNaN(nextDay.getTime())) { nextDay.setUTCDate(nextDay.getUTCDate() + 1); q = q.lt("created_at", nextDay.toISOString()); }
+  }
   const res = await q;
   if (res.error) throw res.error;
   return { rows: res.data ?? [], count: res.count ?? 0 };

@@ -19,7 +19,7 @@ describe("warehouse batch planner", () => {
   test("rejects duplicate, cancelled, fulfilled and FBB-only order", () => {
     const a=base("A");
     const result = planWarehouseBatch([a, a, { ...base("B"), status: "fulfilled" }, { ...base("C"), status: "cancelled" },
-      { ...base("D"), lines: [{ sku: "BOL", quantity: 1, fulfillment: "FBB" }] ], scope);
+      { ...base("D"), lines: [{ sku: "BOL", quantity: 1, fulfillment: "FBB" }] }], scope);
     expect(result.totals.orders).toBe(1);
     expect(result.rejected).toHaveLength(4);
   });

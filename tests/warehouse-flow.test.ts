@@ -151,7 +151,7 @@ describe("handoff readiness", () => {
     event(5, "CARRIER_LABEL_VERIFIED", { evidenceRef: "label-scan-1" }),
   ];
   test("sequential pick, pack and label evidence is ready", () => {
-    expect(reviewWarehouseEvents(full, EVENT_SCOPE)).toEqual({ valid: true, errors: [], readyForHandoff: true });
+    expect(reviewWarehouseEvents(full, EVENT_SCOPE)).toEqual({ valid: true, errors: [], readyForHandoff: true, handedOff: false });
   });
   test("printing a pick list alone is never ready or dispatched", () => {
     const r = reviewWarehouseEvents([event(1, "PICK_LIST_PRINTED")], EVENT_SCOPE);
@@ -176,6 +176,7 @@ describe("handoff readiness", () => {
     const r = reviewWarehouseEvents([...full, event(6, "HANDOFF_RECORDED", { evidenceRef: "carrier-receipt" })], EVENT_SCOPE);
     expect(r.valid).toBe(true);
     expect(r.readyForHandoff).toBe(false);
+    expect(r.handedOff).toBe(true);
   });
 });
 

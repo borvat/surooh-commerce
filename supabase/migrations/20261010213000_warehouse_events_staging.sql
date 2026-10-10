@@ -22,11 +22,11 @@ CREATE TABLE IF NOT EXISTS public.warehouse_events (
 );
 -- Enforce immutable audit rows even if a privileged role accidentally grants DML.
 CREATE OR REPLACE FUNCTION public.reject_warehouse_event_mutation()
-RETURNS trigger LANGUAGE plpgsql SET search_path = '' AS $
+RETURNS trigger LANGUAGE plpgsql SET search_path = '' AS $$
 BEGIN
   RAISE EXCEPTION 'warehouse_events are append-only';
 END;
-$;
+$$;
 DROP TRIGGER IF EXISTS warehouse_events_no_update_delete ON public.warehouse_events;
 CREATE TRIGGER warehouse_events_no_update_delete
 BEFORE UPDATE OR DELETE ON public.warehouse_events
@@ -34,7 +34,7 @@ FOR EACH ROW EXECUTE FUNCTION public.reject_warehouse_event_mutation();
 
 -- Prevent an event from linking an order to a different organization's channel.
 CREATE OR REPLACE FUNCTION public.check_warehouse_event_scope()
-RETURNS trigger LANGUAGE plpgsql SET search_path = '' AS $
+RETURNS trigger LANGUAGE plpgsql SET search_path = '' AS $$
 BEGIN
   IF NOT EXISTS (
     SELECT 1 FROM public.orders o
@@ -48,7 +48,7 @@ BEGIN
   END IF;
   RETURN NEW;
 END;
-$;
+$$;
 DROP TRIGGER IF EXISTS warehouse_events_validate_scope ON public.warehouse_events;
 CREATE TRIGGER warehouse_events_validate_scope
 BEFORE INSERT ON public.warehouse_events

@@ -36,6 +36,9 @@ export function resolveStockitupIdentity(
     !!m.suroohProductId
   );
   const targets = [...new Set(matches.map(m => m.suroohProductId))];
+  // Duplicate mapping rows are not verified evidence, even if the target agrees.
+  // Require exactly one explicit association for an automatic MATCHED preview.
+  if (matches.length > 1) return { status: "NEEDS_REVIEW", reason: "AMBIGUOUS_MAP", suggestedEans };
   if (targets.length > 1) return { status: "NEEDS_REVIEW", reason: "AMBIGUOUS_MAP", suggestedEans };
   if (targets.length === 1) return { status: "MATCHED", suroohProductId: targets[0], evidence: "EXPLICIT_MAP" };
   return { status: "NEEDS_REVIEW", reason: "UNMAPPED", suggestedEans };

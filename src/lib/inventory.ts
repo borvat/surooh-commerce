@@ -202,7 +202,7 @@ export async function listOrders(opts: OrderSearchOptions) {
   const page = opts.page ?? 0;
   let q = supabase
     .from("orders")
-    .select("*, sales_channels(name), order_lines(quantity, fulfillment_method, inventory_owner, remote_status, products(sku, name))", { count: "exact" })
+    .select("*, sales_channels(name), order_lines(quantity, fulfillment_method, inventory_owner, remote_status, products(sku, name, ean, master_reference))", { count: "exact" })
     .order("created_at", { ascending: false })
     .range(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE - 1);
   if (opts.status && opts.status !== "all") q = q.eq("status", opts.status as "placed" | "fulfilled" | "cancelled");

@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
+import { masterReferenceForPrint } from "@/lib/product-family-reference";
 
-type Line = { quantity?: number | null; fulfillment_method?: string | null; products?: { sku?: string | null; name?: string | null } | null };
+type Line = { quantity?: number | null; fulfillment_method?: string | null; products?: { sku?: string | null; name?: string | null; ean?: string | null; master_reference?: string | null } | null };
 export type WarehouseOrder = {
   id: string; order_number?: number | null; external_ref?: string | null; created_at?: string | null;
   sales_channels?: { name?: string | null } | null; order_lines?: Line[] | null;
@@ -28,8 +29,8 @@ export function WarehousePrint({ order, onClose }: Props) {
         <p>الطلب: <b>#{order.order_number ?? "—"}</b></p><p>المرجع الخارجي: {order.external_ref ?? "—"}</p>
         <p>الحساب: {order.sales_channels?.name ?? "يدوي"}</p><p>التاريخ: {order.created_at ? new Date(order.created_at).toLocaleString("nl-NL") : "—"}</p>
       </div>
-      <table className="w-full border-collapse text-sm"><thead><tr className="border-b text-right"><th className="py-2">SKU</th><th>المنتج</th><th>الكمية</th><th>تم الالتقاط</th></tr></thead>
-        <tbody>{lines.map((l, i) => <tr className="border-b" key={i}><td className="py-3">{l.products?.sku ?? "—"}</td><td>{l.products?.name ?? "—"}</td><td>{l.quantity ?? 0}</td><td>□</td></tr>)}</tbody></table>
+      <table className="w-full border-collapse text-sm"><thead><tr className="border-b text-right"><th className="py-2">Master Ref</th><th>SKU / EAN</th><th>المنتج</th><th>الكمية</th><th>تم الالتقاط</th></tr></thead>
+        <tbody>{lines.map((l, i) => <tr className="border-b" key={i}><td className="py-3 font-bold">{masterReferenceForPrint(l.products ?? {})}</td><td>{l.products?.sku ?? "—"}<div className="text-xs">{l.products?.ean ?? "—"}</div></td><td>{l.products?.name ?? "—"}</td><td>{l.quantity ?? 0}</td><td>□</td></tr>)}</tbody></table>
       <p className="mt-4 font-bold">إجمالي قطع المستودع: {qty}</p>
       <p className="mt-6 border-t pt-3 text-sm">المجهّز: ________________  المدقق: ________________</p>
       <div className="mt-6 border-t pt-4 text-sm">

@@ -6,7 +6,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { cancelOrder, errMsg, fulfillOrder, listOrders, PAGE_SIZE } from "@/lib/inventory";
+import { cancelOrder, errMsg, fulfillOrder, listOrders, listChannels, PAGE_SIZE } from "@/lib/inventory";
 import { usePermissions } from "@/lib/auth";
 import { fmtDate } from "@/components/app/ui-bits";
 import { Page, Table, Empty, Tag } from "@/components/app/page";
@@ -31,15 +31,16 @@ function OrdersPage() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [printOrder, setPrintOrder] = useState<WarehouseOrder | null>(null);
-  const q = useQuery({ queryKey: ["orders", page, status], queryFn: () => listOrders({ page, status }) });
+  const channels = useQuery({ queryKey: ["sales-channels"], queryFn: listChannels });
+  const [reference, setReference] = useState("");
+  const q = useQuery({ queryKey: ["orders", page, status, account, from, to, reference], queryFn: () => listOrders({ page, status, accountId: account === "all" ? undefined : account, from: from || undefined, to: to || undefined, externalRef: reference || undefined }) });
   const act = useMutation({
     mutationFn: (v: { id: string; kind: "ship" | "cancel" }) => (v.kind === "ship" ? fulfillOrder(v.id) : cancelOrder(v.id)),
     onSuccess: (_d, v) => { toast.success(v.kind === "ship" ? "تم الشحن — خُصمت القطع من المستودع" : "تم الإلغاء — عادت القطع إلى المتاح"); qc.invalidateQueries(); },
     onError: (e) => toast.error(errMsg(e)),
   });
   const pages = Math.max(1, Math.ceil((q.data?.count ?? 0) / PAGE_SIZE));
-  const filtered = useMemo(() => filterLoadedOrders(q.data?.rows ?? [], { query, account, fulfillment, from, to }), [q.data?.rows, query, account, fulfillment, from, to]);
-  const accounts = useMemo(() => Array.from(new Set((q.data?.rows ?? []).map(o => o.sales_channels?.name).filter((v): v is string => !!v))), [q.data?.rows]);
+  const filtered = useMemo(() => filterLoadedOrders(q.data?.rows ?? [], { query, fulfillment }), [q.data?.rows, query, fulfillment]);
   return (
     <Page
       title="الطلبات"
@@ -53,11 +54,12 @@ function OrdersPage() {
       </div>
       <div className="mb-4 grid gap-2 rounded border p-3 md:grid-cols-5">
         <input aria-label="بحث الطلبات" className="rounded border p-2" placeholder="رقم الطلب، SKU، المنتج..." value={query} onChange={e => setQuery(e.target.value)} />
-        <select aria-label="حساب البيع" className="rounded border p-2" value={account} onChange={e => setAccount(e.target.value)}><option value="all">كل الحسابات</option>{accounts.map(a => <option key={a} value={a}>{a}</option>)}</select>
+        <select aria-label="حساب البيع" className="rounded border p-2" value={account} onChange={e => { setAccount(e.target.value); setPage(0); }}><option value="all">كل الحسابات</option>{(channels.data ?? []).map(a => <option key={a.id} value={a.id}>{a.name}</option>)}</select>
         <select aria-label="طريقة الشحن" className="rounded border p-2" value={fulfillment} onChange={e => setFulfillment(e.target.value as "all" | "FBR" | "FBB")}><option value="all">كل طرق الشحن</option><option value="FBR">شحن المستودع</option><option value="FBB">شحن bol</option></select>
-        <input aria-label="من تاريخ" type="date" className="rounded border p-2" value={from} onChange={e => setFrom(e.target.value)} />
-        <input aria-label="إلى تاريخ" type="date" className="rounded border p-2" value={to} onChange={e => setTo(e.target.value)} />
-        <p className="text-xs text-muted-foreground md:col-span-5">الفلاتر الحالية تُطبّق على الصفحة المحمّلة فقط ({filtered.length} من {(q.data?.rows ?? []).length}). البحث الشامل عبر جميع الصفحات يحتاج فلترة من قاعدة البيانات.</p>
+        <input aria-label="من تاريخ" type="date" className="rounded border p-2" value={from} onChange={e => { setFrom(e.target.value); setPage(0); }} />
+        <input aria-label="إلى تاريخ" type="date" className="rounded border p-2" value={to} onChange={e => { setTo(e.target.value); setPage(0); }} />
+        <input aria-label="مرجع الطلب الخارجي" className="rounded border p-2" placeholder="مرجع طلب bol" value={reference} onChange={e => { setReference(e.target.value); setPage(0); }} />
+        <p className="text-xs text-muted-foreground md:col-span-5">الحساب والتاريخ ومرجع الطلب تُفلتر على مستوى قاعدة البيانات ({q.data?.count ?? 0} طلب مطابق). البحث باسم المنتج أو SKU وطريقة الشحن يفحص الصفحة المحمّلة فقط؛ لا يمثل مجموع النتائج.</p>
       </div>
       <Table head={["الطلب", "الحساب", "التاريخ", "المنتجات", "طريقة الشحن", "الحالة", ""]}>
         {filtered.length === 0 && <Empty cols={7} text={q.isLoading ? "جارٍ التحميل…" : "لا توجد طلبات."} />}

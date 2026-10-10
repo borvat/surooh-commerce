@@ -24,12 +24,12 @@ export function previewStockitupMappings(
 ): ReviewPreview {
   const counts = new Map<string, number>();
   for (const product of externalProducts) {
-    const key = JSON.stringify([product.sellerId, product.productId]);
+    const key = JSON.stringify([product.sellerId.trim(), product.productId.trim()]);
     counts.set(key, (counts.get(key) ?? 0) + 1);
   }
   const rows: ReviewRow[] = [];
   for (const product of externalProducts) {
-    const key = JSON.stringify([product.sellerId, product.productId]);
+    const key = JSON.stringify([product.sellerId.trim(), product.productId.trim()]);
     // Every row sharing an external key is ambiguous, including the first one.
     const duplicate = (counts.get(key) ?? 0) > 1;
     const decision = resolveStockitupIdentity(organizationId, product, mappings);

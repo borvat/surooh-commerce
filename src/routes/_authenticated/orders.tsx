@@ -53,16 +53,21 @@ function OrdersPage() {
         ))}
       </div>
       <div className="mb-4 grid gap-2 rounded border p-3 md:grid-cols-5">
-        <input aria-label="بحث الطلبات" className="rounded border p-2" placeholder="رقم الطلب، SKU، المنتج..." value={query} onChange={e => setQuery(e.target.value)} />
+        <input aria-label="بحث الطلبات" className="rounded border p-2" placeholder="رقم الطلب، SKU، المنتج..." value={query} onChange={e => { setQuery(e.target.value); setPage(0); }} />
         <select aria-label="حساب البيع" className="rounded border p-2" value={account} onChange={e => { setAccount(e.target.value); setPage(0); }}><option value="all">كل الحسابات</option>{(channels.data ?? []).map(a => <option key={a.id} value={a.id}>{a.name}</option>)}</select>
-        <select aria-label="طريقة الشحن" className="rounded border p-2" value={fulfillment} onChange={e => setFulfillment(e.target.value as "all" | "FBR" | "FBB")}><option value="all">كل طرق الشحن</option><option value="FBR">شحن المستودع</option><option value="FBB">شحن bol</option></select>
+        <select aria-label="طريقة الشحن" className="rounded border p-2" value={fulfillment} onChange={e => { setFulfillment(e.target.value as "all" | "FBR" | "FBB"); setPage(0); }}><option value="all">كل طرق الشحن</option><option value="FBR">شحن المستودع</option><option value="FBB">شحن bol</option></select>
         <input aria-label="من تاريخ" type="date" className="rounded border p-2" value={from} onChange={e => { setFrom(e.target.value); setPage(0); }} />
         <input aria-label="إلى تاريخ" type="date" className="rounded border p-2" value={to} onChange={e => { setTo(e.target.value); setPage(0); }} />
         <input aria-label="مرجع الطلب الخارجي" className="rounded border p-2" placeholder="مرجع طلب bol" value={reference} onChange={e => { setReference(e.target.value); setPage(0); }} />
         <p className="text-xs text-muted-foreground md:col-span-5">الحساب والتاريخ ومرجع الطلب تُفلتر على مستوى قاعدة البيانات ({q.data?.count ?? 0} طلب مطابق). البحث باسم المنتج أو SKU وطريقة الشحن يفحص الصفحة المحمّلة فقط؛ لا يمثل مجموع النتائج.</p>
       </div>
+      <div className="mb-3 flex items-center justify-between gap-3 text-sm">
+        <span aria-live="polite">{q.isFetching ? "جارٍ تحديث النتائج…" : `مطابقة استعلام الحساب والتاريخ: ${q.data?.count ?? 0}`}</span>
+        <Button size="sm" variant="outline" onClick={() => { setPage(0); setStatus("all"); setQuery(""); setAccount("all"); setFulfillment("all"); setFrom(""); setTo(""); setReference(""); }}>مسح كل الفلاتر</Button>
+      </div>
+      {q.isError && <p role="alert" className="mb-3 rounded border border-destructive p-3 text-sm text-destructive">تعذّر تحميل الطلبات. لا تعتمد العدد المعروض، وأعد المحاولة.</p>}
       <Table head={["الطلب", "الحساب", "التاريخ", "المنتجات", "طريقة الشحن", "الحالة", ""]}>
-        {filtered.length === 0 && <Empty cols={7} text={q.isLoading ? "جارٍ التحميل…" : "لا توجد طلبات."} />}
+        {filtered.length === 0 && !q.isError && <Empty cols={7} text={q.isLoading ? "جارٍ التحميل…" : (q.data?.count ?? 0) > 0 ? "لا توجد نتائج في هذه الصفحة بعد تطبيق الفلاتر المحلية." : "لا توجد طلبات مطابقة للفلاتر."} />}
         {filtered.map((o) => {
           const lines = o.order_lines ?? [];
           const fms = new Set(lines.map((l) => l.fulfillment_method));

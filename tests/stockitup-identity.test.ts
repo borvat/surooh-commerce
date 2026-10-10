@@ -20,6 +20,17 @@ describe("Stockitup product identity", () => {
     expect(result.status).toBe("NEEDS_REVIEW");
     if (result.status === "NEEDS_REVIEW") expect(result.reason).toBe("AMBIGUOUS_MAP");
   });
+  test("malformed empty mapping never masks a conflict", () => {
+    const result = resolveStockitupIdentity("org-a", source, [map, { ...map, suroohProductId: " " }]);
+    expect(result.status).toBe("NEEDS_REVIEW");
+  });
+  test("empty mapped target is not an approved match", () => {
+    const result = resolveStockitupIdentity("org-a", source, [{ ...map, suroohProductId: "" }]);
+    expect(result.status).toBe("NEEDS_REVIEW");
+  });
+  test("blank external IDs are rejected", () => {
+    expect(resolveStockitupIdentity("org-a", { ...source, productId: " " }, [map]).status).toBe("NEEDS_REVIEW");
+  });
   test("conflicting mappings fail closed", () => {
     expect(resolveStockitupIdentity("org-a",source,[map,{...map,suroohProductId:"master-b"}]).status).toBe("NEEDS_REVIEW");
   });

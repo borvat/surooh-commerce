@@ -27,18 +27,17 @@ export function resolveStockitupIdentity(
   const suggestedEans = [...new Set([source.ean, ...(source.extraEans ?? [])]
     .filter((v): v is string => typeof v === "string" && /^\d{8,14}$/.test(v.trim()))
     .map(v => v.trim()))];
-  if (!organizationId || !source.sellerId || !source.productId)
+  if (!organizationId.trim() || !source.sellerId.trim() || !source.productId.trim())
     return { status: "NEEDS_REVIEW", reason: "INVALID_EXTERNAL_ID", suggestedEans };
   const matches = mappings.filter(m =>
     m.organizationId === organizationId &&
     m.sellerId === source.sellerId &&
-    m.productId === source.productId &&
-    !!m.suroohProductId
+    m.productId === source.productId
   );
-  const targets = [...new Set(matches.map(m => m.suroohProductId))];
+  const targets = [...new Set(matches.map(m => m.suroohProductId.trim()))];
   // Duplicate mapping rows are not verified evidence, even if the target agrees.
   // Require exactly one explicit association for an automatic MATCHED preview.
-  if (matches.length > 1) return { status: "NEEDS_REVIEW", reason: "AMBIGUOUS_MAP", suggestedEans };
+  if (matches.length > 1 || (matches.length === 1 && !matches[0].suroohProductId.trim())) return { status: "NEEDS_REVIEW", reason: "AMBIGUOUS_MAP", suggestedEans };
   if (targets.length > 1) return { status: "NEEDS_REVIEW", reason: "AMBIGUOUS_MAP", suggestedEans };
   if (targets.length === 1) return { status: "MATCHED", suroohProductId: targets[0], evidence: "EXPLICIT_MAP" };
   return { status: "NEEDS_REVIEW", reason: "UNMAPPED", suggestedEans };

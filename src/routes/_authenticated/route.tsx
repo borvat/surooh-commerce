@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet, redirect, Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { Home, LogOut, Boxes, Package, ShoppingCart, History, Store, Settings, Layers, ScanSearch } from "lucide-react";
+import { Home, LogOut, Boxes, Package, ShoppingCart, History, Store, Settings, Layers, ScanSearch, MessageSquareText } from "lucide-react";
 
 const NAV = [
   { to: "/dashboard", label: "الرئيسية", Icon: Home },
@@ -9,6 +9,7 @@ const NAV = [
   { to: "/bundles", label: "البندلات / Sets", Icon: Layers },
   { to: "/components", label: "المخزون", Icon: Boxes },
   { to: "/orders", label: "الطلبات", Icon: ShoppingCart },
+  { to: "/assistant", label: "مساعد التجارة (تجريبي)", Icon: MessageSquareText },
   { to: "/channels", label: "حسابات bol", Icon: Store },
   { to: "/movements", label: "السجل", Icon: History },
   { to: "/settings", label: "الإعدادات", Icon: Settings },

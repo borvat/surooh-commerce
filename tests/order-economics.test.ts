@@ -28,6 +28,13 @@ describe("order economics controls", () => {
     const o = base(); o.returnsAndRefundsCents = verified(1000);
     expect(calc(o).contributionCents).toBe(1000);
   });
+  test("verified money without documentary reference is treated as estimated", () => {
+    const o = base();
+    o.netSalesCents = { cents: 5000, evidence: "VERIFIED" };
+    const result = calc(o);
+    expect(result.status).toBe("ESTIMATED");
+    expect(result.estimatedFields).toContain("netSalesCents");
+  });
   test("rejects bad quantity and unsafe or negative money", () => {
     const o = base(); o.quantity = 0;
     expect(() => calc(o)).toThrow();

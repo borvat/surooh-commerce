@@ -1,0 +1,10 @@
+alter function public.touch_updated_at() set search_path = public;
+alter function public.validate_bom() set search_path = public;
+alter function public.guard_component() set search_path = public;
+alter function public.block_mutation() set search_path = public;
+revoke execute on function public.audit_trigger() from public, anon, authenticated;
+revoke execute on function public._apply_stock(uuid,uuid,public.movement_type,int,int,text,text,uuid,uuid) from public, anon, authenticated;
+revoke execute on function public.default_warehouse_id() from public, anon;
+revoke execute on function public.has_role(uuid, public.app_role) from public, anon;
+revoke execute on function public.has_any_role(uuid, public.app_role[]) from public, anon;
+grant execute on function public.has_role(uuid, public.app_role), public.has_any_role(uuid, public.app_role[]), public.default_warehouse_id() to authenticated;

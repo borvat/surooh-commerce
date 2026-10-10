@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.merge_products(uuid, uuid[], integer, boolean) FROM PUBLIC, anon;

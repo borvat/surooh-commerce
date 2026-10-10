@@ -1,0 +1,2 @@
+REVOKE EXECUTE ON FUNCTION public.merge_products(uuid, uuid[], integer, boolean, text) FROM PUBLIC, anon;
+GRANT EXECUTE ON FUNCTION public.merge_products(uuid, uuid[], integer, boolean, text) TO authenticated;

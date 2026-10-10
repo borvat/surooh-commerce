@@ -1,0 +1,2 @@
+ALTER TABLE public.channel_listings ADD COLUMN bol_product_id text;
+COMMENT ON COLUMN public.channel_listings.bol_product_id IS 'bol webshop product identifier resolved from the listing EAN; used for direct product-page links.';

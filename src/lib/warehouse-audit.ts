@@ -12,11 +12,11 @@ export type WarehouseEvent = {
   recordedAt: string;
   evidenceRef?: string;
 };
-export type WarehouseReview = { valid: boolean; errors: string[]; readyForHandoff: boolean };
+export type WarehouseReview = { valid: boolean; errors: string[]; readyForHandoff: boolean; handedOff: boolean };
 const kinds: WarehouseEventKind[] = ["PICK_LIST_PRINTED","PICKING_STARTED","PICKING_COMPLETED","PACKING_CHECKED","CARRIER_LABEL_VERIFIED","HANDOFF_RECORDED"];
 export function reviewWarehouseEvents(events: WarehouseEvent[], scope: { orgId: string; channelId: string; orderId: string }): WarehouseReview {
   const errors: string[] = [];
-  if (!scope.orgId || !scope.channelId || !scope.orderId) return { valid: false, errors: ["MISSING_SCOPE"], readyForHandoff: false };
+  if (!scope.orgId || !scope.channelId || !scope.orderId) return { valid: false, errors: ["MISSING_SCOPE"], readyForHandoff: false, handedOff: false };
   const ids = new Set<string>(), done = new Set<WarehouseEventKind>();
   let latestTime = -Infinity;
   let handoffSeen = false;
@@ -44,5 +44,5 @@ export function reviewWarehouseEvents(events: WarehouseEvent[], scope: { orgId: 
   }
   const valid = errors.length === 0;
   // Printing alone never represents packing, dispatch, or official shipment.
-  return { valid, errors, readyForHandoff: valid && !handoffSeen && done.has("PICKING_COMPLETED") && done.has("PACKING_CHECKED") && done.has("CARRIER_LABEL_VERIFIED") };
+  return { valid, errors, readyForHandoff: valid && !handoffSeen && done.has("PICKING_COMPLETED") && done.has("PACKING_CHECKED") && done.has("CARRIER_LABEL_VERIFIED"), handedOff: valid && handoffSeen };
 }

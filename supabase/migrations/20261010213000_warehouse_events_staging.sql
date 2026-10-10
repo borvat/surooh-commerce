@@ -20,6 +20,40 @@ CREATE TABLE IF NOT EXISTS public.warehouse_events (
   ),
   CONSTRAINT warehouse_events_operation_uniq UNIQUE (organization_id, operation_key)
 );
+-- Enforce immutable audit rows even if a privileged role accidentally grants DML.
+CREATE OR REPLACE FUNCTION public.reject_warehouse_event_mutation()
+RETURNS trigger LANGUAGE plpgsql SET search_path = '' AS $
+BEGIN
+  RAISE EXCEPTION 'warehouse_events are append-only';
+END;
+$;
+DROP TRIGGER IF EXISTS warehouse_events_no_update_delete ON public.warehouse_events;
+CREATE TRIGGER warehouse_events_no_update_delete
+BEFORE UPDATE OR DELETE ON public.warehouse_events
+FOR EACH ROW EXECUTE FUNCTION public.reject_warehouse_event_mutation();
+
+-- Prevent an event from linking an order to a different organization's channel.
+CREATE OR REPLACE FUNCTION public.check_warehouse_event_scope()
+RETURNS trigger LANGUAGE plpgsql SET search_path = '' AS $
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM public.orders o
+    JOIN public.sales_channels c ON c.id = NEW.channel_id
+    WHERE o.id = NEW.order_id
+      AND o.organization_id = NEW.organization_id
+      AND o.channel_id = NEW.channel_id
+      AND c.organization_id = NEW.organization_id
+  ) THEN
+    RAISE EXCEPTION 'warehouse event order/account scope mismatch';
+  END IF;
+  RETURN NEW;
+END;
+$;
+DROP TRIGGER IF EXISTS warehouse_events_validate_scope ON public.warehouse_events;
+CREATE TRIGGER warehouse_events_validate_scope
+BEFORE INSERT ON public.warehouse_events
+FOR EACH ROW EXECUTE FUNCTION public.check_warehouse_event_scope();
+
 CREATE INDEX IF NOT EXISTS warehouse_events_order_idx
   ON public.warehouse_events (organization_id, order_id, occurred_at);
 ALTER TABLE public.warehouse_events ENABLE ROW LEVEL SECURITY;

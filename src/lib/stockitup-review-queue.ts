@@ -22,12 +22,16 @@ export function previewStockitupMappings(
   externalProducts: ExternalProduct[],
   mappings: ExternalMap[],
 ): ReviewPreview {
-  const seen = new Set<string>();
+  const counts = new Map<string, number>();
+  for (const product of externalProducts) {
+    const key = JSON.stringify([product.sellerId, product.productId]);
+    counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
   const rows: ReviewRow[] = [];
   for (const product of externalProducts) {
     const key = JSON.stringify([product.sellerId, product.productId]);
-    const duplicate = seen.has(key);
-    seen.add(key);
+    // Every row sharing an external key is ambiguous, including the first one.
+    const duplicate = (counts.get(key) ?? 0) > 1;
     const decision = resolveStockitupIdentity(organizationId, product, mappings);
     const eans = [...new Set([product.ean, ...(product.extraEans ?? [])]
       .filter((v): v is string => typeof v === "string" && /^\d{8,14}$/.test(v.trim()))

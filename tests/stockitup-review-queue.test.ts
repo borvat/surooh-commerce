@@ -18,8 +18,10 @@ describe("Stockitup review queue (preview only)", () => {
   });
   test("same external product twice is flagged", () => {
     const r = previewStockitupMappings("org-a", [item, item], [mapping]);
+    expect(r.rows[0].reason).toBe("DUPLICATE_EXTERNAL_KEY");
     expect(r.rows[1].reason).toBe("DUPLICATE_EXTERNAL_KEY");
-    expect(r.totals.needsReview).toBe(1);
+    expect(r.rows.every(row => row.suroohProductId === null)).toBe(true);
+    expect(r.totals.needsReview).toBe(2);
   });
   test("cross-seller mapping cannot match", () => {
     const r = previewStockitupMappings("org-a", [{...item,sellerId:"seller-2"}], [mapping]);

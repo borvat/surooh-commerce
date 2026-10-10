@@ -15,6 +15,11 @@ describe("Stockitup product identity", () => {
     expect(resolveStockitupIdentity("org-b",source,[map]).status).toBe("NEEDS_REVIEW");
     expect(resolveStockitupIdentity("org-a",{...source,sellerId:"seller-2"},[map]).status).toBe("NEEDS_REVIEW");
   });
+  test("duplicate identical mappings require review rather than assuming confirmation", () => {
+    const result = resolveStockitupIdentity("org-a", source, [map, { ...map }]);
+    expect(result.status).toBe("NEEDS_REVIEW");
+    if (result.status === "NEEDS_REVIEW") expect(result.reason).toBe("AMBIGUOUS_MAP");
+  });
   test("conflicting mappings fail closed", () => {
     expect(resolveStockitupIdentity("org-a",source,[map,{...map,suroohProductId:"master-b"}]).status).toBe("NEEDS_REVIEW");
   });

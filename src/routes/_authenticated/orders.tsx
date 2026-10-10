@@ -55,7 +55,21 @@ function OrdersPage() {
       // Re-read selected orders before printing; stale browser snapshots are not shipment evidence.
       const fresh = await listOrders({ page, status, accountId: account, from: from || undefined, to: to || undefined, externalRef: reference || undefined });
       const chosen = fresh.rows.filter(o => selectedOrderIds.includes(o.id));
-      if (chosen.length !== batchCandidates.length) { toast.error("تغيّرت الطلبات أثناء التجهيز. أعد تحميل الصفحة وحددها مجدداً."); setSelectedOrderIds([]); return; }
+      // Compare material picking data, not just the number of orders:
+      // a status, quantity, SKU or fulfillment change must invalidate the print preview.
+      const fingerprint = (items: typeof chosen) => JSON.stringify(items.map(o => ({
+        id: o.id, org: o.organization_id, account: o.channel_id,
+        externalRef: o.external_ref, status: o.status,
+        lines: (o.order_lines ?? []).map(l => ({
+          sku: l.products?.sku ?? null, quantity: l.quantity,
+          fulfillment: l.fulfillment_method
+        })).sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)))
+      })).sort((a, b) => a.id.localeCompare(b.id)));
+      if (chosen.length !== batchCandidates.length || fingerprint(chosen) !== fingerprint(batchCandidates)) {
+        toast.error("تغيّرت بيانات التجهيز أو الكميات. أعد تحميل الصفحة وحدد الطلبات مجدداً.");
+        setSelectedOrderIds([]);
+        return;
+      }
       const orders: PickOrder[] = chosen.map(o => ({
         id: o.id, organizationId: o.organization_id,
         channelId: o.channel_id ?? "",

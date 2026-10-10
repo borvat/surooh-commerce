@@ -31,10 +31,10 @@ function StockitupReviewPage() {
   }
   return <Page title="مراجعة ربط منتجات Stockitup" intro="أداة معاينة محلية فقط: لا تتصل بـStockitup ولا تحفظ أو تدمج أي منتج. لا تُدخل أسرار API أو بيانات شخصية.">
     <div className="space-y-4">
-      <label className="block text-sm">معرّف الشركة<input className="mt-1 w-full rounded border p-2" value={organizationId} onChange={e => setOrganizationId(e.target.value)} placeholder="organization_id" /></label>
+      <label className="block text-sm">معرّف الشركة<input className="mt-1 w-full rounded border p-2" value={organizationId} onChange={e => { setOrganizationId(e.target.value); setPreview(null); setError(""); }} placeholder="organization_id" /></label>
       <div className="grid gap-4 md:grid-cols-2">
-        <label className="block text-sm">منتجات Stockitup (JSON)<textarea className="mt-1 h-40 w-full rounded border p-2 font-mono text-xs" value={productsText} onChange={e => setProductsText(e.target.value)} placeholder={'[{"sellerId":"1","productId":"21","ean":"...","extraEans":[]}]'} /></label>
-        <label className="block text-sm">الربط المؤكد الموجود مسبقاً (JSON)<textarea className="mt-1 h-40 w-full rounded border p-2 font-mono text-xs" value={mappingsText} onChange={e => setMappingsText(e.target.value)} placeholder={'[{"organizationId":"...","sellerId":"1","productId":"21","suroohProductId":"..."}]'} /></label>
+        <label className="block text-sm">منتجات Stockitup (JSON)<textarea className="mt-1 h-40 w-full rounded border p-2 font-mono text-xs" value={productsText} onChange={e => { setProductsText(e.target.value); setPreview(null); setError(""); }} placeholder={'[{"sellerId":"1","productId":"21","ean":"...","extraEans":[]}]'} /></label>
+        <label className="block text-sm">الربط المؤكد الموجود مسبقاً (JSON)<textarea className="mt-1 h-40 w-full rounded border p-2 font-mono text-xs" value={mappingsText} onChange={e => { setMappingsText(e.target.value); setPreview(null); setError(""); }} placeholder={'[{"organizationId":"...","sellerId":"1","productId":"21","suroohProductId":"..."}]'} /></label>
       </div>
       <Button onClick={generate}>إنشاء معاينة للقراءة فقط</Button>
       {error && <p role="alert" className="text-sm text-destructive">{error}</p>}

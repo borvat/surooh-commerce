@@ -27,12 +27,15 @@ export function resolveStockitupIdentity(
   const suggestedEans = [...new Set([source.ean, ...(source.extraEans ?? [])]
     .filter((v): v is string => typeof v === "string" && /^\d{8,14}$/.test(v.trim()))
     .map(v => v.trim()))];
-  if (!organizationId.trim() || !source.sellerId.trim() || !source.productId.trim())
+  const org = organizationId.trim();
+  const seller = source.sellerId.trim();
+  const product = source.productId.trim();
+  if (!org || !seller || !product)
     return { status: "NEEDS_REVIEW", reason: "INVALID_EXTERNAL_ID", suggestedEans };
   const matches = mappings.filter(m =>
-    m.organizationId === organizationId &&
-    m.sellerId === source.sellerId &&
-    m.productId === source.productId
+    m.organizationId.trim() === org &&
+    m.sellerId.trim() === seller &&
+    m.productId.trim() === product
   );
   const targets = [...new Set(matches.map(m => m.suroohProductId.trim()))];
   // Duplicate mapping rows are not verified evidence, even if the target agrees.

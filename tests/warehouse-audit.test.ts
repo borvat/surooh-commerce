@@ -12,8 +12,19 @@ describe("warehouse audit prerequisites", () => {
     expect(r.valid).toBe(true); expect(r.readyForHandoff).toBe(false);
   });
   test("picking, packing, and verified label permits handoff readiness", () => {
-    const r=reviewWarehouseEvents([event("PICKING_COMPLETED","1"),event("PACKING_CHECKED","2"),event("CARRIER_LABEL_VERIFIED","3")],scope);
+    const r=reviewWarehouseEvents([event("PICKING_STARTED","0"),event("PICKING_COMPLETED","1"),event("PACKING_CHECKED","2"),event("CARRIER_LABEL_VERIFIED","3")],scope);
     expect(r.readyForHandoff).toBe(true);
+  });
+  test("rejects handoff before verification and duplicate handoff", () => {
+    const premature = reviewWarehouseEvents([event("HANDOFF_RECORDED","1")], scope);
+    expect(premature.valid).toBe(false);
+    const events = [event("PICKING_STARTED","1"),event("PICKING_COMPLETED","2"),event("PACKING_CHECKED","3"),event("CARRIER_LABEL_VERIFIED","4"),event("HANDOFF_RECORDED","5")];
+    expect(reviewWarehouseEvents(events, scope).readyForHandoff).toBe(false);
+    expect(reviewWarehouseEvents([...events,event("HANDOFF_RECORDED","6")], scope).valid).toBe(false);
+  });
+  test("requires picking started before picking completed", () => {
+    const r=reviewWarehouseEvents([event("PICKING_COMPLETED","1"),event("PACKING_CHECKED","2"),event("CARRIER_LABEL_VERIFIED","3")],scope);
+    expect(r.valid).toBe(false);
   });
   test("cross-account or missing actor is invalid", () => {
     const other={...event("PICKING_COMPLETED","1"),channelId:"bol-B",actorUserId:""};

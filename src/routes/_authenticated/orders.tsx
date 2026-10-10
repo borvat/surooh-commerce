@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { filterLoadedOrders } from "@/lib/order-filters";
 import { WarehousePrint } from "@/components/app/warehouse-print";
+import type { WarehouseOrder } from "@/components/app/warehouse-print";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -29,7 +30,7 @@ function OrdersPage() {
   const [fulfillment, setFulfillment] = useState<"all" | "FBR" | "FBB">("all");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
-  const [printOrder, setPrintOrder] = useState<(NonNullable<NonNullable<typeof q.data>["rows"]>[number]) | null>(null);
+  const [printOrder, setPrintOrder] = useState<WarehouseOrder | null>(null);
   const q = useQuery({ queryKey: ["orders", page, status], queryFn: () => listOrders({ page, status }) });
   const act = useMutation({
     mutationFn: (v: { id: string; kind: "ship" | "cancel" }) => (v.kind === "ship" ? fulfillOrder(v.id) : cancelOrder(v.id)),

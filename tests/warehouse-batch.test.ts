@@ -23,6 +23,11 @@ describe("warehouse batch planner", () => {
     expect(result.totals.orders).toBe(1);
     expect(result.rejected).toHaveLength(4);
   });
+  test("rejects totals that exceed safe integer precision", () => {
+    const huge = base("A");
+    huge.lines = [{ sku: "STOVE", quantity: Number.MAX_SAFE_INTEGER, fulfillment: "FBR" }];
+    expect(() => planWarehouseBatch([huge, base("B")], scope)).toThrow("Unsafe warehouse SKU total");
+  });
   test("rejects invalid quantity and missing authorization", () => {
     const bad = base("A"); bad.lines[0].quantity = 0;
     expect(planWarehouseBatch([bad], scope).rejected[0].reason).toBe("INVALID_LINE");

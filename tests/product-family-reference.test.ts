@@ -11,7 +11,7 @@ describe("product master shared reference", () => {
     expect(() => resolveFamilyReference(b,[a,{ ...b,masterReference:"OTHER" }])).toThrow();
   });
   test("cannot borrow a reference from another company", () => {
-    expect(resolveFamilyReference(b,[a,{...b,organizationId:"org-B"}])).toThrow();
+    expect(() => resolveFamilyReference(b,[a,{...b,organizationId:"org-B"}])).toThrow();
   });
   test("printed reference falls back to SKU, but never rewrites EAN", () => {
     expect(masterReferenceForPrint({master_reference:"MASTER-100",sku:"SKU2"})).toBe("MASTER-100");

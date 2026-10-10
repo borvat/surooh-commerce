@@ -6,14 +6,15 @@ export type WarehouseOrder = {
   id: string; order_number?: number | null; external_ref?: string | null; created_at?: string | null;
   sales_channels?: { name?: string | null } | null; order_lines?: Line[] | null;
 };
-type Props = { order: WarehouseOrder; onClose: () => void; shippingLabelUrl?: string | null };
+type Props = { order: WarehouseOrder; onClose: () => void };
 
 /** A warehouse PICK LIST, not proof of fulfillment or a carrier-issued shipping label.
  * Print no customer's address unless it comes from a verified order shipment record.
  */
-export function WarehousePrint({ order, onClose, shippingLabelUrl }: Props) {
+export function WarehousePrint({ order, onClose }: Props) {
   const lines = useMemo(() => (order.order_lines ?? []).filter(l => l.fulfillment_method !== "FBB"), [order.order_lines]);
   const qty = lines.reduce((n, l) => n + (l.quantity ?? 0), 0);
+  if (lines.length === 0) return null;
   return <div className="fixed inset-0 z-50 overflow-auto bg-background p-6" role="dialog" aria-modal="true" aria-label="ورقة تجهيز المستودع">
     <style>{`@media print { body * { visibility: hidden !important; } #surooh-warehouse-print, #surooh-warehouse-print * { visibility: visible !important; } #surooh-warehouse-print { position: absolute; top: 0; left: 0; right: 0; padding: 16mm; } .warehouse-actions { display: none !important; } }`}</style>
     <div className="warehouse-actions mb-4 flex gap-3">
@@ -32,7 +33,7 @@ export function WarehousePrint({ order, onClose, shippingLabelUrl }: Props) {
       <p className="mt-4 font-bold">إجمالي قطع المستودع: {qty}</p>
       <p className="mt-6 border-t pt-3 text-sm">المجهّز: ________________  المدقق: ________________</p>
       <div className="mt-6 border-t pt-4 text-sm">
-        <b>ملصق الشحن:</b> {shippingLabelUrl ? "ملصق رسمي متاح من شركة الشحن؛ اطبعه من الملف المعتمد بصورة مستقلة." : "غير متاح. يلزم ملصق رسمي من bol.com أو شركة الشحن. لا تُشحن الطرد بلا ملصق صالح."}
+        <b>ملصق الشحن:</b> غير مرفق بهذه الورقة. يجب الحصول على ملصق الشحن الأصلي المرتبط بنفس الحساب والطلب والشحنة من bol.com أو شركة النقل قبل التسليم.
       </div>
     </article>
   </div>;

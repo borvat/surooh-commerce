@@ -20,8 +20,37 @@ describe("warehouse batch planner", () => {
     const a=base("A");
     const result = planWarehouseBatch([a, a, { ...base("B"), status: "fulfilled" }, { ...base("C"), status: "cancelled" },
       { ...base("D"), lines: [{ sku: "BOL", quantity: 1, fulfillment: "FBB" }] }], scope);
-    expect(result.totals.orders).toBe(1);
-    expect(result.rejected).toHaveLength(4);
+    // Ambiguous duplicate submissions reject every occurrence (fail closed).
+    expect(result.totals.orders).toBe(0);
+    expect(result.rejected.map(r => r.reason)).toEqual(["DUPLICATE_ORDER", "DUPLICATE_ORDER", "NOT_OPEN", "NOT_OPEN", "NO_WAREHOUSE_ITEMS"]);
+  });
+  test("eligible copies contain only FBR lines and inputs are not mutated", () => {
+    const a = base("A");
+    const snapshot = structuredClone(a);
+    const r = planWarehouseBatch([a], scope);
+    expect(r.eligible[0]).toEqual({ ...snapshot, lines: [{ sku: "STOVE", quantity: 2, fulfillment: "FBR" }] });
+    expect(r.eligible[0]).not.toBe(a);
+    expect(r.eligible[0]!.lines[0]).not.toBe(a.lines[0]);
+    expect(a).toEqual(snapshot);
+  });
+  test("duplicate is rejected even when the earlier copy was ineligible", () => {
+    const r = planWarehouseBatch([{ ...base("A"), status: "cancelled" }, { ...base("A"), id: "A2" }], scope);
+    expect(r.eligible).toHaveLength(0);
+    expect(r.rejected.map(x => x.reason)).toEqual(["DUPLICATE_ORDER", "DUPLICATE_ORDER"]);
+  });
+  test("same external ID with surrounding whitespace counts as duplicate", () => {
+    const r = planWarehouseBatch([base("A"), { ...base("A2"), externalOrderId: "  A  " }], scope);
+    expect(r.rejected.map(x => x.reason)).toEqual(["DUPLICATE_ORDER", "DUPLICATE_ORDER"]);
+  });
+  test("same external ID in another company or channel does not poison the authorized one", () => {
+    const r = planWarehouseBatch([base("A"), { ...base("A"), id: "X", organizationId: "company-X" }, { ...base("A"), id: "Y", channelId: "bol-2" }], scope);
+    expect(r.eligible.map(o => o.id)).toEqual(["A"]);
+    expect(r.rejected.map(x => x.reason)).toEqual(["UNAUTHORIZED_SCOPE", "UNAUTHORIZED_SCOPE"]);
+  });
+  test("blank or whitespace-only external and internal IDs are rejected", () => {
+    const r = planWarehouseBatch([{ ...base("A"), externalOrderId: "" }, { ...base("B"), externalOrderId: "   " }, { ...base("C"), id: "  " }], scope);
+    expect(r.eligible).toHaveLength(0);
+    expect(r.rejected.map(x => x.reason)).toEqual(["MISSING_ORDER_ID", "MISSING_ORDER_ID", "MISSING_ORDER_ID"]);
   });
   test("rejects totals that exceed safe integer precision", () => {
     const huge = base("A");

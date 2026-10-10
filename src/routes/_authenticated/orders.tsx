@@ -78,7 +78,7 @@ function OrdersPage() {
               </td>
               <td className="px-4 py-2"><Tag tone={tone}>{label}</Tag></td>
               <td className="px-4 py-2">
-                <Button size="sm" variant="outline" onClick={() => setPrintOrder(o)}>ورقة المستودع</Button>
+                {perm.canOperate && lines.some(l => l.fulfillment_method !== "FBB") && <Button size="sm" variant="outline" onClick={() => setPrintOrder(o)}>ورقة المستودع</Button>}
                 {perm.canOperate && o.status === "placed" && <div className="flex justify-end gap-1">
                   <Button size="sm" disabled={act.isPending} onClick={() => act.mutate({ id: o.id, kind: "ship" })}>تم الشحن</Button>
                   <Button size="sm" variant="ghost" disabled={act.isPending} onClick={() => confirm("إلغاء هذا الطلب؟") && act.mutate({ id: o.id, kind: "cancel" })}>إلغاء</Button>

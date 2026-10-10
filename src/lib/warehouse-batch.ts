@@ -31,9 +31,18 @@ export function planWarehouseBatch(
     else if (order.lines.some(l => !l.sku.trim() || !Number.isSafeInteger(l.quantity) || l.quantity < 1)) reason = "INVALID_LINE";
     if (reason) { rejected.push({ id: order.id, reason }); continue; }
     seen.add(key); eligible.push(order);
-    for (const line of order.lines) if (line.fulfillment === "FBR") sku.set(line.sku, (sku.get(line.sku) ?? 0) + line.quantity);
+    for (const line of order.lines) if (line.fulfillment === "FBR") {
+      const next = (sku.get(line.sku) ?? 0) + line.quantity;
+      if (!Number.isSafeInteger(next)) throw new Error("Unsafe warehouse SKU total");
+      sku.set(line.sku, next);
+    }
   }
   const skuTotals = [...sku].map(([sku, pieces]) => ({ sku, pieces })).sort((a,b) => a.sku.localeCompare(b.sku));
+  const pieces = skuTotals.reduce((n,v) => {
+    const next = n + v.pieces;
+    if (!Number.isSafeInteger(next)) throw new Error("Unsafe warehouse batch total");
+    return next;
+  }, 0);
   return { eligible, rejected, skuTotals,
-    totals: { orders: eligible.length, pieces: skuTotals.reduce((n,v) => n+v.pieces, 0), distinctSku: skuTotals.length } };
+    totals: { orders: eligible.length, pieces, distinctSku: skuTotals.length } };
 }

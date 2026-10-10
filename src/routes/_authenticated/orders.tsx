@@ -1,6 +1,9 @@
 import { useMemo, useState } from "react";
 import { filterLoadedOrders } from "@/lib/order-filters";
 import { WarehousePrint } from "@/components/app/warehouse-print";
+import { WarehouseBatchPrint } from "@/components/app/warehouse-batch-print";
+import { planWarehouseBatch, type PickOrder } from "@/lib/warehouse-batch";
+import { orgId } from "@/lib/inventory";
 import type { WarehouseOrder } from "@/components/app/warehouse-print";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -31,6 +34,9 @@ function OrdersPage() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [printOrder, setPrintOrder] = useState<WarehouseOrder | null>(null);
+  const [selectedOrderIds, setSelectedOrderIds] = useState<string[]>([]);
+  const [printBatch, setPrintBatch] = useState<ReturnType<typeof planWarehouseBatch> | null>(null);
+  const [batchAccountName, setBatchAccountName] = useState("");
   const channels = useQuery({ queryKey: ["sales-channels"], queryFn: listChannels });
   const [reference, setReference] = useState("");
   const q = useQuery({ queryKey: ["orders", page, status, account, from, to, reference], queryFn: () => listOrders({ page, status, accountId: account === "all" ? undefined : account, from: from || undefined, to: to || undefined, externalRef: reference || undefined }) });
@@ -41,6 +47,28 @@ function OrdersPage() {
   });
   const pages = Math.max(1, Math.ceil((q.data?.count ?? 0) / PAGE_SIZE));
   const filtered = useMemo(() => filterLoadedOrders(q.data?.rows ?? [], { query, fulfillment }), [q.data?.rows, query, fulfillment]);
+  const batchCandidates = filtered.filter(o => selectedOrderIds.includes(o.id) && o.status === "placed");
+  async function prepareBatch() {
+    if (!perm.canOperate || account === "all" || batchCandidates.length === 0) return;
+    try {
+      const organizationId = await orgId();
+      const orders: PickOrder[] = batchCandidates.map(o => ({
+        id: o.id, organizationId: o.organization_id,
+        channelId: o.channel_id ?? "",
+        externalOrderId: o.external_ref ?? "",
+        status: o.status as PickOrder["status"],
+        lines: (o.order_lines ?? []).map(l => ({
+          sku: l.products?.sku ?? "", quantity: l.quantity,
+          fulfillment: l.fulfillment_method === "FBB" ? "FBB" as const : "FBR" as const
+        }))
+      }));
+      const result = planWarehouseBatch(orders, { organizationId, channelId: account });
+      if (result.eligible.length === 0) { toast.error("لا توجد طلبات صالحة للتجهيز. تحقق من الحساب والمرجع وSKU."); return; }
+      setBatchAccountName((channels.data ?? []).find(c => c.id === account)?.name ?? account);
+      setPrintBatch(result);
+      if (result.rejected.length) toast.warning(`تم استبعاد ${result.rejected.length} طلب غير صالح`);
+    } catch (e) { toast.error(errMsg(e)); }
+  }
   return (
     <Page
       title="الطلبات"
@@ -66,14 +94,22 @@ function OrdersPage() {
         <Button size="sm" variant="outline" onClick={() => { setPage(0); setStatus("all"); setQuery(""); setAccount("all"); setFulfillment("all"); setFrom(""); setTo(""); setReference(""); }}>مسح كل الفلاتر</Button>
       </div>
       {q.isError && <p role="alert" className="mb-3 rounded border border-destructive p-3 text-sm text-destructive">تعذّر تحميل الطلبات. لا تعتمد العدد المعروض، وأعد المحاولة.</p>}
-      <Table head={["الطلب", "الحساب", "التاريخ", "المنتجات", "طريقة الشحن", "الحالة", ""]}>
-        {filtered.length === 0 && !q.isError && <Empty cols={7} text={q.isLoading ? "جارٍ التحميل…" : (q.data?.count ?? 0) > 0 ? "لا توجد نتائج في هذه الصفحة بعد تطبيق الفلاتر المحلية." : "لا توجد طلبات مطابقة للفلاتر."} />}
+      {perm.canOperate && <div className="mb-3 flex flex-wrap items-center gap-2 rounded border p-3 text-sm">
+        <span>مختار من هذه الصفحة: {batchCandidates.length} طلب</span>
+        <Button size="sm" variant="outline" onClick={() => setSelectedOrderIds(filtered.filter(o => o.status === "placed" && o.channel_id === account && o.external_ref && o.order_lines?.some(l => l.fulfillment_method !== "FBB")).map(o => o.id))} disabled={account === "all" || q.isFetching}>تحديد طلبات المستودع بهذه الصفحة</Button>
+        <Button size="sm" variant="outline" onClick={() => setSelectedOrderIds([])}>إلغاء التحديد</Button>
+        <Button size="sm" disabled={account === "all" || !batchCandidates.length || q.isFetching} onClick={prepareBatch}>تجهيز وطباعة مجموعة</Button>
+        <span className="text-muted-foreground">اختر حساباً واحداً أولاً. الطباعة لا تغيّر حالة الشحن.</span>
+      </div>}
+      <Table head={["تحديد", "الطلب", "الحساب", "التاريخ", "المنتجات", "طريقة الشحن", "الحالة", ""]}>
+        {filtered.length === 0 && !q.isError && <Empty cols={8} text={q.isLoading ? "جارٍ التحميل…" : (q.data?.count ?? 0) > 0 ? "لا توجد نتائج في هذه الصفحة بعد تطبيق الفلاتر المحلية." : "لا توجد طلبات مطابقة للفلاتر."} />}
         {filtered.map((o) => {
           const lines = o.order_lines ?? [];
           const fms = new Set(lines.map((l) => l.fulfillment_method));
           const [label, tone] = statusAr[o.status as keyof typeof statusAr] ?? [o.status, "neutral"];
           return (
             <tr key={o.id}>
+              <td className="px-4 py-2"><input type="checkbox" aria-label={`تحديد الطلب ${o.order_number}`} checked={selectedOrderIds.includes(o.id)} disabled={!perm.canOperate || account === "all" || o.channel_id !== account || o.status !== "placed" || !o.external_ref || !lines.some(l => l.fulfillment_method !== "FBB")} onChange={e => setSelectedOrderIds(ids => e.target.checked ? [...new Set([...ids, o.id])] : ids.filter(id => id !== o.id))} /></td>
               <td className="px-4 py-2 num font-medium">#{o.order_number}{o.external_ref && <div className="text-[11px] text-muted-foreground" dir="ltr">{o.external_ref}</div>}</td>
               <td className="px-4 py-2 text-sm">{o.sales_channels?.name ?? "يدوي"}</td>
               <td className="px-4 py-2 text-xs text-muted-foreground">{fmtDate(o.created_at)}</td>
@@ -105,6 +141,7 @@ function OrdersPage() {
       </details>}
       <NewOrderDialog open={open} onOpenChange={setOpen} />
       {printOrder && <WarehousePrint order={printOrder} onClose={() => setPrintOrder(null)} />}
+      {printBatch && <WarehouseBatchPrint batch={printBatch} accountName={batchAccountName} onClose={() => setPrintBatch(null)} />}
     </Page>
   );
 }

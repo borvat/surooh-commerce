@@ -5,6 +5,11 @@ const item = { sellerId:"seller-1", productId:"prod-21", sku:"old-sku", ean:"871
 const mapping = { organizationId:"org-a", sellerId:"seller-1", productId:"prod-21", suroohProductId:"surooh-master-1" };
 
 describe("Stockitup review queue (preview only)", () => {
+  test("duplicate external keys with whitespace are all sent for review", () => {
+    const duplicate = { ...item, sellerId: " seller-1 ", productId: "prod-21 " };
+    const r = previewStockitupMappings("org-a", [item, duplicate], [mapping]);
+    expect(r.totals).toEqual({ seen:2, matched:0, needsReview:2 });
+  });
   test("recognizes explicit mappings and records counts", () => {
     const r = previewStockitupMappings("org-a", [item], [mapping]);
     expect(r.totals).toEqual({ seen:1, matched:1, needsReview:0 });

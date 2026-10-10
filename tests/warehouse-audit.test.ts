@@ -30,6 +30,33 @@ describe("warehouse audit prerequisites", () => {
     const other={...event("PICKING_COMPLETED","1"),channelId:"bol-B",actorUserId:""};
     expect(reviewWarehouseEvents([other],scope).valid).toBe(false);
   });
+  test("repeating a picking milestone with a new event ID is invalid", () => {
+    const r = reviewWarehouseEvents([
+      event("PICKING_STARTED","1"), event("PICKING_STARTED","2"),
+      event("PICKING_COMPLETED","3"), event("PACKING_CHECKED","4"),
+      event("CARRIER_LABEL_VERIFIED","5")
+    ], scope);
+    expect(r.valid).toBe(false);
+    expect(r.readyForHandoff).toBe(false);
+    expect(r.errors).toContain("DUPLICATE_WORKFLOW_STEP");
+  });
+  test("repeating carrier verification with another ID is invalid", () => {
+    const r = reviewWarehouseEvents([
+      event("PICKING_STARTED","1"), event("PICKING_COMPLETED","2"),
+      event("PACKING_CHECKED","3"), event("CARRIER_LABEL_VERIFIED","4"),
+      event("CARRIER_LABEL_VERIFIED","5")
+    ], scope);
+    expect(r.valid).toBe(false);
+    expect(r.readyForHandoff).toBe(false);
+    expect(r.errors).toContain("DUPLICATE_WORKFLOW_STEP");
+  });
+  test("reprinting a pick list is allowed without claiming shipment", () => {
+    const r = reviewWarehouseEvents([
+      event("PICK_LIST_PRINTED","1"), event("PICK_LIST_PRINTED","2")
+    ], scope);
+    expect(r.valid).toBe(true);
+    expect(r.readyForHandoff).toBe(false);
+  });
   test("duplicate event and missing carrier evidence fail closed", () => {
     const a=event("PACKING_CHECKED","1");
     expect(reviewWarehouseEvents([a,a],scope).valid).toBe(false);

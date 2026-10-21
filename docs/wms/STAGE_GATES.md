@@ -1,3 +1,5 @@
+> Current direction: owner approved shared ERPNext16 accounting/stock/valuation for preparation only. [Shared authority](shared-core/AUTHORITY.md) and [phase alignment](shared-core/PHASE_ALIGNMENT.md) supersede any historical Supabase/Tryton writable-ledger instructions below. Current source/production remains unchanged. Codex, merge, deploy and real migration remain held.
+
 # Human-controlled phase gates
 
 The current state is `execution_authorized=false`, `active_phase=null`. P01 is prepared but not started; all later phases are locked. No script, Issue closure, test result or PR approval automatically launches Codex, changes a phase to accepted, merges, deploys or connects production.

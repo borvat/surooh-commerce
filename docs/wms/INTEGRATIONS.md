@@ -1,3 +1,5 @@
+> Current direction: owner approved shared ERPNext16 accounting/stock/valuation for preparation only. [Shared authority](shared-core/AUTHORITY.md) and [phase alignment](shared-core/PHASE_ALIGNMENT.md) supersede any historical Supabase/Tryton writable-ledger instructions below. Current source/production remains unchanged. Codex, merge, deploy and real migration remain held.
+
 # Versioned integration contracts (target, not deployed endpoints)
 
 Use `/inventory/v1` with server-verified company/account scope, stable source IDs, correlation ID, JSON schema version, exact decimal quantity strings when necessary and cursor pagination with an ID tie-breaker. Mutations require `Idempotency-Key`, canonical request hash and `expected_version`. Errors: 401 unauthenticated,403 scope denied,409 insufficient stock/state/version/hash conflict,422 invalid command,429 bounded retry-after. Error details/logs never contain secrets or unnecessary customer data.

@@ -1,0 +1,130 @@
+{
+  "scope": "captured local preparation evidence; never hosted CI or production acceptance",
+  "authority_sha256": "01c792be997043eea23630d436242415bf55ac8543edfe17fe3919bf81d2c8b6",
+  "files": [
+    {
+      "path": ".github/workflows/shared-core.yml",
+      "sha256": "7d41e044a92d44804720c180b4f4f066ea61105208da22a41f98908f2bce92f2"
+    },
+    {
+      "path": "ci/check_shared_core.py",
+      "sha256": "3a7a37218f001e8dfca75ce67f0dc77482d406de3314c6e228e317a7740bd970"
+    },
+    {
+      "path": "contracts/shared-core-authority.json",
+      "sha256": "01c792be997043eea23630d436242415bf55ac8543edfe17fe3919bf81d2c8b6"
+    },
+    {
+      "path": "docs/wms/phases/P01.md",
+      "sha256": "c062f01b53164ec23685ed93044396ce3a47f27bc9473c52e1e17ae80c21bca2"
+    },
+    {
+      "path": "docs/wms/phases/P02.md",
+      "sha256": "628f74637c91292a965fe1b7f4839eb952b6ed097732d28af8fcab6f852db1a5"
+    },
+    {
+      "path": "docs/wms/phases/P03.md",
+      "sha256": "9fe214679589bcb388e1a4810e4f6e150204fa1a79c992fe3ff617aaad29c5d1"
+    },
+    {
+      "path": "docs/wms/phases/P04.md",
+      "sha256": "b200df8a02c91cf614b31724ab950dd4f18b1641d8c47cb0e7286efb40304209"
+    },
+    {
+      "path": "docs/wms/phases/P05.md",
+      "sha256": "f240a27962710d566cc371463649538f8b63368a84259e4a2d335ce3403cf51d"
+    },
+    {
+      "path": "docs/wms/phases/P06.md",
+      "sha256": "05df68c84df49558d70a0fdad96149f5fd881e9fa16a6fb9dcd7a8859b8da405"
+    },
+    {
+      "path": "docs/wms/phases/P07.md",
+      "sha256": "f6dc42ee6624a1b7f9a7ff885d46811bd7e6db7e8b447108995f0188854f3599"
+    },
+    {
+      "path": "docs/wms/phases/P08.md",
+      "sha256": "df00671b6f6829afd1517e5d60b277ced3848993287de24875ca6ddfb8161b8b"
+    },
+    {
+      "path": "docs/wms/phases/P09.md",
+      "sha256": "697c3c97ce5b1cf747a5f1a78d083acd80996075ca4c0869abca23f6134688c4"
+    },
+    {
+      "path": "docs/wms/phases.json",
+      "sha256": "c87400689513127d70d4f62d63cc07b139867cb804c089141fd7a3cc9cda91a1"
+    },
+    {
+      "path": "docs/wms/shared-core/ACCOUNTANT_REVIEW.md",
+      "sha256": "6912395c99b26759e4b646b401ef7622985491fbec32e39cb3b8f522b1e06abe"
+    },
+    {
+      "path": "docs/wms/shared-core/AUTHORITY.md",
+      "sha256": "fac24a7a493f88ce3afe0f3e15e1891d72da2db9940e137d37eba02d50b5eeeb"
+    },
+    {
+      "path": "docs/wms/shared-core/GATES.md",
+      "sha256": "e640f70730f095a0f01a752ad1d165d05ccf857baa3c022fcba8ba737295e833"
+    },
+    {
+      "path": "docs/wms/shared-core/GITHUB_REPAIR.md",
+      "sha256": "66726028e3fa3be7d4d6b81532d0dfa8dedc37f3499098e984da9133a08c476a"
+    },
+    {
+      "path": "docs/wms/shared-core/ISOLATION.md",
+      "sha256": "12b0632e79e944d6b333f442d86a7f4474a80e2056e26d66dd0e610b290c8976"
+    },
+    {
+      "path": "docs/wms/shared-core/OWNER_DISPOSITION.json",
+      "sha256": "1709950d72cab7bc07004da981c242ddda5cf7ebd732e177ca4d8b1b276794d7"
+    },
+    {
+      "path": "docs/wms/shared-core/PHASE_ALIGNMENT.md",
+      "sha256": "0b5d75aec34c6b84eac5c221c413727010cdb4f0c30f10a620c6e33de24f0327"
+    },
+    {
+      "path": "docs/wms/shared-core/README.md",
+      "sha256": "eb007866bb522ccbedd29900076b80dc43da7f78afd2b5cdeac5b43b46a5f317"
+    },
+    {
+      "path": "docs/wms/shared-core/RESULT_SUMMARY.json",
+      "sha256": "d85d7a650b4be3fde633f8cb3a4e98461df5595cbf64b221b8db6572203fb903"
+    },
+    {
+      "path": "docs/wms/shared-core/REVIEW_RECORD.template.json",
+      "sha256": "a92f6e93c33b8ef373383523153127ff58e2778c994e7465a9461e740778774a"
+    },
+    {
+      "path": "docs/wms/shared-core/THREE_GAPS.md",
+      "sha256": "e9718699d5d1b970602431fba348542d32622b695ff99d5aa10034d2f70d3aec"
+    },
+    {
+      "path": "docs/wms/shared-core/investigation.json",
+      "sha256": "b6f938bdb499632fa7410b267008b9d948b9cd36bc3cb056004e82c8e2ac5275"
+    },
+    {
+      "path": "docs/wms/shared-core/plan.json",
+      "sha256": "9d925146b0d5f0b26de3157662c7a763071f75e6d550fe0b701a81aed4a25791"
+    },
+    {
+      "path": "tests/shared_core/test_holds.py",
+      "sha256": "330befcea8e3f277eecb09630680dabf9c0190945fee2369e68560fe7a65e8a1"
+    },
+    {
+      "path": "contracts/shared-command-v1.schema.json",
+      "sha256": "2fda47742946b082b0188d9fdad0f22594d292e75548c39880b2cdb6ce7c5111"
+    },
+    {
+      "path": "contracts/shared-command-v1.md",
+      "sha256": "9cd3f99d4ff68035db3e3bd9347536c3295241ae2f0b4076d8df4f273ef5c12d"
+    },
+    {
+      "path": "docs/wms/shared-core/offline-checks.log",
+      "sha256": "109d920595310b4bef97053f060aceff742456f53d4bf163a2eeec544ff27ed3"
+    },
+    {
+      "path": "docs/wms/github-register.json",
+      "sha256": "af0353d3e663b5bb943213f688af54e2bbd0c6db09e0981fd9fa03e0c066ab80"
+    }
+  ]
+}

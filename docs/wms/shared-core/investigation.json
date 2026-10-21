@@ -1,0 +1,33 @@
+{
+  "accounting": {
+    "head": "0f5e6ece5a06f3807255d5e250705eb331189c3f",
+    "main_sha": "4171fdadf279641a255132d56f62e15d6e2d6bc6",
+    "protected": false,
+    "required_status_enforcement": "off",
+    "protection_detail_error": "403 Resource not accessible by integration",
+    "rulesets_error": "403 Upgrade to GitHub Pro or make this repository public to enable this feature",
+    "run": {
+      "id": 39686768894,
+      "sha": "0f5e6ece5a06f3807255d5e250705eb331189c3f",
+      "conclusion": "startup_failure",
+      "jobs": 0,
+      "path": "BuildFailed"
+    },
+    "account_billing_root_cause": "NOT_PROVEN_FROM_CURRENT_API",
+    "check_suite_diagnostics": "connector endpoint not available"
+  },
+  "commerce": {
+    "head": "35232d0a5015bcc39e7b91604d17a5259cafc464",
+    "main_sha": "953d41a28a3916c94456645eaed00817cd17ca3b",
+    "protected": false,
+    "rulesets": []
+  },
+  "mutations": {
+    "billing": false,
+    "plan": false,
+    "permissions": false,
+    "protection": false,
+    "main": false,
+    "production": false
+  }
+}

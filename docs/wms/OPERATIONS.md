@@ -1,3 +1,5 @@
+> Current direction: owner approved shared ERPNext16 accounting/stock/valuation for preparation only. [Shared authority](shared-core/AUTHORITY.md) and [phase alignment](shared-core/PHASE_ALIGNMENT.md) supersede any historical Supabase/Tryton writable-ledger instructions below. Current source/production remains unchanged. Codex, merge, deploy and real migration remain held.
+
 # Warehouse operation state machines
 
 Transitions are server-authored transactions with expected aggregate version, operation key, actor, source lines, quantity, timestamp and immutable evidence. Scanning produces proposed commands; offline scans do not guarantee reservations until server acceptance. Printing is always a separate informational action.

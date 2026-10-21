@@ -1,3 +1,9 @@
+# Current cross-system disposition — overrides earlier comparison preference
+
+Owner direction approved: shared ERPNext16 accounting/native stock/valuation/COGS with independent Surooh app and current WMS UI/bol/bundle logic retained. Legal-company sites/DB/storage/service identities separated. See [joint preparation](../shared-core/README.md), [authority](../shared-core/AUTHORITY.md), [gates](../shared-core/GATES.md) and [phase alignment](../shared-core/PHASE_ALIGNMENT.md). Production adoption, Codex, merge and migration remain held. Earlier comparison/measurement below remains historical evidence; its unresolved/Tryton-first recommendations are superseded only as engineering direction. No past unexecuted PostgreSQL or security test is relabelled passed.
+
+---
+
 # Evidence closure and three-architecture decision review
 
 Snapshot: 2026-10-21 UTC. Review baseline: research commit `c739bf4ad1007d46df97eac900a0863e4079830b`. Owner accepted preparatory research, explicitly withheld Tryton adoption and Codex handoff. This report supersedes the earlier implication that Tryton is the selected foundation. **No final engine winner is demonstrated. P01 is not eligible for Codex handoff.**

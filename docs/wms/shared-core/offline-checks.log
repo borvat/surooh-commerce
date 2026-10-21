@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "proof": "offline contract and captured hash consistency only",
+  "hosted_native_ci": "NOT_PROVEN",
+  "direction": "APPROVED_PREPARATION_ONLY",
+  "codex": "HELD"
+}
+test_direction_cannot_approve_admin_change (test_holds.Holds.test_direction_cannot_approve_admin_change) ... ok
+test_direction_cannot_start_codex (test_holds.Holds.test_direction_cannot_start_codex) ... ok
+test_direction_only_valid (test_holds.Holds.test_direction_only_valid) ... ok
+test_missing_service_boundary_rejected (test_holds.Holds.test_missing_service_boundary_rejected) ... ok
+test_second_reservation_writer_rejected (test_holds.Holds.test_second_reservation_writer_rejected) ... ok
+test_second_stock_valuation_authority_rejected (test_holds.Holds.test_second_stock_valuation_authority_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.002s
+
+OK
+PASS: 9 phase packets, ordered dependencies, held execution, documentation/templates and workflow guardrails.
+✔ missing or proposed ADR blocks otherwise complete phase evidence (1.223013ms)
+✔ a skipped mandatory architecture experiment cannot pass (0.228985ms)
+✔ accepted architecture never authorizes execution or clears phase defects (0.237929ms)
+✔ database guard accepts dedicated loopback fixture only (1.548354ms)
+✔ database guard rejects postgresql://production.supabase.co/wms_test_ci (0.410248ms)
+✔ database guard rejects postgresql://127.0.0.1/postgres (0.199861ms)
+✔ database guard rejects postgresql://localhost/wms_test_ci?host=production (0.155795ms)
+✔ database guard rejects https://localhost/wms_test_ci (0.222936ms)
+✔ database guard rejects postgresql://127.0.0.1.evil.test/wms_test_ci (0.147483ms)
+✔ database guard requires explicit isolation flag (0.228725ms)
+✔ complete packet only recommends human review (1.63851ms)
+✔ stale head invalidates evidence (0.682298ms)
+✔ skipped acceptance check blocks (0.655357ms)
+✔ tampered log digest blocks (1.11485ms)
+✔ missing dependency acceptance blocks (0.501005ms)
+✔ unresolved inventory P1 blocks (0.632413ms)
+✔ production connection evidence blocks (0.515197ms)
+✔ artifact traversal outside evidence directory blocks (0.556309ms)
+✔ symbolic link to external evidence blocks (1.614312ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 128.784474

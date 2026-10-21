@@ -1,3 +1,5 @@
+> Current direction: owner approved shared ERPNext16 accounting/stock/valuation for preparation only. [Shared authority](shared-core/AUTHORITY.md) and [phase alignment](shared-core/PHASE_ALIGNMENT.md) supersede any historical Supabase/Tryton writable-ledger instructions below. Current source/production remains unchanged. Codex, merge, deploy and real migration remain held.
+
 # Baseline decision — 2026-10-21 (Asia/Damascus)
 
 Use `feature/bol-orders-warehouse` at `d3fce83c8b376822d04d8efcd675f1bebf7bef65` as the **development source baseline**. Preserve `main` at `953d41a28a3916c94456645eaed00817cd17ca3b` as the unchanged integration branch; neither source is certified for production. This foundation branch is based on the feature commit and its draft PR targets the feature branch, not main. Do not merge the existing feature PR #1 as part of this preparation.

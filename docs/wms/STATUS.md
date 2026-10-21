@@ -1,3 +1,5 @@
+> Current direction: owner approved shared ERPNext16 accounting/stock/valuation for preparation only. [Shared authority](shared-core/AUTHORITY.md) and [phase alignment](shared-core/PHASE_ALIGNMENT.md) supersede any historical Supabase/Tryton writable-ledger instructions below. Current source/production remains unchanged. Codex, merge, deploy and real migration remain held.
+
 # Foundation delivery status
 
 Prepared on engineering/wms-foundation above d3fce83c8b376822d04d8efcd675f1bebf7bef65. Existing main and feature branch references are preserved. This is preparation only; no Codex execution or phase acceptance has occurred.

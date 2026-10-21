@@ -1,0 +1,38 @@
+{
+  "scope": "synthetic local research prototypes only",
+  "accounting_evidence_branch": "engineering/shared-core-preparation",
+  "reviewed_accounting_base": "0f5e6ece5a06f3807255d5e250705eb331189c3f",
+  "reviewed_wms_base": "35232d0a5015bcc39e7b91604d17a5259cafc464",
+  "native_mitigation_cases": 8,
+  "native_mitigation_verifiers_passed": 8,
+  "isolation_cases": 11,
+  "isolation_verifiers_passed": 11,
+  "historical_isolation_replays_included": 7,
+  "hosted_ci": "NOT_PROVEN",
+  "os_uid_isolation": "BLOCKED",
+  "production_acceptance": "NOT_APPROVED",
+  "known_remaining": [
+    "real RQ and mutation job lifecycle",
+    "native direct API bypass closure",
+    "UI/commercial bundle parent/pick/dispatch mapping",
+    "serial/batch/nested bundle/cancel-dispatch race",
+    "separate non-root service identities and storage mounts",
+    "KMS and off-host recovery",
+    "accountant review and fiscal native enforcement",
+    "clean pinned native CI bootstrap and advisory triage"
+  ],
+  "attempts": [
+    {
+      "id": "01",
+      "result": "8 passed; original scope"
+    },
+    {
+      "id": "02",
+      "result": "7 passed,1 failed; reused fixed lab command key correctly conflicted with new voucher; evidence retained"
+    },
+    {
+      "id": "final",
+      "result": "8 passed; per-run keys corrected; terminal cancellation and role revocation included"
+    }
+  ]
+}

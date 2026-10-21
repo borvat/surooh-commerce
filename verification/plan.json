@@ -32,12 +32,7 @@
       "legacy_db_adapter",
       "alternative_gate_regressions",
       "accounting_native_link",
-      "service_uid_isolation",
-      "real_queue_and_api_bypass",
-      "wms_ui_native_e2e",
-      "dutch_accountant_signoff",
-      "fresh_full_engine_build_upgrade",
-      "live_integrations"
+      "fresh_engine_bootstrap"
     ],
     "P02": [
       "foundation",
@@ -53,11 +48,7 @@
       "alternative_gate_regressions",
       "accounting_native_link",
       "service_uid_isolation",
-      "real_queue_and_api_bypass",
-      "wms_ui_native_e2e",
-      "dutch_accountant_signoff",
-      "fresh_full_engine_build_upgrade",
-      "live_integrations"
+      "real_queue_and_api_bypass"
     ],
     "P03": [
       "foundation",
@@ -72,12 +63,7 @@
       "legacy_db_adapter",
       "alternative_gate_regressions",
       "accounting_native_link",
-      "service_uid_isolation",
-      "real_queue_and_api_bypass",
-      "wms_ui_native_e2e",
-      "dutch_accountant_signoff",
-      "fresh_full_engine_build_upgrade",
-      "live_integrations"
+      "bundle_full_reservation_acceptance"
     ],
     "P04": [
       "foundation",
@@ -92,12 +78,7 @@
       "legacy_db_adapter",
       "alternative_gate_regressions",
       "accounting_native_link",
-      "service_uid_isolation",
-      "real_queue_and_api_bypass",
-      "wms_ui_native_e2e",
-      "dutch_accountant_signoff",
-      "fresh_full_engine_build_upgrade",
-      "live_integrations"
+      "warehouse_receipt_count_acceptance"
     ],
     "P05": [
       "foundation",
@@ -112,12 +93,7 @@
       "legacy_db_adapter",
       "alternative_gate_regressions",
       "accounting_native_link",
-      "service_uid_isolation",
-      "real_queue_and_api_bypass",
-      "wms_ui_native_e2e",
-      "dutch_accountant_signoff",
-      "fresh_full_engine_build_upgrade",
-      "live_integrations"
+      "wms_ui_native_e2e"
     ],
     "P06": [
       "foundation",
@@ -132,12 +108,7 @@
       "legacy_db_adapter",
       "alternative_gate_regressions",
       "accounting_native_link",
-      "service_uid_isolation",
-      "real_queue_and_api_bypass",
-      "wms_ui_native_e2e",
-      "dutch_accountant_signoff",
-      "fresh_full_engine_build_upgrade",
-      "live_integrations"
+      "return_inspection_transfer_acceptance"
     ],
     "P07": [
       "foundation",
@@ -152,12 +123,7 @@
       "legacy_db_adapter",
       "alternative_gate_regressions",
       "accounting_native_link",
-      "service_uid_isolation",
-      "real_queue_and_api_bypass",
-      "wms_ui_native_e2e",
-      "dutch_accountant_signoff",
-      "fresh_full_engine_build_upgrade",
-      "live_integrations"
+      "cross_system_integration_acceptance"
     ],
     "P08": [
       "foundation",
@@ -172,12 +138,7 @@
       "legacy_db_adapter",
       "alternative_gate_regressions",
       "accounting_native_link",
-      "service_uid_isolation",
-      "real_queue_and_api_bypass",
-      "wms_ui_native_e2e",
-      "dutch_accountant_signoff",
-      "fresh_full_engine_build_upgrade",
-      "live_integrations"
+      "quota_drift_acceptance"
     ],
     "P09": [
       "foundation",
@@ -195,9 +156,9 @@
       "service_uid_isolation",
       "real_queue_and_api_bypass",
       "wms_ui_native_e2e",
-      "dutch_accountant_signoff",
       "fresh_full_engine_build_upgrade",
-      "live_integrations"
+      "cross_system_integration_acceptance",
+      "synthetic_migration_reconciliation"
     ]
   },
   "tests": [
@@ -359,7 +320,63 @@
       "id": "live_integrations",
       "tier": "live",
       "reason": "No authorized live bank/tax/bol/Peppol mutation or live acceptance environment"
+    },
+    {
+      "id": "fresh_engine_bootstrap",
+      "tier": "operations",
+      "reason": "Fresh pinned ERPNext/site/service bootstrap with isolated identities is not implemented by seeded replay"
+    },
+    {
+      "id": "native_fiscal_enforcement",
+      "tier": "native_fiscal",
+      "reason": "Accountant goldens and direct native posting enforcement not implemented"
+    },
+    {
+      "id": "native_finance_workflow",
+      "tier": "native_financial",
+      "reason": "Complete native invoice/credit/APAR/bank-import workflow acceptance beyond prototypes not implemented"
+    },
+    {
+      "id": "stock_valuation_acceptance",
+      "tier": "native_valuation",
+      "reason": "Full landed/backdated/returns/assets/COGS/GL acceptance for Surooh workflows not implemented"
+    },
+    {
+      "id": "cross_system_integration_acceptance",
+      "tier": "integration",
+      "reason": "Marketplace/Warehouse/SAM/IC real implementation and fake-provider recovery acceptance not implemented"
+    },
+    {
+      "id": "synthetic_migration_reconciliation",
+      "tier": "migration",
+      "reason": "Complete synthetic source disposition/mapping/replay/reconciliation not implemented"
+    },
+    {
+      "id": "complete_financial_acceptance",
+      "tier": "acceptance",
+      "reason": "Full financial acceptance matrix/reports not executed on shipped Surooh app"
+    },
+    {
+      "id": "bundle_full_reservation_acceptance",
+      "tier": "native_stock",
+      "reason": "Nested/serial/batch/order lifecycle and cancel/dispatch full bundle adapter acceptance not implemented"
+    },
+    {
+      "id": "warehouse_receipt_count_acceptance",
+      "tier": "native_stock",
+      "reason": "Retained WMS UI/native receipt/count/location acceptance not implemented"
+    },
+    {
+      "id": "return_inspection_transfer_acceptance",
+      "tier": "native_stock",
+      "reason": "Full authorized native inspection/returns/transfer acceptance not implemented"
+    },
+    {
+      "id": "quota_drift_acceptance",
+      "tier": "integration",
+      "reason": "Full scoped native quota/projection-lag/drift acceptance not implemented"
     }
   ],
-  "not_applicable": {}
+  "not_applicable": {},
+  "stage_review_policy": "Phase-specific technical requirements plus existing predecessor/owner/accountant gates. Live provider operations remain separately prohibited, not a prerequisite to run preparation."
 }

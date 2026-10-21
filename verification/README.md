@@ -45,3 +45,9 @@ Test code is committed before the full run. A later evidence-only commit records
 G1 service/OS/files/key isolation, G2 real worker/API/outbox/IC integration, G3 UI/bundle/dispatch/valuation lifecycle, G4 Dutch policy/accountant review, G5 builds/security/full upgrade/restore/load and G6 effective protection/human start approval remain independently required. Alternative verification is a method to produce/review evidence; it does not resolve those defects. Existing TypeScript/lint baseline issues remain FAIL until separately fixed and retested.
 
 Rollback: revert only verification/docs changes or discard local test checkouts/evidence targets. Current financial/WMS systems remain authoritative. No real data, live provider writes, hosted service provisioning, Codex launch or merge/deploy is included.
+
+## Evidence archives and repeated runs
+
+Published evidence is a gzip tar archive plus plain report/index with SHA256. It contains only the report, redacted logs and explicitly listed artifacts. Verify the archive SHA before unpacking into a new empty directory, and use Python tarfile's `filter="data"` (Python>=3.12) to reject unsafe paths/links. Run gate.py against the unpacked report and its **tested source SHA**. Full WMS lint logs are retained in the archive; they are not replaced by a passing summary.
+
+First full run found the verifier's nested `bun` executable missing from PATH; fixed by prepending only the chosen pinned Bun binary directory. WMS build's generated route-tree change is captured as an artifact and source_after=dirty; it is not committed or claimed clean. Original type/lint defects remain failures. First-run evidence is preserved. The clean source clone's generated file is restored only after recording its patch, before a separately committed/retested verifier revision.

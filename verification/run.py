@@ -135,6 +135,11 @@ def main():
         "VITE_SUPABASE_URL": "http://127.0.0.1:15432",
         "VITE_SUPABASE_PUBLISHABLE_KEY": "SYNTHETIC-PUBLISHABLE-NOT-A-REAL-KEY",
     }
+    bun_binary = (
+        shutil.which(args.bun) if not Path(args.bun).is_absolute() else args.bun
+    )
+    if bun_binary:
+        env["PATH"] = str(Path(bun_binary).resolve().parent) + os.pathsep + env["PATH"]
     source = snapshot()
     if source["dirty_tracked"] or (
         args.expected_sha and args.expected_sha != source["commit_sha"]
@@ -276,6 +281,45 @@ def main():
         print(row["id"], row["status"], row["exit_code"], flush=True)
         (output / "report.json").write_text(json.dumps(report, indent=2) + "\n")
     report["source_after"] = snapshot()
+    if report["source_after"]["dirty_tracked"]:
+        patch = subprocess.check_output(["git", "diff", "--binary"], cwd=ROOT)
+        (output / "artifacts/tracked-source.patch").write_text(
+            redact(patch.decode(errors="replace"))
+        )
+    if args.profile == "wms":
+        build_files = []
+        for name in ["dist", ".output", "dist-ssr"]:
+            folder = ROOT / name
+            if folder.exists():
+                for path in sorted(folder.rglob("*")):
+                    if path.is_file() and not path.is_symlink():
+                        build_files.append(
+                            {
+                                "path": str(path.relative_to(ROOT)),
+                                "bytes": path.stat().st_size,
+                                "sha256": sha256(path.read_bytes()),
+                            }
+                        )
+        (output / "artifacts/build-output-manifest.json").write_text(
+            json.dumps(build_files, indent=2) + "\n"
+        )
+    packages_code = "import importlib.metadata as m,json;print(json.dumps({k:m.version(k) for k in ['ruff','build','flit_core','packaging','pyproject_hooks']}))"
+    try:
+        versions = subprocess.run(
+            [args.tools_python, "-c", packages_code],
+            env=env,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            timeout=20,
+        )
+        report["environment"]["tools_distributions"] = (
+            json.loads(versions.stdout)
+            if versions.returncode == 0
+            else {"error": redact(versions.stdout), "exit_code": versions.returncode}
+        )
+    except OSError as exc:
+        report["environment"]["tools_distributions"] = {"error": str(exc)}
     report["tracked_diff"] = git("diff", "--stat")
     report["finished_at_utc"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     report["summary"] = {

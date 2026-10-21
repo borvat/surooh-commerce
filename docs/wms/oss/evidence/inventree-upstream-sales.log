@@ -1,0 +1,367 @@
+INVE-W1: Current branch could not be detected.
+INVE-W10 - Config for 'INVENTREE_CONFIG_FILE' not in recommended directory '<WORKSPACE>/oss-research/inventree/config'.
+2026-10-21 16:25:32,809 WARNING INVE-W10 - Config for 'INVENTREE_CONFIG_FILE' not in recommended directory '<WORKSPACE>/oss-research/inventree/config'.
+2026-10-21 16:25:32,811 WARNING INVE-W10 - Config for 'INVENTREE_PLUGIN_FILE' not in recommended directory '<WORKSPACE>/oss-research/inventree/config'.
+2026-10-21T21:25:35.089546Z [warning  ] plugin.registry.get_plugin_configs: Database not ready [inventree]
+2026-10-21 21:25:35,089 WARNING {'event': 'plugin.registry.get_plugin_configs: Database not ready', 'timestamp': '2026-10-21T21:25:35.089546Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.089856Z [warning  ] plugin.registry.with_mixin: Database not ready [inventree]
+2026-10-21 21:25:35,089 WARNING {'event': 'plugin.registry.with_mixin: Database not ready', 'timestamp': '2026-10-21T21:25:35.089856Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.345008Z [warning  ] plugin.registry.get_plugin_configs: Database not ready [inventree]
+2026-10-21 21:25:35,345 WARNING {'event': 'plugin.registry.get_plugin_configs: Database not ready', 'timestamp': '2026-10-21T21:25:35.345008Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.345242Z [warning  ] plugin.registry.with_mixin: Database not ready [inventree]
+2026-10-21 21:25:35,345 WARNING {'event': 'plugin.registry.with_mixin: Database not ready', 'timestamp': '2026-10-21T21:25:35.345242Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.346965Z [warning  ] plugin.registry.get_plugin_configs: Database not ready [inventree]
+2026-10-21 21:25:35,346 WARNING {'event': 'plugin.registry.get_plugin_configs: Database not ready', 'timestamp': '2026-10-21T21:25:35.346965Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.355934Z [warning  ] plugin.registry.get_plugin_configs: Database not ready [inventree]
+2026-10-21 21:25:35,355 WARNING {'event': 'plugin.registry.get_plugin_configs: Database not ready', 'timestamp': '2026-10-21T21:25:35.355934Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.356099Z [warning  ] plugin.registry.with_mixin: Database not ready [inventree]
+2026-10-21 21:25:35,356 WARNING {'event': 'plugin.registry.with_mixin: Database not ready', 'timestamp': '2026-10-21T21:25:35.356099Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.356324Z [warning  ] plugin.registry.get_plugin_configs: Database not ready [inventree]
+2026-10-21 21:25:35,356 WARNING {'event': 'plugin.registry.get_plugin_configs: Database not ready', 'timestamp': '2026-10-21T21:25:35.356324Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.356456Z [warning  ] plugin.registry.with_mixin: Database not ready [inventree]
+2026-10-21 21:25:35,356 WARNING {'event': 'plugin.registry.with_mixin: Database not ready', 'timestamp': '2026-10-21T21:25:35.356456Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.356685Z [warning  ] plugin.registry.get_plugin_configs: Database not ready [inventree]
+2026-10-21 21:25:35,356 WARNING {'event': 'plugin.registry.get_plugin_configs: Database not ready', 'timestamp': '2026-10-21T21:25:35.356685Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.360254Z [warning  ] plugin.registry.get_plugin_configs: Database not ready [inventree]
+2026-10-21 21:25:35,360 WARNING {'event': 'plugin.registry.get_plugin_configs: Database not ready', 'timestamp': '2026-10-21T21:25:35.360254Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.360536Z [warning  ] plugin.registry.with_mixin: Database not ready [inventree]
+2026-10-21 21:25:35,360 WARNING {'event': 'plugin.registry.with_mixin: Database not ready', 'timestamp': '2026-10-21T21:25:35.360536Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.360775Z [warning  ] plugin.registry.get_plugin_configs: Database not ready [inventree]
+2026-10-21 21:25:35,360 WARNING {'event': 'plugin.registry.get_plugin_configs: Database not ready', 'timestamp': '2026-10-21T21:25:35.360775Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.360856Z [warning  ] plugin.registry.with_mixin: Database not ready [inventree]
+2026-10-21 21:25:35,360 WARNING {'event': 'plugin.registry.with_mixin: Database not ready', 'timestamp': '2026-10-21T21:25:35.360856Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.361105Z [warning  ] Database is not ready - cannot load machines [inventree]
+2026-10-21 21:25:35,361 WARNING {'event': 'Database is not ready - cannot load machines', 'timestamp': '2026-10-21T21:25:35.361105Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.361409Z [warning  ] plugin.registry.get_plugin_configs: Database not ready [inventree]
+2026-10-21 21:25:35,361 WARNING {'event': 'plugin.registry.get_plugin_configs: Database not ready', 'timestamp': '2026-10-21T21:25:35.361409Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.365188Z [warning  ] Database is not ready - cannot load machines [inventree]
+2026-10-21 21:25:35,365 WARNING {'event': 'Database is not ready - cannot load machines', 'timestamp': '2026-10-21T21:25:35.365188Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.365444Z [warning  ] plugin.registry.get_plugin_configs: Database not ready [inventree]
+2026-10-21 21:25:35,365 WARNING {'event': 'plugin.registry.get_plugin_configs: Database not ready', 'timestamp': '2026-10-21T21:25:35.365444Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.368645Z [warning  ] plugin.registry.get_plugin_configs: Database not ready [inventree]
+2026-10-21 21:25:35,368 WARNING {'event': 'plugin.registry.get_plugin_configs: Database not ready', 'timestamp': '2026-10-21T21:25:35.368645Z', 'logger': 'inventree', 'level': 'warning'}
+2026-10-21T21:25:35.371841Z [warning  ] plugin.registry.get_plugin_configs: Database not ready [inventree]
+2026-10-21 21:25:35,371 WARNING {'event': 'plugin.registry.get_plugin_configs: Database not ready', 'timestamp': '2026-10-21T21:25:35.371841Z', 'logger': 'inventree', 'level': 'warning'}
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+Found 8 test(s).
+Operations to perform:
+  Synchronize unmigrated apps: admindocs, allauth, anymail, corsheaders, dbbackup, django_cleanup, django_filters, django_ical, django_otp, django_structlog, djmoney, drf_spectacular, generic, headless, humanize, maintenance_mode, markdownify, messages, mptt, openid_connect, rest_framework, runserver_nostatic, saml, sslserver, staticfiles, storages, web
+  Apply all migrations: InvenTree, account, admin, auth, build, common, company, contenttypes, django_mailbox, django_q, error_report, exchange, flags, importer, machine, mfa, oauth2_provider, order, otp_static, otp_totp, part, plugin, report, scim, sessions, socialaccount, stock, taggit, users, usersessions
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying InvenTree.0001_initial... OK
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying account.0001_initial... OK
+  Applying account.0002_email_max_length... OK
+  Applying account.0003_alter_emailaddress_create_unique_verified_email... OK
+  Applying account.0004_alter_emailaddress_drop_unique_email... OK
+  Applying account.0005_emailaddress_idx_upper_email... OK
+  Applying account.0006_emailaddress_lower... OK
+  Applying account.0007_emailaddress_idx_email... OK
+  Applying account.0008_emailaddress_unique_primary_email_fixup... OK
+  Applying account.0009_emailaddress_unique_primary_email... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying users.0001_squashed_0015_alter_userprofile_type... OK
+  Applying taggit.0001_initial... OK
+  Applying taggit.0002_auto_20150616_2121... OK
+  Applying taggit.0003_taggeditem_add_unique_index... OK
+  Applying taggit.0004_alter_taggeditem_content_type_alter_taggeditem_tag... OK
+  Applying taggit.0005_auto_20220424_2025... OK
+  Applying part.0001_initial... OK
+  Applying company.0001_initial... OK
+  Applying stock.0001_initial... OK
+  Applying company.0002_auto_20190520_2204... OK
+  Applying part.0002_auto_20190520_2204... OK
+  Applying common.0001_squashed_0007_colortheme... OK
+  Applying part.0003_auto_20190525_2226_squashed_0060_merge_20201112_1722... OK
+  Applying company.0003_remove_supplierpart_minimum_squashed_0047_supplierpart_pack_size... OK
+  Applying order.0001_squashed_0023_auto_20200420_2309... OK
+  Applying build.0001_initial... OK
+  Applying build.0002_auto_20190520_2204... OK
+  Applying build.0003_auto_20190525_2355... OK
+  Applying build.0004_auto_20190525_2356... OK
+  Applying build.0005_auto_20190604_2217... OK
+  Applying stock.0002_auto_20190525_2226_squashed_0030_auto_20200422_0015... OK
+  Applying order.0024_salesorderallocation... OK
+  Applying stock.0031_auto_20200422_0209... OK
+  Applying order.0025_auto_20200422_0222... OK
+  Applying order.0026_auto_20200422_0224... OK
+  Applying order.0027_auto_20200422_0236... OK
+  Applying order.0028_auto_20200423_0956... OK
+  Applying order.0029_auto_20200423_1042... OK
+  Applying build.0006_auto_20190913_1407_squashed_0015_auto_20200425_1350... OK
+  Applying stock.0032_stockitem_build_order... OK
+  Applying stock.0033_auto_20200426_0539... OK
+  Applying order.0030_auto_20200426_0551... OK
+  Applying build.0016_auto_20200426_0551... OK
+  Applying stock.0034_auto_20200426_0602... OK
+  Applying stock.0035_auto_20200502_2308... OK
+  Applying stock.0036_stockitemattachment... OK
+  Applying stock.0037_stockitemattachment_user... OK
+  Applying stock.0038_stockitemattachment_upload_date... OK
+  Applying stock.0039_auto_20200513_0016... OK
+  Applying stock.0040_stockitemtestresult... OK
+  Applying stock.0041_stockitemtestresult_notes... OK
+  Applying stock.0042_auto_20200523_0121... OK
+  Applying stock.0043_auto_20200525_0420... OK
+  Applying stock.0044_auto_20200528_1036... OK
+  Applying stock.0045_stockitem_customer... OK
+  Applying stock.0046_auto_20200605_0931... OK
+  Applying stock.0047_auto_20200605_0932... OK
+  Applying stock.0048_auto_20200807_2344... OK
+  Applying stock.0049_auto_20200820_0454... OK
+  Applying stock.0050_auto_20200821_1403... OK
+  Applying stock.0051_auto_20200928_0928... OK
+  Applying stock.0052_stockitem_is_building... OK
+  Applying stock.0053_auto_20201110_0513... OK
+  Applying stock.0054_remove_stockitem_build_order... OK
+  Applying stock.0055_auto_20201117_1453... OK
+  Applying stock.0056_stockitem_expiry_date... OK
+  Applying stock.0057_stock_location_item_owner... OK
+  Applying stock.0058_stockitem_packaging... OK
+  Applying plugin.0001_initial... OK
+  Applying plugin.0002_alter_pluginconfig_options... OK
+  Applying plugin.0003_pluginsetting... OK
+  Applying plugin.0004_alter_pluginsetting_key... OK
+  Applying plugin.0005_notificationusersetting... OK
+  Applying plugin.0006_pluginconfig_metadata... OK
+  Applying plugin.0007_auto_20230805_1748... OK
+  Applying plugin.0008_pluginconfig_package_name... OK
+  Applying plugin.0009_alter_pluginconfig_key... OK
+  Applying common.0008_remove_inventreesetting_description_squashed_0039_emailthread_emailmessage... OK
+  Applying part.0061_auto_20210103_2313_squashed_0142_remove_part_last_stocktake_remove_partstocktake_note_and_more... OK
+  Applying django_q.0001_initial... OK
+  Applying django_q.0002_auto_20150630_1624... OK
+  Applying django_q.0003_auto_20150708_1326... OK
+  Applying django_q.0004_auto_20150710_1043... OK
+  Applying django_q.0005_auto_20150718_1506... OK
+  Applying django_q.0006_auto_20150805_1817... OK
+  Applying django_q.0007_ormq... OK
+  Applying stock.0059_auto_20210404_2016_squashed_0116_alter_stockitem_link... OK
+  Applying part.0143_alter_part_image... OK
+  Applying part.0144_auto_20251203_1045... OK
+  Applying common.0040_parametertemplate_parameter... OK
+  Applying part.0145_auto_20251203_1238... OK
+  Applying part.0146_auto_20251203_1241... OK
+  Applying stock.0117_stockitemtracking_part_alter_stockitemtracking_item... OK
+  Applying stock.0118_auto_20260205_1218... OK
+  Applying stock.0119_alter_stockitemtestresult_date... OK
+  Applying stock.0120_stockitem_creation_date... OK
+  Applying stock.0121_auto_20260526_0849... OK
+  Applying stock.0122_alter_stockitem_creation_date... OK
+  Applying stock.0123_remove_stockitem_review_needed... OK
+  Applying stock.0124_alter_mptt_fields... OK
+  Applying stock.0125_remove_mptt_fields... OK
+  Applying company.0048_auto_20220913_0312_squashed_0075_company_tax_id... OK
+  Applying company.0076_alter_company_image... OK
+  Applying common.0041_auto_20251203_1244... OK
+  Applying company.0077_delete_manufacturerpartparameter... OK
+  Applying company.0078_supplierpart_primary... OK
+  Applying company.0079_auto_20260212_1054... OK
+  Applying part.0147_remove_part_default_supplier... OK
+  Applying part.0148_auto_20260427_2233... OK
+  Applying part.0149_bomitem_raw_amount... OK
+  Applying part.0150_part_maximum_stock... OK
+  Applying part.0151_part_consumable... OK
+  Applying part.0152_alter_partpricing_currency... OK
+  Applying taggit.0006_rename_taggeditem_content_type_object_id_taggit_tagg_content_8fc721_idx... OK
+  Applying build.0017_auto_20200426_0612_squashed_0058_buildline_consumed... OK
+  Applying order.0031_auto_20200426_0612_squashed_0112_alter_salesorderlineitem_part... OK
+  Applying order.0113_salesordershipment_shipment_address... OK
+  Applying order.0114_purchaseorderextraline_project_code_and_more... OK
+  Applying order.0115_purchaseorder_updated_at_returnorder_updated_at_and_more... OK
+  Applying order.0116_purchaseorderextraline_line_and_more... OK
+  Applying order.0117_purchaseorderextraline_line_int_and_more... OK
+  Applying order.0118_transferorder... OK
+  Applying order.0119_transferorderlineitem_line_int... OK
+  Applying order.0120_purchaseorder_tags_returnorder_tags_salesorder_tags_and_more... OK
+  Applying order.0121_add_line_item_discount... OK
+  Applying company.0080_company_tags... OK
+  Applying common.0042_attachment_is_image_attachment_thumbnail... OK
+  Applying common.0043_auto_20260518_1206... OK
+  Applying common.0044_notificationmessage_charfield_pk... OK
+  Applying common.0045_projectcode_active... OK
+  Applying common.0046_alter_emailmessage_global_id_and_more... OK
+  Applying common.0047_parametertemplate_unique... OK
+  Applying common.0048_notificationmessage_link... OK
+  Applying common.0049_notificationentry_charfield_uid... OK
+  Applying common.0050_note... OK
+  Applying build.0059_build_tags... OK
+  Applying common.0051_auto_20260525_0956... OK
+  Applying common.0052_remove_notesimage_model_id_and_more... OK
+  Applying build.0060_remove_build_notes... OK
+  Applying common.0053_inventreesetting_touched_inventreesetting_updated_and_more... OK
+  Applying company.0081_remove_company_notes_remove_manufacturerpart_notes_and_more... OK
+  Applying company.0082_address_phone_email... OK
+  Applying company.0083_company_is_internal... OK
+  Applying django_mailbox.0001_initial... OK
+  Applying django_mailbox.0002_add_eml_to_message... OK
+  Applying django_mailbox.0003_auto_20150409_0316... OK
+  Applying django_mailbox.0004_bytestring_to_unicode... OK
+  Applying django_mailbox.0005_auto_20160523_2240... OK
+  Applying django_mailbox.0006_mailbox_last_polling... OK
+  Applying django_mailbox.0007_auto_20180421_0026... OK
+  Applying django_mailbox.0008_auto_20190219_1553... OK
+  Applying django_mailbox.0009_alter_message_eml... OK
+  Applying django_q.0008_auto_20160224_1026... OK
+  Applying django_q.0009_auto_20171009_0915... OK
+  Applying django_q.0010_auto_20200610_0856... OK
+  Applying django_q.0011_auto_20200628_1055... OK
+  Applying django_q.0012_auto_20200702_1608... OK
+  Applying django_q.0013_task_attempt_count... OK
+  Applying django_q.0014_schedule_cluster... OK
+  Applying django_q.0015_alter_schedule_schedule_type... OK
+  Applying django_q.0016_schedule_intended_date_kwarg... OK
+  Applying django_q.0017_task_cluster_alter... OK
+  Applying django_q.0018_task_success_index... OK
+  Applying django_q.0019_alter_task_options_alter_ormq_key_alter_ormq_lock_and_more... OK
+  Applying error_report.0001_initial... OK
+  Applying exchange.0001_initial... OK
+  Applying flags.0012_replace_migrations_for_wagtail_independence... OK
+  Applying flags.0013_add_required_field... OK
+  Applying flags.0014_flagstate_unique_constraint... OK
+  Applying importer.0001_initial... OK
+  Applying importer.0002_dataimportsession_field_overrides... OK
+  Applying importer.0003_dataimportsession_field_filters... OK
+  Applying importer.0004_alter_dataimportsession_model_type... OK
+  Applying importer.0005_dataimportsession_update_records... OK
+  Applying importer.0006_dataimportcolumnmap_lookup_field... OK
+  Applying importer.0007_dataimportsession_completed_row_count_history_and_more... OK
+  Applying importer.0008_alter_dataimportrow_data_alter_dataimportrow_errors_and_more... OK
+  Applying machine.0001_initial... OK
+  Applying machine.0002_alter_machineconfig_id... OK
+  Applying machine.0003_machinesetting_touched_machinesetting_updated_and_more... OK
+  Applying mfa.0001_initial... OK
+  Applying mfa.0002_authenticator_timestamps... OK
+  Applying mfa.0003_authenticator_type_uniq... OK
+  Applying oauth2_provider.0001_initial... OK
+  Applying oauth2_provider.0002_auto_20190406_1805... OK
+  Applying oauth2_provider.0003_auto_20201211_1314... OK
+  Applying oauth2_provider.0004_auto_20200902_2022... OK
+  Applying oauth2_provider.0005_auto_20211222_2352... OK
+  Applying oauth2_provider.0006_alter_application_client_secret... OK
+  Applying oauth2_provider.0007_application_post_logout_redirect_uris... OK
+  Applying oauth2_provider.0008_alter_accesstoken_token... OK
+  Applying oauth2_provider.0009_add_hash_client_secret... OK
+  Applying oauth2_provider.0010_application_allowed_origins... OK
+  Applying oauth2_provider.0011_refreshtoken_token_family... OK
+  Applying oauth2_provider.0012_add_token_checksum... OK
+  Applying oauth2_provider.0013_alter_application_authorization_grant_type_device... OK
+  Applying oauth2_provider.0014_alter_help_text... OK
+  Applying oauth2_provider.0015_refreshtoken_token_checksum... OK
+  Applying oauth2_provider.0016_alter_devicegrant_scope... OK
+  Applying oauth2_provider.0017_application_dcr_created... OK
+  Applying oauth2_provider.0018_resource_indicators... OK
+  Applying oauth2_provider.0019_application_registration_source... OK
+  Applying oauth2_provider.0020_cimd_application_fields... OK
+  Applying oauth2_provider.0021_translatable_field_labels... OK
+  Applying oauth2_provider.0022_refreshtoken_token_family_index... OK
+  Applying order.0122_remove_purchaseorder_notes_remove_returnorder_notes_and_more... OK
+  Applying order.0123_salesordershipment_contact... OK
+  Applying order.0124_purchaseorder_delivery_address... OK
+  Applying otp_static.0001_initial... OK
+  Applying otp_static.0002_throttling... OK
+  Applying otp_totp.0001_initial... OK
+  Applying otp_totp.0002_auto_20190420_0723... OK
+  Applying part.0153_bomitem_piece_count_bomitem_piece_size... OK
+  Applying part.0154_remove_part_notes... OK
+  Applying plugin.0010_pluginusersetting... OK
+  Applying plugin.0011_delete_notificationusersetting... OK
+  Applying plugin.0012_pluginsetting_touched_pluginsetting_updated_and_more... OK
+  Applying report.0001_initial... OK
+  Applying report.0002_delete_reporttemplate... OK
+  Applying report.0003_testreport_enabled... OK
+  Applying report.0004_auto_20200823_1104... OK
+  Applying report.0005_auto_20210119_0815... OK
+  Applying report.0006_reportsnippet... OK
+  Applying report.0007_auto_20210204_1617... OK
+  Applying report.0008_auto_20210204_2100... OK
+  Applying report.0009_testreport_revision... OK
+  Applying report.0010_auto_20210205_1201... OK
+  Applying report.0011_auto_20210212_2024... OK
+  Applying report.0012_buildreport... OK
+  Applying report.0013_testreport_include_installed... OK
+  Applying report.0014_purchaseorderreport_salesorderreport... OK
+  Applying report.0015_auto_20210403_1837... OK
+  Applying report.0016_auto_20210513_1303... OK
+  Applying report.0017_auto_20230317_0816... OK
+  Applying report.0018_returnorderreport... OK
+  Applying report.0019_returnorderreport_metadata... OK
+  Applying report.0020_stocklocationreport... OK
+  Applying report.0021_auto_20231009_0144... OK
+  Applying report.0022_reporttemplate... OK
+  Applying report.0023_auto_20240421_0455... OK
+  Applying report.0024_delete_billofmaterialsreport_delete_buildreport_and_more... OK
+  Applying report.0025_labeltemplate... OK
+  Applying report.0026_auto_20240422_1301... OK
+  Applying report.0027_alter_labeltemplate_model_type_and_more... OK
+  Applying report.0028_labeltemplate_attach_to_model_and_more... OK
+  Applying report.0029_remove_reportoutput_template_and_more... OK
+  Applying report.0030_alter_labeltemplate_model_type_and_more... OK
+  Applying report.0031_reporttemplate_merge... OK
+  Applying report.0032_labeltemplate_updated_labeltemplate_updated_by_and_more... OK
+  Applying scim.0001_initial... OK
+  Applying sessions.0001_initial... OK
+  Applying socialaccount.0001_initial... OK
+  Applying socialaccount.0002_token_max_lengths... OK
+  Applying socialaccount.0003_extra_data_default_dict... OK
+  Applying socialaccount.0004_app_provider_id_settings... OK
+  Applying socialaccount.0005_socialtoken_nullable_app... OK
+  Applying socialaccount.0006_alter_socialaccount_extra_data... OK
+  Applying stock.0126_serial_number_concurrency_guard... OK
+  Applying stock.0127_alter_stockitemtestresult_options... OK
+  Applying stock.0128_remove_stockitem_notes... OK
+  Applying users.0016_remove_legacy_user_sessions_table... OK
+  Applying users.0017_apitoken_hmac_digest_apitoken_issued_by_and_more... OK
+  Applying users.0018_tippresult... OK
+  Applying usersessions.0001_initial...test_over_allocate (order.test_sales_order.SalesOrderTest.test_over_allocate)
+Test that over allocation logic works. ... ok
+test_allocate_full (order.test_sales_order.SalesOrderTest.test_allocate_full)
+Fully allocate stock. ... ok
+test_complete_order (order.test_sales_order.SalesOrderTest.test_complete_order)
+Allocate line items, then ship the order. ... ok
+test_complete_allocation_stale_line_instance (order.test_sales_order.SalesOrderTest.test_complete_allocation_stale_line_instance)
+The 'shipped' count is incremented atomically at the database level. ... ok
+test_order_cancel (order.test_sales_order.SalesOrderTest.test_order_cancel)
+Allocate line items then cancel the order. ... ok
+test_order_cancel_stale_instance_is_noop (order.test_sales_order.SalesOrderTest.test_order_cancel_stale_instance_is_noop)
+A second cancellation attempt with a stale order instance must be a no-op. ... ok
+test_split_stock (stock.tests.StockTest.test_split_stock)
+Test stock splitting. ... ok
+test_return_from_customer (stock.tests.StockTest.test_return_from_customer)
+Test removing previous allocated stock from customer. ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.720s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+ OK
+System check identified no issues (0 silenced).
+
+8 slowest tests:
+0.3506s test_over_allocate (order.test_sales_order.SalesOrderTest.test_over_allocate)
+0.1957s test_split_stock (stock.tests.StockTest.test_split_stock)
+0.0729s test_return_from_customer (stock.tests.StockTest.test_return_from_customer)
+0.0440s test_complete_order (order.test_sales_order.SalesOrderTest.test_complete_order)
+0.0171s test_order_cancel_stale_instance_is_noop (order.test_sales_order.SalesOrderTest.test_order_cancel_stale_instance_is_noop)
+0.0147s test_complete_allocation_stale_line_instance (order.test_sales_order.SalesOrderTest.test_complete_allocation_stale_line_instance)
+0.0141s test_order_cancel (order.test_sales_order.SalesOrderTest.test_order_cancel)
+0.0097s test_allocate_full (order.test_sales_order.SalesOrderTest.test_allocate_full)

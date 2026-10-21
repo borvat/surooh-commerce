@@ -1,0 +1,7 @@
+{
+  "trytond/modules/stock/move.py": "693db44e9d68ec11652bc850ba929a066c6a4e344f8fbd1ce4ac13f673420e49",
+  "trytond/modules/stock/tests/test_module.py": "f51e1ef6c3d494dba6e61bb616c41aa533edd88787c495cfb5d0bff2408532a3",
+  "trytond/modules/product_kit/product.py": "edf7daf0467bfadfbce8caa6457009d79ad6b142ea7e6ff37e6ed7e1330c3ad7",
+  "trytond/modules/product_kit/common.py": "d203302123eb3f778173e20bf20889d69351e5f23151d470ec941573841a7303",
+  "trytond/modules/product_kit/tests/scenario_product_kit_sale.rst": "aabda4be12af0a09b09b6e069530b12d30e1241393879653a6ea3ac7974f6a52"
+}

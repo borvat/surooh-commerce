@@ -1,0 +1,6 @@
+test_two_native_kits_share_one_component (tryton_probe.SuroohKitAvailabilityProbe.test_two_native_kits_share_one_component) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 12.956s
+
+OK

@@ -76,5 +76,14 @@
   ],
   "native_milestones_created": true,
   "codex_assigned": false,
-  "baseline_defect_issues": [12, 13]
+  "baseline_defect_issues": [
+    12,
+    13
+  ],
+  "architecture_decision_issue": {
+    "number": 15,
+    "url": "https://github.com/borvat/surooh-commerce/issues/15",
+    "status": "open-blocking",
+    "milestone_number": 1
+  }
 }

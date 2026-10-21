@@ -1,0 +1,2 @@
+# Preserve sanitized research evidence despite repository-wide log exclusions.
+!*.log

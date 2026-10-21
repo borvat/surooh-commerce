@@ -89,6 +89,20 @@ export function evaluateEvidence(phase, record, head, evidenceRoot) {
   };
 }
 
+export function applyArchitectureGate(result, decision) {
+  const errors = [...result.errors];
+  if (!decision || decision.status !== "accepted" ||
+      !sha(decision.accepted_sha) ||
+      typeof decision.owner_acceptance_ref !== "string" ||
+      !decision.owner_acceptance_ref.trim() ||
+      !["G1", "G2", "G3", "G4"].every((id) => decision.gates?.[id] === "passed")) {
+    errors.push("Architecture decision lacks owner acceptance or mandatory evidence gates");
+  }
+  return { ...result, errors,
+    status: errors.length ? "BLOCKED" : "READY_FOR_HUMAN_REVIEW",
+    execution_authorized: false, automatic_merge: false, automatic_deploy: false };
+}
+
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
     const [id, path] = process.argv.slice(2);
@@ -100,12 +114,13 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     const record = JSON.parse(readFileSync(path, "utf8"));
     const repo = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
     const head = execFileSync("git", ["rev-parse", "HEAD"], { cwd: repo, encoding: "utf8" }).trim();
-    const result = evaluateEvidence(
+    const evidenceResult = evaluateEvidence(
       catalog.phases.find((p) => p.id === id),
       record,
       head,
       dirname(resolve(path)),
     );
+    const result = applyArchitectureGate(evidenceResult, catalog.architecture_decision);
     console.log(JSON.stringify(result, null, 2));
     process.exitCode = result.status === "BLOCKED" ? 2 : 0;
   } catch (e) {

@@ -1,0 +1,29 @@
+test_two_native_kits_share_one_component (tryton_probe.SuroohKitAvailabilityProbe.test_two_native_kits_share_one_component) ... ERROR
+
+======================================================================
+ERROR: test_two_native_kits_share_one_component (tryton_probe.SuroohKitAvailabilityProbe.test_two_native_kits_share_one_component)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/tests/test_tryton.py", line 294, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/wms-oss-evaluation/research/wms-oss/prototypes/tryton_probe.py", line 89, in test_two_native_kits_share_one_component
+    Component.create([dict(parent_product=kit.id, product=shared.id,
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelsql.py", line 274, in wrapper
+    return func(cls, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelsql.py", line 1183, in create
+    return cls.browse(cls._after_create(new_ids, vlist_orig))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelstorage.py", line 337, in _after_create
+    cls._validate(records)
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelstorage.py", line 1722, in _validate
+    required_test(record, field)
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelstorage.py", line 1702, in required_test
+    raise RequiredValidationError(
+trytond.model.modelstorage.RequiredValidationError: A value is required for field "Parent Product" in record "4 u SYNTHETIC component @ SYNTHETIC kit A" of "Product Component". - 
+
+----------------------------------------------------------------------
+Ran 1 test in 13.822s
+
+FAILED (errors=1)

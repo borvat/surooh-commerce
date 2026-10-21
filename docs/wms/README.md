@@ -20,3 +20,7 @@ Status: **foundation proposed; Codex execution NOT authorized**. No stage is run
 Implementation modules stay in their current locations. No business-code migration, schema deployment, dependency upgrade, production connection or live marketplace call belongs to this foundation.
 
 The prior `Surooh-WMS-Codex-Handoff.zip` is an initial audit reference only. Its old instruction to start Codex is superseded by this foundation and the owner's explicit execution hold. [Phase P01](phases/P01.md) is a prepared task packet; do not submit it to Codex until the owner authorizes that exact phase.
+
+## Architecture evaluation hold
+
+Read [OSS evaluation and proposed decision](oss/README.md) before any phase. P01 is now blocked by the architecture decision, not ready for execution.

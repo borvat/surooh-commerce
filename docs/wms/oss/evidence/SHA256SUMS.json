@@ -1,0 +1,20 @@
+{
+  "docs/wms/oss/evidence/tryton-module-hashes.json": "596dc13319b37c5398c6a450e500358d7011148c9e9c6e97049af0e2e8e61658",
+  "docs/wms/oss/evidence/foundation-check.log": "16c50c626e196c38ebd952f76379fece6eeec304782e924c399b01c14f00fa6d",
+  "docs/wms/oss/evidence/tryton-shared-native-kit.log": "9ed7b7974c7508151009debd937b0796780354babb6b8330b91af2e7676fd784",
+  "docs/wms/oss/evidence/tryton-native-kit.log": "f22f84409b6b4cadd077ce856d5bd8e7bc6c844eedc44b98c5b3c3459f0a814e",
+  "docs/wms/oss/evidence/tryton-upstream-scenarios.log": "f2c31be34a80f5c0a7afda1f92ddcf369a9ebf1f8ec6fa2a6f5217b21476ae22",
+  "docs/wms/oss/evidence/tryton-surooh-probe.log": "f5c4267091e6f0c8b35e0efe8f810994361b9862e1e742f18727ffc91d718e4f",
+  "docs/wms/oss/evidence/.gitignore": "2bfc7b580d9eca7a95b88abd62b3264f2c3139ce0516d96d8d186eb51781f2be",
+  "docs/wms/oss/evidence/inventree-installed.json": "359de3d3b087d8e684d867045deab6ce6a4f5636c8706e4a1d17959eaf987120",
+  "docs/wms/oss/evidence/inventree-surooh-probe.log": "08a5c93f9193b0c6d569ba5ebe43b453062d0a4976e51c7ea3b81ad67e9833c3",
+  "docs/wms/oss/evidence/inventree-surooh-probe-final.log": "4bde625a326421179172b553f8bd1ad5db7f558c26f419161b9327172ea10669",
+  "docs/wms/oss/evidence/inventree-upstream-sales.log": "0071b6893134bd6469a538eee4d49131f6b95214bc2e13ce4879eb3e4d0f6b25",
+  "docs/wms/oss/evidence/tryton-critical-unit.log": "045cc1dabecac9f2dd4f7f76a1ba441a409a7f905be628766719baa6f3ac1acb",
+  "docs/wms/oss/evidence/tryton-shared-native-kit-final.log": "0613d3559a288e2c1f1e2fa907e3c3482d481b11b3d0cdc7178ffbe2b8986888",
+  "docs/wms/oss/evidence/foundation-tests.log": "812d93ac7d5943713e0dc81cc23caefba9797eca5b2568c37c370962f02a2805",
+  "docs/wms/oss/evidence/tryton-installed.json": "0a03c743fdf72a29414e2ebbbbac4b494edcdbcf36f312ccdd3e9018ab1a9124",
+  "research/wms-oss/run-prototypes.py": "9b435acdf1eee480b7648acf2ad07be3d33ccfd74d92076db10262d25deea856",
+  "research/wms-oss/prototypes/tryton_probe.py": "05b70aaf61732cbc9d21cb088c250783f5d8a0aaa975b79e0e1f22f4f07d367e",
+  "research/wms-oss/prototypes/inventree_probe.py": "0e3ba4df0b0dab3ba973687808188f31340b05cb748f3365471b0962b7631be3"
+}

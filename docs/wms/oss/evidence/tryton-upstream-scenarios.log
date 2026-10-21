@@ -1,0 +1,114 @@
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_shipment_in.rst
+Doctest: scenario_stock_shipment_in.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_reporting.rst
+Doctest: scenario_stock_reporting.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_shipment_in_same_storage_input.rst
+Doctest: scenario_stock_shipment_in_same_storage_input.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_recompute_average_cost_price_production.rst
+Doctest: scenario_stock_recompute_average_cost_price_production.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_inventory_tolerance.rst
+Doctest: scenario_stock_inventory_tolerance.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_shipment_internal_transit.rst
+Doctest: scenario_stock_shipment_internal_transit.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_inventory_empty_quantity.rst
+Doctest: scenario_stock_inventory_empty_quantity.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_recompute_average_cost_price.rst
+Doctest: scenario_stock_recompute_average_cost_price.rst ... status dumper crashed
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/status.py", line 73, in dumper
+    if dump(path):
+       ^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/status.py", line 55, in dump
+    sock = socket.socket(socket.AF_UNIX)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py", line 233, in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+PermissionError: [Errno 1] Operation not permitted
+ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_reporting_inventory.rst
+Doctest: scenario_stock_reporting_inventory.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_reporting_inventory.rst
+Doctest: scenario_stock_reporting_inventory.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_reporting_inventory.rst
+Doctest: scenario_stock_reporting_inventory.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_reporting_inventory.rst
+Doctest: scenario_stock_reporting_inventory.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_move_in_future.rst
+Doctest: scenario_stock_move_in_future.rst ... status dumper crashed
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/status.py", line 73, in dumper
+    if dump(path):
+       ^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/status.py", line 55, in dump
+    sock = socket.socket(socket.AF_UNIX)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py", line 233, in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+PermissionError: [Errno 1] Operation not permitted
+ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_average_cost_price.rst
+Doctest: scenario_stock_average_cost_price.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_shipment_out_return_same_storage_input.rst
+Doctest: scenario_stock_shipment_out_return_same_storage_input.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_shipment_out_same_storage_output.rst
+Doctest: scenario_stock_shipment_out_same_storage_output.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_shipment_out_return.rst
+Doctest: scenario_stock_shipment_out_return.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_inventory.rst
+Doctest: scenario_stock_inventory.rst ... status dumper crashed
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/status.py", line 73, in dumper
+    if dump(path):
+       ^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/status.py", line 55, in dump
+    sock = socket.socket(socket.AF_UNIX)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py", line 233, in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+PermissionError: [Errno 1] Operation not permitted
+ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_shipment_cron_assign.rst
+Doctest: scenario_stock_shipment_cron_assign.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_shipment_internal.rst
+Doctest: scenario_stock_shipment_internal.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_shipment_in_return.rst
+Doctest: scenario_stock_shipment_in_return.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_product_quantities_by_warehouse.rst
+Doctest: scenario_stock_product_quantities_by_warehouse.rst ... status dumper crashed
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/status.py", line 73, in dumper
+    if dump(path):
+       ^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/status.py", line 55, in dump
+    sock = socket.socket(socket.AF_UNIX)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py", line 233, in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+PermissionError: [Errno 1] Operation not permitted
+ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_reporting_margin.rst
+Doctest: scenario_stock_reporting_margin.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_period.rst
+Doctest: scenario_stock_period.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_inventory_count.rst
+Doctest: scenario_stock_inventory_count.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_product_replace.rst
+Doctest: scenario_stock_product_replace.rst ... ok
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/stock/tests/scenario_stock_shipment_out.rst
+Doctest: scenario_stock_shipment_out.rst ... status dumper crashed
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/status.py", line 73, in dumper
+    if dump(path):
+       ^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/status.py", line 55, in dump
+    sock = socket.socket(socket.AF_UNIX)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py", line 233, in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+PermissionError: [Errno 1] Operation not permitted
+ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 357.470s
+
+OK

@@ -38,3 +38,8 @@
 - Main, production databases, real inventory/prices and live provider mutations remain out of scope. Existing bol write-disable guards must stay disabled. No customer exports or credentials in this public repository.
 - Local helper/static SQL tests do not prove DB concurrency or RLS. Database acceptance must use disposable synthetic fixtures and real limited-role sessions. Missing/blocked checks must remain visible.
 - scripts/wms/phase-gate.mjs only recommends human review. Never treat self-authored evidence or Issue closure as owner approval.
+
+## OSS architecture decision hold
+
+- Read docs/wms/oss/ADR-0001.md and EXECUTION_PLAN.md. The recommendation is proposed, not accepted. P01 is blocked until mandatory architecture gates, owner acceptance and a revised task packet are recorded. Do not use historical Supabase phase scopes to start a Tryton migration.
+- Research probes run only on separately installed upstream runtimes with disposable synthetic databases. They are not production acceptance or permission to copy upstream code into this application.

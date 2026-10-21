@@ -17,3 +17,7 @@ All execution is on hold. The owner authorized preparation only, not starting Co
 Each task packet includes scope, affected files, dependencies, start/exit criteria, acceptance checks, risk/rollback and a held Codex prompt. `phases.json` is the machine-readable catalog. Issues are planning containers, not execution authorization. Nine native milestones were created and linked to Issues; the confirmed register is in GITHUB_OPERATIONS.md and github-register.json.
 
 Incremental changes only: no wholesale frontend rewrite, ERP replacement, database fork or automatic migration. New components must build on the current canonical inventory model and interfaces. A phase may produce additive code and fixtures but cannot silently redefine safety/ownership/BOM policy.
+
+## Architecture evaluation hold
+
+The conditional [OSS execution plan](oss/EXECUTION_PLAN.md) adds P00 and proposes replacement phase scopes if ADR-0001 is accepted. Existing phase packets remain historical current-system plans until explicitly revised and approved.

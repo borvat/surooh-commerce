@@ -1,0 +1,23 @@
+# Baseline decision — 2026-10-21 (Asia/Damascus)
+
+Use `feature/bol-orders-warehouse` at `d3fce83c8b376822d04d8efcd675f1bebf7bef65` as the **development source baseline**. Preserve `main` at `953d41a28a3916c94456645eaed00817cd17ca3b` as the unchanged integration branch; neither source is certified for production. This foundation branch is based on the feature commit and its draft PR targets the feature branch, not main. Do not merge the existing feature PR #1 as part of this preparation.
+
+| Surface                              | Pinned revision                                                     | Evidence and differences                                                                                                                                                                                                                         |
+| ------------------------------------ | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| GitHub main                          | `953d41a28a3916c94456645eaed00817cd17ca3b`                          | 22 SQL migrations; inventory service and canonical stock engine; no tests directory                                                                                                                                                              |
+| GitHub feature                       | `d3fce83c8b376822d04d8efcd675f1bebf7bef65`                          | 35 changed files, +1556/-12 lines against main; 13 test files / 91 test declarations; warehouse helpers, read-only copilot, command/label contracts, staging-only warehouse events migration                                                     |
+| Lovable Bundle Stock                 | `fe613f1f841f81b35527d4fdaa6310f8fa32adb9`                          | Published; latest metadata unchanged in this follow-up. Prior direct samples inventory.ts, bol.server.ts, organization and merge migrations match main ignoring trailing newline only                                                            |
+| Lovable Bundle Stock - Isolated Test | `8f858923378764e7f63bd00cd0deee2b27580597`                          | Unpublished; metadata unchanged. Prior samples inventory service matches main, batch and Stockitup identity match feature; warehouse audit lacks feature's duplicate-step guard and handedOff result                                             |
+| Replit surooh-commerce               | previously reported main `18aa4ca51a44d624879dd2bd9e41fdc96cc450fd` | Prior read-only inspection reported two Replit configuration commits and a feature worktree with four local edits. No independent local patch was retrieved; preserve and reconcile it in P01 before claiming a complete cross-platform baseline |
+
+Sources: [repo main](https://github.com/borvat/surooh-commerce/tree/953d41a28a3916c94456645eaed00817cd17ca3b), [feature](https://github.com/borvat/surooh-commerce/tree/d3fce83c8b376822d04d8efcd675f1bebf7bef65), [original project](https://lovable.dev/projects/6f792a79-806b-41b0-b8a8-7afb8b3d91d4), [isolated project](https://lovable.dev/projects/4d80453f-63ba-45a3-b9c2-ca825af5430e).
+
+Initial audit ZIP SHA-256: `41e44463590a4a0c57401eb54e689eee9eb0feb6ba422c4e8fe1d6150f2518f5`. It is retained by the owner, not uploaded into this public repository. Comparisons are sampled, not full-tree identity; local Replit edits and runtime environment may diverge from Git.
+
+## Why retain this structure
+
+The feature contains existing transaction-based SQL reservations and append-only stock movements plus newer validation contracts. Rebuilding would discard usable work without resolving the identified database, tenant and channel-quota uncertainties. The feature's staging SQL adds no recording gateway and denies clients access; it is a draft schema, not an operating warehouse subsystem.
+
+## Unverified runtime facts
+
+The prior database metadata SELECT returned UNAVAILABLE for both Lovable projects. Different checked-in Supabase project references indicate different configurations, not proof of isolated runtime databases. No production balances or customer records were read. Which deployed database is authoritative, which migrations are actually applied, whether balances represent real goods, and live multi-company isolation remain unverified. P01 must build a separate synthetic database and document deployment-to-commit-to-database mappings without connecting production to tests.

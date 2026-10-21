@@ -1,0 +1,32 @@
+name: WMS disposable database acceptance
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  disposable-database:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16.6
+        env:
+          POSTGRES_DB: wms_test_ci
+          POSTGRES_USER: wms_fixture
+          POSTGRES_PASSWORD: synthetic-fixture-only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      WMS_TEST_ISOLATED: "true"
+      WMS_TEST_DATABASE_URL: postgresql://wms_fixture:synthetic-fixture-only@127.0.0.1:5432/wms_test_ci
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Actual database adapter required — currently blocks in P01
+        run: node scripts/wms/db-check.mjs

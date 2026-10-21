@@ -1,0 +1,14 @@
+{
+  "phase": "P01",
+  "commit_sha": "REPLACE_WITH_TESTED_COMMIT",
+  "baseline_sha": "REPLACE_WITH_REVIEWED_BASELINE",
+  "environment": "isolated-synthetic",
+  "production_connections": 0,
+  "dependencies": [],
+  "checks": [],
+  "artifacts": [],
+  "blockers": [],
+  "rollback_artifact": "",
+  "limitations": [],
+  "review": { "technical_review_ref": "", "owner_decision_ref": "" }
+}

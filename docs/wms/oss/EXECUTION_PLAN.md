@@ -5,3 +5,6 @@ The former Tryton-first packet is superseded by [C0–C5 plan](../shared-core/PH
 ERPNext16 native stock/valuation/accounting is the selected engineering direction, with an independent Accounting app and retained Commerce UI/bol/bundle identity. All future phases remain blocked pending explicit owner start authorization and reviewed predecessor evidence. Tryton remains contingency; no second financial/stock-value writer. No Render/production changes, no live data, no paid/admin settings, no bol writes and no merge.
 
 Read authority contract, native mitigation prototype limits, accountant review path, CI repair runbook and phase packets before any future work. P01 cannot start from this file or an Issue closure.
+
+
+Current verification decision: independent local/isolated runner and evidence gate in `verification/README.md`. G0 HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED; no billing repair or repeated Actions. Required build/type/lint/native/security/integration tests and owner/accountant review remain mandatory; no phase start or completion is authorized.

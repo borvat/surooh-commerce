@@ -16,43 +16,43 @@
     },
     {
       "path": "docs/wms/phases/P01.md",
-      "sha256": "c062f01b53164ec23685ed93044396ce3a47f27bc9473c52e1e17ae80c21bca2"
+      "sha256": "91892a676bd3845819c5d9d7a3ea2f061d48d80952d5cd7bdc8d1fde609b2277"
     },
     {
       "path": "docs/wms/phases/P02.md",
-      "sha256": "628f74637c91292a965fe1b7f4839eb952b6ed097732d28af8fcab6f852db1a5"
+      "sha256": "9baf352c24c67238beeeb3197b6bfc9f55537cf1ff9abdab34bc271e4711c45e"
     },
     {
       "path": "docs/wms/phases/P03.md",
-      "sha256": "9fe214679589bcb388e1a4810e4f6e150204fa1a79c992fe3ff617aaad29c5d1"
+      "sha256": "33867acfcf32fe376302e2724eeb363bfb0d1b870675e8aca1c0d525432e99eb"
     },
     {
       "path": "docs/wms/phases/P04.md",
-      "sha256": "b200df8a02c91cf614b31724ab950dd4f18b1641d8c47cb0e7286efb40304209"
+      "sha256": "fe7cfa78a323307f329b0cb381542e11acc9ab3f9308c6013bde5f03a02e438e"
     },
     {
       "path": "docs/wms/phases/P05.md",
-      "sha256": "f240a27962710d566cc371463649538f8b63368a84259e4a2d335ce3403cf51d"
+      "sha256": "1a4c0c00696aaea73a9e06e683b5ed6fcc2b765fe7682c5aa940cad8ca615ae7"
     },
     {
       "path": "docs/wms/phases/P06.md",
-      "sha256": "05df68c84df49558d70a0fdad96149f5fd881e9fa16a6fb9dcd7a8859b8da405"
+      "sha256": "5aab0429f3eabd5f8efd3e0ab1d54043495c3a7db9b4f84ba423658f9604e1b4"
     },
     {
       "path": "docs/wms/phases/P07.md",
-      "sha256": "f6dc42ee6624a1b7f9a7ff885d46811bd7e6db7e8b447108995f0188854f3599"
+      "sha256": "31c9d1853c5244bd2120beff431c4381e521769da0f11211e1cc51a45f308f7f"
     },
     {
       "path": "docs/wms/phases/P08.md",
-      "sha256": "df00671b6f6829afd1517e5d60b277ced3848993287de24875ca6ddfb8161b8b"
+      "sha256": "2b3d7cb070e620203109bd4ef2cc16c67d94617a9120c4657d5fc6ad906e2eb7"
     },
     {
       "path": "docs/wms/phases/P09.md",
-      "sha256": "697c3c97ce5b1cf747a5f1a78d083acd80996075ca4c0869abca23f6134688c4"
+      "sha256": "e0a50077d5ca9ca1189504c30b8e809a80c930e7ea99e56a94dee614e3aacf77"
     },
     {
       "path": "docs/wms/phases.json",
-      "sha256": "c87400689513127d70d4f62d63cc07b139867cb804c089141fd7a3cc9cda91a1"
+      "sha256": "dd2c265c42ddaa12157f00ed866728fd7b009fa39ec5e52d507f43c56ee6b0cc"
     },
     {
       "path": "docs/wms/shared-core/ACCOUNTANT_REVIEW.md",
@@ -64,11 +64,11 @@
     },
     {
       "path": "docs/wms/shared-core/GATES.md",
-      "sha256": "7ea553cec4205363fdf25a4d560020e51adbf4bb45b1a85b1d500737788e3066"
+      "sha256": "cf08a238962ea53b767fe912b05cd4eb68bb004330f0203dc4813708c6ac8b5d"
     },
     {
       "path": "docs/wms/shared-core/GITHUB_REPAIR.md",
-      "sha256": "dbb6502bdf720e34725e5e6eaa074a6c8a80a8bac4d1ff7ebf222a298c4592af"
+      "sha256": "60a7e1b2a5492c2ddfc7cb3f57aba8aab82aa7d246d9623eb0ddfa6598cf5761"
     },
     {
       "path": "docs/wms/shared-core/ISOLATION.md",
@@ -80,7 +80,7 @@
     },
     {
       "path": "docs/wms/shared-core/PHASE_ALIGNMENT.md",
-      "sha256": "0b5d75aec34c6b84eac5c221c413727010cdb4f0c30f10a620c6e33de24f0327"
+      "sha256": "a802627f48b050c1bbc8299406d5e513f667aa524bfcb8c516a3396333119edf"
     },
     {
       "path": "docs/wms/shared-core/README.md",
@@ -104,7 +104,7 @@
     },
     {
       "path": "docs/wms/shared-core/plan.json",
-      "sha256": "9d925146b0d5f0b26de3157662c7a763071f75e6d550fe0b701a81aed4a25791"
+      "sha256": "a949d241ea089122cfa85039377fd8b81f6f0dfb9611ab8ed57da3e896ffd4a2"
     },
     {
       "path": "tests/shared_core/test_holds.py",

@@ -47,3 +47,6 @@ OSS evaluation is on a separate research branch. ADR-0001 proposes option 1 (Try
 ## Evidence-closure update
 
 Owner accepted preparatory research only. No engine is selected. See [the latest decision report](oss/DECISION_CLOSURE.md). G1–G4 are not closed; P01 is not eligible for Codex handoff. Additional SQLite authorization tests and ERPNext imports do not replace the mandatory PostgreSQL practical comparison.
+
+
+Current verification decision: independent local/isolated runner and evidence gate in `verification/README.md`. G0 HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED; no billing repair or repeated Actions. Required build/type/lint/native/security/integration tests and owner/accountant review remain mandatory; no phase start or completion is authorized.

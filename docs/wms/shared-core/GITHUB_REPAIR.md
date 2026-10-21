@@ -1,3 +1,5 @@
+> Current owner decision supersedes the repair requests below: do not attempt billing/account-plan repair or repeatedly rerun Actions. G0 is HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED. Use `verification/run.py` and `verification/gate.py` with exact-SHA evidence review. The following investigation/repair text is historical reference only and authorizes no account action.
+
 # Current confirmed admission diagnostic
 
 New WMS [run39689565654](https://github.com/borvat/surooh-commerce/actions/runs/39689565654) produced one failed job119532094822, runner_id0 and no steps. Public GitHub check annotation explicitly states: **“The job was not started because your account is locked due to a billing issue.”** See CURRENT_CI_DIAGNOSTIC.json for verbatim public API evidence. This establishes GitHub's stated account admission reason for WMS; the underlying unpaid item/payment/account remedy is not visible or changed here. Job log retrieval returned404 because no log blob exists.

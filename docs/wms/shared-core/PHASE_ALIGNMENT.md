@@ -5,7 +5,7 @@ The identical authority contract is hashed in the joint wave plan. Accounting re
 | Wave | Accounting | WMS | Shared deliverable / acceptance |
 |---|---|---|---|
 | C0 preparation | M0 | P00 | This reviewed direction, precise evidence/holds and coordinated Draft PRs |
-| C1 foundation | M1 | P01 then P02 | Pinned engine/app, legal-company isolation, controlled facade, core inbox/outbox and explicit worker permissions; hosted CI and actual non-root boundary evidence |
+| C1 foundation | M1 | P01 then P02 | Pinned engine/app, legal-company isolation, controlled facade, core inbox/outbox and explicit worker permissions; reviewed alternative verification and actual non-root boundary evidence |
 | C2 fiscal and billing | M2 then M3 | Baseline retained | Accountant policy/goldens and native invoice/credit/APAR/bank-import controls |
 | C3 stock workflows | M4 | P03→P04→P05→P06 | Native component reservations and WMS adapter, receiving/counts, pick/pack/ship, inspection/transfer; quantity/value/COGS/GL reconcile |
 | C4 integration | M5 | P07 then P08 | Channel events, IC saga, SAM read/proposal, durable dedup/recovery and quota simulation; no live bol writes |
@@ -16,3 +16,6 @@ Within C1, review Accounting M1 engine boundary before WMS P01/P02. Within C3, A
 The backend app lives in Accounting; Commerce owns its current UI/contracts/mapping and read projections. Backend commands must not be implemented independently a second time in Commerce. A paired review record lists both exact heads, shared-contract hash, native/backend and UI test artifacts, remaining defects, reviewer decisions and rollback. Contract drift fails offline checks and blocks review. No shared token or cross-private-repository secret is added to public CI.
 
 Future rollback: stop isolated consumers, retain evidence/outbox state, revert/rebuild only sandbox; native reversals when appropriate. Current production authorities and write guards remain unchanged. Future data cutover requires a new explicit reconciled single-writer plan and approval.
+
+
+Verification transport update: G0 is HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED. Every wave uses the independent local/isolated runner and evidence gate; no wave must wait for a billing fix, but all required security/fiscal/native integration evidence and owner start approval remain mandatory.

@@ -48,3 +48,8 @@
 ## Shared ERPNext preparation direction
 
 Owner approved the engineering direction only: shared native accounting/stock/valuation with independent Surooh app and retained WMS UI/bol/bundles; separate company services/sites/DB/storage. Read `docs/wms/shared-core/README.md` and identical `contracts/shared-core-authority.json`. No Codex, main merge, deploy or real migration is authorized. Earlier unresolved direction language is superseded by this limited disposition, not by final adoption.
+
+
+## Owner-approved alternative verification preparation
+
+G0 = HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED. The current user authorizes local/isolated synthetic testing and preparation of `verification/` without launching Codex. Do not repair billing or repeatedly rerun Actions. Use `[skip ci]` for preparation commits. Follow `verification/README.md`; require real exit/log/artifact/SHA evidence and human review. No automatic phase completion, other-gate bypass, production change, paid service or main merge.

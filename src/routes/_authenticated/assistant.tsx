@@ -12,7 +12,7 @@ function CommerceAssistant() {
     const input = draft.trim();
     if (!input || input.length > 500) return;
     const result = classifyCopilotMessage(input);
-    setMessages(m => [...m, { role: "user", text: input }, { role: "assistant", text: result.reply, suggestedPath: result.suggestedPath }]);
+    setMessages(m => [...m, { role: "user", text: input }, { role: "assistant", text: result.reply, ...(result.suggestedPath !== undefined ? { suggestedPath: result.suggestedPath } : {}) }]);
     setDraft("");
   }
   return <Page title="مساعد التجارة" intro="نسخة أولية بدون اتصال بنموذج ذكاء أو MCP. لا تُنفَّذ أي تغييرات في الطلبات أو المخزون أو الشحن.">

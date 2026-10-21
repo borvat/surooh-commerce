@@ -1,3 +1,5 @@
+import type { OrderSearchOptions } from "./inventory";
+
 /** Pure, client-side filtering for the currently loaded order page.
  * IMPORTANT: pagination happens on the server. A filtered result is not a global count;
  * for complete historical filtering, add authorized database-side filters.
@@ -38,4 +40,18 @@ export function filterLoadedOrders<T extends OrderFilterInput>(rows: T[], filter
     ].filter(v => v != null).join(" ").toLocaleLowerCase();
     return haystack.includes(needle);
   });
+}
+
+/** Keep empty UI filters absent while preserving the existing server-query behavior. */
+export function toOrderSearchOptions(input: {
+  page: number; status: string; account: string; from: string; to: string; reference: string;
+}): OrderSearchOptions {
+  return {
+    page: input.page,
+    status: input.status,
+    ...(input.account !== "all" ? { accountId: input.account } : {}),
+    ...(input.from ? { from: input.from } : {}),
+    ...(input.to ? { to: input.to } : {}),
+    ...(input.reference ? { externalRef: input.reference } : {}),
+  };
 }

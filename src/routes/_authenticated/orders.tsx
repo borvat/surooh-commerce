@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { filterLoadedOrders } from "@/lib/order-filters";
+import { filterLoadedOrders, toOrderSearchOptions } from "@/lib/order-filters";
 import { WarehousePrint } from "@/components/app/warehouse-print";
 import { WarehouseBatchPrint } from "@/components/app/warehouse-batch-print";
 import { planWarehouseBatch, type PickOrder } from "@/lib/warehouse-batch";
@@ -39,7 +39,7 @@ function OrdersPage() {
   const [batchAccountName, setBatchAccountName] = useState("");
   const channels = useQuery({ queryKey: ["sales-channels"], queryFn: listChannels });
   const [reference, setReference] = useState("");
-  const q = useQuery({ queryKey: ["orders", page, status, account, from, to, reference], queryFn: () => listOrders({ page, status, accountId: account === "all" ? undefined : account, from: from || undefined, to: to || undefined, externalRef: reference || undefined }) });
+  const q = useQuery({ queryKey: ["orders", page, status, account, from, to, reference], queryFn: () => listOrders(toOrderSearchOptions({ page, status, account, from, to, reference })) });
   const act = useMutation({
     mutationFn: (v: { id: string; kind: "ship" | "cancel" }) => (v.kind === "ship" ? fulfillOrder(v.id) : cancelOrder(v.id)),
     onSuccess: (_d, v) => { toast.success(v.kind === "ship" ? "تم الشحن — خُصمت القطع من المستودع" : "تم الإلغاء — عادت القطع إلى المتاح"); qc.invalidateQueries(); },
@@ -53,7 +53,7 @@ function OrdersPage() {
     try {
       const organizationId = await orgId();
       // Re-read selected orders before printing; stale browser snapshots are not shipment evidence.
-      const fresh = await listOrders({ page, status, accountId: account, from: from || undefined, to: to || undefined, externalRef: reference || undefined });
+      const fresh = await listOrders(toOrderSearchOptions({ page, status, account, from, to, reference }));
       const chosen = fresh.rows.filter(o => selectedOrderIds.includes(o.id));
       // Compare material picking data, not just the number of orders:
       // a status, quantity, SKU or fulfillment change must invalidate the print preview.

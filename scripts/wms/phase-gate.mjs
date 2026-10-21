@@ -91,16 +91,24 @@ export function evaluateEvidence(phase, record, head, evidenceRoot) {
 
 export function applyArchitectureGate(result, decision) {
   const errors = [...result.errors];
-  if (!decision || decision.status !== "accepted" ||
-      !sha(decision.accepted_sha) ||
-      typeof decision.owner_acceptance_ref !== "string" ||
-      !decision.owner_acceptance_ref.trim() ||
-      !["G1", "G2", "G3", "G4"].every((id) => decision.gates?.[id] === "passed")) {
+  if (
+    !decision ||
+    decision.status !== "accepted" ||
+    !sha(decision.accepted_sha) ||
+    typeof decision.owner_acceptance_ref !== "string" ||
+    !decision.owner_acceptance_ref.trim() ||
+    !["G1", "G2", "G3", "G4"].every((id) => decision.gates?.[id] === "passed")
+  ) {
     errors.push("Architecture decision lacks owner acceptance or mandatory evidence gates");
   }
-  return { ...result, errors,
+  return {
+    ...result,
+    errors,
     status: errors.length ? "BLOCKED" : "READY_FOR_HUMAN_REVIEW",
-    execution_authorized: false, automatic_merge: false, automatic_deploy: false };
+    execution_authorized: false,
+    automatic_merge: false,
+    automatic_deploy: false,
+  };
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

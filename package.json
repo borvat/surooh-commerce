@@ -9,7 +9,13 @@
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "bun test ./tests/*.test.ts",
+    "test:foundation": "node --test tests/foundation/*.test.mjs",
+    "check:foundation": "node scripts/wms/foundation-check.mjs",
+    "test:db": "node scripts/wms/db-check.mjs",
+    "test:live": "node scripts/wms/live-check.mjs"
   },
   "overrides": {
     "rolldown": "1.2.1"

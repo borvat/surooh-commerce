@@ -1,0 +1,42 @@
+name: WMS engineering phase
+description: Prepare a scoped WMS phase; does not assign or start Codex
+title: "[WMS Pxx] "
+body:
+  - type: markdown
+    attributes:
+      value: "Execution is held until explicit owner start approval. No automatic main merge or deployment."
+  - type: input
+    id: phase
+    attributes:
+      label: Phase ID and task packet
+      placeholder: P01 — docs/wms/phases/P01.md
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Goal, requirements and affected files
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies, accepted SHAs and start conditions
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance, exit criteria and evidence by test tier
+    validations:
+      required: true
+  - type: textarea
+    id: rollback
+    attributes:
+      label: Risks and rollback
+    validations:
+      required: true
+  - type: input
+    id: authorization
+    attributes:
+      label: Owner start authorization reference (leave blank until approved)

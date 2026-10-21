@@ -1,4 +1,5 @@
 <!-- LOVABLE:BEGIN -->
+
 > [!IMPORTANT]
 > This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
 > published git history — force pushing, or rebasing/amending/squashing commits
@@ -7,8 +8,8 @@
 >
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
-<!-- LOVABLE:END -->
 
+<!-- LOVABLE:END -->
 
 - All business data is scoped by organization_id with RLS via is_org_member/has_org_role; legacy global user_roles is unused — multi-company safety.
 - Stock ownership lives on listings/order lines (FBR=INTERNAL reserves BOM parts, FBB=BOL never touches internal stock); EAN is only a matching hint.
@@ -27,3 +28,13 @@
 - Families are product_families + products.family_id (organisational only, never shared stock); relationship kind is products.relationship_type (MULTIPACK|BUNDLE|KIT|SET) + relationship_status, with bom_lines still driving availability — why: explicit relationship types without replacing the safe engine.
 - Unified stock: a canonical product owns ONE stock pool and ONE master_reference; every confirmed FBR offer's target qty = canonical available (cap 999) and target ref = master_reference, computed in src/lib/unified-stock.ts; bol quantities/references are drift observations, never summed, and SUGGESTED offers are excluded — why: many EANs are sales representations of the same physical product.
 - Same-product linking: compareSame hard-blocks only when both sides have confirmed non-inferred Product Master values that differ (brand, model/mpn, color, size, pack, unit qty); title-derived/unknown/offer-conflict values are warn-only — why: title guesses must never block the owner.
+
+## WMS engineering foundation — owner execution hold
+
+- Read docs/wms/README.md, BASELINE.md, STAGES.md and STAGE_GATES.md before work.
+- Preparation is authorized; Codex execution is NOT yet authorized. Do not assign, launch or trigger an agent from Issues or CI. P01 awaits explicit owner start approval; P02–P09 are locked.
+- Preserve source modules and applied migration history. Use additive, scoped changes only; do not refactor the application wholesale or format unrelated business files.
+- Each authorized phase stops at a draft PR with exact-SHA test evidence, known defects and rollback plan. Technical completion never automatically authorizes the next phase, main merge or deployment.
+- Main, production databases, real inventory/prices and live provider mutations remain out of scope. Existing bol write-disable guards must stay disabled. No customer exports or credentials in this public repository.
+- Local helper/static SQL tests do not prove DB concurrency or RLS. Database acceptance must use disposable synthetic fixtures and real limited-role sessions. Missing/blocked checks must remain visible.
+- scripts/wms/phase-gate.mjs only recommends human review. Never treat self-authored evidence or Issue closure as owner approval.

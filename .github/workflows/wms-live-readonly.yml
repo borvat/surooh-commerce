@@ -1,0 +1,15 @@
+name: WMS live read-only assessment (blocked)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Fail closed — live implementation and owner approval required
+        run: node scripts/wms/live-check.mjs

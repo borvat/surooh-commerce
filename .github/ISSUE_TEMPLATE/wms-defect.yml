@@ -1,0 +1,23 @@
+name: WMS integrity or security defect
+description: Trace a failing inventory, company-isolation or workflow invariant
+title: "[WMS defect] "
+body:
+  - type: input
+    id: severity
+    attributes:
+      label: Severity and domain
+      placeholder: P0/P1/P2 — inventory, security, integration, UI
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Synthetic reproduction, commit and expected versus actual
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized test evidence, affected phase and containment/rollback
+    validations:
+      required: true

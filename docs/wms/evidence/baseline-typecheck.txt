@@ -1,0 +1,22 @@
+src/routes/_authenticated/assistant.tsx(7,38): error TS2345: Argument of type '"/_authenticated/assistant"' is not assignable to parameter of type 'keyof FileRoutesByPath | undefined'.
+src/routes/_authenticated/assistant.tsx(15,17): error TS2345: Argument of type '(m: Message[]) => (Message | { role: "assistant"; text: string; suggestedPath: string | undefined; })[]' is not assignable to parameter of type 'SetStateAction<Message[]>'.
+  Type '(m: Message[]) => (Message | { role: "assistant"; text: string; suggestedPath: string | undefined; })[]' is not assignable to type '(prevState: Message[]) => Message[]'.
+    Type '(Message | { role: "assistant"; text: string; suggestedPath: string | undefined; })[]' is not assignable to type 'Message[]'.
+      Type 'Message | { role: "assistant"; text: string; suggestedPath: string | undefined; }' is not assignable to type 'Message' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+        Type '{ role: "assistant"; text: string; suggestedPath: string | undefined; }' is not assignable to type 'Message' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+          Types of property 'suggestedPath' are incompatible.
+            Type 'string | undefined' is not assignable to type 'string'.
+              Type 'undefined' is not assignable to type 'string'.
+src/routes/_authenticated/orders.tsx(42,116): error TS2379: Argument of type '{ page: number; status: string; accountId: string | undefined; from: string | undefined; to: string | undefined; externalRef: string | undefined; }' is not assignable to parameter of type 'OrderSearchOptions' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'accountId' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/routes/_authenticated/orders.tsx(56,38): error TS2379: Argument of type '{ page: number; status: string; accountId: string; from: string | undefined; to: string | undefined; externalRef: string | undefined; }' is not assignable to parameter of type 'OrderSearchOptions' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'externalRef' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/routes/_authenticated/route.tsx(51,28): error TS2322: Type '"/bundles" | "/channels" | "/components" | "/dashboard" | "/movements" | "/orders" | "/products" | "/review" | "/settings" | "/assistant"' is not assignable to type '"/" | "/auth" | "/reset-password" | "." | ".." | "/bundles" | "/channels" | "/components" | "/dashboard" | "/diagnostics" | "/import" | "/mappings" | "/movements" | "/orders" | ... 4 more ... | "/products/$productId"'.
+  Type '"/assistant"' is not assignable to type '"/" | "/auth" | "/reset-password" | "." | ".." | "/bundles" | "/channels" | "/components" | "/dashboard" | "/diagnostics" | "/import" | "/mappings" | "/movements" | "/orders" | ... 4 more ... | "/products/$productId"'.
+src/routes/_authenticated/route.tsx(64,26): error TS2322: Type '"/bundles" | "/channels" | "/components" | "/dashboard" | "/movements" | "/orders" | "/products" | "/review" | "/settings" | "/assistant"' is not assignable to type '"/" | "/auth" | "/reset-password" | "." | ".." | "/bundles" | "/channels" | "/components" | "/dashboard" | "/diagnostics" | "/import" | "/mappings" | "/movements" | "/orders" | ... 4 more ... | "/products/$productId"'.
+  Type '"/assistant"' is not assignable to type '"/" | "/auth" | "/reset-password" | "." | ".." | "/bundles" | "/channels" | "/components" | "/dashboard" | "/diagnostics" | "/import" | "/mappings" | "/movements" | "/orders" | ... 4 more ... | "/products/$productId"'.
+src/routes/_authenticated/stockitup-review.tsx(9,38): error TS2345: Argument of type '"/_authenticated/stockitup-review"' is not assignable to parameter of type 'keyof FileRoutesByPath | undefined'.

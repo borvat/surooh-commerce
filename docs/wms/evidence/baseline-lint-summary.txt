@@ -1,0 +1,5 @@
+Inherited application lint debt on source baseline d3fce83c8b376822d04d8efcd675f1bebf7bef65.
+Command: npm run lint (existing eslint config; no --fix). Exit1.
+Final scoped-foundation run: 3523 problems: 3508 errors,15 warnings;3507 errors potentially auto-fixable.
+No scripts/wms or tests/foundation diagnostic paths were present in that output.
+No bulk source formatting was performed. Full local transient log was inspected; this summary avoids committing thousands of unrelated formatting messages.

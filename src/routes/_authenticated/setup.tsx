@@ -1,5 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_authenticated/setup")({
-  beforeLoad: () => { throw redirect({ to: "/dashboard" }); },
+  beforeLoad: () => {
+    throw redirect({ to: "/dashboard" });
+  },
 });

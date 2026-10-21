@@ -7,3 +7,6 @@ Both repositories carry identical `contracts/shared-core-authority.json`. Its ha
 Read AUTHORITY.md, THREE_GAPS.md, ISOLATION.md, GATES.md, PHASE_ALIGNMENT.md, GITHUB_REPAIR.md and ACCOUNTANT_REVIEW.md. Evidence is synthetic, local, scoped and reviewable; hosted CI and accountant approval remain independent. The authority contract and owner transcription do not manufacture technical or production approval.
 
 Full native evidence resides in the private Accounting repository; WMS carries only synthetic result summaries, not credentials/configs/backups.
+
+
+Current independent verification: ALTERNATIVE_VERIFICATION.md explains replay; ALTERNATIVE_RESULTS.md and alternative-evidence/INDEX.json contain actual results and full archive hashes. Actions remains blocked; no phase accepted.

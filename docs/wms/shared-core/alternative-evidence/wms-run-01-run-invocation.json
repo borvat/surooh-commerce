@@ -1,0 +1,24 @@
+{
+  "command": [
+    "python3",
+    "verification/run.py",
+    "--profile",
+    "wms",
+    "--expected-sha",
+    "53bac96f790c152361a8e449d6db7d14fa95815c",
+    "--tools-python",
+    "/workspace/scratch/930c38487b1a/alternative-runtime/python-tools/bin/python",
+    "--bun",
+    "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+    "--accounting-report",
+    "/workspace/scratch/930c38487b1a/alternative-evidence/accounting-run-01/report.json",
+    "--accounting-expected-sha",
+    "8d740d468595db14c2e2e2c7b7cad4d75925c6b4",
+    "--output",
+    "/workspace/scratch/930c38487b1a/alternative-evidence/wms-run-01"
+  ],
+  "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+  "actual_process_exit_code": 1,
+  "source_commit": "53bac96f790c152361a8e449d6db7d14fa95815c",
+  "note": "exit2 includes explicitly blocked future requirements; exit1 includes real failed commands"
+}

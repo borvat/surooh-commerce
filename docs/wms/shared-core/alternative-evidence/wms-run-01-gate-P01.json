@@ -1,0 +1,25 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "tracked source changed during verification",
+    "required test not executed successfully: unit_tests",
+    "no positive executed test count: unit_tests",
+    "required test not executed successfully: typecheck",
+    "required test not executed successfully: lint",
+    "required test not executed successfully: legacy_db_adapter",
+    "required test not executed successfully: service_uid_isolation",
+    "required test not executed successfully: real_queue_and_api_bypass",
+    "required test not executed successfully: wms_ui_native_e2e",
+    "required test not executed successfully: dutch_accountant_signoff",
+    "required test not executed successfully: fresh_full_engine_build_upgrade",
+    "required test not executed successfully: live_integrations"
+  ],
+  "scope": "P01",
+  "tested_commit": "53bac96f790c152361a8e449d6db7d14fa95815c",
+  "hosted_ci": "BLOCKED",
+  "phase_complete": false,
+  "codex_start_authorized": false,
+  "merge_authorized": false,
+  "deploy_authorized": false,
+  "human_review_required": true
+}

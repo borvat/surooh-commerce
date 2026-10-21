@@ -1,0 +1,343 @@
+{
+  "schema_version": 1,
+  "component": "wms",
+  "source": {
+    "commit_sha": "53bac96f790c152361a8e449d6db7d14fa95815c",
+    "tree_sha": "8df7434bd6625c366883518bcbca72bca5b86acb",
+    "dirty_tracked": false
+  },
+  "started_at_utc": "2026-10-21T23:21:57.418052+00:00",
+  "environment": {
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "uid": 0,
+    "env_policy": "allowlisted variables only; no inherited provider/DB/OAuth credentials",
+    "node": {
+      "version": "v24.19.0",
+      "exit_code": 0
+    },
+    "bun": {
+      "version": "1.3.13",
+      "exit_code": 0
+    },
+    "tools_python": {
+      "version": "Python 3.14.8",
+      "exit_code": 0
+    }
+  },
+  "g0": "HOSTED_CI_BLOCKED \u2014 ALTERNATIVE_VERIFICATION_REQUIRED",
+  "codex_start_authorized": false,
+  "phase_completion_authorized": false,
+  "plan_sha256": "4479b196f04c651a774a48d7dfdf97db94f250d9dcc5affa1b5aab60b7278d56",
+  "tests": [
+    {
+      "id": "foundation",
+      "tier": "foundation",
+      "command": [
+        "node",
+        "scripts/wms/foundation-check.mjs"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.046,
+      "log": "logs/foundation.log",
+      "log_sha256": "16c50c626e196c38ebd952f76379fece6eeec304782e924c399b01c14f00fa6d",
+      "raw_output_sha256": "16c50c626e196c38ebd952f76379fece6eeec304782e924c399b01c14f00fa6d"
+    },
+    {
+      "id": "shared_integrity",
+      "tier": "captured_evidence",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "ci/check_shared_core.py"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.039,
+      "log": "logs/shared_integrity.log",
+      "log_sha256": "2a3af38e90315db7dfaeedfa0940a409fdcf4397d377308140e1ab2c082dafbf",
+      "raw_output_sha256": "2a3af38e90315db7dfaeedfa0940a409fdcf4397d377308140e1ab2c082dafbf"
+    },
+    {
+      "id": "stage_gate_regressions",
+      "tier": "foundation",
+      "command": [
+        "node",
+        "--test",
+        "tests/foundation/architecture-decision.test.mjs",
+        "tests/foundation/gates.test.mjs"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.131,
+      "log": "logs/stage_gate_regressions.log",
+      "log_sha256": "ffdc2340b8230c053f227407f96a37abca0fc122a15ce9ef25c2e13b054f4695",
+      "raw_output_sha256": "ffdc2340b8230c053f227407f96a37abca0fc122a15ce9ef25c2e13b054f4695",
+      "executed_test_count": 19
+    },
+    {
+      "id": "authority_holds",
+      "tier": "foundation",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/shared_core",
+        "-v"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.078,
+      "log": "logs/authority_holds.log",
+      "log_sha256": "cd16321080bf8a1ff379ecf1047dc58f859e17d9fbe993c620839e1a16fb071d",
+      "raw_output_sha256": "cd16321080bf8a1ff379ecf1047dc58f859e17d9fbe993c620839e1a16fb071d",
+      "executed_test_count": 6
+    },
+    {
+      "id": "dependency_install",
+      "tier": "dependencies",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "install",
+        "--frozen-lockfile",
+        "--ignore-scripts"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 1200,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.131,
+      "log": "logs/dependency_install.log",
+      "log_sha256": "f5e0fce86cf6cc3849e20485f1785d57048c993373f64e5d29a7ff4ed59511ac",
+      "raw_output_sha256": "f5e0fce86cf6cc3849e20485f1785d57048c993373f64e5d29a7ff4ed59511ac"
+    },
+    {
+      "id": "unit_tests",
+      "tier": "unit",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "run",
+        "test:unit"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "FAIL",
+      "exit_code": 127,
+      "duration_seconds": 0.006,
+      "log": "logs/unit_tests.log",
+      "log_sha256": "8d7d901c3a0b318b89583ec9ab101b536f3b24347026ae33977398b24cc8b218",
+      "raw_output_sha256": "8d7d901c3a0b318b89583ec9ab101b536f3b24347026ae33977398b24cc8b218",
+      "executed_test_count": null
+    },
+    {
+      "id": "typecheck",
+      "tier": "typescript",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "FAIL",
+      "exit_code": 2,
+      "duration_seconds": 9.576,
+      "log": "logs/typecheck.log",
+      "log_sha256": "74fb632065fdeadd7dd60e027e12e150b1e8162103bd1bd0ef37b869c4b43377",
+      "raw_output_sha256": "74fb632065fdeadd7dd60e027e12e150b1e8162103bd1bd0ef37b869c4b43377"
+    },
+    {
+      "id": "lint",
+      "tier": "lint",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "run",
+        "lint"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "FAIL",
+      "exit_code": 1,
+      "duration_seconds": 9.258,
+      "log": "logs/lint.log",
+      "log_sha256": "0be59d7392366c61dfc67999ebc7085e193dfd1019004642b9cea23162898450",
+      "raw_output_sha256": "f8c20ab7ad6028ba8907070be216bca2113f223fc5618230c00f783b21e11c00"
+    },
+    {
+      "id": "build",
+      "tier": "build",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "run",
+        "build"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 1200,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 6.312,
+      "log": "logs/build.log",
+      "log_sha256": "cfe76ba1f108e8ca7aa527f84b4d5e1499a080e9fdfba742d41cb093a5e15d50",
+      "raw_output_sha256": "cfe76ba1f108e8ca7aa527f84b4d5e1499a080e9fdfba742d41cb093a5e15d50"
+    },
+    {
+      "id": "legacy_db_adapter",
+      "tier": "database",
+      "command": [
+        "node",
+        "scripts/wms/db-check.mjs"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "BLOCKED",
+      "exit_code": 2,
+      "duration_seconds": 0.03,
+      "log": "logs/legacy_db_adapter.log",
+      "log_sha256": "8b4ac741b830fe120d625b40b767c63b242080f75eea4b243fd0171edc974c88",
+      "raw_output_sha256": "8b4ac741b830fe120d625b40b767c63b242080f75eea4b243fd0171edc974c88"
+    },
+    {
+      "id": "alternative_gate_regressions",
+      "tier": "foundation",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "verification/tests",
+        "-v"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.071,
+      "log": "logs/alternative_gate_regressions.log",
+      "log_sha256": "09a8f869c238e24abd8e1fe719c41e49e8077a9860265f701a8651ee799df532",
+      "raw_output_sha256": "09a8f869c238e24abd8e1fe719c41e49e8077a9860265f701a8651ee799df532",
+      "executed_test_count": 14
+    },
+    {
+      "id": "accounting_native_link",
+      "tier": "linked_native_evidence",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "verification/link_native.py",
+        "--report",
+        "/workspace/scratch/930c38487b1a/alternative-evidence/accounting-run-01/report.json",
+        "--output",
+        "/workspace/scratch/930c38487b1a/alternative-evidence/wms-run-01/artifacts/accounting-native-link.json",
+        "--expected-sha",
+        "8d740d468595db14c2e2e2c7b7cad4d75925c6b4"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.032,
+      "log": "logs/accounting_native_link.log",
+      "log_sha256": "cebbdea112b34168a51bb9ac15af7f3446b5bdceb500b6d6ccebbb6f881a3abd",
+      "raw_output_sha256": "cebbdea112b34168a51bb9ac15af7f3446b5bdceb500b6d6ccebbb6f881a3abd"
+    },
+    {
+      "id": "service_uid_isolation",
+      "tier": "security",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Distinct non-root UIDs/mounts unavailable in this executor; remains G1"
+    },
+    {
+      "id": "real_queue_and_api_bypass",
+      "tier": "integration",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Real RQ lifecycle/mutation/direct endpoint closure unimplemented; remains G2"
+    },
+    {
+      "id": "wms_ui_native_e2e",
+      "tier": "integration",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Full current WMS UI/native bundle parent/dispatch/cancel races unimplemented; remains G3"
+    },
+    {
+      "id": "dutch_accountant_signoff",
+      "tier": "fiscal_review",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Qualified accountant has not reviewed/signed policy; remains G4"
+    },
+    {
+      "id": "fresh_full_engine_build_upgrade",
+      "tier": "operations",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Fresh complete ERPNext asset/framework/business-schema and restore/load acceptance not implemented; remains G5"
+    },
+    {
+      "id": "live_integrations",
+      "tier": "live",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "No authorized live bank/tax/bol/Peppol mutation or live acceptance environment"
+    }
+  ],
+  "open_gate_policy": "G1-G6 remain independently required; local evidence is not hosted CI or production approval",
+  "input_hashes": {
+    "bun.lock": "3712617b3e818ec1525fb11a8165960ce4af6c70731a1bf47a38fcdcff3efbe2",
+    "verification/tool-versions.json": "735b2d4c62ec29de1829f67f26b0df411bf915d310004a10a64a9162e35ef234",
+    "contracts/shared-core-authority.json": "01c792be997043eea23630d436242415bf55ac8543edfe17fe3919bf81d2c8b6"
+  },
+  "source_after": {
+    "commit_sha": "53bac96f790c152361a8e449d6db7d14fa95815c",
+    "tree_sha": "8df7434bd6625c366883518bcbca72bca5b86acb",
+    "dirty_tracked": true
+  },
+  "tracked_diff": "src/routeTree.gen.ts | 45 ++++++++++++++++++++++++++++++++++++++++++++-\n 1 file changed, 44 insertions(+), 1 deletion(-)",
+  "finished_at_utc": "2026-10-21T23:22:23.184094+00:00",
+  "summary": {
+    "PASS": 8,
+    "FAIL": 3,
+    "BLOCKED": 7
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/accounting-native-link.json",
+      "sha256": "cea93ae39909e0da2a147a95f2e7cb64ea9e9fc66cfb022014f9ab09aecd2139"
+    },
+    {
+      "path": "artifacts/linked-isolation-results.json",
+      "sha256": "f9c23594d07a490fef855cf8654b00d5191e39f1d93a16957c72a242a4c1b11a"
+    },
+    {
+      "path": "artifacts/linked-native-results.json",
+      "sha256": "851b1595d29b5ec5b6f193bfc23cb91f235aef54e36da070c1f66389846b9d81"
+    },
+    {
+      "path": "artifacts/linked-runtime.json",
+      "sha256": "94f5dfac079c3daa232004acc7eb7d5975b970dd462217782e4910034ae6de14"
+    }
+  ],
+  "evidence_review": {
+    "decision": null,
+    "reviewer": null,
+    "review_reference": null
+  }
+}

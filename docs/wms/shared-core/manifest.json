@@ -64,7 +64,7 @@
     },
     {
       "path": "docs/wms/shared-core/GATES.md",
-      "sha256": "cf08a238962ea53b767fe912b05cd4eb68bb004330f0203dc4813708c6ac8b5d"
+      "sha256": "0277c6728db7fc6e546f855af41e08d32181abfde0aad1020687cf362f667d86"
     },
     {
       "path": "docs/wms/shared-core/GITHUB_REPAIR.md",
@@ -84,7 +84,7 @@
     },
     {
       "path": "docs/wms/shared-core/README.md",
-      "sha256": "eb007866bb522ccbedd29900076b80dc43da7f78afd2b5cdeac5b43b46a5f317"
+      "sha256": "119c59a0ba8ae292505202bb998bbdf19a645f14377e604ca2bab9910686a7c1"
     },
     {
       "path": "docs/wms/shared-core/RESULT_SUMMARY.json",

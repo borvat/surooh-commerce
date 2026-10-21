@@ -1,0 +1,17 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "tracked source changed during verification",
+    "required test not executed successfully: typecheck",
+    "required test not executed successfully: lint",
+    "required test not executed successfully: legacy_db_adapter"
+  ],
+  "scope": "PREPARATION",
+  "tested_commit": "e0ba96bab66a43ba580fb13aec3675ea36def932",
+  "hosted_ci": "BLOCKED",
+  "phase_complete": false,
+  "codex_start_authorized": false,
+  "merge_authorized": false,
+  "deploy_authorized": false,
+  "human_review_required": true
+}

@@ -14,9 +14,16 @@ Eight native mitigation verifiers and eleven isolation verifiers passed locally.
 
 Legacy WMS mapping: old G1 concurrency→G2/G3; G2 security→G1/G2; G3 workflow→G3/G5; G4 support/security/operations→G0/G5; G5 owner→G6. Tryton PostgreSQL remains unproven as fallback evidence, not a requirement to deploy a second active engine. No old gate is relabelled passed merely because the preferred direction changed.
 
-Commerce baseline Issues#12 (TypeScript) and#13 (lint debt) are still open. Full UI typecheck/lint/build were not rerun in this documentation/prototype scope; prior failures remain an additional C1/G5 acceptance blocker, not green from foundation tests. Fix only after a bounded authorized packet; do not disable rules or broadly reformat.
+Commerce baseline Issues#12 (TypeScript) and#13 (lint debt) are still open. The alternative run now executes full UI typecheck/lint/build: build passed, typecheck and lint failed. These remain C1/G5 blockers, not green from foundation tests. Fix only after a bounded authorized packet; do not disable rules or broadly reformat.
 
 Fresh CI observation: Accounting run39689544956 startup_failure/zero jobs. WMS run39689565654 one failed job, runner_id0, zero steps; public annotation explicitly reports account locked due to billing issue. See CURRENT_CI_DIAGNOSTIC.json and GITHUB_REPAIR.md. No actual hosted test executed, and no billing/admin changes made.
 
 
 Current owner decision: GitHub Actions remains blocked. No billing fix or repeated Actions reruns. The independent path is `verification/README.md`; G1–G6 and every unexecuted requirement remain open. Historical failure observations above are preserved, not reclassified successful.
+
+
+Executed alternative path: see ALTERNATIVE_RESULTS.md and alternative-evidence/INDEX.json. Accounting PREPARATION is ready for human evidence review, M1 remains BLOCKED. WMS PREPARATION/P01 remain BLOCKED by actual type/lint/DB-adapter/source-drift findings. G0 retains HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED; no hosted retry/billing repair or other-gate waiver.
+
+## Final G0 disposition
+
+Hosted CI = BLOCKED (billing; historical failure retained). Alternative path = IMPLEMENTED_AND_EXECUTED; Accounting preparation technical result = READY_FOR_HUMAN_EVIDENCE_REVIEW; WMS preparation = BLOCKED. G0 is not jointly accepted: WMS defects and human evidence review remain outstanding. No stage-start authorization is implied. M1 and P01–P09/M2–M7 remain held. See FINAL_ACCEPTANCE.md and WMS_DIAGNOSTICS.md.

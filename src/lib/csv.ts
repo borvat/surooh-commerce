@@ -1,7 +1,8 @@
 /** Minimal RFC-4180 CSV parser (quotes, escaped quotes, commas/semicolons, CRLF). */
 export function parseCsv(text: string): Record<string, string>[] {
   const firstLine = text.split(/\r?\n/, 1)[0] ?? "";
-  const sep = (firstLine.match(/;/g)?.length ?? 0) > (firstLine.match(/,/g)?.length ?? 0) ? ";" : ",";
+  const sep =
+    (firstLine.match(/;/g)?.length ?? 0) > (firstLine.match(/,/g)?.length ?? 0) ? ";" : ",";
   const rows: string[][] = [];
   let row: string[] = [];
   let cell = "";
@@ -9,26 +10,49 @@ export function parseCsv(text: string): Record<string, string>[] {
   for (let i = 0; i < text.length; i++) {
     const ch = text[i]!;
     if (q) {
-      if (ch === '"' && text[i + 1] === '"') { cell += '"'; i++; }
-      else if (ch === '"') q = false;
+      if (ch === '"' && text[i + 1] === '"') {
+        cell += '"';
+        i++;
+      } else if (ch === '"') q = false;
       else cell += ch;
     } else if (ch === '"') q = true;
-    else if (ch === sep) { row.push(cell); cell = ""; }
-    else if (ch === "\n" || ch === "\r") {
+    else if (ch === sep) {
+      row.push(cell);
+      cell = "";
+    } else if (ch === "\n" || ch === "\r") {
       if (ch === "\r" && text[i + 1] === "\n") i++;
-      row.push(cell); rows.push(row); row = []; cell = "";
+      row.push(cell);
+      rows.push(row);
+      row = [];
+      cell = "";
     } else cell += ch;
   }
-  if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
+  if (cell !== "" || row.length) {
+    row.push(cell);
+    rows.push(row);
+  }
   const clean = rows.filter((r) => r.some((c) => c.trim() !== ""));
-  const header = (clean.shift() ?? []).map((h) => h.trim().toLowerCase().replace(/^\ufeff/, ""));
+  const header = (clean.shift() ?? []).map((h) =>
+    h
+      .trim()
+      .toLowerCase()
+      .replace(/^\ufeff/, ""),
+  );
   return clean.map((r) => Object.fromEntries(header.map((h, i) => [h, (r[i] ?? "").trim()])));
 }
 
 export const CSV_TEMPLATES = {
   components: {
     title: "Components / physical stock",
-    columns: ["component_sku", "name", "barcode", "warehouse", "physical_qty", "safety_stock", "low_stock_threshold"],
+    columns: [
+      "component_sku",
+      "name",
+      "barcode",
+      "warehouse",
+      "physical_qty",
+      "safety_stock",
+      "low_stock_threshold",
+    ],
     example: "GAS-001,Gas Bottle,,WH-MAIN,3000,50,100",
     help: "physical_qty is the counted shelf quantity. The system books the difference as an adjustment in the stock history.",
   },
@@ -46,7 +70,15 @@ export const CSV_TEMPLATES = {
   },
   listings: {
     title: "Channel listing mappings",
-    columns: ["channel_code", "product_sku", "external_offer_id", "external_ean", "fulfillment_method", "inventory_owner", "mapping_status"],
+    columns: [
+      "channel_code",
+      "product_sku",
+      "external_offer_id",
+      "external_ean",
+      "fulfillment_method",
+      "inventory_owner",
+      "mapping_status",
+    ],
     example: "CH-1,GAS-10,,8712345678906,FBR,INTERNAL,SUGGESTED",
     help: "FBR must be INTERNAL, FBB must be BOL. Only CONFIRMED mappings are ever used for stock sync.",
   },

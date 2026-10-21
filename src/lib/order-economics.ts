@@ -25,32 +25,53 @@ export type OrderEconomicsResult = {
   estimatedFields: string[];
 };
 const COST_KEYS = [
-  "marketplaceFeeCents", "outboundShippingCents", "packingCents",
-  "returnsAndRefundsCents", "otherCostsCents"
+  "marketplaceFeeCents",
+  "outboundShippingCents",
+  "packingCents",
+  "returnsAndRefundsCents",
+  "otherCostsCents",
 ] as const;
 function validMoney(c: CostSource) {
   return c.cents !== null && Number.isSafeInteger(c.cents) && c.cents >= 0;
 }
 export function calculateOrderEconomics(input: OrderEconomicsInput): OrderEconomicsResult {
-  if (!Number.isSafeInteger(input.quantity) || input.quantity < 1) throw new Error("Invalid order quantity");
+  if (!Number.isSafeInteger(input.quantity) || input.quantity < 1)
+    throw new Error("Invalid order quantity");
   const fields: { key: string; value: CostSource }[] = [
     { key: "netSalesCents", value: input.netSalesCents },
     { key: "landedUnitCostCents", value: input.landedUnitCostCents },
-    ...COST_KEYS.map(key => ({ key, value: input[key] }))
+    ...COST_KEYS.map((key) => ({ key, value: input[key] })),
   ];
-  const missingFields = fields.filter(f => !validMoney(f.value) || f.value.evidence === "MISSING_INPUT").map(f => f.key);
-  const estimatedFields = fields.filter(f => f.value.evidence === "ESTIMATED" || (f.value.evidence === "VERIFIED" && !f.value.reference?.trim())).map(f => f.key);
-  if (missingFields.length) return { status: "MISSING_INPUT", contributionCents: null, contributionMarginPct: null, missingFields, estimatedFields };
+  const missingFields = fields
+    .filter((f) => !validMoney(f.value) || f.value.evidence === "MISSING_INPUT")
+    .map((f) => f.key);
+  const estimatedFields = fields
+    .filter(
+      (f) =>
+        f.value.evidence === "ESTIMATED" ||
+        (f.value.evidence === "VERIFIED" && !f.value.reference?.trim()),
+    )
+    .map((f) => f.key);
+  if (missingFields.length)
+    return {
+      status: "MISSING_INPUT",
+      contributionCents: null,
+      contributionMarginPct: null,
+      missingFields,
+      estimatedFields,
+    };
   const sales = input.netSalesCents.cents!;
   const inventory = input.landedUnitCostCents.cents! * input.quantity;
   const fees = COST_KEYS.reduce((sum, key) => sum + input[key].cents!, 0);
   const contribution = sales - inventory - fees;
-  if (![sales, inventory, fees, contribution].every(Number.isSafeInteger)) throw new Error("Money amount exceeds safe integer range");
+  if (![sales, inventory, fees, contribution].every(Number.isSafeInteger))
+    throw new Error("Money amount exceeds safe integer range");
   return {
     status: estimatedFields.length ? "ESTIMATED" : "VERIFIED",
     contributionCents: contribution,
     contributionMarginPct: sales > 0 ? Math.round((contribution / sales) * 10000) / 100 : null,
-    missingFields, estimatedFields
+    missingFields,
+    estimatedFields,
   };
 }
 

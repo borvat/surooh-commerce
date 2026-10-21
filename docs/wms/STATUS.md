@@ -37,3 +37,11 @@ Prepared on engineering/wms-foundation above d3fce83c8b376822d04d8efcd675f1bebf7
 ## Owner decisions still required
 
 Review this draft PR and development-baseline decision. Decide whether to authorize P01 later; no approval is assumed from this report. Main merge, branch/ruleset administration changes and any future live account access/deployment each remain separate explicit decisions. No billing, paid service, credential or production setting was changed.
+
+## Architecture evaluation hold
+
+OSS evaluation is on a separate research branch. ADR-0001 proposes option 1 (Tryton) conditionally; no adoption, Codex execution, migration, merge or deployment is authorized. See `oss/RESULTS.md` for actual passes and blocked checks.
+
+## Evidence-closure update
+
+Owner accepted preparatory research only. No engine is selected. See [the latest decision report](oss/DECISION_CLOSURE.md). G1–G4 are not closed; P01 is not eligible for Codex handoff. Additional SQLite authorization tests and ERPNext imports do not replace the mandatory PostgreSQL practical comparison.

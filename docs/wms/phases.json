@@ -11,8 +11,11 @@
       "title": "Disposable database and reproducible baseline",
       "milestone": "WMS M01 \u2014 Disposable database and reproducible baseline",
       "dependencies": [],
-      "audit_backlog": ["W00", "W01"],
-      "status": "awaiting_owner_start",
+      "audit_backlog": [
+        "W00",
+        "W01"
+      ],
+      "status": "blocked_architecture_decision",
       "spec": "docs/wms/phases/P01.md",
       "checks": [
         "foundation",
@@ -36,8 +39,12 @@
       "id": "P02",
       "title": "Explicit company scope and tenant security",
       "milestone": "WMS M02 \u2014 Explicit company scope and tenant security",
-      "dependencies": ["P01"],
-      "audit_backlog": ["W02"],
+      "dependencies": [
+        "P01"
+      ],
+      "audit_backlog": [
+        "W02"
+      ],
       "status": "locked",
       "spec": "docs/wms/phases/P02.md",
       "checks": [
@@ -62,8 +69,13 @@
       "id": "P03",
       "title": "Reservations, ATP and shared BOM correctness",
       "milestone": "WMS M03 \u2014 Reservations, ATP and shared BOM correctness",
-      "dependencies": ["P02"],
-      "audit_backlog": ["W03", "W04"],
+      "dependencies": [
+        "P02"
+      ],
+      "audit_backlog": [
+        "W03",
+        "W04"
+      ],
       "status": "locked",
       "spec": "docs/wms/phases/P03.md",
       "checks": [
@@ -91,8 +103,13 @@
       "id": "P04",
       "title": "Receiving, locations and stock control",
       "milestone": "WMS M04 \u2014 Receiving, locations and stock control",
-      "dependencies": ["P03"],
-      "audit_backlog": ["W05", "W11"],
+      "dependencies": [
+        "P03"
+      ],
+      "audit_backlog": [
+        "W05",
+        "W11"
+      ],
       "status": "locked",
       "spec": "docs/wms/phases/P04.md",
       "checks": [
@@ -116,8 +133,12 @@
       "id": "P05",
       "title": "Persisted picking, packing and dispatch",
       "milestone": "WMS M05 \u2014 Persisted picking, packing and dispatch",
-      "dependencies": ["P04"],
-      "audit_backlog": ["W06"],
+      "dependencies": [
+        "P04"
+      ],
+      "audit_backlog": [
+        "W06"
+      ],
       "status": "locked",
       "spec": "docs/wms/phases/P05.md",
       "checks": [
@@ -145,8 +166,12 @@
       "id": "P06",
       "title": "Inspected returns and conserved transfers",
       "milestone": "WMS M06 \u2014 Inspected returns and conserved transfers",
-      "dependencies": ["P05"],
-      "audit_backlog": ["W07"],
+      "dependencies": [
+        "P05"
+      ],
+      "audit_backlog": [
+        "W07"
+      ],
       "status": "locked",
       "spec": "docs/wms/phases/P06.md",
       "checks": [
@@ -171,8 +196,13 @@
       "id": "P07",
       "title": "Read-only channels, Accounting and SAM contracts",
       "milestone": "WMS M07 \u2014 Read-only channels, Accounting and SAM contracts",
-      "dependencies": ["P06"],
-      "audit_backlog": ["W08", "W09"],
+      "dependencies": [
+        "P06"
+      ],
+      "audit_backlog": [
+        "W08",
+        "W09"
+      ],
       "status": "locked",
       "spec": "docs/wms/phases/P07.md",
       "checks": [
@@ -200,8 +230,13 @@
       "id": "P08",
       "title": "Quota simulation and operational observability",
       "milestone": "WMS M08 \u2014 Quota simulation and operational observability",
-      "dependencies": ["P07"],
-      "audit_backlog": ["W10", "W11"],
+      "dependencies": [
+        "P07"
+      ],
+      "audit_backlog": [
+        "W10",
+        "W11"
+      ],
       "status": "locked",
       "spec": "docs/wms/phases/P08.md",
       "checks": [
@@ -227,8 +262,12 @@
       "id": "P09",
       "title": "Release evidence and controlled readiness review",
       "milestone": "WMS M09 \u2014 Release evidence and controlled readiness review",
-      "dependencies": ["P08"],
-      "audit_backlog": ["W12"],
+      "dependencies": [
+        "P08"
+      ],
+      "audit_backlog": [
+        "W12"
+      ],
       "status": "locked",
       "spec": "docs/wms/phases/P09.md",
       "checks": [
@@ -251,5 +290,26 @@
         ".github/workflows/"
       ]
     }
-  ]
+  ],
+  "architecture_decision": {
+    "id": "ADR-0001",
+    "status": "proposed",
+    "option": null,
+    "candidate": null,
+    "spec": "docs/wms/oss/ADR-0001.md",
+    "owner_acceptance_ref": null,
+    "accepted_sha": null,
+    "gates": {
+      "G1": "blocked",
+      "G2": "partial",
+      "G3": "partial",
+      "G4": "blocked"
+    },
+    "execution_plan": "docs/wms/oss/EXECUTION_PLAN.md",
+    "issue": "https://github.com/borvat/surooh-commerce/issues/15",
+    "selection_status": "unresolved_pending_native_comparison",
+    "owner_research_acceptance": "User accepted preparatory research only; Tryton adoption and Codex explicitly withheld",
+    "decision_report": "docs/wms/oss/DECISION_CLOSURE.md",
+    "next_environment_step": "Restricted Dashboard connection setup for new free synthetic PostgreSQL; browser fallback approval missing"
+  }
 }

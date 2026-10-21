@@ -1,0 +1,13 @@
+test_assign_try (trytond.modules.stock.tests.test_module.StockTestCase.test_assign_try)
+Test Move assign_try ... ok
+test_products_by_location_assign (trytond.modules.stock.tests.test_module.StockTestCase.test_products_by_location_assign)
+Test products by location for assignation ... ok
+test_company_rule (trytond.modules.company.tests.test_module.CompanyTestCase.test_company_rule)
+Test missing company rule ... ok
+test_user_company (trytond.modules.company.tests.test_module.CompanyTestCase.test_user_company)
+Test user company ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 22.342s
+
+OK

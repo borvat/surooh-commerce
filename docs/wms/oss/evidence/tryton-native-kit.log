@@ -1,0 +1,18 @@
+<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/modules/product_kit/tests/scenario_product_kit_sale.rst
+Doctest: scenario_product_kit_sale.rst ... status dumper crashed
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/status.py", line 73, in dumper
+    if dump(path):
+       ^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/status.py", line 55, in dump
+    sock = socket.socket(socket.AF_UNIX)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py", line 233, in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+PermissionError: [Errno 1] Operation not permitted
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 27.159s
+
+OK

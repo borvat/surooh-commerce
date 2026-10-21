@@ -9,6 +9,10 @@ assert.equal(catalog.execution_authorized, false, "Codex execution must remain h
 assert.equal(catalog.active_phase, null);
 assert.equal(catalog.automatic_merge, false);
 assert.equal(catalog.automatic_deploy, false);
+assert.equal(catalog.architecture_decision.status, "proposed");
+assert.equal(catalog.architecture_decision.owner_acceptance_ref, null);
+assert.equal(catalog.phases[0].status, "blocked_architecture_decision");
+assert(existsSync(resolve(root, catalog.architecture_decision.spec)));
 const seen = new Set();
 for (const phase of catalog.phases) {
   assert(!seen.has(phase.id), "Duplicate phase");

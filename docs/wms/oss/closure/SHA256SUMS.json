@@ -1,0 +1,19 @@
+{
+  "docs/wms/oss/closure/foundation-tests.txt": "4dee7c55415774a9388170a62458c413a5b6070e7690632234dcce25979b24b2",
+  "docs/wms/oss/closure/tryton-dependency-audit.json": "3a3c319c624b89034948663c8c56fd9f99d3264f4943461ebe42af52b664a6db",
+  "docs/wms/oss/closure/tryton-security-sqlite.txt": "1e166d6eee523a7a456c0885d82c42db02891af7ec74b865135a218fcfb7749b",
+  "docs/wms/oss/closure/erpnext-pip-audit.txt": "7bc42cdf15f86725f06e4ea5a6034c64397297ce0400990e2eb36d23fea89a0b",
+  "docs/wms/oss/closure/tryton-security-sqlite-corrected.txt": "55816962898647c71d44a592decbe5debb29fd1dd497b37b9f1b66d74d91d1a2",
+  "docs/wms/oss/closure/pypi-spot-check.json": "5e965ddab5ed4c3c067cdb487bfcb446d5dd234e51edff0dc960b13697f9fb8d",
+  "docs/wms/oss/closure/erpnext-dependency-audit.json": "19fe977fd320285e02acdf9210495a9ac06287ff7aeb2725a2c6d873916feeb5",
+  "docs/wms/oss/closure/erpnext-runtime.json": "5fe06e9360c12de7e070da0429dac853f4219b5288b04130eb704dcdb322703b",
+  "docs/wms/oss/closure/tryton-runtime.json": "7f3357208a3bf486e2d151ba538f2fbc95f7db7ee8d4ac56b3552917262d62dd",
+  "docs/wms/oss/closure/environment.json": "b7fc838804858154f613c1634b355138d6c565800e0c6b8599f5b22cbd15f374",
+  "docs/wms/oss/closure/tryton-pip-audit-final.txt": "15950a68a7ed99c59779717acefdceb3f69cfd31bde67d2c954f2a3cea4d7955",
+  "docs/wms/oss/closure/audit-tool.txt": "70d9a63a0ea389b4992009be156f8738d7c22f2f5c049084054528ed7f9eee0c",
+  "docs/wms/oss/closure/render-synthetic-postgres.json": "fa7359031e5feaa35147f8c0302ced412685b037bc68d5fe7991662b40b48535",
+  "docs/wms/oss/closure/erpnext-bootstrap-summary.txt": "ab3fb61309f1875babe2563749c91b0b41fb408ed94eff111f80a6eadff70c27",
+  "docs/wms/oss/closure/tryton-security-sqlite-final.txt": "fd9466e3b02faf46777a12168b675c3051e24c13320ea54ba8ebf88538187c1d",
+  "research/wms-oss/closure/tryton_security_probe.py": "61cf9ca3d0e0020f908d55249426f9893af6a1af2cac8b466ece97ea205308d4",
+  "research/wms-oss/closure/README.md": "3f5a79a337e9128b87924af5798278ecc95c3bb33b17fe95a1760bcb808bd048"
+}

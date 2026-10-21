@@ -1,0 +1,9 @@
+{
+  "effective_uid": 0,
+  "uid_map": "0          0          1",
+  "database_container_runtime_available": false,
+  "local_postgres_started": false,
+  "tcp": "available",
+  "unix": "PermissionError: [Errno 1] Operation not permitted",
+  "non_root_spawn": "OSError: [Errno 22] Invalid argument"
+}

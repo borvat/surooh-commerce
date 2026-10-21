@@ -159,6 +159,20 @@
       "fresh_full_engine_build_upgrade",
       "cross_system_integration_acceptance",
       "synthetic_migration_reconciliation"
+    ],
+    "SOURCE_QUALITY": [
+      "foundation",
+      "shared_integrity",
+      "stage_gate_regressions",
+      "authority_holds",
+      "dependency_install",
+      "unit_tests",
+      "typecheck",
+      "lint",
+      "build",
+      "alternative_gate_regressions",
+      "source_quality_regressions",
+      "generated_cleanliness"
     ]
   },
   "tests": [
@@ -227,7 +241,7 @@
         "test:unit"
       ],
       "timeout": 600,
-      "min_executed_tests": 1
+      "min_executed_tests": 100
     },
     {
       "id": "typecheck",
@@ -258,6 +272,26 @@
         "build"
       ],
       "timeout": 1200
+    },
+    {
+      "id": "generated_cleanliness",
+      "tier": "generated_source",
+      "command": [
+        "node",
+        "scripts/wms/generated-clean.mjs"
+      ],
+      "timeout": 60
+    },
+    {
+      "id": "source_quality_regressions",
+      "tier": "unit",
+      "command": [
+        "{bun}",
+        "test",
+        "tests/source-quality.test.ts"
+      ],
+      "timeout": 600,
+      "min_executed_tests": 9
     },
     {
       "id": "legacy_db_adapter",
@@ -378,5 +412,6 @@
     }
   ],
   "not_applicable": {},
-  "stage_review_policy": "Phase-specific technical requirements plus existing predecessor/owner/accountant gates. Live provider operations remain separately prohibited, not a prerequisite to run preparation."
+  "stage_review_policy": "Phase-specific technical requirements plus existing predecessor/owner/accountant gates. Live provider operations remain separately prohibited, not a prerequisite to run preparation.",
+  "source_quality_scope_policy": "Owner-authorized bounded source cleanup only; does not waive PREPARATION/P01 database, engine, isolation, accountant or integration requirements. No Codex or next phase authorization."
 }

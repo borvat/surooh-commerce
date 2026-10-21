@@ -1,0 +1,15 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "required test not executed successfully: legacy_db_adapter",
+    "required test not executed successfully: fresh_engine_bootstrap"
+  ],
+  "scope": "P01",
+  "tested_commit": "3a7cfb73850ec89fd91822c5c0078ff985d25895",
+  "hosted_ci": "BLOCKED",
+  "phase_complete": false,
+  "codex_start_authorized": false,
+  "merge_authorized": false,
+  "deploy_authorized": false,
+  "human_review_required": true
+}

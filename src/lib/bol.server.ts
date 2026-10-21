@@ -17,19 +17,30 @@ async function key() {
 
 export async function encryptSecret(plain: string) {
   const iv = crypto.getRandomValues(new Uint8Array(12));
-  const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await key(), new TextEncoder().encode(plain));
+  const ct = await crypto.subtle.encrypt(
+    { name: "AES-GCM", iv },
+    await key(),
+    new TextEncoder().encode(plain),
+  );
   return { ciphertext: b64(new Uint8Array(ct)), iv: b64(iv) };
 }
 
 export async function decryptSecret(ciphertext: string, iv: string) {
-  const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: unb64(iv) }, await key(), unb64(ciphertext));
+  const pt = await crypto.subtle.decrypt(
+    { name: "AES-GCM", iv: unb64(iv) },
+    await key(),
+    unb64(ciphertext),
+  );
   return new TextDecoder().decode(pt);
 }
 
 export async function bolToken(clientId: string, clientSecret: string): Promise<string> {
   const res = await fetch("https://login.bol.com/token?grant_type=client_credentials", {
     method: "POST",
-    headers: { Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`, Accept: "application/json" },
+    headers: {
+      Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
+      Accept: "application/json",
+    },
   });
   const body = await res.text();
   if (!res.ok) throw new Error(`bol.com login failed [${res.status}]: ${body.slice(0, 300)}`);
@@ -41,29 +52,52 @@ export async function bolToken(clientId: string, clientSecret: string): Promise<
 async function call(token: string, path: string, init: RequestInit & { accept?: string } = {}) {
   const res = await fetch(`${API}${path}`, {
     ...init,
-    headers: { Authorization: `Bearer ${token}`, Accept: init.accept ?? V10_JSON, ...(init.body ? { "Content-Type": V10_JSON } : {}) },
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: init.accept ?? V10_JSON,
+      ...(init.body ? { "Content-Type": V10_JSON } : {}),
+    },
   });
   const text = await res.text();
   if (!res.ok) throw new Error(`bol.com ${path} failed [${res.status}]: ${text.slice(0, 300)}`);
   return text;
 }
 
-type ProcessStatus = { processStatusId?: string | number; status?: string; entityId?: string; errorMessage?: string };
+type ProcessStatus = {
+  processStatusId?: string | number;
+  status?: string;
+  entityId?: string;
+  errorMessage?: string;
+};
 
 export async function startOfferExport(token: string) {
-  const ps = JSON.parse(await call(token, "/retailer/offers/export", { method: "POST", body: JSON.stringify({ format: "CSV" }) })) as ProcessStatus;
+  const ps = JSON.parse(
+    await call(token, "/retailer/offers/export", {
+      method: "POST",
+      body: JSON.stringify({ format: "CSV" }),
+    }),
+  ) as ProcessStatus;
   if (!ps.processStatusId) throw new Error("bol.com did not start the export");
   return String(ps.processStatusId);
 }
 
 export async function checkProcess(token: string, id: string) {
-  return JSON.parse(await call(token, `/shared/process-status/${encodeURIComponent(id)}`)) as ProcessStatus;
+  return JSON.parse(
+    await call(token, `/shared/process-status/${encodeURIComponent(id)}`),
+  ) as ProcessStatus;
 }
 
 export type BolOffer = {
-  offerId: string; ean: string | null; reference: string | null; title: string | null;
-  stock: number | null; correctedStock: number | null; fulfilmentMethod: "FBR" | "FBB";
-  forSale: boolean | null; modifiedAt: string | null; countries: string[] | null;
+  offerId: string;
+  ean: string | null;
+  reference: string | null;
+  title: string | null;
+  stock: number | null;
+  correctedStock: number | null;
+  fulfilmentMethod: "FBR" | "FBB";
+  forSale: boolean | null;
+  modifiedAt: string | null;
+  countries: string[] | null;
 };
 
 const pick = (r: Record<string, string>, ...keys: string[]) => {
@@ -73,14 +107,19 @@ const pick = (r: Record<string, string>, ...keys: string[]) => {
   }
   return null;
 };
-const int = (v: string | null) => (v == null || v === "" || isNaN(Number(v)) ? null : Math.trunc(Number(v)));
+const int = (v: string | null) =>
+  v == null || v === "" || isNaN(Number(v)) ? null : Math.trunc(Number(v));
 
 export async function downloadOfferExport(token: string, reportId: string): Promise<BolOffer[]> {
-  const csv = await call(token, `/retailer/offers/export/${encodeURIComponent(reportId)}`, { accept: V10_CSV });
+  const csv = await call(token, `/retailer/offers/export/${encodeURIComponent(reportId)}`, {
+    accept: V10_CSV,
+  });
   return parseCsv(csv)
     .map((r) => {
       const onHold = pick(r, "onHoldByRetailer");
-      const fm = (pick(r, "fulfilmentType", "fulfilmentMethod", "fulfillmentMethod") ?? "FBR").toUpperCase();
+      const fm = (
+        pick(r, "fulfilmentType", "fulfilmentMethod", "fulfillmentMethod") ?? "FBR"
+      ).toUpperCase();
       return {
         offerId: pick(r, "offerId") ?? "",
         ean: pick(r, "ean"),
@@ -110,13 +149,24 @@ export async function fetchRetailer(token: string): Promise<BolRetailer> {
 }
 
 export type OfferDetail = {
-  offerId: string; ean: string | null; reference: string | null; title: string | null;
-  unitPrice: number | null; stock: number | null; correctedStock: number | null;
-  fulfilmentMethod: "FBR" | "FBB"; forSale: boolean | null; condition: string | null; countries: string[] | null;
+  offerId: string;
+  ean: string | null;
+  reference: string | null;
+  title: string | null;
+  unitPrice: number | null;
+  stock: number | null;
+  correctedStock: number | null;
+  fulfilmentMethod: "FBR" | "FBB";
+  forSale: boolean | null;
+  condition: string | null;
+  countries: string[] | null;
 };
 
 type RawOffer = {
-  offerId?: string; ean?: string; reference?: string; onHoldByRetailer?: boolean;
+  offerId?: string;
+  ean?: string;
+  reference?: string;
+  onHoldByRetailer?: boolean;
   pricing?: { bundlePrices?: { quantity?: number; unitPrice?: number }[] };
   stock?: { amount?: number; correctedStock?: number };
   fulfilment?: { method?: string };
@@ -126,10 +176,15 @@ type RawOffer = {
 
 /** Full offer record: real product title, selling price, stock, countries. */
 export async function fetchOfferDetail(token: string, offerId: string): Promise<OfferDetail> {
-  const o = JSON.parse(await call(token, `/retailer/offers/${encodeURIComponent(offerId)}`)) as RawOffer;
-  const single = o.pricing?.bundlePrices?.find((b) => (b.quantity ?? 1) === 1) ?? o.pricing?.bundlePrices?.[0];
+  const o = JSON.parse(
+    await call(token, `/retailer/offers/${encodeURIComponent(offerId)}`),
+  ) as RawOffer;
+  const single =
+    o.pricing?.bundlePrices?.find((b) => (b.quantity ?? 1) === 1) ?? o.pricing?.bundlePrices?.[0];
   const fm = (o.fulfilment?.method ?? "FBR").toUpperCase();
-  const countries = (o.store?.visible ?? []).map((v) => v.countryCode).filter((c): c is string => !!c);
+  const countries = (o.store?.visible ?? [])
+    .map((v) => v.countryCode)
+    .filter((c): c is string => !!c);
   return {
     offerId: o.offerId ?? offerId,
     ean: o.ean ?? null,
@@ -149,12 +204,15 @@ export async function fetchOfferDetail(token: string, offerId: string): Promise<
 export async function fetchPrimaryImage(token: string, ean: string): Promise<string | null> {
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
-      const json = JSON.parse(await call(token, `/retailer/products/${encodeURIComponent(ean)}/assets?usage=PRIMARY`)) as {
+      const json = JSON.parse(
+        await call(token, `/retailer/products/${encodeURIComponent(ean)}/assets?usage=PRIMARY`),
+      ) as {
         assets?: { variants?: { size?: string; url?: string }[] }[];
       };
       const variants = json.assets?.flatMap((a) => a.variants ?? []) ?? [];
       const order = ["medium", "large", "small"];
-      const best = order.map((s) => variants.find((v) => v.size === s)).find(Boolean) ?? variants[0];
+      const best =
+        order.map((s) => variants.find((v) => v.size === s)).find(Boolean) ?? variants[0];
       return best?.url ?? null;
     } catch (e) {
       // bol throttles bursts; back off and retry, otherwise give up quietly
@@ -167,11 +225,18 @@ export async function fetchPrimaryImage(token: string, ean: string): Promise<str
 
 /** bol's webshop product ID (BPID), distinct from both EAN and offer ID. */
 export async function fetchBolProductId(token: string, ean: string): Promise<string | null> {
-  const result = JSON.parse(await call(token, `/retailer/products/${encodeURIComponent(ean)}/product-ids`)) as { bolProductId?: string };
+  const result = JSON.parse(
+    await call(token, `/retailer/products/${encodeURIComponent(ean)}/product-ids`),
+  ) as { bolProductId?: string };
   return result.bolProductId && /^\d+$/.test(result.bolProductId) ? result.bolProductId : null;
 }
 
-export type OfferChange = { reference?: string | undefined; forSale?: boolean | undefined; price?: number | undefined; stock?: number | undefined };
+export type OfferChange = {
+  reference?: string | undefined;
+  forSale?: boolean | undefined;
+  price?: number | undefined;
+  stock?: number | undefined;
+};
 
 /** Global kill switch: bol.com is READ-ONLY until the owner explicitly enables writes in a later release. */
 export const BOL_WRITE_ENABLED = false as boolean;
@@ -186,7 +251,10 @@ export async function updateOffer(token: string, offerId: string, ch: OfferChang
   const sent: string[] = [];
   if (ch.reference !== undefined || ch.forSale !== undefined) {
     const raw = JSON.parse(await call(token, `/retailer/offers/${id}`)) as {
-      reference?: string; onHoldByRetailer?: boolean; unknownProductTitle?: string; fulfilment?: Record<string, unknown>;
+      reference?: string;
+      onHoldByRetailer?: boolean;
+      unknownProductTitle?: string;
+      fulfilment?: Record<string, unknown>;
     };
     const body: Record<string, unknown> = {
       reference: ch.reference ?? raw.reference ?? "",
@@ -198,33 +266,58 @@ export async function updateOffer(token: string, offerId: string, ch: OfferChang
     sent.push("offer");
   }
   if (ch.price !== undefined) {
-    await call(token, `/retailer/offers/${id}/price`, { method: "PUT", body: JSON.stringify({ pricing: { bundlePrices: [{ quantity: 1, unitPrice: ch.price }] } }) });
+    await call(token, `/retailer/offers/${id}/price`, {
+      method: "PUT",
+      body: JSON.stringify({ pricing: { bundlePrices: [{ quantity: 1, unitPrice: ch.price }] } }),
+    });
     sent.push("price");
   }
   if (ch.stock !== undefined) {
-    await call(token, `/retailer/offers/${id}/stock`, { method: "PUT", body: JSON.stringify({ amount: ch.stock, managedByRetailer: true }) });
+    await call(token, `/retailer/offers/${id}/stock`, {
+      method: "PUT",
+      body: JSON.stringify({ amount: ch.stock, managedByRetailer: true }),
+    });
     sent.push("stock");
   }
   return sent;
 }
 
 /** Colour / pieces per package / box contents from bol's catalog, or null when bol has no catalog entry. */
-export async function fetchCatalogAttributes(token: string, ean: string): Promise<{ colour: string | null; pack: number | null; contents: string | null } | null> {
+export async function fetchCatalogAttributes(
+  token: string,
+  ean: string,
+): Promise<{ colour: string | null; pack: number | null; contents: string | null } | null> {
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
-      const res = await fetch(`${API}/retailer/content/catalog-products/${encodeURIComponent(ean)}`, {
-        headers: { Authorization: `Bearer ${token}`, Accept: V10_JSON, "Accept-Language": "nl" },
-      });
+      const res = await fetch(
+        `${API}/retailer/content/catalog-products/${encodeURIComponent(ean)}`,
+        {
+          headers: { Authorization: `Bearer ${token}`, Accept: V10_JSON, "Accept-Language": "nl" },
+        },
+      );
       if (res.status === 429 || res.status >= 500) throw new Error(`[${res.status}]`);
       if (!res.ok) return null;
-      const j = (await res.json()) as { attributes?: { id?: string; values?: { value?: string }[] }[] };
+      const j = (await res.json()) as {
+        attributes?: { id?: string; values?: { value?: string }[] }[];
+      };
       const get = (...ids: string[]) => {
-        for (const id of ids) { const v = j.attributes?.find((a) => a.id === id)?.values?.map((x) => x.value).filter(Boolean).join(", "); if (v && v !== "-") return v; }
+        for (const id of ids) {
+          const v = j.attributes
+            ?.find((a) => a.id === id)
+            ?.values?.map((x) => x.value)
+            .filter(Boolean)
+            .join(", ");
+          if (v && v !== "-") return v;
+        }
         return null;
       };
       const packRaw = get("Number Pieces In Package", "Pack Quantity", "Number of Items");
       const pack = packRaw && /^\d+/.test(packRaw) ? parseInt(packRaw, 10) : null;
-      return { colour: get("Colour", "Colour Group"), pack: pack && pack > 0 ? pack : null, contents: get("Whats In The Box") };
+      return {
+        colour: get("Colour", "Colour Group"),
+        pack: pack && pack > 0 ? pack : null,
+        contents: get("Whats In The Box"),
+      };
     } catch (e) {
       if (!/\[429\]|\[50\d\]/.test(String(e))) return null;
       await new Promise((r) => setTimeout(r, 800 * (attempt + 1)));

@@ -10,7 +10,11 @@ export function useMe() {
       const { data: u } = await supabase.auth.getUser();
       const { data, error } = await supabase.rpc("bootstrap_user");
       if (error) throw error;
-      return { email: u.user?.email ?? "", id: u.user?.id ?? "", role: (data ?? null) as Role | null };
+      return {
+        email: u.user?.email ?? "",
+        id: u.user?.id ?? "",
+        role: (data ?? null) as Role | null,
+      };
     },
   });
 }

@@ -1,6 +1,16 @@
 import type { ReactNode } from "react";
 
-export function Page({ title, intro, actions, children }: { title: string; intro?: ReactNode; actions?: ReactNode; children: ReactNode }) {
+export function Page({
+  title,
+  intro,
+  actions,
+  children,
+}: {
+  title: string;
+  intro?: ReactNode;
+  actions?: ReactNode;
+  children: ReactNode;
+}) {
   return (
     <div className="mx-auto max-w-6xl p-4 md:p-8">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
@@ -24,7 +34,13 @@ export function Table({ head, children }: { head: string[]; children: ReactNode 
     <div className="overflow-x-auto rounded-xl border bg-card">
       <table className="w-full text-sm">
         <thead className="bg-muted/50 text-muted-foreground">
-          <tr>{head.map((h) => <th key={h} className="px-4 py-3 text-start font-medium">{h}</th>)}</tr>
+          <tr>
+            {head.map((h) => (
+              <th key={h} className="px-4 py-3 text-start font-medium">
+                {h}
+              </th>
+            ))}
+          </tr>
         </thead>
         <tbody className="divide-y">{children}</tbody>
       </table>
@@ -33,15 +49,33 @@ export function Table({ head, children }: { head: string[]; children: ReactNode 
 }
 
 export function Empty({ cols, text }: { cols: number; text: string }) {
-  return <tr><td colSpan={cols} className="py-12 text-center text-muted-foreground">{text}</td></tr>;
+  return (
+    <tr>
+      <td colSpan={cols} className="py-12 text-center text-muted-foreground">
+        {text}
+      </td>
+    </tr>
+  );
 }
 
-export function Tag({ tone = "neutral", children }: { tone?: "success" | "warning" | "danger" | "neutral"; children: ReactNode }) {
+export function Tag({
+  tone = "neutral",
+  children,
+}: {
+  tone?: "success" | "warning" | "danger" | "neutral";
+  children: ReactNode;
+}) {
   const m = {
     success: "bg-success/12 text-success",
     warning: "bg-warning/20 text-warning-foreground",
     danger: "bg-destructive/10 text-destructive",
     neutral: "bg-muted text-muted-foreground",
   };
-  return <span className={`inline-flex items-center whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium ${m[tone]}`}>{children}</span>;
+  return (
+    <span
+      className={`inline-flex items-center whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium ${m[tone]}`}
+    >
+      {children}
+    </span>
+  );
 }

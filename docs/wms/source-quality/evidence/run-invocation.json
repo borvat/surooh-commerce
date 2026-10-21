@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "python3",
+    "verification/run.py",
+    "--profile",
+    "wms",
+    "--expected-sha",
+    "3a7cfb73850ec89fd91822c5c0078ff985d25895",
+    "--bun",
+    "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+    "--tools-python",
+    "/workspace/scratch/930c38487b1a/alternative-runtime/python-tools/bin/python",
+    "--accounting-report",
+    "/workspace/scratch/930c38487b1a/alternative-evidence/accounting-run-02/report.json",
+    "--accounting-expected-sha",
+    "a9400f6f4b9066f5487f16cd45268728920e5672",
+    "--output",
+    "/workspace/scratch/930c38487b1a/remediation-evidence/clean-run-01"
+  ],
+  "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+  "exit_code": 2,
+  "source_sha": "3a7cfb73850ec89fd91822c5c0078ff985d25895",
+  "note": "Full runner retains database/future BLOCKED slots; per-scope gate is separate.",
+  "console_sha256": "9b841a0149c440ee5b8a0cdeedd9cdbe485f2fcc0a734f7ceb334f6af8ec8550"
+}

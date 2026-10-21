@@ -1,6 +1,9 @@
 import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
-const sql = readFileSync(new URL("../supabase/migrations/20261010213000_warehouse_events_staging.sql", import.meta.url), "utf8");
+const sql = readFileSync(
+  new URL("../supabase/migrations/20261010213000_warehouse_events_staging.sql", import.meta.url),
+  "utf8",
+);
 describe("warehouse audit migration safety", () => {
   test("uses correct paired PL/pgSQL delimiters", () => {
     const matches = sql.match(/\$\$/g) ?? [];

@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedAssistantRouteImport } from './routes/_authenticated/assistant'
 import { Route as AuthenticatedBundlesRouteImport } from './routes/_authenticated/bundles'
 import { Route as AuthenticatedChannelsRouteImport } from './routes/_authenticated/channels'
 import { Route as AuthenticatedComponentsRouteImport } from './routes/_authenticated/components'
@@ -26,6 +27,7 @@ import { Route as AuthenticatedProductsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedReviewRouteImport } from './routes/_authenticated/review'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedSetupRouteImport } from './routes/_authenticated/setup'
+import { Route as AuthenticatedStockitupReviewRouteImport } from './routes/_authenticated/stockitup-review'
 import { Route as AuthenticatedProductsProductIdRouteImport } from './routes/_authenticated/products_.$productId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -46,6 +48,11 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAssistantRoute = AuthenticatedAssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedBundlesRoute = AuthenticatedBundlesRouteImport.update({
   id: '/bundles',
@@ -113,6 +120,12 @@ const AuthenticatedSetupRoute = AuthenticatedSetupRouteImport.update({
   path: '/setup',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedStockitupReviewRoute =
+  AuthenticatedStockitupReviewRouteImport.update({
+    id: '/stockitup-review',
+    path: '/stockitup-review',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedProductsProductIdRoute =
   AuthenticatedProductsProductIdRouteImport.update({
     id: '/products_/$productId',
@@ -124,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/assistant': typeof AuthenticatedAssistantRoute
   '/bundles': typeof AuthenticatedBundlesRoute
   '/channels': typeof AuthenticatedChannelsRoute
   '/components': typeof AuthenticatedComponentsRoute
@@ -137,12 +151,14 @@ export interface FileRoutesByFullPath {
   '/review': typeof AuthenticatedReviewRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/setup': typeof AuthenticatedSetupRoute
+  '/stockitup-review': typeof AuthenticatedStockitupReviewRoute
   '/products/$productId': typeof AuthenticatedProductsProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/assistant': typeof AuthenticatedAssistantRoute
   '/bundles': typeof AuthenticatedBundlesRoute
   '/channels': typeof AuthenticatedChannelsRoute
   '/components': typeof AuthenticatedComponentsRoute
@@ -156,6 +172,7 @@ export interface FileRoutesByTo {
   '/review': typeof AuthenticatedReviewRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/setup': typeof AuthenticatedSetupRoute
+  '/stockitup-review': typeof AuthenticatedStockitupReviewRoute
   '/products/$productId': typeof AuthenticatedProductsProductIdRoute
 }
 export interface FileRoutesById {
@@ -164,6 +181,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/assistant': typeof AuthenticatedAssistantRoute
   '/_authenticated/bundles': typeof AuthenticatedBundlesRoute
   '/_authenticated/channels': typeof AuthenticatedChannelsRoute
   '/_authenticated/components': typeof AuthenticatedComponentsRoute
@@ -177,6 +195,7 @@ export interface FileRoutesById {
   '/_authenticated/review': typeof AuthenticatedReviewRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/setup': typeof AuthenticatedSetupRoute
+  '/_authenticated/stockitup-review': typeof AuthenticatedStockitupReviewRoute
   '/_authenticated/products_/$productId': typeof AuthenticatedProductsProductIdRoute
 }
 export interface FileRouteTypes {
@@ -185,6 +204,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/reset-password'
+    | '/assistant'
     | '/bundles'
     | '/channels'
     | '/components'
@@ -198,12 +218,14 @@ export interface FileRouteTypes {
     | '/review'
     | '/settings'
     | '/setup'
+    | '/stockitup-review'
     | '/products/$productId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/reset-password'
+    | '/assistant'
     | '/bundles'
     | '/channels'
     | '/components'
@@ -217,6 +239,7 @@ export interface FileRouteTypes {
     | '/review'
     | '/settings'
     | '/setup'
+    | '/stockitup-review'
     | '/products/$productId'
   id:
     | '__root__'
@@ -224,6 +247,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/reset-password'
+    | '/_authenticated/assistant'
     | '/_authenticated/bundles'
     | '/_authenticated/channels'
     | '/_authenticated/components'
@@ -237,6 +261,7 @@ export interface FileRouteTypes {
     | '/_authenticated/review'
     | '/_authenticated/settings'
     | '/_authenticated/setup'
+    | '/_authenticated/stockitup-review'
     | '/_authenticated/products_/$productId'
   fileRoutesById: FileRoutesById
 }
@@ -276,6 +301,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/assistant': {
+      id: '/_authenticated/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AuthenticatedAssistantRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/bundles': {
       id: '/_authenticated/bundles'
@@ -368,6 +400,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSetupRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/stockitup-review': {
+      id: '/_authenticated/stockitup-review'
+      path: '/stockitup-review'
+      fullPath: '/stockitup-review'
+      preLoaderRoute: typeof AuthenticatedStockitupReviewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/products_/$productId': {
       id: '/_authenticated/products_/$productId'
       path: '/products/$productId'
@@ -379,6 +418,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAssistantRoute: typeof AuthenticatedAssistantRoute
   AuthenticatedBundlesRoute: typeof AuthenticatedBundlesRoute
   AuthenticatedChannelsRoute: typeof AuthenticatedChannelsRoute
   AuthenticatedComponentsRoute: typeof AuthenticatedComponentsRoute
@@ -392,10 +432,12 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedReviewRoute: typeof AuthenticatedReviewRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedSetupRoute: typeof AuthenticatedSetupRoute
+  AuthenticatedStockitupReviewRoute: typeof AuthenticatedStockitupReviewRoute
   AuthenticatedProductsProductIdRoute: typeof AuthenticatedProductsProductIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAssistantRoute: AuthenticatedAssistantRoute,
   AuthenticatedBundlesRoute: AuthenticatedBundlesRoute,
   AuthenticatedChannelsRoute: AuthenticatedChannelsRoute,
   AuthenticatedComponentsRoute: AuthenticatedComponentsRoute,
@@ -409,6 +451,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedReviewRoute: AuthenticatedReviewRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedSetupRoute: AuthenticatedSetupRoute,
+  AuthenticatedStockitupReviewRoute: AuthenticatedStockitupReviewRoute,
   AuthenticatedProductsProductIdRoute: AuthenticatedProductsProductIdRoute,
 }
 

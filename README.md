@@ -21,3 +21,8 @@ Stockitup is a functional benchmark; its source code has not been copied.
 Start with [docs/wms/README.md](docs/wms/README.md). Architecture, data/inventory rules, operation cycles, Marketplace/Accounting/SAM contracts and nine ordered phase packets are prepared there. P01 is ready for owner review, not assigned to Codex. No automatic phase start, main merge or production deployment is authorized.
 
 Local engineering checks: `npm run check:foundation` and `npm run test:foundation`. Existing application tests use `bun run test:unit`; typecheck/build/lint remain separate. Disposable DB and live read-only entry points deliberately fail closed until their actual adapters and approvals exist. See [testing](docs/wms/TESTING.md) and [stage gates](docs/wms/STAGE_GATES.md).
+
+
+## Owner-approved alternative verification preparation
+
+G0 = HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED. The current user authorizes local/isolated synthetic testing and preparation of `verification/` without launching Codex. Do not repair billing or repeatedly rerun Actions. Use `[skip ci]` for preparation commits. Follow `verification/README.md`; require real exit/log/artifact/SHA evidence and human review. No automatic phase completion, other-gate bypass, production change, paid service or main merge.

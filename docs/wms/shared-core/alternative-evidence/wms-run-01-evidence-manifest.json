@@ -1,0 +1,117 @@
+{
+  "component": "wms",
+  "source_commit": "53bac96f790c152361a8e449d6db7d14fa95815c",
+  "scope": "local alternative verification; no hosted CI/production acceptance",
+  "files": [
+    {
+      "path": "artifacts/accounting-native-link.json",
+      "bytes": 850,
+      "sha256": "cea93ae39909e0da2a147a95f2e7cb64ea9e9fc66cfb022014f9ab09aecd2139"
+    },
+    {
+      "path": "artifacts/linked-isolation-results.json",
+      "bytes": 4091,
+      "sha256": "f9c23594d07a490fef855cf8654b00d5191e39f1d93a16957c72a242a4c1b11a"
+    },
+    {
+      "path": "artifacts/linked-native-results.json",
+      "bytes": 2912,
+      "sha256": "851b1595d29b5ec5b6f193bfc23cb91f235aef54e36da070c1f66389846b9d81"
+    },
+    {
+      "path": "artifacts/linked-runtime.json",
+      "bytes": 7679,
+      "sha256": "94f5dfac079c3daa232004acc7eb7d5975b970dd462217782e4910034ae6de14"
+    },
+    {
+      "path": "gate-P01.json",
+      "bytes": 1071,
+      "sha256": "3cc2a0137ef45655881c879e8ad6679f740cdaa64a54673bdbb57737ad126ba9"
+    },
+    {
+      "path": "gate-PREPARATION.json",
+      "bytes": 650,
+      "sha256": "979d28c3f9c5a497a398684eb95f4e4c5372039096797bada6fa76b35ce83df0"
+    },
+    {
+      "path": "gate-invocations.json",
+      "bytes": 1083,
+      "sha256": "bc8b5e883ec86a6251c260ffaaf51545f9abd07bdd781cdefedc206c47c54fc2"
+    },
+    {
+      "path": "generated-route-source.patch",
+      "bytes": 8872,
+      "sha256": "0a0d3584956e0af45af2e5e9b68ff6b371f0f01b60087e83fa52fb7fab52650f"
+    },
+    {
+      "path": "logs/accounting_native_link.log",
+      "bytes": 75,
+      "sha256": "cebbdea112b34168a51bb9ac15af7f3446b5bdceb500b6d6ccebbb6f881a3abd"
+    },
+    {
+      "path": "logs/alternative_gate_regressions.log",
+      "bytes": 1551,
+      "sha256": "09a8f869c238e24abd8e1fe719c41e49e8077a9860265f701a8651ee799df532"
+    },
+    {
+      "path": "logs/authority_holds.log",
+      "bytes": 712,
+      "sha256": "cd16321080bf8a1ff379ecf1047dc58f859e17d9fbe993c620839e1a16fb071d"
+    },
+    {
+      "path": "logs/build.log",
+      "bytes": 26640,
+      "sha256": "cfe76ba1f108e8ca7aa527f84b4d5e1499a080e9fdfba742d41cb093a5e15d50"
+    },
+    {
+      "path": "logs/dependency_install.log",
+      "bytes": 97,
+      "sha256": "f5e0fce86cf6cc3849e20485f1785d57048c993373f64e5d29a7ff4ed59511ac"
+    },
+    {
+      "path": "logs/foundation.log",
+      "bytes": 110,
+      "sha256": "16c50c626e196c38ebd952f76379fece6eeec304782e924c399b01c14f00fa6d"
+    },
+    {
+      "path": "logs/legacy_db_adapter.log",
+      "bytes": 126,
+      "sha256": "8b4ac741b830fe120d625b40b767c63b242080f75eea4b243fd0171edc974c88"
+    },
+    {
+      "path": "logs/lint.log",
+      "bytes": 2164585,
+      "sha256": "0be59d7392366c61dfc67999ebc7085e193dfd1019004642b9cea23162898450"
+    },
+    {
+      "path": "logs/shared_integrity.log",
+      "bytes": 188,
+      "sha256": "2a3af38e90315db7dfaeedfa0940a409fdcf4397d377308140e1ab2c082dafbf"
+    },
+    {
+      "path": "logs/stage_gate_regressions.log",
+      "bytes": 1394,
+      "sha256": "ffdc2340b8230c053f227407f96a37abca0fc122a15ce9ef25c2e13b054f4695"
+    },
+    {
+      "path": "logs/typecheck.log",
+      "bytes": 4210,
+      "sha256": "74fb632065fdeadd7dd60e027e12e150b1e8162103bd1bd0ef37b869c4b43377"
+    },
+    {
+      "path": "logs/unit_tests.log",
+      "bytes": 122,
+      "sha256": "8d7d901c3a0b318b89583ec9ab101b536f3b24347026ae33977398b24cc8b218"
+    },
+    {
+      "path": "report.json",
+      "bytes": 12091,
+      "sha256": "b61524585f0603c769ee3e69e9633fa7cd3c5c26d9fce1fd54ed521c5b92bd35"
+    },
+    {
+      "path": "run-invocation.json",
+      "bytes": 925,
+      "sha256": "83c4dc5920c09a21e24383914058a045b05801f6b20effda2391bc39cc6be559"
+    }
+  ]
+}

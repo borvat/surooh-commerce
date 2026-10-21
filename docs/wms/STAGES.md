@@ -1,3 +1,5 @@
+> Current direction: owner approved shared ERPNext16 accounting/stock/valuation for preparation only. [Shared authority](shared-core/AUTHORITY.md) and [phase alignment](shared-core/PHASE_ALIGNMENT.md) supersede any historical Supabase/Tryton writable-ledger instructions below. Current source/production remains unchanged. Codex, merge, deploy and real migration remain held.
+
 # Ordered engineering execution plan
 
 All execution is on hold. The owner authorized preparation only, not starting Codex. Foundation is P00 (this draft PR); P01 is the first prepared implementation task. Each phase is reviewed before owner acceptance and a separate next-phase start decision. Technical dependencies below form a deliberately sequential delivery path.
@@ -25,3 +27,6 @@ The conditional [OSS execution plan](oss/EXECUTION_PLAN.md) adds P00 and propose
 ## Evidence-closure update
 
 Owner accepted preparatory research only. No engine is selected. See [the latest decision report](oss/DECISION_CLOSURE.md). G1–G4 are not closed; P01 is not eligible for Codex handoff. Additional SQLite authorization tests and ERPNext imports do not replace the mandatory PostgreSQL practical comparison.
+
+
+Current verification decision: independent local/isolated runner and evidence gate in `verification/README.md`. G0 HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED; no billing repair or repeated Actions. Required build/type/lint/native/security/integration tests and owner/accountant review remain mandatory; no phase start or completion is authorized.

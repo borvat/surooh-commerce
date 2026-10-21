@@ -1,3 +1,5 @@
+> Current direction: owner approved shared ERPNext16 accounting/stock/valuation for preparation only. [Shared authority](shared-core/AUTHORITY.md) and [phase alignment](shared-core/PHASE_ALIGNMENT.md) supersede any historical Supabase/Tryton writable-ledger instructions below. Current source/production remains unchanged. Codex, merge, deploy and real migration remain held.
+
 # Canonical data and ownership model
 
 An organization represents one legal stock-owning company for this release. A group-level user may have several memberships; that never combines the companies' inventory. Channel accounts and warehouse addresses are not legal owners. Same-location storage for two companies has distinct ownership dimensions. Intercompany movement requires an explicit commercial transaction, not an internal transfer.

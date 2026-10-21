@@ -1,0 +1,382 @@
+{
+  "schema_version": 1,
+  "component": "wms",
+  "g0": "HOSTED_CI_BLOCKED \u2014 ALTERNATIVE_VERIFICATION_REQUIRED",
+  "codex_start_authorized": false,
+  "automatic_phase_completion": false,
+  "required_tests_by_scope": {
+    "PREPARATION": [
+      "foundation",
+      "shared_integrity",
+      "stage_gate_regressions",
+      "authority_holds",
+      "dependency_install",
+      "unit_tests",
+      "typecheck",
+      "lint",
+      "build",
+      "legacy_db_adapter",
+      "alternative_gate_regressions",
+      "accounting_native_link"
+    ],
+    "P01": [
+      "foundation",
+      "shared_integrity",
+      "stage_gate_regressions",
+      "authority_holds",
+      "dependency_install",
+      "unit_tests",
+      "typecheck",
+      "lint",
+      "build",
+      "legacy_db_adapter",
+      "alternative_gate_regressions",
+      "accounting_native_link",
+      "fresh_engine_bootstrap"
+    ],
+    "P02": [
+      "foundation",
+      "shared_integrity",
+      "stage_gate_regressions",
+      "authority_holds",
+      "dependency_install",
+      "unit_tests",
+      "typecheck",
+      "lint",
+      "build",
+      "legacy_db_adapter",
+      "alternative_gate_regressions",
+      "accounting_native_link",
+      "service_uid_isolation",
+      "real_queue_and_api_bypass"
+    ],
+    "P03": [
+      "foundation",
+      "shared_integrity",
+      "stage_gate_regressions",
+      "authority_holds",
+      "dependency_install",
+      "unit_tests",
+      "typecheck",
+      "lint",
+      "build",
+      "legacy_db_adapter",
+      "alternative_gate_regressions",
+      "accounting_native_link",
+      "bundle_full_reservation_acceptance"
+    ],
+    "P04": [
+      "foundation",
+      "shared_integrity",
+      "stage_gate_regressions",
+      "authority_holds",
+      "dependency_install",
+      "unit_tests",
+      "typecheck",
+      "lint",
+      "build",
+      "legacy_db_adapter",
+      "alternative_gate_regressions",
+      "accounting_native_link",
+      "warehouse_receipt_count_acceptance"
+    ],
+    "P05": [
+      "foundation",
+      "shared_integrity",
+      "stage_gate_regressions",
+      "authority_holds",
+      "dependency_install",
+      "unit_tests",
+      "typecheck",
+      "lint",
+      "build",
+      "legacy_db_adapter",
+      "alternative_gate_regressions",
+      "accounting_native_link",
+      "wms_ui_native_e2e"
+    ],
+    "P06": [
+      "foundation",
+      "shared_integrity",
+      "stage_gate_regressions",
+      "authority_holds",
+      "dependency_install",
+      "unit_tests",
+      "typecheck",
+      "lint",
+      "build",
+      "legacy_db_adapter",
+      "alternative_gate_regressions",
+      "accounting_native_link",
+      "return_inspection_transfer_acceptance"
+    ],
+    "P07": [
+      "foundation",
+      "shared_integrity",
+      "stage_gate_regressions",
+      "authority_holds",
+      "dependency_install",
+      "unit_tests",
+      "typecheck",
+      "lint",
+      "build",
+      "legacy_db_adapter",
+      "alternative_gate_regressions",
+      "accounting_native_link",
+      "cross_system_integration_acceptance"
+    ],
+    "P08": [
+      "foundation",
+      "shared_integrity",
+      "stage_gate_regressions",
+      "authority_holds",
+      "dependency_install",
+      "unit_tests",
+      "typecheck",
+      "lint",
+      "build",
+      "legacy_db_adapter",
+      "alternative_gate_regressions",
+      "accounting_native_link",
+      "quota_drift_acceptance"
+    ],
+    "P09": [
+      "foundation",
+      "shared_integrity",
+      "stage_gate_regressions",
+      "authority_holds",
+      "dependency_install",
+      "unit_tests",
+      "typecheck",
+      "lint",
+      "build",
+      "legacy_db_adapter",
+      "alternative_gate_regressions",
+      "accounting_native_link",
+      "service_uid_isolation",
+      "real_queue_and_api_bypass",
+      "wms_ui_native_e2e",
+      "fresh_full_engine_build_upgrade",
+      "cross_system_integration_acceptance",
+      "synthetic_migration_reconciliation"
+    ]
+  },
+  "tests": [
+    {
+      "id": "foundation",
+      "tier": "foundation",
+      "command": [
+        "node",
+        "scripts/wms/foundation-check.mjs"
+      ],
+      "timeout": 600
+    },
+    {
+      "id": "shared_integrity",
+      "tier": "captured_evidence",
+      "command": [
+        "{python}",
+        "ci/check_shared_core.py"
+      ],
+      "timeout": 600
+    },
+    {
+      "id": "stage_gate_regressions",
+      "tier": "foundation",
+      "command": [
+        "node",
+        "--test",
+        "tests/foundation/architecture-decision.test.mjs",
+        "tests/foundation/gates.test.mjs"
+      ],
+      "timeout": 600,
+      "min_executed_tests": 1
+    },
+    {
+      "id": "authority_holds",
+      "tier": "foundation",
+      "command": [
+        "{python}",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/shared_core",
+        "-v"
+      ],
+      "timeout": 600,
+      "min_executed_tests": 1
+    },
+    {
+      "id": "dependency_install",
+      "tier": "dependencies",
+      "command": [
+        "{bun}",
+        "install",
+        "--frozen-lockfile",
+        "--ignore-scripts"
+      ],
+      "timeout": 1200
+    },
+    {
+      "id": "unit_tests",
+      "tier": "unit",
+      "command": [
+        "{bun}",
+        "run",
+        "test:unit"
+      ],
+      "timeout": 600,
+      "min_executed_tests": 1
+    },
+    {
+      "id": "typecheck",
+      "tier": "typescript",
+      "command": [
+        "{bun}",
+        "run",
+        "typecheck"
+      ],
+      "timeout": 600
+    },
+    {
+      "id": "lint",
+      "tier": "lint",
+      "command": [
+        "{bun}",
+        "run",
+        "lint"
+      ],
+      "timeout": 600
+    },
+    {
+      "id": "build",
+      "tier": "build",
+      "command": [
+        "{bun}",
+        "run",
+        "build"
+      ],
+      "timeout": 1200
+    },
+    {
+      "id": "legacy_db_adapter",
+      "tier": "database",
+      "command": [
+        "node",
+        "scripts/wms/db-check.mjs"
+      ],
+      "timeout": 600,
+      "blocked_exit_codes": [
+        2
+      ]
+    },
+    {
+      "id": "alternative_gate_regressions",
+      "tier": "foundation",
+      "command": [
+        "{python}",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "verification/tests",
+        "-v"
+      ],
+      "timeout": 600,
+      "min_executed_tests": 1
+    },
+    {
+      "id": "accounting_native_link",
+      "tier": "linked_native_evidence",
+      "linked_accounting": true
+    },
+    {
+      "id": "service_uid_isolation",
+      "tier": "security",
+      "reason": "Distinct non-root UIDs/mounts unavailable in this executor; remains G1"
+    },
+    {
+      "id": "real_queue_and_api_bypass",
+      "tier": "integration",
+      "reason": "Real RQ lifecycle/mutation/direct endpoint closure unimplemented; remains G2"
+    },
+    {
+      "id": "wms_ui_native_e2e",
+      "tier": "integration",
+      "reason": "Full current WMS UI/native bundle parent/dispatch/cancel races unimplemented; remains G3"
+    },
+    {
+      "id": "dutch_accountant_signoff",
+      "tier": "fiscal_review",
+      "reason": "Qualified accountant has not reviewed/signed policy; remains G4"
+    },
+    {
+      "id": "fresh_full_engine_build_upgrade",
+      "tier": "operations",
+      "reason": "Fresh complete ERPNext asset/framework/business-schema and restore/load acceptance not implemented; remains G5"
+    },
+    {
+      "id": "live_integrations",
+      "tier": "live",
+      "reason": "No authorized live bank/tax/bol/Peppol mutation or live acceptance environment"
+    },
+    {
+      "id": "fresh_engine_bootstrap",
+      "tier": "operations",
+      "reason": "Fresh pinned ERPNext/site/service bootstrap with isolated identities is not implemented by seeded replay"
+    },
+    {
+      "id": "native_fiscal_enforcement",
+      "tier": "native_fiscal",
+      "reason": "Accountant goldens and direct native posting enforcement not implemented"
+    },
+    {
+      "id": "native_finance_workflow",
+      "tier": "native_financial",
+      "reason": "Complete native invoice/credit/APAR/bank-import workflow acceptance beyond prototypes not implemented"
+    },
+    {
+      "id": "stock_valuation_acceptance",
+      "tier": "native_valuation",
+      "reason": "Full landed/backdated/returns/assets/COGS/GL acceptance for Surooh workflows not implemented"
+    },
+    {
+      "id": "cross_system_integration_acceptance",
+      "tier": "integration",
+      "reason": "Marketplace/Warehouse/SAM/IC real implementation and fake-provider recovery acceptance not implemented"
+    },
+    {
+      "id": "synthetic_migration_reconciliation",
+      "tier": "migration",
+      "reason": "Complete synthetic source disposition/mapping/replay/reconciliation not implemented"
+    },
+    {
+      "id": "complete_financial_acceptance",
+      "tier": "acceptance",
+      "reason": "Full financial acceptance matrix/reports not executed on shipped Surooh app"
+    },
+    {
+      "id": "bundle_full_reservation_acceptance",
+      "tier": "native_stock",
+      "reason": "Nested/serial/batch/order lifecycle and cancel/dispatch full bundle adapter acceptance not implemented"
+    },
+    {
+      "id": "warehouse_receipt_count_acceptance",
+      "tier": "native_stock",
+      "reason": "Retained WMS UI/native receipt/count/location acceptance not implemented"
+    },
+    {
+      "id": "return_inspection_transfer_acceptance",
+      "tier": "native_stock",
+      "reason": "Full authorized native inspection/returns/transfer acceptance not implemented"
+    },
+    {
+      "id": "quota_drift_acceptance",
+      "tier": "integration",
+      "reason": "Full scoped native quota/projection-lag/drift acceptance not implemented"
+    }
+  ],
+  "not_applicable": {},
+  "stage_review_policy": "Phase-specific technical requirements plus existing predecessor/owner/accountant gates. Live provider operations remain separately prohibited, not a prerequisite to run preparation."
+}

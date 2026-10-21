@@ -1,0 +1,15 @@
+{
+  "source": "explicit current owner message in this conversation; transcription, not a fabricated GitHub approval",
+  "reviewed_accounting_commit": "0f5e6ece5a06f3807255d5e250705eb331189c3f",
+  "reviewed_wms_commit": "35232d0a5015bcc39e7b91604d17a5259cafc464",
+  "direction_status": "APPROVED_PREPARATION_ONLY",
+  "engine": "ERPNext16 accounting, stock movements, valuation and COGS; independent Surooh app",
+  "legal_company_boundary": "independent sites, databases, storage and service identities; controlled read group reporting",
+  "production_adoption": false,
+  "codex_start_authorized": false,
+  "merge_authorized": false,
+  "production_deploy_authorized": false,
+  "real_data_migration_authorized": false,
+  "admin_or_billing_change_authorized": false,
+  "owner_quote": "أوافق مبدئياً على الاتجاه المعماري المشترك: ERPNext 16 للمحاسبة والحركات الأساسية وتقييم المخزون وCOGS، مع إضافة Surooh مستقلة والحفاظ على واجهات WMS ومنطق bol والباقات الموجود."
+}

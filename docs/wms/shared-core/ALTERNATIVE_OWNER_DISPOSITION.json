@@ -1,0 +1,15 @@
+{
+  "source": "explicit current owner instruction",
+  "decision": "Use independent local/isolated alternative verification because GitHub Actions billing cannot currently be resolved",
+  "g0": "HOSTED_CI_BLOCKED \u2014 ALTERNATIVE_VERIFICATION_REQUIRED",
+  "github_source_of_truth": true,
+  "attempt_billing_repair": false,
+  "manual_actions_rerun": false,
+  "new_paid_services": false,
+  "automatic_phase_completion": false,
+  "codex_start_authorized": false,
+  "merge_authorized": false,
+  "deploy_authorized": false,
+  "real_data_migration_authorized": false,
+  "other_security_fiscal_integration_gates_unchanged": true
+}

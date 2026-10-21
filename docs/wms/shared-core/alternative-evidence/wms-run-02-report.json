@@ -1,0 +1,446 @@
+{
+  "schema_version": 1,
+  "component": "wms",
+  "source": {
+    "commit_sha": "e0ba96bab66a43ba580fb13aec3675ea36def932",
+    "tree_sha": "fc9ff495070f5327548a9c385abadd49cb6eccfa",
+    "dirty_tracked": false
+  },
+  "started_at_utc": "2026-10-21T23:26:52.301141+00:00",
+  "environment": {
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "uid": 0,
+    "env_policy": "allowlisted variables only; no inherited provider/DB/OAuth credentials",
+    "node": {
+      "version": "v24.19.0",
+      "exit_code": 0
+    },
+    "bun": {
+      "version": "1.3.13",
+      "exit_code": 0
+    },
+    "tools_python": {
+      "version": "Python 3.14.8",
+      "exit_code": 0
+    },
+    "tools_distributions": {
+      "ruff": "0.15.6",
+      "build": "1.4.0",
+      "flit_core": "3.12.0",
+      "packaging": "26.3",
+      "pyproject_hooks": "1.3.3"
+    }
+  },
+  "g0": "HOSTED_CI_BLOCKED \u2014 ALTERNATIVE_VERIFICATION_REQUIRED",
+  "codex_start_authorized": false,
+  "phase_completion_authorized": false,
+  "plan_sha256": "82338aef84876dd298374d33a71917f305b75037acd89b1d2856c44d8ea08023",
+  "tests": [
+    {
+      "id": "foundation",
+      "tier": "foundation",
+      "command": [
+        "node",
+        "scripts/wms/foundation-check.mjs"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.037,
+      "log": "logs/foundation.log",
+      "log_sha256": "16c50c626e196c38ebd952f76379fece6eeec304782e924c399b01c14f00fa6d",
+      "raw_output_sha256": "16c50c626e196c38ebd952f76379fece6eeec304782e924c399b01c14f00fa6d"
+    },
+    {
+      "id": "shared_integrity",
+      "tier": "captured_evidence",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "ci/check_shared_core.py"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.041,
+      "log": "logs/shared_integrity.log",
+      "log_sha256": "2a3af38e90315db7dfaeedfa0940a409fdcf4397d377308140e1ab2c082dafbf",
+      "raw_output_sha256": "2a3af38e90315db7dfaeedfa0940a409fdcf4397d377308140e1ab2c082dafbf"
+    },
+    {
+      "id": "stage_gate_regressions",
+      "tier": "foundation",
+      "command": [
+        "node",
+        "--test",
+        "tests/foundation/architecture-decision.test.mjs",
+        "tests/foundation/gates.test.mjs"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.168,
+      "log": "logs/stage_gate_regressions.log",
+      "log_sha256": "5a6ac721267b0a2d7a5fdeec39e4c36350b6731ed8dfd8dd3664e3bc1fdcd577",
+      "raw_output_sha256": "5a6ac721267b0a2d7a5fdeec39e4c36350b6731ed8dfd8dd3664e3bc1fdcd577",
+      "executed_test_count": 19
+    },
+    {
+      "id": "authority_holds",
+      "tier": "foundation",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/shared_core",
+        "-v"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.054,
+      "log": "logs/authority_holds.log",
+      "log_sha256": "3b7f57f9fc77bd691c11521ace10c4d1dab2a7b5896496a24166a17063b89da4",
+      "raw_output_sha256": "3b7f57f9fc77bd691c11521ace10c4d1dab2a7b5896496a24166a17063b89da4",
+      "executed_test_count": 6
+    },
+    {
+      "id": "dependency_install",
+      "tier": "dependencies",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "install",
+        "--frozen-lockfile",
+        "--ignore-scripts"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 1200,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.093,
+      "log": "logs/dependency_install.log",
+      "log_sha256": "454d4d8d360dbdb0d1a37bcd823a35e59096dc411b5a6e123ee8fa2c66136bbf",
+      "raw_output_sha256": "454d4d8d360dbdb0d1a37bcd823a35e59096dc411b5a6e123ee8fa2c66136bbf"
+    },
+    {
+      "id": "unit_tests",
+      "tier": "unit",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "run",
+        "test:unit"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.162,
+      "log": "logs/unit_tests.log",
+      "log_sha256": "1973108a52ec4b76500dd01a2ebf8324bebe986880b576a3d768efca700c9620",
+      "raw_output_sha256": "1973108a52ec4b76500dd01a2ebf8324bebe986880b576a3d768efca700c9620",
+      "executed_test_count": 91
+    },
+    {
+      "id": "typecheck",
+      "tier": "typescript",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "FAIL",
+      "exit_code": 2,
+      "duration_seconds": 7.591,
+      "log": "logs/typecheck.log",
+      "log_sha256": "74fb632065fdeadd7dd60e027e12e150b1e8162103bd1bd0ef37b869c4b43377",
+      "raw_output_sha256": "74fb632065fdeadd7dd60e027e12e150b1e8162103bd1bd0ef37b869c4b43377"
+    },
+    {
+      "id": "lint",
+      "tier": "lint",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "run",
+        "lint"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "FAIL",
+      "exit_code": 1,
+      "duration_seconds": 6.944,
+      "log": "logs/lint.log",
+      "log_sha256": "0be59d7392366c61dfc67999ebc7085e193dfd1019004642b9cea23162898450",
+      "raw_output_sha256": "f8c20ab7ad6028ba8907070be216bca2113f223fc5618230c00f783b21e11c00"
+    },
+    {
+      "id": "build",
+      "tier": "build",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "run",
+        "build"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 1200,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 5.251,
+      "log": "logs/build.log",
+      "log_sha256": "2553da000e9a2d3917f2af92eccc9274ac2d70aee83258c9b1895884cd1ecbd9",
+      "raw_output_sha256": "2553da000e9a2d3917f2af92eccc9274ac2d70aee83258c9b1895884cd1ecbd9"
+    },
+    {
+      "id": "legacy_db_adapter",
+      "tier": "database",
+      "command": [
+        "node",
+        "scripts/wms/db-check.mjs"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "BLOCKED",
+      "exit_code": 2,
+      "duration_seconds": 0.042,
+      "log": "logs/legacy_db_adapter.log",
+      "log_sha256": "8b4ac741b830fe120d625b40b767c63b242080f75eea4b243fd0171edc974c88",
+      "raw_output_sha256": "8b4ac741b830fe120d625b40b767c63b242080f75eea4b243fd0171edc974c88"
+    },
+    {
+      "id": "alternative_gate_regressions",
+      "tier": "foundation",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "verification/tests",
+        "-v"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.063,
+      "log": "logs/alternative_gate_regressions.log",
+      "log_sha256": "e164ef0e38821a02dca732ce90eb4967853faf53b765687c24e850a49273e6f6",
+      "raw_output_sha256": "e164ef0e38821a02dca732ce90eb4967853faf53b765687c24e850a49273e6f6",
+      "executed_test_count": 14
+    },
+    {
+      "id": "accounting_native_link",
+      "tier": "linked_native_evidence",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "verification/link_native.py",
+        "--report",
+        "/workspace/scratch/930c38487b1a/alternative-evidence/accounting-run-02/report.json",
+        "--output",
+        "/workspace/scratch/930c38487b1a/alternative-evidence/wms-run-02/artifacts/accounting-native-link.json",
+        "--expected-sha",
+        "a9400f6f4b9066f5487f16cd45268728920e5672"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.039,
+      "log": "logs/accounting_native_link.log",
+      "log_sha256": "cebbdea112b34168a51bb9ac15af7f3446b5bdceb500b6d6ccebbb6f881a3abd",
+      "raw_output_sha256": "cebbdea112b34168a51bb9ac15af7f3446b5bdceb500b6d6ccebbb6f881a3abd"
+    },
+    {
+      "id": "service_uid_isolation",
+      "tier": "security",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Distinct non-root UIDs/mounts unavailable in this executor; remains G1"
+    },
+    {
+      "id": "real_queue_and_api_bypass",
+      "tier": "integration",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Real RQ lifecycle/mutation/direct endpoint closure unimplemented; remains G2"
+    },
+    {
+      "id": "wms_ui_native_e2e",
+      "tier": "integration",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Full current WMS UI/native bundle parent/dispatch/cancel races unimplemented; remains G3"
+    },
+    {
+      "id": "dutch_accountant_signoff",
+      "tier": "fiscal_review",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Qualified accountant has not reviewed/signed policy; remains G4"
+    },
+    {
+      "id": "fresh_full_engine_build_upgrade",
+      "tier": "operations",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Fresh complete ERPNext asset/framework/business-schema and restore/load acceptance not implemented; remains G5"
+    },
+    {
+      "id": "live_integrations",
+      "tier": "live",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "No authorized live bank/tax/bol/Peppol mutation or live acceptance environment"
+    },
+    {
+      "id": "fresh_engine_bootstrap",
+      "tier": "operations",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Fresh pinned ERPNext/site/service bootstrap with isolated identities is not implemented by seeded replay"
+    },
+    {
+      "id": "native_fiscal_enforcement",
+      "tier": "native_fiscal",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Accountant goldens and direct native posting enforcement not implemented"
+    },
+    {
+      "id": "native_finance_workflow",
+      "tier": "native_financial",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Complete native invoice/credit/APAR/bank-import workflow acceptance beyond prototypes not implemented"
+    },
+    {
+      "id": "stock_valuation_acceptance",
+      "tier": "native_valuation",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Full landed/backdated/returns/assets/COGS/GL acceptance for Surooh workflows not implemented"
+    },
+    {
+      "id": "cross_system_integration_acceptance",
+      "tier": "integration",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Marketplace/Warehouse/SAM/IC real implementation and fake-provider recovery acceptance not implemented"
+    },
+    {
+      "id": "synthetic_migration_reconciliation",
+      "tier": "migration",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Complete synthetic source disposition/mapping/replay/reconciliation not implemented"
+    },
+    {
+      "id": "complete_financial_acceptance",
+      "tier": "acceptance",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Full financial acceptance matrix/reports not executed on shipped Surooh app"
+    },
+    {
+      "id": "bundle_full_reservation_acceptance",
+      "tier": "native_stock",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Nested/serial/batch/order lifecycle and cancel/dispatch full bundle adapter acceptance not implemented"
+    },
+    {
+      "id": "warehouse_receipt_count_acceptance",
+      "tier": "native_stock",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Retained WMS UI/native receipt/count/location acceptance not implemented"
+    },
+    {
+      "id": "return_inspection_transfer_acceptance",
+      "tier": "native_stock",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Full authorized native inspection/returns/transfer acceptance not implemented"
+    },
+    {
+      "id": "quota_drift_acceptance",
+      "tier": "integration",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Full scoped native quota/projection-lag/drift acceptance not implemented"
+    }
+  ],
+  "open_gate_policy": "G1-G6 remain independently required; local evidence is not hosted CI or production approval",
+  "input_hashes": {
+    "bun.lock": "3712617b3e818ec1525fb11a8165960ce4af6c70731a1bf47a38fcdcff3efbe2",
+    "verification/tool-versions.json": "735b2d4c62ec29de1829f67f26b0df411bf915d310004a10a64a9162e35ef234",
+    "contracts/shared-core-authority.json": "01c792be997043eea23630d436242415bf55ac8543edfe17fe3919bf81d2c8b6"
+  },
+  "source_after": {
+    "commit_sha": "e0ba96bab66a43ba580fb13aec3675ea36def932",
+    "tree_sha": "fc9ff495070f5327548a9c385abadd49cb6eccfa",
+    "dirty_tracked": true
+  },
+  "tracked_diff": "src/routeTree.gen.ts | 45 ++++++++++++++++++++++++++++++++++++++++++++-\n 1 file changed, 44 insertions(+), 1 deletion(-)",
+  "finished_at_utc": "2026-10-21T23:27:12.920024+00:00",
+  "summary": {
+    "PASS": 9,
+    "FAIL": 2,
+    "BLOCKED": 18
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/accounting-native-link.json",
+      "sha256": "8db2c80c31528ae627a9ecf68e24f6fcbfea58a064bc4ae47a3bc9c7cf943a50"
+    },
+    {
+      "path": "artifacts/build-output-manifest.json",
+      "sha256": "204fea9c846e3c62a85bf7b73b0fb9d69d0d56ccfb415850c0038274377509ea"
+    },
+    {
+      "path": "artifacts/linked-isolation-results.json",
+      "sha256": "d3dde5f3e36e4582c2a70be0a514d37787462fddcec7779b433765d6397f03c8"
+    },
+    {
+      "path": "artifacts/linked-native-results.json",
+      "sha256": "851b1595d29b5ec5b6f193bfc23cb91f235aef54e36da070c1f66389846b9d81"
+    },
+    {
+      "path": "artifacts/linked-runtime.json",
+      "sha256": "94f5dfac079c3daa232004acc7eb7d5975b970dd462217782e4910034ae6de14"
+    },
+    {
+      "path": "artifacts/tracked-source.patch",
+      "sha256": "0a0d3584956e0af45af2e5e9b68ff6b371f0f01b60087e83fa52fb7fab52650f"
+    }
+  ],
+  "evidence_review": {
+    "decision": null,
+    "reviewer": null,
+    "review_reference": null
+  }
+}

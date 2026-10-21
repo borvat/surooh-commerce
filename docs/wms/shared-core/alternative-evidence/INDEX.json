@@ -1,0 +1,109 @@
+{
+  "component": "wms",
+  "g0": "HOSTED_CI_BLOCKED \u2014 ALTERNATIVE_VERIFICATION_REQUIRED",
+  "current_tested_source": "e0ba96bab66a43ba580fb13aec3675ea36def932",
+  "hosted_ci_passed": false,
+  "phase_complete": false,
+  "review_required": true,
+  "runs": [
+    {
+      "run": "01",
+      "source": {
+        "commit_sha": "53bac96f790c152361a8e449d6db7d14fa95815c",
+        "tree_sha": "8df7434bd6625c366883518bcbca72bca5b86acb",
+        "dirty_tracked": false
+      },
+      "source_after": {
+        "commit_sha": "53bac96f790c152361a8e449d6db7d14fa95815c",
+        "tree_sha": "8df7434bd6625c366883518bcbca72bca5b86acb",
+        "dirty_tracked": true
+      },
+      "summary": {
+        "PASS": 8,
+        "FAIL": 3,
+        "BLOCKED": 7
+      },
+      "archive": "wms-run-01.tar.gz",
+      "archive_sha256": "95d20171c2c4423ef234b6b3208c955998c50c0b3f8c2896c1f81b41096406f4",
+      "archive_bytes": 143160,
+      "files": [
+        {
+          "path": "wms-run-01-report.json",
+          "sha256": "b61524585f0603c769ee3e69e9633fa7cd3c5c26d9fce1fd54ed521c5b92bd35"
+        },
+        {
+          "path": "wms-run-01-evidence-manifest.json",
+          "sha256": "35c197aa60c3755ec599535d703f2935ae6d14d50ff14af1dad53631c901319f"
+        },
+        {
+          "path": "wms-run-01-gate-PREPARATION.json",
+          "sha256": "979d28c3f9c5a497a398684eb95f4e4c5372039096797bada6fa76b35ce83df0"
+        },
+        {
+          "path": "wms-run-01-gate-P01.json",
+          "sha256": "3cc2a0137ef45655881c879e8ad6679f740cdaa64a54673bdbb57737ad126ba9"
+        },
+        {
+          "path": "wms-run-01-run-invocation.json",
+          "sha256": "83c4dc5920c09a21e24383914058a045b05801f6b20effda2391bc39cc6be559"
+        },
+        {
+          "path": "wms-run-01-gate-invocations.json",
+          "sha256": "bc8b5e883ec86a6251c260ffaaf51545f9abd07bdd781cdefedc206c47c54fc2"
+        }
+      ]
+    },
+    {
+      "run": "02",
+      "source": {
+        "commit_sha": "e0ba96bab66a43ba580fb13aec3675ea36def932",
+        "tree_sha": "fc9ff495070f5327548a9c385abadd49cb6eccfa",
+        "dirty_tracked": false
+      },
+      "source_after": {
+        "commit_sha": "e0ba96bab66a43ba580fb13aec3675ea36def932",
+        "tree_sha": "fc9ff495070f5327548a9c385abadd49cb6eccfa",
+        "dirty_tracked": true
+      },
+      "summary": {
+        "PASS": 9,
+        "FAIL": 2,
+        "BLOCKED": 18
+      },
+      "archive": "wms-run-02.tar.gz",
+      "archive_sha256": "777aa060f702d3e177bfdd990286c22111dabddf5da9705a8a10c93369d2f03f",
+      "archive_bytes": 155420,
+      "files": [
+        {
+          "path": "wms-run-02-report.json",
+          "sha256": "d5bc29dec55ce1625f3c8121552d06fee7d13e2fb4d1f4c6fcb70378d4b7f29d"
+        },
+        {
+          "path": "wms-run-02-evidence-manifest.json",
+          "sha256": "7c19a27555dbee31efbefe306c80a00133f6a76593139fa9f66b801389dafc87"
+        },
+        {
+          "path": "wms-run-02-gate-PREPARATION.json",
+          "sha256": "eed7d295027a002e5bdd5d6bf080886eb01158fefd84663a23fb5f2487ebbcfd"
+        },
+        {
+          "path": "wms-run-02-gate-P01.json",
+          "sha256": "a64c46d6ff7690cf62b6ea4afb580a9e4d122c64a4cf4d45b4e67093056b23e5"
+        },
+        {
+          "path": "wms-run-02-run-invocation.json",
+          "sha256": "e5e047762e77d7bfd3712a7dc3b93b30451fdbcc4a0c08ce5ec5a4b3f2b78ece"
+        },
+        {
+          "path": "wms-run-02-gate-invocations.json",
+          "sha256": "09d1d64c6c1e087863c03fe790a117514adfe8d8dda7a42ef0c77906471843ab"
+        }
+      ]
+    }
+  ],
+  "alternative_path": "IMPLEMENTED_AND_EXECUTED",
+  "hosted_ci": "BLOCKED",
+  "preparation_technical_result": "BLOCKED",
+  "overall_g0_acceptance": "BLOCKED",
+  "codex_start_authorized": false
+}

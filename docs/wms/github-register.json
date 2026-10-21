@@ -5,7 +5,7 @@
       "phase": "P01",
       "number": 3,
       "url": "https://github.com/borvat/surooh-commerce/issues/3",
-      "title": "[WMS P01] Disposable database and reproducible baseline",
+      "title": "[WMS P01] ERPNext-backed reproducible WMS baseline",
       "milestone_number": 1,
       "milestone_url": "https://github.com/borvat/surooh-commerce/milestone/1"
     },
@@ -13,7 +13,7 @@
       "phase": "P02",
       "number": 4,
       "url": "https://github.com/borvat/surooh-commerce/issues/4",
-      "title": "[WMS P02] Explicit company scope and tenant security",
+      "title": "[WMS P02] Company-scoped facade and delegated worker security",
       "milestone_number": 2,
       "milestone_url": "https://github.com/borvat/surooh-commerce/milestone/2"
     },
@@ -21,7 +21,7 @@
       "phase": "P03",
       "number": 5,
       "url": "https://github.com/borvat/surooh-commerce/issues/5",
-      "title": "[WMS P03] Reservations, ATP and shared BOM correctness",
+      "title": "[WMS P03] Native component reservations and bundle adapter",
       "milestone_number": 3,
       "milestone_url": "https://github.com/borvat/surooh-commerce/milestone/3"
     },
@@ -29,7 +29,7 @@
       "phase": "P04",
       "number": 6,
       "url": "https://github.com/borvat/surooh-commerce/issues/6",
-      "title": "[WMS P04] Receiving, locations and stock control",
+      "title": "[WMS P04] Native receiving, locations and counts",
       "milestone_number": 4,
       "milestone_url": "https://github.com/borvat/surooh-commerce/milestone/4"
     },
@@ -37,7 +37,7 @@
       "phase": "P05",
       "number": 7,
       "url": "https://github.com/borvat/surooh-commerce/issues/7",
-      "title": "[WMS P05] Persisted picking, packing and dispatch",
+      "title": "[WMS P05] Native picking, packing and dispatch",
       "milestone_number": 5,
       "milestone_url": "https://github.com/borvat/surooh-commerce/milestone/5"
     },
@@ -45,7 +45,7 @@
       "phase": "P06",
       "number": 8,
       "url": "https://github.com/borvat/surooh-commerce/issues/8",
-      "title": "[WMS P06] Inspected returns and conserved transfers",
+      "title": "[WMS P06] Native inspected returns and transfers",
       "milestone_number": 6,
       "milestone_url": "https://github.com/borvat/surooh-commerce/milestone/6"
     },
@@ -53,7 +53,7 @@
       "phase": "P07",
       "number": 9,
       "url": "https://github.com/borvat/surooh-commerce/issues/9",
-      "title": "[WMS P07] Read-only channels, Accounting and SAM contracts",
+      "title": "[WMS P07] Shared channel/inbox/outbox/Accounting/SAM contracts",
       "milestone_number": 7,
       "milestone_url": "https://github.com/borvat/surooh-commerce/milestone/7"
     },
@@ -61,7 +61,7 @@
       "phase": "P08",
       "number": 10,
       "url": "https://github.com/borvat/surooh-commerce/issues/10",
-      "title": "[WMS P08] Quota simulation and operational observability",
+      "title": "[WMS P08] Read-only quota simulation and drift observability",
       "milestone_number": 8,
       "milestone_url": "https://github.com/borvat/surooh-commerce/milestone/8"
     },
@@ -69,7 +69,7 @@
       "phase": "P09",
       "number": 11,
       "url": "https://github.com/borvat/surooh-commerce/issues/11",
-      "title": "[WMS P09] Release evidence and controlled readiness review",
+      "title": "[WMS P09] Joint synthetic release evidence and readiness review",
       "milestone_number": 9,
       "milestone_url": "https://github.com/borvat/surooh-commerce/milestone/9"
     }
@@ -83,7 +83,9 @@
   "architecture_decision_issue": {
     "number": 15,
     "url": "https://github.com/borvat/surooh-commerce/issues/15",
-    "status": "open-blocking",
+    "status": "direction-approved-preparation-only; technical gates open",
     "milestone_number": 1
-  }
+  },
+  "shared_core_authority": "contracts/shared-core-authority.json",
+  "joint_plan": "docs/wms/shared-core/plan.json"
 }

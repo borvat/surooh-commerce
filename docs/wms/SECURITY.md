@@ -1,3 +1,5 @@
+> Current direction: owner approved shared ERPNext16 accounting/stock/valuation for preparation only. [Shared authority](shared-core/AUTHORITY.md) and [phase alignment](shared-core/PHASE_ALIGNMENT.md) supersede any historical Supabase/Tryton writable-ledger instructions below. Current source/production remains unchanged. Codex, merge, deploy and real migration remain held.
+
 # Company isolation, permissions and audit
 
 Use an explicit active company and warehouse/account scope validated on the server for every command and query. Current `current_org_id()` picks the first organization and is insufficient for deliberate multi-company operation. RLS membership may expose multiple memberships; UI filters and cache keys must still select one company. A user belonging to two companies cannot mix item A with warehouse B.

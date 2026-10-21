@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "architecture_id": "SUROOH-SHARED-CORE-001",
+  "authority_sha256": "01c792be997043eea23630d436242415bf55ac8543edfe17fe3919bf81d2c8b6",
+  "execution_authorized": false,
+  "production_authority_changed": false,
+  "approval_protocol": "Every stage needs separate explicit owner start approval for both repository scopes, reviewed exact predecessor SHAs and evidence hashes; no automatic next stage/merge/deploy",
+  "waves": [
+    {
+      "id": "C0",
+      "scope": "This joint preparation",
+      "accounting": [
+        "M0"
+      ],
+      "wms": [
+        "P00"
+      ],
+      "depends_on": [],
+      "acceptance": "Direction recorded; identical authority contract, explicit gaps and Draft PRs; no implementation start"
+    },
+    {
+      "id": "C1",
+      "scope": "Pinned native engine, company boundaries, core inbox/outbox and worker policy",
+      "accounting": [
+        "M1"
+      ],
+      "wms": [
+        "P01",
+        "P02"
+      ],
+      "depends_on": [
+        "C0"
+      ],
+      "acceptance": "G0 independent verification evidence reviewed; two independent service/storage/DB identities; negative HTTP/file/report/export/job/backup tests; durable command retries/crash recovery; WMS baseline retained"
+    },
+    {
+      "id": "C2",
+      "scope": "Accountant fiscal policy and native billing/APAR",
+      "accounting": [
+        "M2",
+        "M3"
+      ],
+      "wms": [],
+      "depends_on": [
+        "C1"
+      ],
+      "acceptance": "Accountant goldens, native policy enforcement, credits/allocations/bank import reconciliation; no bank/tax actions"
+    },
+    {
+      "id": "C3",
+      "scope": "Shared ERPNext WMS commands, atomic bundles, native stock and cost",
+      "accounting": [
+        "M4"
+      ],
+      "wms": [
+        "P03",
+        "P04",
+        "P05",
+        "P06"
+      ],
+      "depends_on": [
+        "C2"
+      ],
+      "acceptance": "Whole-component reserve/cancel/ship races, receipt→dispatch→quarantine/inspection/transfer, quantity/value/COGS/GL tie-outs; no legacy writer on target fixtures"
+    },
+    {
+      "id": "C4",
+      "scope": "Marketplace/Warehouse/SAM and cross-site integration",
+      "accounting": [
+        "M5"
+      ],
+      "wms": [
+        "P07",
+        "P08"
+      ],
+      "depends_on": [
+        "C3"
+      ],
+      "acceptance": "Versioned scoped contracts, durable delivery/replay, cross-site intercompany saga and clearing; SAM read/proposal; bol writes remain disabled"
+    },
+    {
+      "id": "C5",
+      "scope": "Synthetic migration, operations and readiness evidence",
+      "accounting": [
+        "M6",
+        "M7"
+      ],
+      "wms": [
+        "P09"
+      ],
+      "depends_on": [
+        "C4"
+      ],
+      "acceptance": "100% synthetic disposition; restore, app/framework upgrade+rollback, load/security and owner/accountant review; no cutover"
+    }
+  ],
+  "within_wave_order": "Existing M1–M7 and P01–P09 chains remain sequential. C1: Accounting M1 native boundary accepted before WMS P01/P02; C3: WMS P03–P06 and Accounting M4 are jointly reviewed slices, never require M4 acceptance before its own WMS implementation slices. C4 similarly reviews M5 with P07/P08. Each slice gets explicit start approval; owner may approve only one named slice. No circular prerequisites.",
+  "rollback": "Close/revert proposal branches now; future waves discard isolated fixtures or stop consumers and reconcile native test reversals. Current production authorities remain unchanged.",
+  "verification_policy": {
+    "g0": "HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED",
+    "runner": "verification/run.py",
+    "gate": "verification/gate.py",
+    "hosted_ci": "BLOCKED",
+    "alternative_required": true,
+    "human_evidence_review_required": true,
+    "automatic_phase_completion": false
+  }
+}

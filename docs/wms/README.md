@@ -1,3 +1,5 @@
+> Current direction: owner approved shared ERPNext16 accounting/stock/valuation for preparation only. [Shared authority](shared-core/AUTHORITY.md) and [phase alignment](shared-core/PHASE_ALIGNMENT.md) supersede any historical Supabase/Tryton writable-ledger instructions below. Current source/production remains unchanged. Codex, merge, deploy and real migration remain held.
+
 # Surooh WMS — Engineering Foundation & Execution Readiness
 
 Status: **foundation proposed; Codex execution NOT authorized**. No stage is running. This directory is the engineering control surface, not a claim that the WMS is production ready.

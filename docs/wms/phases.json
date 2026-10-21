@@ -8,7 +8,7 @@
   "phases": [
     {
       "id": "P01",
-      "title": "Disposable database and reproducible baseline",
+      "title": "ERPNext-backed reproducible WMS baseline",
       "milestone": "WMS M01 \u2014 Disposable database and reproducible baseline",
       "dependencies": [],
       "audit_backlog": [
@@ -23,21 +23,23 @@
         "typecheck",
         "build",
         "lint",
+        "native-clean-bootstrap",
+        "authority-contract-parity",
         "baseline-reconciliation",
-        "schema-rebuild",
-        "sql-acceptance",
-        "database-isolation"
+        "isolated-ci"
       ],
       "files": [
-        "supabase/migrations/",
-        "tests/db/",
-        "scripts/wms/db-check.mjs",
-        "src/integrations/supabase/types.ts"
-      ]
+        "contracts/shared-core-authority.json",
+        "src/lib/ (retained UI/identity contract adapters only)",
+        "tests/ (native integration fixtures; separate runner)",
+        "borvat/surooh-accounting:surooh_accounting/ (sole future backend commands)"
+      ],
+      "joint_wave": "C1",
+      "verification_path": "local-isolated-alternative; independent evidence review"
     },
     {
       "id": "P02",
-      "title": "Explicit company scope and tenant security",
+      "title": "Company-scoped facade and delegated worker security",
       "milestone": "WMS M02 \u2014 Explicit company scope and tenant security",
       "dependencies": [
         "P01"
@@ -53,21 +55,23 @@
         "typecheck",
         "build",
         "lint",
-        "tenant-isolation",
-        "cross-owner-fk",
-        "role-revocation"
+        "native-service-isolation",
+        "worker-execution-auth",
+        "role-revocation",
+        "routing-denials"
       ],
       "files": [
-        "src/lib/inventory.ts",
-        "src/lib/auth.ts",
-        "src/integrations/supabase/",
-        "supabase/migrations/",
-        "tests/db/"
-      ]
+        "contracts/shared-core-authority.json",
+        "src/lib/ (retained UI/identity contract adapters only)",
+        "tests/ (native integration fixtures; separate runner)",
+        "borvat/surooh-accounting:surooh_accounting/ (sole future backend commands)"
+      ],
+      "joint_wave": "C1",
+      "verification_path": "local-isolated-alternative; independent evidence review"
     },
     {
       "id": "P03",
-      "title": "Reservations, ATP and shared BOM correctness",
+      "title": "Native component reservations and bundle adapter",
       "milestone": "WMS M03 \u2014 Reservations, ATP and shared BOM correctness",
       "dependencies": [
         "P02"
@@ -84,24 +88,23 @@
         "typecheck",
         "build",
         "lint",
-        "shared-bom",
-        "concurrent-reservations",
-        "shortage-atomicity",
-        "cancel-replay",
-        "bom-snapshot",
-        "site-availability"
+        "native-bundle-race",
+        "multi-line-shortage-rollback",
+        "cancel-dispatch-race",
+        "bom-version-replay"
       ],
       "files": [
-        "src/lib/inventory.ts",
-        "src/lib/unified-stock.ts",
-        "src/components/app/bundle-view.tsx",
-        "supabase/migrations/",
-        "tests/db/"
-      ]
+        "contracts/shared-core-authority.json",
+        "src/lib/ (retained UI/identity contract adapters only)",
+        "tests/ (native integration fixtures; separate runner)",
+        "borvat/surooh-accounting:surooh_accounting/ (sole future backend commands)"
+      ],
+      "joint_wave": "C3",
+      "verification_path": "local-isolated-alternative; independent evidence review"
     },
     {
       "id": "P04",
-      "title": "Receiving, locations and stock control",
+      "title": "Native receiving, locations and counts",
       "milestone": "WMS M04 \u2014 Receiving, locations and stock control",
       "dependencies": [
         "P03"
@@ -118,20 +121,23 @@
         "typecheck",
         "build",
         "lint",
-        "receipt-inspection-putaway",
+        "native-receipt-putaway",
         "count-concurrency",
-        "damage-control"
+        "warehouse-company-binding",
+        "quantity-value-gl-tieout"
       ],
       "files": [
-        "src/lib/wms/receiving/",
-        "src/routes/_authenticated/",
-        "supabase/migrations/",
-        "tests/db/"
-      ]
+        "contracts/shared-core-authority.json",
+        "src/lib/ (retained UI/identity contract adapters only)",
+        "tests/ (native integration fixtures; separate runner)",
+        "borvat/surooh-accounting:surooh_accounting/ (sole future backend commands)"
+      ],
+      "joint_wave": "C3",
+      "verification_path": "local-isolated-alternative; independent evidence review"
     },
     {
       "id": "P05",
-      "title": "Persisted picking, packing and dispatch",
+      "title": "Native picking, packing and dispatch",
       "milestone": "WMS M05 \u2014 Persisted picking, packing and dispatch",
       "dependencies": [
         "P04"
@@ -147,24 +153,23 @@
         "typecheck",
         "build",
         "lint",
-        "pick-pack-dispatch",
+        "native-pick-pack-dispatch",
         "partial-dispatch",
         "cancel-dispatch-race",
-        "print-no-dispatch",
-        "label-scope"
+        "no-duplicate-invoice"
       ],
       "files": [
-        "src/lib/warehouse-audit.ts",
-        "src/lib/warehouse-command-contract.ts",
-        "src/lib/wms/warehouse/",
-        "src/routes/_authenticated/orders.tsx",
-        "supabase/migrations/",
-        "tests/db/"
-      ]
+        "contracts/shared-core-authority.json",
+        "src/lib/ (retained UI/identity contract adapters only)",
+        "tests/ (native integration fixtures; separate runner)",
+        "borvat/surooh-accounting:surooh_accounting/ (sole future backend commands)"
+      ],
+      "joint_wave": "C3",
+      "verification_path": "local-isolated-alternative; independent evidence review"
     },
     {
       "id": "P06",
-      "title": "Inspected returns and conserved transfers",
+      "title": "Native inspected returns and transfers",
       "milestone": "WMS M06 \u2014 Inspected returns and conserved transfers",
       "dependencies": [
         "P05"
@@ -180,21 +185,23 @@
         "typecheck",
         "build",
         "lint",
-        "return-inspection",
-        "transfer-transit",
-        "return-overage",
-        "partial-transfer"
+        "native-return-inspection",
+        "transfer-conservation",
+        "return-overage-denial",
+        "cogs-credit-tieout"
       ],
       "files": [
-        "src/lib/wms/returns/",
-        "src/lib/wms/transfers/",
-        "supabase/migrations/",
-        "tests/db/"
-      ]
+        "contracts/shared-core-authority.json",
+        "src/lib/ (retained UI/identity contract adapters only)",
+        "tests/ (native integration fixtures; separate runner)",
+        "borvat/surooh-accounting:surooh_accounting/ (sole future backend commands)"
+      ],
+      "joint_wave": "C3",
+      "verification_path": "local-isolated-alternative; independent evidence review"
     },
     {
       "id": "P07",
-      "title": "Read-only channels, Accounting and SAM contracts",
+      "title": "Shared channel/inbox/outbox/Accounting/SAM contracts",
       "milestone": "WMS M07 \u2014 Read-only channels, Accounting and SAM contracts",
       "dependencies": [
         "P06"
@@ -211,24 +218,23 @@
         "typecheck",
         "build",
         "lint",
-        "inbox-replay",
-        "outbox-recovery",
-        "pagination-account-scope",
-        "accounting-export-dedupe",
-        "sam-delegation"
+        "native-durable-replay",
+        "receiver-crash-recovery",
+        "cross-site-ic-reconciliation",
+        "sam-proposal-only"
       ],
       "files": [
-        "src/lib/channels/",
-        "src/lib/bol.functions.ts",
-        "src/lib/bol.server.ts",
-        "src/lib/wms/integrations/",
-        "tests/db/",
-        "tests/contracts/"
-      ]
+        "contracts/shared-core-authority.json",
+        "src/lib/ (retained UI/identity contract adapters only)",
+        "tests/ (native integration fixtures; separate runner)",
+        "borvat/surooh-accounting:surooh_accounting/ (sole future backend commands)"
+      ],
+      "joint_wave": "C4",
+      "verification_path": "local-isolated-alternative; independent evidence review"
     },
     {
       "id": "P08",
-      "title": "Quota simulation and operational observability",
+      "title": "Read-only quota simulation and drift observability",
       "milestone": "WMS M08 \u2014 Quota simulation and operational observability",
       "dependencies": [
         "P07"
@@ -246,21 +252,22 @@
         "build",
         "lint",
         "component-quota-budget",
-        "sync-lag-pause",
+        "projection-lag-pause",
         "reconciliation-drift",
-        "reorder-evidence"
+        "no-live-write"
       ],
       "files": [
-        "src/lib/channels/",
-        "src/lib/wms/planning/",
-        "tests/contracts/",
-        "tests/db/",
-        "docs/wms/"
-      ]
+        "contracts/shared-core-authority.json",
+        "src/lib/ (retained UI/identity contract adapters only)",
+        "tests/ (native integration fixtures; separate runner)",
+        "borvat/surooh-accounting:surooh_accounting/ (sole future backend commands)"
+      ],
+      "joint_wave": "C4",
+      "verification_path": "local-isolated-alternative; independent evidence review"
     },
     {
       "id": "P09",
-      "title": "Release evidence and controlled readiness review",
+      "title": "Joint synthetic release evidence and readiness review",
       "milestone": "WMS M09 \u2014 Release evidence and controlled readiness review",
       "dependencies": [
         "P08"
@@ -276,40 +283,65 @@
         "typecheck",
         "build",
         "lint",
-        "all-core-acceptance",
-        "load-recovery",
-        "migration-rehearsal",
-        "read-only-live-review",
-        "rollback-rehearsal"
+        "native-full-acceptance",
+        "upgrade-rollback",
+        "backup-key-recovery",
+        "synthetic-migration",
+        "hosted-ci"
       ],
       "files": [
-        "tests/db/",
-        "tests/live/",
-        "scripts/wms/",
-        "docs/wms/evidence/",
-        ".github/workflows/"
-      ]
+        "contracts/shared-core-authority.json",
+        "src/lib/ (retained UI/identity contract adapters only)",
+        "tests/ (native integration fixtures; separate runner)",
+        "borvat/surooh-accounting:surooh_accounting/ (sole future backend commands)"
+      ],
+      "joint_wave": "C5",
+      "verification_path": "local-isolated-alternative; independent evidence review"
     }
   ],
   "architecture_decision": {
     "id": "ADR-0001",
     "status": "proposed",
     "option": null,
-    "candidate": null,
+    "candidate": "ERPNext16 shared accounting and stock core",
     "spec": "docs/wms/oss/ADR-0001.md",
     "owner_acceptance_ref": null,
     "accepted_sha": null,
     "gates": {
-      "G1": "blocked",
+      "G1": "partial",
       "G2": "partial",
       "G3": "partial",
       "G4": "blocked"
     },
     "execution_plan": "docs/wms/oss/EXECUTION_PLAN.md",
     "issue": "https://github.com/borvat/surooh-commerce/issues/15",
-    "selection_status": "unresolved_pending_native_comparison",
+    "selection_status": "direction_approved_preparation_only",
     "owner_research_acceptance": "User accepted preparatory research only; Tryton adoption and Codex explicitly withheld",
     "decision_report": "docs/wms/oss/DECISION_CLOSURE.md",
-    "next_environment_step": "Restricted Dashboard connection setup for new free synthetic PostgreSQL; browser fallback approval missing"
+    "next_environment_step": "Review C1 non-root isolated ERPNext runner and account admission; no Tryton deployment authorized",
+    "direction_status": "APPROVED_PREPARATION_ONLY",
+    "direction_owner_record": "docs/wms/shared-core/OWNER_DISPOSITION.json",
+    "shared_authority": "contracts/shared-core-authority.json",
+    "joint_plan": "docs/wms/shared-core/plan.json",
+    "status_meaning": "status/owner_acceptance_ref/accepted_sha refer to final technical adoption only; direction_status records separately approved preparation direction",
+    "direction_option": 1
+  },
+  "alternative_verification": {
+    "source": "explicit current owner instruction",
+    "decision": "Use independent local/isolated alternative verification because GitHub Actions billing cannot currently be resolved",
+    "g0": "HOSTED_CI_BLOCKED \u2014 ALTERNATIVE_VERIFICATION_REQUIRED",
+    "github_source_of_truth": true,
+    "attempt_billing_repair": false,
+    "manual_actions_rerun": false,
+    "new_paid_services": false,
+    "automatic_phase_completion": false,
+    "codex_start_authorized": false,
+    "merge_authorized": false,
+    "deploy_authorized": false,
+    "real_data_migration_authorized": false,
+    "other_security_fiscal_integration_gates_unchanged": true,
+    "spec": "verification/plan.json",
+    "runner": "verification/run.py",
+    "gate": "verification/gate.py"
   }
 }

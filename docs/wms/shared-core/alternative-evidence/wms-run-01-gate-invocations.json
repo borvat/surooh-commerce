@@ -1,0 +1,34 @@
+[
+  {
+    "command": [
+      "python3",
+      "/tmp/surooh-pinned-gate-n_azb8st/verification/gate.py",
+      "--report",
+      "/workspace/scratch/930c38487b1a/alternative-evidence/wms-run-01/report.json",
+      "--phase",
+      "PREPARATION",
+      "--expected-sha",
+      "53bac96f790c152361a8e449d6db7d14fa95815c"
+    ],
+    "gate_source_commit": "53bac96f790c152361a8e449d6db7d14fa95815c",
+    "exit_code": 2,
+    "stdout_log": "gate-PREPARATION.json",
+    "stdout_sha256": "979d28c3f9c5a497a398684eb95f4e4c5372039096797bada6fa76b35ce83df0"
+  },
+  {
+    "command": [
+      "python3",
+      "/tmp/surooh-pinned-gate-n_azb8st/verification/gate.py",
+      "--report",
+      "/workspace/scratch/930c38487b1a/alternative-evidence/wms-run-01/report.json",
+      "--phase",
+      "P01",
+      "--expected-sha",
+      "53bac96f790c152361a8e449d6db7d14fa95815c"
+    ],
+    "gate_source_commit": "53bac96f790c152361a8e449d6db7d14fa95815c",
+    "exit_code": 2,
+    "stdout_log": "gate-P01.json",
+    "stdout_sha256": "3cc2a0137ef45655881c879e8ad6679f740cdaa64a54673bdbb57737ad126ba9"
+  }
+]

@@ -20,3 +20,6 @@ GitHub environment required reviewers only enforce review when actually configur
 ## Baseline handling
 
 Do not fix widespread existing formatting or refactor business code just to green CI. Record inherited lint/build/type failures as blockers on the exact baseline and open a narrowly scoped follow-up. Dependency installation problems, runner assignment failures and unavailable DB/provider adapters are NOT successful verification. Never set continue-on-error on acceptance jobs. Always retain separate job results and redacted logs.
+
+
+Current verification decision: independent local/isolated runner and evidence gate in `verification/README.md`. G0 HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED; no billing repair or repeated Actions. Required build/type/lint/native/security/integration tests and owner/accountant review remain mandatory; no phase start or completion is authorized.

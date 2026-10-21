@@ -1,3 +1,15 @@
+# Current plan hold — comparative evidence first
+
+The Tryton-specific phase table below is historical/conditional. It is not the adopted plan. Read [DECISION_CLOSURE.md](DECISION_CLOSURE.md). Owner withheld final engine approval and any Codex handoff.
+
+P00 remaining sequence: (1) complete restricted connection setup for the new free test database; (2) initialize separate synthetic Tryton and ERPNext databases; (3) run native shared-component races/whole-command rollback and retry tests; (4) prove limited-role API/report/export/background boundaries; (5) execute complete receiving→two kits→reservation→pick/pack/ship/cancel→quarantine/inspection→channel replay cycles; (6) exercise ERPNext stock-to-GL postings and role-separated Surooh modules on one core; (7) run common performance and upgrade/restore benchmarks plus advisory/license triage; (8) compare A/B/C on measured evidence and obtain owner ADR acceptance. Only then rewrite/review P01–P09 for the selected architecture and request separate phase-start approval. No execution permission follows from this sequence.
+
+The worker regression must reject a foreign-company payload even in a native queue job. Fixing an HTTP endpoint alone is insufficient. Do not suppress the discovered trusted-context case or label it a passed tenant requirement. Never substitute a read-only provider metadata query, an ERPNext import, or SQLite locking behavior for a native PostgreSQL acceptance result.
+
+---
+
+## Historical conditional Tryton plan
+
 # Decision-dependent GitHub execution plan
 
 Status: proposed branch-only supplement. Existing P01–P09 Issues/Milestones remain **held**. Their Supabase-specific file plans are the historical current-system path, not authorization to implement a Tryton migration. If ADR-0001 is accepted, rewrite/review those packets and Issues on the accepted SHA before assigning any Codex work. If rejected, explicitly choose/review option 2 or 3; do not silently resume old tasks.

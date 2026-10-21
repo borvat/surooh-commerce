@@ -1,0 +1,204 @@
+test_restricted_background_context_discovery (tryton_security_probe.SuroohRestrictedRPC.test_restricted_background_context_discovery) ... ok
+test_rpc_direct_foreign_read_and_export (tryton_security_probe.SuroohRestrictedRPC.test_rpc_direct_foreign_read_and_export) ... status dumper crashed
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/status.py", line 73, in dumper
+    if dump(path):
+       ^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/status.py", line 55, in dump
+    sock = socket.socket(socket.AF_UNIX)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py", line 233, in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+PermissionError: [Errno 1] Operation not permitted
+Exception when processing <JSONRequest synthetic_a@None 'http://localhost/:memory:/rpc/' [POST] model.stock.move.read>
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 125, in dispatch_request
+    return endpoint(request, **request.view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 40, in rpc
+    return methods.get(request.rpc_method, _dispatch)(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 90, in wrapper
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/wrappers.py", line 310, in wrapper
+    return func(request, pool, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 280, in _dispatch
+    result = rpc.result(meth(*c_args, **c_kwargs))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelsql.py", line 1305, in read
+    cls.__check_domain_rule(ids, 'read')
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelsql.py", line 1820, in __check_domain_rule
+    raise AccessError(msg, '\n'.join(ctx_msg))
+trytond.model.modelstorage.AccessError: You are not allowed to read records "435" of "Stock Move" because of at least one of these rules:
+User in companies - Within groups: Stock
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 125, in dispatch_request
+    return endpoint(request, **request.view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 40, in rpc
+    return methods.get(request.rpc_method, _dispatch)(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 90, in wrapper
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/wrappers.py", line 310, in wrapper
+    return func(request, pool, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 280, in _dispatch
+    result = rpc.result(meth(*c_args, **c_kwargs))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelsql.py", line 1305, in read
+    cls.__check_domain_rule(ids, 'read')
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelsql.py", line 1820, in __check_domain_rule
+    raise AccessError(msg, '\n'.join(ctx_msg))
+trytond.model.modelstorage.AccessError: You are not allowed to read records "435" of "Stock Move" because of at least one of these rules:
+User in companies - Within groups: Stock
+Exception when processing <JSONRequest synthetic_a@None 'http://localhost/:memory:/rpc/' [POST] model.stock.move.export_data>
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 125, in dispatch_request
+    return endpoint(request, **request.view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 40, in rpc
+    return methods.get(request.rpc_method, _dispatch)(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 90, in wrapper
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/wrappers.py", line 310, in wrapper
+    return func(request, pool, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 280, in _dispatch
+    result = rpc.result(meth(*c_args, **c_kwargs))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelstorage.py", line 1138, in export_data
+    data += record.__export_row(fields_names)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelstorage.py", line 1034, in __export_row
+    raise AccessError(gettext(
+trytond.model.modelstorage.AccessError: You are not allowed to read records "435" of "Stock Move" because of at least one of these rules:
+User in companies - 
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 125, in dispatch_request
+    return endpoint(request, **request.view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 40, in rpc
+    return methods.get(request.rpc_method, _dispatch)(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 90, in wrapper
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/wrappers.py", line 310, in wrapper
+    return func(request, pool, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 280, in _dispatch
+    result = rpc.result(meth(*c_args, **c_kwargs))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelstorage.py", line 1138, in export_data
+    data += record.__export_row(fields_names)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelstorage.py", line 1034, in __export_row
+    raise AccessError(gettext(
+trytond.model.modelstorage.AccessError: You are not allowed to read records "435" of "Stock Move" because of at least one of these rules:
+User in companies - 
+Exception when processing <JSONRequest synthetic_b@None 'http://localhost/:memory:/rpc/' [POST] model.stock.move.read>
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 125, in dispatch_request
+    return endpoint(request, **request.view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 40, in rpc
+    return methods.get(request.rpc_method, _dispatch)(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 90, in wrapper
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/wrappers.py", line 310, in wrapper
+    return func(request, pool, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 280, in _dispatch
+    result = rpc.result(meth(*c_args, **c_kwargs))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelsql.py", line 1305, in read
+    cls.__check_domain_rule(ids, 'read')
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelsql.py", line 1820, in __check_domain_rule
+    raise AccessError(msg, '\n'.join(ctx_msg))
+trytond.model.modelstorage.AccessError: You are not allowed to read records "434" of "Stock Move" because of at least one of these rules:
+User in companies - Within groups: Stock
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 125, in dispatch_request
+    return endpoint(request, **request.view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 40, in rpc
+    return methods.get(request.rpc_method, _dispatch)(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 90, in wrapper
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/wrappers.py", line 310, in wrapper
+    return func(request, pool, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 280, in _dispatch
+    result = rpc.result(meth(*c_args, **c_kwargs))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelsql.py", line 1305, in read
+    cls.__check_domain_rule(ids, 'read')
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelsql.py", line 1820, in __check_domain_rule
+    raise AccessError(msg, '\n'.join(ctx_msg))
+trytond.model.modelstorage.AccessError: You are not allowed to read records "434" of "Stock Move" because of at least one of these rules:
+User in companies - Within groups: Stock
+Exception when processing <JSONRequest synthetic_b@None 'http://localhost/:memory:/rpc/' [POST] model.stock.move.export_data>
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 125, in dispatch_request
+    return endpoint(request, **request.view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 40, in rpc
+    return methods.get(request.rpc_method, _dispatch)(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 90, in wrapper
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/wrappers.py", line 310, in wrapper
+    return func(request, pool, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 280, in _dispatch
+    result = rpc.result(meth(*c_args, **c_kwargs))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelstorage.py", line 1138, in export_data
+    data += record.__export_row(fields_names)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelstorage.py", line 1034, in __export_row
+    raise AccessError(gettext(
+trytond.model.modelstorage.AccessError: You are not allowed to read records "434" of "Stock Move" because of at least one of these rules:
+User in companies - 
+Traceback (most recent call last):
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 125, in dispatch_request
+    return endpoint(request, **request.view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 40, in rpc
+    return methods.get(request.rpc_method, _dispatch)(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/wsgi.py", line 90, in wrapper
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/wrappers.py", line 310, in wrapper
+    return func(request, pool, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/protocols/dispatcher.py", line 280, in _dispatch
+    result = rpc.result(meth(*c_args, **c_kwargs))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelstorage.py", line 1138, in export_data
+    data += record.__export_row(fields_names)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>/oss-research/tryton-env/lib/python3.12/site-packages/trytond/model/modelstorage.py", line 1034, in __export_row
+    raise AccessError(gettext(
+trytond.model.modelstorage.AccessError: You are not allowed to read records "434" of "Stock Move" because of at least one of these rules:
+User in companies - 
+ok
+test_rpc_inventory_report_company_scope (tryton_security_probe.SuroohRestrictedRPC.test_rpc_inventory_report_company_scope) ... ok
+test_rpc_list_and_forged_context (tryton_security_probe.SuroohRestrictedRPC.test_rpc_list_and_forged_context) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 14.593s
+
+OK

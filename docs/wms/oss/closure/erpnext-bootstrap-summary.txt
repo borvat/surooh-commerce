@@ -1,0 +1,6 @@
+Python 3.14.8
+Frappe 16.50.0
+ERPNext 16.52.0
+psycopg2-binary 2.9.13
+frappe-bench 5.24.1
+Site installation: NOT EXECUTED; no reachable approved database credentials

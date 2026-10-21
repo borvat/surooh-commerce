@@ -1,6 +1,8 @@
 # Surooh WMS — Independent OSS foundation assessment
 
-**Proposed decision: option 1, Tryton core with Surooh extensions. Owner acceptance and blocking database/security evidence are outstanding. Codex remains stopped.**
+**Current decision: no engine accepted. Owner accepted research only; PostgreSQL evidence and ERPNext competition remain blocked/unfinished. Codex handoff stays prohibited.**
+
+Read the latest [decision closure and three-architecture report](DECISION_CLOSURE.md) before the historical Tryton recommendation.
 
 - [Comparison of current code and five alternatives](COMPARISON.md)
 - [ADR-0001: decision, alternatives, gates and rollback](ADR-0001.md)

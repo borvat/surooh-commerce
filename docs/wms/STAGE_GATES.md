@@ -25,3 +25,7 @@ The local evidence validator does not cryptographically prove a test ran or auth
 ## Architecture evaluation hold
 
 The CLI also applies the mandatory architecture decision gate in `phases.json`. G1–G4 and owner acceptance must be recorded before any phase can reach human review. This is a review guard, not proof that an approval reference is authentic or repository branch protection is enabled.
+
+## Evidence-closure update
+
+Owner accepted preparatory research only. No engine is selected. See [the latest decision report](oss/DECISION_CLOSURE.md). G1–G4 are not closed; P01 is not eligible for Codex handoff. Additional SQLite authorization tests and ERPNext imports do not replace the mandatory PostgreSQL practical comparison.

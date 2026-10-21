@@ -41,3 +41,7 @@ Review this draft PR and development-baseline decision. Decide whether to author
 ## Architecture evaluation hold
 
 OSS evaluation is on a separate research branch. ADR-0001 proposes option 1 (Tryton) conditionally; no adoption, Codex execution, migration, merge or deployment is authorized. See `oss/RESULTS.md` for actual passes and blocked checks.
+
+## Evidence-closure update
+
+Owner accepted preparatory research only. No engine is selected. See [the latest decision report](oss/DECISION_CLOSURE.md). G1–G4 are not closed; P01 is not eligible for Codex handoff. Additional SQLite authorization tests and ERPNext imports do not replace the mandatory PostgreSQL practical comparison.

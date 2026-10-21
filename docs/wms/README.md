@@ -24,3 +24,7 @@ The prior `Surooh-WMS-Codex-Handoff.zip` is an initial audit reference only. Its
 ## Architecture evaluation hold
 
 Read [OSS evaluation and proposed decision](oss/README.md) before any phase. P01 is now blocked by the architecture decision, not ready for execution.
+
+## Current decision review
+
+Research acceptance does not select an engine. Read [the three-architecture evidence report](oss/DECISION_CLOSURE.md). P01 is not eligible for Codex handoff; native PostgreSQL/application tests are blocked by the isolated test connection setup. No production resource or application code was changed.

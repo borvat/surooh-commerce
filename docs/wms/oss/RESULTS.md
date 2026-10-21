@@ -30,3 +30,7 @@ Initial InvenTree custom probe expected DRF ValidationError only; native save ra
 - Existing application production schema/runtime mapping and real inventory character remain unverified. No stock/prices/production records were changed.
 
 Reproduce using [research instructions](../../../research/wms-oss/README.md). Logs are sanitized only for local workspace prefix and ANSI escapes. [Evidence manifest](evidence/SHA256SUMS.json) binds logs, inventories and probes. Acceptance gates remain blocked regardless of successful process exit codes.
+
+## Additional evidence review
+
+See [DECISION_CLOSURE.md](DECISION_CLOSURE.md): six additional native SQLite security/worker tests passed, including a discovery assertion that trusted worker contexts can cross company boundaries without access checks. No new PostgreSQL or ERPNext DB acceptance was executed. Do not treat runtime import/provisioning as an acceptance pass.

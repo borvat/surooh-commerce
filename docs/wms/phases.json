@@ -294,18 +294,22 @@
   "architecture_decision": {
     "id": "ADR-0001",
     "status": "proposed",
-    "option": 1,
-    "candidate": "Tryton",
+    "option": null,
+    "candidate": null,
     "spec": "docs/wms/oss/ADR-0001.md",
     "owner_acceptance_ref": null,
     "accepted_sha": null,
     "gates": {
       "G1": "blocked",
-      "G2": "blocked",
+      "G2": "partial",
       "G3": "partial",
       "G4": "blocked"
     },
     "execution_plan": "docs/wms/oss/EXECUTION_PLAN.md",
-    "issue": "https://github.com/borvat/surooh-commerce/issues/15"
+    "issue": "https://github.com/borvat/surooh-commerce/issues/15",
+    "selection_status": "unresolved_pending_native_comparison",
+    "owner_research_acceptance": "User accepted preparatory research only; Tryton adoption and Codex explicitly withheld",
+    "decision_report": "docs/wms/oss/DECISION_CLOSURE.md",
+    "next_environment_step": "Restricted Dashboard connection setup for new free synthetic PostgreSQL; browser fallback approval missing"
   }
 }

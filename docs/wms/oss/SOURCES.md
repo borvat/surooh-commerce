@@ -58,3 +58,15 @@ Read at the pins listed below, on 2026-10-21 UTC. File-level implementation obse
 - [GNU license FAQ](https://www.gnu.org/licenses/gpl-faq.html), [LGPLv3](https://www.gnu.org/licenses/lgpl-3.0.html), [EPL 1.0](https://www.eclipse.org/legal/epl-v10.html).
 
 No advisory API crawl or full dependency CVE scan was completed. Do not infer a clean security bill from this register.
+
+## Evidence-closure sources
+
+- [Frappe v16.50.0 dependency metadata](https://github.com/frappe/frappe/blob/f20f92d29706510551b4438cc196b0323a7f1a92/pyproject.toml).
+- [Pinned ERPNext PostgreSQL CI](https://github.com/frappe/erpnext/blob/90cb7f9243048a44311777d60a1cec8ca05ceec9/.github/workflows/server-tests-postgres.yml) and [installer helper](https://github.com/frappe/erpnext/blob/90cb7f9243048a44311777d60a1cec8ca05ceec9/.github/helper/install.sh): source facts, not completed CI evidence.
+- [Stock/GL controller](https://github.com/frappe/erpnext/blob/90cb7f9243048a44311777d60a1cec8ca05ceec9/erpnext/controllers/stock_controller.py): shared-engine feasibility, not executed accounting results.
+- [Render compute plan reference](https://render.com/docs/compute-plans.md): fetched current free PostgreSQL plan. Provider provisioning metadata and connection rejection were directly observed.
+- [PyPI Werkzeug metadata](https://pypi.org/pypi/werkzeug/3.1.6/json), [PyPI PyJWT metadata](https://pypi.org/pypi/pyjwt/2.13.0/json): spot checks of advisory feed, not vulnerability reproduction.
+- Native installed Tryton `rpc.py`, `ir/rule.py`, `ir/queue_.py` and `worker.py` plus the test script explain HTTP private-context filtering and trusted worker access-check semantics.
+- A historical Frappe forum thread (https://discuss.frappe.io/t/is-erpnext-officially-supported-with-postgresql/163329) was retrieved but its full replies were not exposed by that scrape; no conclusion about current stable support relies on those incomplete replies.
+
+- [Frappe pinned MIT license](https://github.com/frappe/frappe/blob/f20f92d29706510551b4438cc196b0323a7f1a92/LICENSE), read directly from the installed checkout; dependencies and bundled assets retain separate notices.

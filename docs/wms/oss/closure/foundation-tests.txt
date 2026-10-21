@@ -1,0 +1,27 @@
+✔ missing or proposed ADR blocks otherwise complete phase evidence (1.080128ms)
+✔ a skipped mandatory architecture experiment cannot pass (0.224549ms)
+✔ accepted architecture never authorizes execution or clears phase defects (0.135845ms)
+✔ database guard accepts dedicated loopback fixture only (1.816718ms)
+✔ database guard rejects postgresql://production.supabase.co/wms_test_ci (0.468275ms)
+✔ database guard rejects postgresql://127.0.0.1/postgres (0.178719ms)
+✔ database guard rejects postgresql://localhost/wms_test_ci?host=production (0.102544ms)
+✔ database guard rejects https://localhost/wms_test_ci (0.11937ms)
+✔ database guard rejects postgresql://127.0.0.1.evil.test/wms_test_ci (0.178318ms)
+✔ database guard requires explicit isolation flag (0.219731ms)
+✔ complete packet only recommends human review (1.652601ms)
+✔ stale head invalidates evidence (0.976291ms)
+✔ skipped acceptance check blocks (0.823842ms)
+✔ tampered log digest blocks (3.945777ms)
+✔ missing dependency acceptance blocks (0.885374ms)
+✔ unresolved inventory P1 blocks (1.125546ms)
+✔ production connection evidence blocks (0.647035ms)
+✔ artifact traversal outside evidence directory blocks (0.864282ms)
+✔ symbolic link to external evidence blocks (1.870929ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 128.090627

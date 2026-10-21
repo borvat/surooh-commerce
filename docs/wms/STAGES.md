@@ -21,3 +21,7 @@ Incremental changes only: no wholesale frontend rewrite, ERP replacement, databa
 ## Architecture evaluation hold
 
 The conditional [OSS execution plan](oss/EXECUTION_PLAN.md) adds P00 and proposes replacement phase scopes if ADR-0001 is accepted. Existing phase packets remain historical current-system plans until explicitly revised and approved.
+
+## Evidence-closure update
+
+Owner accepted preparatory research only. No engine is selected. See [the latest decision report](oss/DECISION_CLOSURE.md). G1–G4 are not closed; P01 is not eligible for Codex handoff. Additional SQLite authorization tests and ERPNext imports do not replace the mandatory PostgreSQL practical comparison.

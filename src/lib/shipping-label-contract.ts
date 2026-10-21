@@ -18,10 +18,13 @@ export type AuthorizedShipmentScope = {
   externalOrderId: string;
   shipmentId: string;
 };
-export function isLabelForShipment(label: ShippingLabelMetadata | null, scope: AuthorizedShipmentScope): boolean {
+export function isLabelForShipment(
+  label: ShippingLabelMetadata | null,
+  scope: AuthorizedShipmentScope,
+): boolean {
   if (!label) return false;
   const keys = ["organizationId", "channelId", "externalOrderId", "shipmentId"] as const;
-  if (!keys.every(k => Boolean(label[k]) && label[k] === scope[k])) return false;
+  if (!keys.every((k) => Boolean(label[k]) && label[k] === scope[k])) return false;
   if (!label.documentId.trim() || !label.carrier.trim()) return false;
   if (label.source !== "bol" && label.source !== "carrier") return false;
   return label.mediaType === "application/pdf" || label.mediaType === "image/png";

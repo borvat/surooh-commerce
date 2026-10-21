@@ -27,3 +27,7 @@ Executed alternative path: see ALTERNATIVE_RESULTS.md and alternative-evidence/I
 ## Final G0 disposition
 
 Hosted CI = BLOCKED (billing; historical failure retained). Alternative path = IMPLEMENTED_AND_EXECUTED; Accounting preparation technical result = READY_FOR_HUMAN_EVIDENCE_REVIEW; WMS preparation = BLOCKED. G0 is not jointly accepted: WMS defects and human evidence review remain outstanding. No stage-start authorization is implied. M1 and P01–P09/M2–M7 remain held. See FINAL_ACCEPTANCE.md and WMS_DIAGNOSTICS.md.
+
+## Bounded source-quality remediation candidate
+
+On independent branch remediation/wms-source-quality, tested3a7cfb73850ec89fd91822c5c0078ff985d25895: typecheck0, lint0 with15 disclosed warnings, build0/no tracked drift,100 unit cases PASS. See ../source-quality/RESULTS.md. Historical type/lint/route-drift failures remain preserved in old archives; the new clean candidate addresses them only at its tested SHA. SOURCE_QUALITY is READY_FOR_HUMAN_EVIDENCE_REVIEW; PREPARATION remains BLOCKED on the unimplemented DB adapter, P01 additionally on fresh bootstrap. No general G0 acceptance, G1–G6 waiver, Codex start, merge or deploy.

@@ -1,0 +1,47 @@
+[
+  {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "verification/gate.py",
+      "--report",
+      "/workspace/scratch/930c38487b1a/remediation-evidence/clean-run-01/report.json",
+      "--phase",
+      "SOURCE_QUALITY",
+      "--expected-sha",
+      "3a7cfb73850ec89fd91822c5c0078ff985d25895"
+    ],
+    "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+    "exit_code": 0,
+    "stdout_sha256": "9ba23917480db0edbc0de995b66ea71d6df555f5b2789153e5df2577bf8dc528"
+  },
+  {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "verification/gate.py",
+      "--report",
+      "/workspace/scratch/930c38487b1a/remediation-evidence/clean-run-01/report.json",
+      "--phase",
+      "PREPARATION",
+      "--expected-sha",
+      "3a7cfb73850ec89fd91822c5c0078ff985d25895"
+    ],
+    "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+    "exit_code": 2,
+    "stdout_sha256": "b888fec95cb1ad74d3db902cbad5b7e7214d97aad72652da4c58f830f84da4e9"
+  },
+  {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "verification/gate.py",
+      "--report",
+      "/workspace/scratch/930c38487b1a/remediation-evidence/clean-run-01/report.json",
+      "--phase",
+      "P01",
+      "--expected-sha",
+      "3a7cfb73850ec89fd91822c5c0078ff985d25895"
+    ],
+    "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+    "exit_code": 2,
+    "stdout_sha256": "6b9b3c15818cb702b90277f658fa0d99047f2a116e98480a0b01a3d8b76c6ae1"
+  }
+]

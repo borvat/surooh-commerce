@@ -64,11 +64,11 @@
     },
     {
       "path": "docs/wms/shared-core/GATES.md",
-      "sha256": "e640f70730f095a0f01a752ad1d165d05ccf857baa3c022fcba8ba737295e833"
+      "sha256": "7ea553cec4205363fdf25a4d560020e51adbf4bb45b1a85b1d500737788e3066"
     },
     {
       "path": "docs/wms/shared-core/GITHUB_REPAIR.md",
-      "sha256": "66726028e3fa3be7d4d6b81532d0dfa8dedc37f3499098e984da9133a08c476a"
+      "sha256": "dbb6502bdf720e34725e5e6eaa074a6c8a80a8bac4d1ff7ebf222a298c4592af"
     },
     {
       "path": "docs/wms/shared-core/ISOLATION.md",
@@ -100,7 +100,7 @@
     },
     {
       "path": "docs/wms/shared-core/investigation.json",
-      "sha256": "b6f938bdb499632fa7410b267008b9d948b9cd36bc3cb056004e82c8e2ac5275"
+      "sha256": "f690e78165ddf3ae969dd355e4d8e1ed04e3c659f4b4c1b67cdfc926a9af97c9"
     },
     {
       "path": "docs/wms/shared-core/plan.json",
@@ -125,6 +125,10 @@
     {
       "path": "docs/wms/github-register.json",
       "sha256": "af0353d3e663b5bb943213f688af54e2bbd0c6db09e0981fd9fa03e0c066ab80"
+    },
+    {
+      "path": "docs/wms/shared-core/CURRENT_CI_DIAGNOSTIC.json",
+      "sha256": "5e23c664c642c806d85a3d507c3253c4cb7c930c579feba17b5ca9c933e6fce1"
     }
   ]
 }

@@ -13,14 +13,30 @@
       "jobs": 0,
       "path": "BuildFailed"
     },
-    "account_billing_root_cause": "NOT_PROVEN_FROM_CURRENT_API",
-    "check_suite_diagnostics": "connector endpoint not available"
+    "account_billing_root_cause": "Common owner account billing lock explicitly reported by WMS; own private run has no job annotation. Same admission cause is an inference, not independently proven.",
+    "check_suite_diagnostics": "connector endpoint not available",
+    "current_run": {
+      "id": 39689544956,
+      "head": "77dbe5a7215bd32d23671b4fa43ebdf06dff018b",
+      "conclusion": "startup_failure",
+      "jobs": 0
+    }
   },
   "commerce": {
     "head": "35232d0a5015bcc39e7b91604d17a5259cafc464",
     "main_sha": "953d41a28a3916c94456645eaed00817cd17ca3b",
     "protected": false,
-    "rulesets": []
+    "rulesets": [],
+    "current_run": {
+      "id": 39689565654,
+      "head": "485cfcbc969bccfffaa48d8cbd08fd6137b0cb4e",
+      "conclusion": "failure",
+      "job_id": 119532094822,
+      "runner_id": 0,
+      "steps": [],
+      "annotation": "The job was not started because your account is locked due to a billing issue.",
+      "annotation_source": "anonymous public GitHub REST check-runs/119532094822/annotations"
+    }
   },
   "mutations": {
     "billing": false,

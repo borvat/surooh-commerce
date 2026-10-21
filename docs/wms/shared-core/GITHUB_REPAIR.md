@@ -1,3 +1,13 @@
+# Current confirmed admission diagnostic
+
+New WMS [run39689565654](https://github.com/borvat/surooh-commerce/actions/runs/39689565654) produced one failed job119532094822, runner_id0 and no steps. Public GitHub check annotation explicitly states: **“The job was not started because your account is locked due to a billing issue.”** See CURRENT_CI_DIAGNOSTIC.json for verbatim public API evidence. This establishes GitHub's stated account admission reason for WMS; the underlying unpaid item/payment/account remedy is not visible or changed here. Job log retrieval returned404 because no log blob exists.
+
+New Accounting [run39689544956](https://github.com/borvat/surooh-accounting/actions/runs/39689544956) remains startup_failure with zero jobs. Same owner account makes the same lock a supported inference; no private-run annotation independently confirms it. Both remain G0 BLOCKED. The observations below predate this new annotation; their unknown-root-cause caveat is superseded for the WMS stated admission reason only.
+
+Owner action: inspect GitHub billing account lock or ask existing Support ticket to identify and clear it; any payment/plan/budget/admin mutation still needs separate explicit approval. A Render paid plan does not clear GitHub account billing. Do not edit workflow steps or bypass via public mirrors/self-hosted runners as a supposed fix for this lock.
+
+---
+
 # GitHub Actions and main protection — read-only investigation and repair steps
 
 ## Observations, separated from diagnosis

@@ -15,3 +15,5 @@ Eight native mitigation verifiers and eleven isolation verifiers passed locally.
 Legacy WMS mapping: old G1 concurrency→G2/G3; G2 security→G1/G2; G3 workflow→G3/G5; G4 support/security/operations→G0/G5; G5 owner→G6. Tryton PostgreSQL remains unproven as fallback evidence, not a requirement to deploy a second active engine. No old gate is relabelled passed merely because the preferred direction changed.
 
 Commerce baseline Issues#12 (TypeScript) and#13 (lint debt) are still open. Full UI typecheck/lint/build were not rerun in this documentation/prototype scope; prior failures remain an additional C1/G5 acceptance blocker, not green from foundation tests. Fix only after a bounded authorized packet; do not disable rules or broadly reformat.
+
+Fresh CI observation: Accounting run39689544956 startup_failure/zero jobs. WMS run39689565654 one failed job, runner_id0, zero steps; public annotation explicitly reports account locked due to billing issue. See CURRENT_CI_DIAGNOSTIC.json and GITHUB_REPAIR.md. No actual hosted test executed, and no billing/admin changes made.

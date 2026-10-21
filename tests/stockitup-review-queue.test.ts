@@ -1,18 +1,29 @@
 import { describe, expect, test } from "bun:test";
 import { previewStockitupMappings } from "../src/lib/stockitup-review-queue";
 
-const item = { sellerId:"seller-1", productId:"prod-21", sku:"old-sku", ean:"8711252955193", extraEans:["8711252459424"] };
-const mapping = { organizationId:"org-a", sellerId:"seller-1", productId:"prod-21", suroohProductId:"surooh-master-1" };
+const item = {
+  sellerId: "seller-1",
+  productId: "prod-21",
+  sku: "old-sku",
+  ean: "8711252955193",
+  extraEans: ["8711252459424"],
+};
+const mapping = {
+  organizationId: "org-a",
+  sellerId: "seller-1",
+  productId: "prod-21",
+  suroohProductId: "surooh-master-1",
+};
 
 describe("Stockitup review queue (preview only)", () => {
   test("duplicate external keys with whitespace are all sent for review", () => {
     const duplicate = { ...item, sellerId: " seller-1 ", productId: "prod-21 " };
     const r = previewStockitupMappings("org-a", [item, duplicate], [mapping]);
-    expect(r.totals).toEqual({ seen:2, matched:0, needsReview:2 });
+    expect(r.totals).toEqual({ seen: 2, matched: 0, needsReview: 2 });
   });
   test("recognizes explicit mappings and records counts", () => {
     const r = previewStockitupMappings("org-a", [item], [mapping]);
-    expect(r.totals).toEqual({ seen:1, matched:1, needsReview:0 });
+    expect(r.totals).toEqual({ seen: 1, matched: 1, needsReview: 0 });
     expect(r.rows[0].suroohProductId).toBe("surooh-master-1");
   });
   test("unmapped item goes to review without changing identity", () => {
@@ -25,11 +36,11 @@ describe("Stockitup review queue (preview only)", () => {
     const r = previewStockitupMappings("org-a", [item, item], [mapping]);
     expect(r.rows[0].reason).toBe("DUPLICATE_EXTERNAL_KEY");
     expect(r.rows[1].reason).toBe("DUPLICATE_EXTERNAL_KEY");
-    expect(r.rows.every(row => row.suroohProductId === null)).toBe(true);
+    expect(r.rows.every((row) => row.suroohProductId === null)).toBe(true);
     expect(r.totals.needsReview).toBe(2);
   });
   test("cross-seller mapping cannot match", () => {
-    const r = previewStockitupMappings("org-a", [{...item,sellerId:"seller-2"}], [mapping]);
+    const r = previewStockitupMappings("org-a", [{ ...item, sellerId: "seller-2" }], [mapping]);
     expect(r.rows[0].status).toBe("NEEDS_REVIEW");
   });
 });

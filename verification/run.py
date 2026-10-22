@@ -222,7 +222,7 @@ def main():
                     "--postgres-bin",
                     str(args.postgres_bin.resolve()),
                     "--db-python",
-                    str(args.db_python.resolve()),
+                    str(args.db_python.absolute()),
                     "--artifact-dir",
                     str(output / "artifacts/postgres"),
                 ]

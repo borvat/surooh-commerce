@@ -31,3 +31,7 @@ Hosted CI = BLOCKED (billing; historical failure retained). Alternative path = I
 ## Bounded source-quality remediation candidate
 
 On independent branch remediation/wms-source-quality, tested3a7cfb73850ec89fd91822c5c0078ff985d25895: typecheck0, lint0 with15 disclosed warnings, build0/no tracked drift,100 unit cases PASS. See ../source-quality/RESULTS.md. Historical type/lint/route-drift failures remain preserved in old archives; the new clean candidate addresses them only at its tested SHA. SOURCE_QUALITY is READY_FOR_HUMAN_EVIDENCE_REVIEW; PREPARATION remains BLOCKED on the unimplemented DB adapter, P01 additionally on fresh bootstrap. No general G0 acceptance, G1–G6 waiver, Codex start, merge or deploy.
+
+## Executed legacy PostgreSQL candidate — not accepted
+
+At 6066f6a3fbb8f6edd2b6cadb8304b311e2e046bb: real PostgreSQL18.6 applied23 unchanged migrations;21 groups executed (19 PASS,2 FAIL). Adapter now exists; see ../postgresql-validation/RESULTS.md and FINDINGS.md. PREPARATION remains BLOCKED on native invariant failures, host identity isolation and real HTTP/JWT boundary; P01 additionally lacks fresh engine bootstrap. Local PG dump/restore is scoped evidence, not off-host/OS/production approval. G0 hosted Actions stays BLOCKED and G1–G6/Codex/merge/deploy holds are unchanged.

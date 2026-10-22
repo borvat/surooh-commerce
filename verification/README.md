@@ -1,3 +1,5 @@
+> Current PostgreSQL validation candidate: the former missing legacy adapter is now implemented. Use the explicit PostgreSQL/DB-Python arguments in `docs/wms/postgresql-validation/README.md`. Exact-source native results are19 PASS/2 FAIL; PREPARATION/P01 remain BLOCKED on findings, real HTTP identity and OS identity limits. Historical unimplemented-baseline statements and commands below do not supersede this candidate disposition. No Codex/merge/deploy permission.
+
 # Alternative verification — independent of GitHub Actions
 
 G0 is **HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED**. The owner explicitly selected this path because account billing cannot currently be resolved. Preserve GitHub source/branches/PRs and the actual failed Actions evidence. Do not repair billing, change plans/permissions, manually rerun Actions or create paid services. Preparation commits use `[skip ci]`; no hosted success is implied.

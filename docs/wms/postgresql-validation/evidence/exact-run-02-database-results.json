@@ -1,0 +1,1783 @@
+{
+  "source_sha": "6066f6a3fbb8f6edd2b6cadb8304b311e2e046bb",
+  "source_dirty_tracked": false,
+  "driver_sha256": "3ce5b7ad58850d37b1b9b691739c88251b4732faf3050a1983d3b666758b17d1",
+  "expected_case_count": 21,
+  "started_at_utc": "2026-10-22T00:18:34.242780+00:00",
+  "engine": "real standalone PostgreSQL processes and independent TCP sessions",
+  "psycopg": "3.3.6",
+  "libpq_version": 180006,
+  "runtime_pins_sha256": "402345af55211822e8d9ed223ba53e3868c640a940a41409e9d0487edcc46622",
+  "compatibility_sha256": "e61235f9ee0395e91f0fa4c59504d354fb859e4cc04e8990396dc4ad360e6159",
+  "migrations": [
+    {
+      "file": "20260927102344_55393e9a-8fa7-4ae2-9ebf-f9033548d5c2.sql",
+      "sha256": "968a2aeda86665f4ddd012cc95cd6548e9b16f68c7a41966f606a0b7cff125c2",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927102354_6bb88873-7478-48e1-9f96-da0486b1ca2d.sql",
+      "sha256": "507dac47f0875def01e0004c649238c57b753677a6314b81a4748f852c3f5901",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927104753_c649a1fe-71fd-4fff-b0da-34d38c7308d5.sql",
+      "sha256": "86f0df86d7f06a149b1450a1eb0d2c8eeae9c2ff84130d00442183bab77ec471",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927104802_ab14cb98-0056-4ef1-ab4b-d5bce3d820f6.sql",
+      "sha256": "6f5b1793f0366f51e4d4693e4d5e3ebd0204e47a61b481899c7096e1b624bd97",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927105731_c465ac92-7fc3-4a00-b80d-4ea652fe047c.sql",
+      "sha256": "a0e101942a43972fec0e2c69b820e990a77c799be48c53b3af34264f980d2fbb",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927105742_92ab0011-e71b-42ec-8bec-88645b181936.sql",
+      "sha256": "539f9d2c6ab335ca25ae46195ecb54250833202b3c01bf5a11e41c9f9a5d2c98",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927111500_578ab1ab-d75a-4dd2-a5c5-c1e6e1371d68.sql",
+      "sha256": "07c60ef21585892d5446a8837ee027cb96c55b0c8ebbab63c486498bb06e6553",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927113054_c0ea03da-9204-48e2-831a-7f138b3cd21d.sql",
+      "sha256": "359254a68a9f50330ef691c8fafaaa3e01a5917ff964b5485853d89793f30fad",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927120453_e66158e5-cc3a-4cf5-afd4-833e2cc7adea.sql",
+      "sha256": "01368669c80099b5506298db567ed604e52bd35a31292fc7edd0a252b3e9067d",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927123427_8897b13b-4dc4-460c-b8e4-5de334619bbc.sql",
+      "sha256": "251f543b1322c0d7caf88d72e52307c38ead082efacbaa5ea78fad97c4679472",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927123439_8c25e043-6508-424e-9abf-8cb739adb50f.sql",
+      "sha256": "446efafe411dceaca93b33291cb51a335d222c440696bd5b408a5347a6cb798b",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927124023_82621cb6-867f-4521-907c-96fc8c71eaa6.sql",
+      "sha256": "58cea0b017f793c1c5b3d0681def799c51994839b171d052340bee88984a665f",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927125439_7d5387e8-3e4a-465b-a50d-517127320868.sql",
+      "sha256": "80ca97010941f2c2da6e833272f399e4559fa1b7adb79e345aa4a47b3154e63d",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927130542_e0017dc8-c098-4075-ae35-8b277c6f3267.sql",
+      "sha256": "580d2cbdd2f33db471217fd0d49995c0f57db81e745ef21e18f2efd4e68a80e4",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927133410_ac9bcfe0-c954-482a-baa9-135f4c08b87d.sql",
+      "sha256": "d10b6ee0fed6c56354a9dfab93d406019765fdadc9ae2f7c66208fd6279d023a",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927134326_c3e6f8a7-8e92-4f28-a8cb-5f0a8864362a.sql",
+      "sha256": "76fd8e49b77b0f027295bc8ca66f813d0402d2db62be4ce4217610e8191201c8",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927134604_212434ca-0020-4cac-9448-c9ee5a7b0af8.sql",
+      "sha256": "68cecfeb138231f146267fdc60922b393b65ca096b673063983adb77331c5008",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927151326_1c10f59a-7bd1-4b45-a826-0b3919d2478b.sql",
+      "sha256": "e3c12c7280c0b65decfad60e84cfcdb6343de53ba1d36b88bbad4a488725b1d3",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927151334_813bc44d-7104-4174-9c67-397ccf6738d7.sql",
+      "sha256": "05baf992504b0ef444109e4ea200cf5cdaf1c242ce6bde4e413d6ddb8feaf200",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927163030_d436d779-7a35-4dc4-afaa-360ac77eec12.sql",
+      "sha256": "b3ad65b6250e80aa633f38931c89feac4a998b442a0ba325e86410d70e10c210",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927221842_aea451ef-3a19-4849-b43d-b9fd4a74a2af.sql",
+      "sha256": "b43384e27212c30d8247a8e96374b352caee56410396e905a99e09baabbbd7ed",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927221851_db4e5ba1-0601-44b5-9a53-a8b2289c719c.sql",
+      "sha256": "60945947127390756ae7f77c2d6ee6adf38ffc4861bc67853c6b9c2478010e95",
+      "status": "PASS"
+    },
+    {
+      "file": "20261010213000_warehouse_events_staging.sql",
+      "sha256": "374ab4cb00cb6d32b737c8fbfdac7214612e375b44cd22a23625d6de4012a110",
+      "status": "PASS"
+    }
+  ],
+  "cases": [
+    {
+      "id": "D01_all_original_migrations",
+      "started_at_utc": "2026-10-22T00:18:35.204600+00:00",
+      "evidence": {
+        "applied": 23,
+        "historical_files_modified": false
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D02_real_restricted_login_roles",
+      "started_at_utc": "2026-10-22T00:18:35.205212+00:00",
+      "evidence": [
+        [
+          "fixture_a_admin",
+          "fixture_a_admin",
+          false,
+          false,
+          "on",
+          "ff0452f2-912e-49ba-b544-79d464fadc51",
+          212
+        ],
+        [
+          "fixture_a_warehouse",
+          "fixture_a_warehouse",
+          false,
+          false,
+          "on",
+          "21a9a245-2697-495f-b662-d97eb6053736",
+          213
+        ],
+        [
+          "fixture_a_viewer",
+          "fixture_a_viewer",
+          false,
+          false,
+          "on",
+          "b21e8a05-54f7-40fc-8af3-3b6b13a0a092",
+          214
+        ],
+        [
+          "fixture_b_admin",
+          "fixture_b_admin",
+          false,
+          false,
+          "on",
+          "7405fd16-3b86-4d0e-984b-d46059d3c2bd",
+          215
+        ],
+        [
+          "fixture_b_warehouse",
+          "fixture_b_warehouse",
+          false,
+          false,
+          "on",
+          "583b1448-a8a0-4c72-a884-5bee0728ee45",
+          216
+        ],
+        [
+          "fixture_b_viewer",
+          "fixture_b_viewer",
+          false,
+          false,
+          "on",
+          "466c309b-ff96-4ef3-a3ac-cdbb1beecc6e",
+          217
+        ],
+        [
+          "fixture_outsider",
+          "fixture_outsider",
+          false,
+          false,
+          "on",
+          "2aef3e11-14df-4952-807c-480106d9e36e",
+          218
+        ],
+        [
+          "fixture_missing",
+          "fixture_missing",
+          false,
+          false,
+          "on",
+          null,
+          219
+        ],
+        [
+          "fixture_anon",
+          "fixture_anon",
+          false,
+          false,
+          "on",
+          null,
+          220
+        ]
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "D03_company_user_select_isolation",
+      "started_at_utc": "2026-10-22T00:18:35.314439+00:00",
+      "evidence": [
+        {
+          "label": "a_admin",
+          "visible": [
+            "a30a1c74-2ea9-4688-9d40-130e1790e05b"
+          ]
+        },
+        {
+          "label": "a_warehouse",
+          "visible": [
+            "a30a1c74-2ea9-4688-9d40-130e1790e05b"
+          ]
+        },
+        {
+          "label": "a_viewer",
+          "visible": [
+            "a30a1c74-2ea9-4688-9d40-130e1790e05b"
+          ]
+        },
+        {
+          "label": "b_admin",
+          "visible": [
+            "e8ed5897-3c47-4dcd-9826-d0c008fd25f6"
+          ]
+        },
+        {
+          "label": "b_warehouse",
+          "visible": [
+            "e8ed5897-3c47-4dcd-9826-d0c008fd25f6"
+          ]
+        },
+        {
+          "label": "b_viewer",
+          "visible": [
+            "e8ed5897-3c47-4dcd-9826-d0c008fd25f6"
+          ]
+        },
+        {
+          "label": "outsider",
+          "visible": []
+        },
+        {
+          "label": "missing",
+          "visible": []
+        },
+        {
+          "label": "anon",
+          "visible": []
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "D04_direct_CRUD_matrix",
+      "started_at_utc": "2026-10-22T00:18:35.380868+00:00",
+      "evidence": {
+        "denied_operations": 41,
+        "own_admin_crud": "PASS; disposable transaction rolled back",
+        "denials": [
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "42501",
+            "message": "permission denied for table products"
+          },
+          {
+            "denied": "42501",
+            "message": "permission denied for table products"
+          },
+          {
+            "denied": "42501",
+            "message": "permission denied for table bom_lines"
+          },
+          {
+            "denied": "42501",
+            "message": "permission denied for table products"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "permission denied for table products"
+          }
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D05_definer_RPC_and_helper_bypass_denial",
+      "started_at_utc": "2026-10-22T00:18:35.509948+00:00",
+      "evidence": [
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function _apply_stock"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function _apply_stock"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function _apply_stock"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function _apply_stock"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function _apply_stock"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function place_order"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "D06_browser_roles_cannot_read_credentials",
+      "started_at_utc": "2026-10-22T00:18:35.602207+00:00",
+      "evidence": [
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "D07_shared_bundle_concurrent_shortage",
+      "started_at_utc": "2026-10-22T00:18:35.657016+00:00",
+      "evidence": {
+        "connections": [
+          {
+            "pid": 269,
+            "status": "OK",
+            "value": "4e4461cb-5c80-40f2-a2a1-9c0bcec0fb08"
+          },
+          {
+            "pid": 270,
+            "status": "ERROR",
+            "sqlstate": "P0001",
+            "error": "Insufficient stock for FIXTURE-C1-8338c48fd935: need 2, available 1"
+          }
+        ],
+        "stock": [
+          [
+            "aaaf04d0-1cf4-4d7a-ad9c-7c44bf145640",
+            3,
+            2
+          ],
+          [
+            "e533abb0-3500-4a40-86b5-683c29efabd9",
+            3,
+            1
+          ]
+        ],
+        "atomic_loser": "no partial reservation"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D08_whole_bundle_atomic_rollback",
+      "started_at_utc": "2026-10-22T00:18:35.702975+00:00",
+      "evidence": {
+        "stock": [
+          [
+            "3d5f6423-c7f7-44f9-8ce4-9d56a171899f",
+            1,
+            0
+          ],
+          [
+            "67afb1f8-8814-4dd8-8858-89ba4b1fed9c",
+            1,
+            0
+          ]
+        ],
+        "rolled_back_order": true
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D09_cancel_ship_race_and_replay",
+      "started_at_utc": "2026-10-22T00:18:35.755962+00:00",
+      "evidence": {
+        "order": "8c733a2d-a85c-49e1-b7e3-f450e6070923",
+        "status": "cancelled",
+        "connections": [
+          {
+            "pid": 281,
+            "status": "ERROR",
+            "sqlstate": "P0001",
+            "error": "Only placed orders can be fulfilled (current: cancelled)"
+          },
+          {
+            "pid": 282,
+            "status": "OK",
+            "value": "('',)"
+          }
+        ],
+        "stock": [
+          [
+            "4e6833ec-89ea-4f16-a394-abdf546a62ed",
+            20,
+            0
+          ],
+          [
+            "5fe40435-6edb-4d69-a214-a17573586c8c",
+            20,
+            0
+          ]
+        ],
+        "terminal_replays": "rejected without duplicate effect"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D10_terminated_transaction_rollback_and_retry",
+      "started_at_utc": "2026-10-22T00:18:35.828171+00:00",
+      "evidence": {
+        "terminated_backend_pid": 288,
+        "uncommitted_order_absent": true,
+        "successful_retry": "095ccfb1-aa64-4df9-89ad-0140eaf5a516"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D11_external_idempotency_required",
+      "started_at_utc": "2026-10-22T00:18:35.917112+00:00",
+      "evidence": {
+        "connections": [
+          {
+            "pid": 298,
+            "status": "OK",
+            "value": "6b932f06-a5be-4787-9bf1-3e5dae514930"
+          },
+          {
+            "pid": 299,
+            "status": "ERROR",
+            "sqlstate": "23505",
+            "error": "duplicate key value violates unique constraint \"orders_channel_ext_uniq\""
+          }
+        ],
+        "orders": 1,
+        "stock": [
+          [
+            "50970f5b-17a6-4f2b-a589-ac3e8da316e6",
+            50,
+            1
+          ],
+          [
+            "7e29d671-fb9d-40e8-b750-a4903189ab87",
+            50,
+            1
+          ]
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D12_execution_time_membership_revocation",
+      "started_at_utc": "2026-10-22T00:18:35.970723+00:00",
+      "evidence": {
+        "denial": {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        "visible_after_revoke": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D13_view_and_report_isolation",
+      "started_at_utc": "2026-10-22T00:18:36.025257+00:00",
+      "evidence": [
+        {
+          "view": "v_stock_reconciliation",
+          "rows": 14
+        },
+        {
+          "view": "v_component_availability",
+          "rows": 14
+        },
+        {
+          "view": "v_product_availability",
+          "rows": 14
+        },
+        {
+          "view": "v_listing_sync",
+          "rows": 0
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "D14_temp_schema_shadow_resistance",
+      "started_at_utc": "2026-10-22T00:18:36.039678+00:00",
+      "evidence": {
+        "foreign_admin": false
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D15_direct_SQL_claim_spoof_boundary",
+      "started_at_utc": "2026-10-22T00:18:36.052610+00:00",
+      "status": "FAIL",
+      "error": "AssertionError: Direct SQL client can replace trusted auth claim and see foreign rows; PostgREST/JWT boundary unproved"
+    },
+    {
+      "id": "D16_restart_durability_reconnect",
+      "started_at_utc": "2026-10-22T00:18:36.062331+00:00",
+      "evidence": {
+        "persisted_order_status": "placed",
+        "stock": [
+          [
+            "d451e92a-e717-4691-b5d3-26d936ddf083",
+            20,
+            1
+          ],
+          [
+            "eebeaec9-498a-41db-a0c9-7c0cc98b44cf",
+            20,
+            2
+          ]
+        ],
+        "recovery": "fsync enabled clean fast-stop/restart; not power-loss or off-host restore"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D17_all_public_table_read_surfaces",
+      "started_at_utc": "2026-10-22T00:18:36.396918+00:00",
+      "evidence": [
+        {
+          "table": "audit_log",
+          "rows": 69,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "bom_lines",
+          "rows": 28,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "channel_credentials",
+          "access": "denied"
+        },
+        {
+          "table": "channel_listings",
+          "rows": 0,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "component_stock",
+          "rows": 14,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "components",
+          "rows": 14,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "inventory_outbox",
+          "rows": 0,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "order_lines",
+          "rows": 5,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "order_reservations",
+          "rows": 10,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "orders",
+          "rows": 5,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "organization_members",
+          "rows": 3,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "organizations",
+          "rows": 1,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "product_attributes",
+          "rows": 0,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "product_families",
+          "rows": 0,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "product_review_decisions",
+          "rows": 0,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "products",
+          "rows": 14,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "profiles",
+          "rows": 3,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "sales_channels",
+          "rows": 7,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "stock_movements",
+          "rows": 12,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "user_roles",
+          "rows": 0,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "warehouse_events",
+          "access": "denied"
+        },
+        {
+          "table": "warehouses",
+          "rows": 7,
+          "foreign_fixture_rows": 0
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "D18_null_channel_external_replay",
+      "started_at_utc": "2026-10-22T00:18:36.420724+00:00",
+      "status": "FAIL",
+      "error": "AssertionError: Nullable channel bypassed external-ref uniqueness; 2 durable orders"
+    },
+    {
+      "id": "D19_separate_ship_and_cancel_lifecycles",
+      "started_at_utc": "2026-10-22T00:18:36.479937+00:00",
+      "evidence": [
+        {
+          "operation": "fulfill_order",
+          "stock": [
+            [
+              "c03627dc-1d0e-46aa-b39d-c6275a515b4b",
+              18,
+              0
+            ],
+            [
+              "ebfcb687-4db2-40bf-b319-7cdab0acdcc3",
+              19,
+              0
+            ]
+          ]
+        },
+        {
+          "operation": "cancel_order",
+          "stock": [
+            [
+              "04532618-4e11-456f-9b2e-698ab7bd9428",
+              20,
+              0
+            ],
+            [
+              "81388034-c7bd-4d43-afe2-695942f54d55",
+              20,
+              0
+            ]
+          ]
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "D20_real_dump_restore_and_RLS_recheck",
+      "started_at_utc": "2026-10-22T00:18:36.564373+00:00",
+      "evidence": {
+        "matching_relations": 23,
+        "restored_role_RLS": "foreign denied; own visible",
+        "private_dump_exported": false,
+        "scope": "same isolated cluster, separate restored DB; not off-host/key/SLA recovery"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D21_anonymous_role_denials",
+      "started_at_utc": "2026-10-22T00:18:36.969495+00:00",
+      "evidence": [
+        {
+          "denied": "42501",
+          "message": "permission denied to set role \"authenticated\""
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table products"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function bootstrap_user"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function place_order"
+        }
+      ],
+      "status": "PASS"
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "gcc",
+        "-shared",
+        "-fPIC",
+        "/workspace/scratch/930c38487b1a/alternative-wms/verification/postgres/uid_compat.c",
+        "-o",
+        "/tmp/wms-pg-synthetic-wi441qkj/uid_compat.so",
+        "-ldl"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "exit_code": 0,
+      "log": "uid-compat-build.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "duration_seconds": 0.037
+    },
+    {
+      "argv": [
+        "/workspace/scratch/930c38487b1a/pg-runtime/embedded_postgres/pginstall/bin/initdb",
+        "-D",
+        "/tmp/wms-pg-synthetic-wi441qkj/cluster",
+        "-U",
+        "fixture_owner",
+        "--no-locale",
+        "--encoding=UTF8",
+        "--auth=scram-sha-256",
+        "--pwfile",
+        "[PRIVATE_PWFILE]"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "exit_code": 0,
+      "log": "initdb.log",
+      "log_sha256": "b35c25b52257d76e0b857aa0317b49c7b85380f4bd06dbf76defa63aefe5f014",
+      "duration_seconds": 0.567
+    },
+    {
+      "argv": [
+        "/workspace/scratch/930c38487b1a/pg-runtime/embedded_postgres/pginstall/bin/postgres",
+        "-D",
+        "/tmp/wms-pg-synthetic-wi441qkj/cluster",
+        "-h",
+        "127.0.0.1",
+        "-p",
+        "15432",
+        "-k",
+        "",
+        "-c",
+        "shared_buffers=16MB",
+        "-c",
+        "max_connections=25",
+        "-c",
+        "fsync=on",
+        "-c",
+        "synchronous_commit=on"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "purpose": "owned ephemeral server start",
+      "pid": 199,
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/930c38487b1a/pg-runtime/embedded_postgres/pginstall/bin/postgres",
+        "-D",
+        "/tmp/wms-pg-synthetic-wi441qkj/cluster",
+        "-h",
+        "127.0.0.1",
+        "-p",
+        "15432",
+        "-k",
+        "",
+        "-c",
+        "shared_buffers=16MB",
+        "-c",
+        "max_connections=25",
+        "-c",
+        "fsync=on",
+        "-c",
+        "synchronous_commit=on"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "purpose": "owned ephemeral server start",
+      "pid": 310,
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/930c38487b1a/pg-runtime/embedded_postgres/pginstall/bin/pg_dump",
+        "-h",
+        "127.0.0.1",
+        "-p",
+        "15432",
+        "-U",
+        "fixture_owner",
+        "-d",
+        "wms_test_alternative",
+        "-Fc",
+        "-f",
+        "/tmp/wms-pg-synthetic-wi441qkj/private.dump"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "exit_code": 0,
+      "log": "pg-dump.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "duration_seconds": 0.07
+    },
+    {
+      "argv": [
+        "/workspace/scratch/930c38487b1a/pg-runtime/embedded_postgres/pginstall/bin/pg_restore",
+        "-h",
+        "127.0.0.1",
+        "-p",
+        "15432",
+        "-U",
+        "fixture_owner",
+        "-d",
+        "wms_test_restore_e7d3fc91bf",
+        "--exit-on-error",
+        "--no-owner",
+        "/tmp/wms-pg-synthetic-wi441qkj/private.dump"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "exit_code": 0,
+      "log": "pg-restore.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "duration_seconds": 0.225
+    }
+  ],
+  "runtime_binary_hashes": {
+    "postgres": "8a5fa2b4644be7fed5c8ace3c94989132ff95dcf3ddf178ce777bdd6dda357e8",
+    "initdb": "9c93d1e2112cf30669bd22f9d474313d3aec8a22041ebb0157f758c57614f61e",
+    "pg_ctl": "dd458781620f016af2d6edb76b84f5246e106a1db43cdd9979d552d96d65068c",
+    "pg_dump": "b0efe5ee27b4090a16c742169e7de580d399388c6486bcaed3ae59b1cda7bca1",
+    "pg_restore": "358b4481213f1c2c61b4440920d898ba9da65964d3149c222bc3337fe7ead5b2"
+  },
+  "host_isolation_proven": false,
+  "http_postgrest_jwt_proven": false,
+  "codex_start_authorized": false,
+  "production_authority_changed": false,
+  "uid_compat": {
+    "actual_uid": 0,
+    "observed_uid": 1,
+    "source_sha256": "dfd766a3cb228d6a3f9c4e6adf59f12db35ef60fa4ab86c4f5d181a183733390",
+    "library_sha256": "ddbfb13e1c68b338c2851fd01cc173fe8c7028da1019bd77333908f29ea3a8fc",
+    "scope": "child processes only; libc UID/stat observations; NOT OS or filesystem isolation"
+  },
+  "server_version": "PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 14.2.1 20250110 (Red Hat 14.2.1-11), 64-bit",
+  "rls_catalog": [
+    {
+      "table": "audit_log",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "bom_lines",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "channel_credentials",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "channel_listings",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "component_stock",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "components",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "inventory_outbox",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "order_lines",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "order_reservations",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "orders",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "organization_members",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "organizations",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "product_attributes",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "product_families",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "product_review_decisions",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "products",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "profiles",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "sales_channels",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "stock_movements",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "user_roles",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "warehouse_events",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "warehouses",
+      "enabled": true,
+      "forced": false
+    }
+  ],
+  "definer_catalog": [
+    {
+      "signature": "_apply_stock(uuid,uuid,movement_type,integer,integer,text,text,uuid,uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": false,
+      "anon_execute": false
+    },
+    {
+      "signature": "_ensure_primary(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": false,
+      "anon_execute": false
+    },
+    {
+      "signature": "_product_for_ean(uuid,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": false,
+      "anon_execute": false
+    },
+    {
+      "signature": "apply_bol_attributes(uuid,jsonb)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "apply_bol_enrichment(uuid,jsonb)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "audit_trigger()",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": false,
+      "anon_execute": false
+    },
+    {
+      "signature": "bootstrap_user()",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "cancel_order(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "channel_credential_status()",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "confirm_listing(uuid,uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "current_org_id()",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "default_warehouse_id(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": false,
+      "anon_execute": false
+    },
+    {
+      "signature": "fulfill_order(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "has_any_role(uuid,app_role[])",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "has_org_role(uuid,app_role[])",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "has_role(uuid,app_role)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "import_bom(jsonb,boolean)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "import_components(jsonb,boolean)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "import_listings(jsonb,boolean)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "import_products(jsonb,boolean)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "is_org_member(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "merge_products(uuid,uuid[],integer,boolean,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "place_order(jsonb,uuid,text,text,uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "plan_stock_sync(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "post_stock_movement(uuid,movement_type,integer,text,text,uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "remove_member(uuid,uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "reset_product_attribute(uuid,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "run_acceptance_test()",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_bundle_contents(uuid,jsonb)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_channel_company(uuid,jsonb)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_channel_retailer(uuid,jsonb)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_channel_status(uuid,text,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_listing_variant(uuid,text,text,integer)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_member_role(uuid,text,app_role)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_org()",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": false,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_primary_listing(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_product_as_stock_item(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_product_attribute(uuid,text,text,text,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_product_bom(uuid,jsonb)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_product_family(uuid,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_product_master(uuid,text,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_product_normal(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_product_relationship(uuid,text,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "unmerge_listing(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "upsert_bol_offers(uuid,jsonb,boolean)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    }
+  ],
+  "restart_fixture": {
+    "warehouse": "6228aaca-ee48-47b1-a0ee-9e512e4594f1",
+    "order": "095ccfb1-aa64-4df9-89ad-0140eaf5a516",
+    "stock": [
+      [
+        "d451e92a-e717-4691-b5d3-26d936ddf083",
+        20,
+        1
+      ],
+      [
+        "eebeaec9-498a-41db-a0c9-7c0cc98b44cf",
+        20,
+        2
+      ]
+    ]
+  },
+  "duplicate_external_observation": {
+    "connections": [
+      {
+        "pid": 298,
+        "status": "OK",
+        "value": "6b932f06-a5be-4787-9bf1-3e5dae514930"
+      },
+      {
+        "pid": 299,
+        "status": "ERROR",
+        "sqlstate": "23505",
+        "error": "duplicate key value violates unique constraint \"orders_channel_ext_uniq\""
+      }
+    ],
+    "orders": 1,
+    "stock": [
+      [
+        "50970f5b-17a6-4f2b-a589-ac3e8da316e6",
+        50,
+        1
+      ],
+      [
+        "7e29d671-fb9d-40e8-b750-a4903189ab87",
+        50,
+        1
+      ]
+    ]
+  },
+  "claim_spoof_observation": {
+    "restricted_login": "fixture_a_viewer",
+    "forged_subject": "fixture_b_admin",
+    "foreign_visible": 1,
+    "boundary": "custom request claims are trusted API inputs, not authentication for arbitrary SQL clients"
+  },
+  "null_channel_replay_observation": {
+    "connections": [
+      {
+        "pid": 326,
+        "status": "OK",
+        "value": "b0b040d9-5f2e-4da9-b667-8222e3a0dd7e"
+      },
+      {
+        "pid": 327,
+        "status": "OK",
+        "value": "8d0286b4-062c-4e54-967c-8522f388ad73"
+      }
+    ],
+    "orders": 2,
+    "stock": [
+      [
+        "59163cbb-57f7-4e4d-bb19-a7b166b06b0a",
+        50,
+        2
+      ],
+      [
+        "fa40e070-8972-44d3-8d37-0cf0ecb486f8",
+        50,
+        2
+      ]
+    ]
+  },
+  "backup_restore_fingerprints": [
+    {
+      "table": "auth.users",
+      "count": 9,
+      "sha256": "34bb2efc1d28151af5d9533772446df00a36b50ee2efffb0fd292c09c314c762"
+    },
+    {
+      "table": "public.audit_log",
+      "count": 158,
+      "sha256": "db3d09e2e86a734e526520688f11e2b6f989b22ceef3e2d62c74798f932ee9cd"
+    },
+    {
+      "table": "public.bom_lines",
+      "count": 53,
+      "sha256": "7e51dad738caefad0875dff9bc561dca5fb5897ba6ef72d6050a365d70632ed9"
+    },
+    {
+      "table": "public.channel_credentials",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.channel_listings",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.component_stock",
+      "count": 25,
+      "sha256": "c349652756ef2fb3d6c8bfd938d1d9e7789d0999470844cbc9f6d089d6006ef4"
+    },
+    {
+      "table": "public.components",
+      "count": 25,
+      "sha256": "7041f1d5e26fcd61ea08277c848fc1f7d2e43dcfafbac4cf00abcd94a8a3a44a"
+    },
+    {
+      "table": "public.inventory_outbox",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.order_lines",
+      "count": 9,
+      "sha256": "ba499572f9c20d04bd61c6eac4f18e4d238cb7c4ff2458721969a5b9e39bf5ee"
+    },
+    {
+      "table": "public.order_reservations",
+      "count": 18,
+      "sha256": "800c04a7bb8003419854fc3e14f7c1da7413de2f07c6af971d2d995352251791"
+    },
+    {
+      "table": "public.orders",
+      "count": 9,
+      "sha256": "9577e4b03b66862d3a7a5d9ba296174f985f26a28cbfc44258165a2fb60bbd9a"
+    },
+    {
+      "table": "public.organization_members",
+      "count": 6,
+      "sha256": "1cd181cfd72efc7ab09422241073db425fae5a60ecb2f865cbda2411fece62fd"
+    },
+    {
+      "table": "public.organizations",
+      "count": 3,
+      "sha256": "63f832ac740f73cac0164e77726897029aebb8c87ed92092a199de27437861a3"
+    },
+    {
+      "table": "public.product_attributes",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.product_families",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.product_review_decisions",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.products",
+      "count": 29,
+      "sha256": "cfb4b54669b4d60b217f088858458431f017703bac9d9f38b853dbd2c5b753b4"
+    },
+    {
+      "table": "public.profiles",
+      "count": 9,
+      "sha256": "da59ad783e5c21a802f5430a6132b567d974eb721111cb998de70035fc0e6c92"
+    },
+    {
+      "table": "public.sales_channels",
+      "count": 13,
+      "sha256": "47675ee01e3b5428291798de7604ddc6216eae552655eb04142067eaabacc86f"
+    },
+    {
+      "table": "public.stock_movements",
+      "count": 27,
+      "sha256": "1347178684878f5d13c7caecf689f3995f523c73396a9ff3dcac8b1005aefc4f"
+    },
+    {
+      "table": "public.user_roles",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.warehouse_events",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.warehouses",
+      "count": 12,
+      "sha256": "99480bb398525a689197e0add8df565929bef59029d1c5f2c24a598104810bfe"
+    }
+  ],
+  "cleanup": {
+    "server_stopped": true,
+    "private_cluster_removed": true
+  },
+  "finished_at_utc": "2026-10-22T00:18:37.001648+00:00",
+  "summary": {
+    "PASS": 19,
+    "FAIL": 2
+  },
+  "unexecuted_requirements": [
+    "HTTP/PostgREST JWT validation",
+    "separate real OS identities/mounts",
+    "native ERPNext integration",
+    "real background-worker transport",
+    "fresh full ERPNext bootstrap",
+    "off-host backup/key custody and crash/power-loss durability"
+  ],
+  "unexecuted_case_ids": []
+}

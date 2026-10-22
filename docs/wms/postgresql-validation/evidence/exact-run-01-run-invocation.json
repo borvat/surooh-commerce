@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "python3",
+    "verification/run.py",
+    "--profile",
+    "wms",
+    "--expected-sha",
+    "cf4863623a5c3e42fb850b0b5942bc17e58ba72f",
+    "--bun",
+    "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+    "--tools-python",
+    "/workspace/scratch/930c38487b1a/alternative-runtime/python-tools/bin/python",
+    "--postgres-bin",
+    "/workspace/scratch/930c38487b1a/pg-runtime/embedded_postgres/pginstall/bin",
+    "--db-python",
+    "/workspace/scratch/930c38487b1a/oss-lab/tryton-venv/bin/python",
+    "--allow-uid-compat",
+    "--accounting-report",
+    "/workspace/scratch/930c38487b1a/alternative-evidence/accounting-run-02/report.json",
+    "--accounting-expected-sha",
+    "a9400f6f4b9066f5487f16cd45268728920e5672",
+    "--output",
+    "/workspace/scratch/930c38487b1a/postgres-evidence/exact-run-01"
+  ],
+  "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+  "exit_code": 1,
+  "source_sha": "cf4863623a5c3e42fb850b0b5942bc17e58ba72f",
+  "console_sha256": "b0853f0e05fdfa9cb72effa4fb3b4cb0b8fcb89d4c0628414bc2e6943ad265ac"
+}

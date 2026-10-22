@@ -1,3 +1,5 @@
+> Status update from the separately authorized PostgreSQL packet: adapter implemented and21 real DB groups executed at 6066f6a3fbb8f6edd2b6cadb8304b311e2e046bb (19 PASS,2 FAIL). PREPARATION/P01 remain BLOCKED. See [current results](../postgresql-validation/RESULTS.md) and [findings](../postgresql-validation/FINDINGS.md). The original unimplemented-plan text below is preserved as historical scope, not the current adapter status. No production/Codex authorization.
+
 # Separate disposable DB/RLS/concurrency packet — NOT IMPLEMENTED
 
 Status: planned only, no database was provisioned or migrated in source cleanup. scripts/wms/db-check.mjs must continue to exit2 and report the missing real adapter. Source-quality readiness does not close PREPARATION/P01 DB requirements.

@@ -1,0 +1,591 @@
+{
+  "schema_version": 1,
+  "component": "wms",
+  "source": {
+    "commit_sha": "9827f7252d74849bba5dc5f130a4fc6d6e6d5d2c",
+    "tree_sha": "d22499518b037abf38b455519772c9752f316424",
+    "dirty_tracked": false
+  },
+  "started_at_utc": "2026-10-22T01:20:27.813408+00:00",
+  "environment": {
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "uid": 0,
+    "env_policy": "allowlisted variables only; no inherited provider/DB/OAuth credentials",
+    "node": {
+      "version": "v24.19.0",
+      "exit_code": 0
+    },
+    "bun": {
+      "version": "1.3.13",
+      "exit_code": 0
+    },
+    "tools_python": {
+      "version": "Python 3.14.8",
+      "exit_code": 0
+    },
+    "tools_distributions": {
+      "ruff": "0.15.6",
+      "build": "1.4.0",
+      "flit_core": "3.12.0",
+      "packaging": "26.3",
+      "pyproject_hooks": "1.3.3"
+    }
+  },
+  "g0": "HOSTED_CI_BLOCKED \u2014 ALTERNATIVE_VERIFICATION_REQUIRED",
+  "codex_start_authorized": false,
+  "phase_completion_authorized": false,
+  "plan_sha256": "91da011fe70fba950519c427e038a1865557b546a78bcd2a759040ebe4db550b",
+  "tests": [
+    {
+      "id": "foundation",
+      "tier": "foundation",
+      "command": [
+        "node",
+        "scripts/wms/foundation-check.mjs"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.038,
+      "log": "logs/foundation.log",
+      "log_sha256": "16c50c626e196c38ebd952f76379fece6eeec304782e924c399b01c14f00fa6d",
+      "raw_output_sha256": "16c50c626e196c38ebd952f76379fece6eeec304782e924c399b01c14f00fa6d"
+    },
+    {
+      "id": "shared_integrity",
+      "tier": "captured_evidence",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "ci/check_shared_core.py"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.027,
+      "log": "logs/shared_integrity.log",
+      "log_sha256": "2a3af38e90315db7dfaeedfa0940a409fdcf4397d377308140e1ab2c082dafbf",
+      "raw_output_sha256": "2a3af38e90315db7dfaeedfa0940a409fdcf4397d377308140e1ab2c082dafbf"
+    },
+    {
+      "id": "stage_gate_regressions",
+      "tier": "foundation",
+      "command": [
+        "node",
+        "--test",
+        "tests/foundation/architecture-decision.test.mjs",
+        "tests/foundation/gates.test.mjs"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.155,
+      "log": "logs/stage_gate_regressions.log",
+      "log_sha256": "e70236917f79db347ee5a725f24c924e905eb3eb0ad1a72633e2073d793d8bc5",
+      "raw_output_sha256": "e70236917f79db347ee5a725f24c924e905eb3eb0ad1a72633e2073d793d8bc5",
+      "executed_test_count": 19
+    },
+    {
+      "id": "authority_holds",
+      "tier": "foundation",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/shared_core",
+        "-v"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.057,
+      "log": "logs/authority_holds.log",
+      "log_sha256": "3b7f57f9fc77bd691c11521ace10c4d1dab2a7b5896496a24166a17063b89da4",
+      "raw_output_sha256": "3b7f57f9fc77bd691c11521ace10c4d1dab2a7b5896496a24166a17063b89da4",
+      "executed_test_count": 6
+    },
+    {
+      "id": "dependency_install",
+      "tier": "dependencies",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "install",
+        "--frozen-lockfile",
+        "--ignore-scripts"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 1200,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.092,
+      "log": "logs/dependency_install.log",
+      "log_sha256": "a04afaaca569c3203c9101ee35648029c65e56d0372d978a4a094d189095d8a8",
+      "raw_output_sha256": "a04afaaca569c3203c9101ee35648029c65e56d0372d978a4a094d189095d8a8"
+    },
+    {
+      "id": "unit_tests",
+      "tier": "unit",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "run",
+        "test:unit"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.85,
+      "log": "logs/unit_tests.log",
+      "log_sha256": "d3595de0a11fbae067fd3d57a7672649c4ec1e81f0c54262a384a2b96f2ecf5e",
+      "raw_output_sha256": "d3595de0a11fbae067fd3d57a7672649c4ec1e81f0c54262a384a2b96f2ecf5e",
+      "executed_test_count": 106
+    },
+    {
+      "id": "typecheck",
+      "tier": "typescript",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 7.934,
+      "log": "logs/typecheck.log",
+      "log_sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+      "raw_output_sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "id": "lint",
+      "tier": "lint",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "run",
+        "lint"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 5.279,
+      "log": "logs/lint.log",
+      "log_sha256": "12c22d6577056a511d810dd2d4790c6166291046ee5d77784c9baf6b719eff74",
+      "raw_output_sha256": "12c22d6577056a511d810dd2d4790c6166291046ee5d77784c9baf6b719eff74"
+    },
+    {
+      "id": "build",
+      "tier": "build",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "run",
+        "build"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 1200,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 5.384,
+      "log": "logs/build.log",
+      "log_sha256": "8c82dc851f5243feed7b64c3f052b78224d7fbe5a81038bf7d2e9b3805ed109d",
+      "raw_output_sha256": "8c82dc851f5243feed7b64c3f052b78224d7fbe5a81038bf7d2e9b3805ed109d"
+    },
+    {
+      "id": "generated_cleanliness",
+      "tier": "generated_source",
+      "command": [
+        "node",
+        "scripts/wms/generated-clean.mjs"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 60,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.045,
+      "log": "logs/generated_cleanliness.log",
+      "log_sha256": "5ac7d439105a9ee9efd923a7f5bce7b29982eab8b85a708b0343d45db517925f",
+      "raw_output_sha256": "5ac7d439105a9ee9efd923a7f5bce7b29982eab8b85a708b0343d45db517925f"
+    },
+    {
+      "id": "source_quality_regressions",
+      "tier": "unit",
+      "command": [
+        "/workspace/scratch/930c38487b1a/alternative-runtime/node_modules/@oven/bun-linux-x64/bin/bun",
+        "test",
+        "tests/source-quality.test.ts"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.366,
+      "log": "logs/source_quality_regressions.log",
+      "log_sha256": "d97a21abc88b8c0bc0867343403fe584447b4b597f0957de266dd6dbfcf55be8",
+      "raw_output_sha256": "d97a21abc88b8c0bc0867343403fe584447b4b597f0957de266dd6dbfcf55be8",
+      "executed_test_count": 9
+    },
+    {
+      "id": "legacy_db_adapter",
+      "tier": "database",
+      "command": [
+        "node",
+        "scripts/wms/db-check.mjs",
+        "--postgres-bin",
+        "/workspace/scratch/930c38487b1a/pg-runtime/embedded_postgres/pginstall/bin",
+        "--db-python",
+        "/workspace/scratch/930c38487b1a/oss-lab/tryton-venv/bin/python",
+        "--artifact-dir",
+        "/workspace/scratch/930c38487b1a/native-integration-evidence/regression-exact-01/artifacts/postgres",
+        "--allow-uid-compat"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 4.333,
+      "log": "logs/legacy_db_adapter.log",
+      "log_sha256": "adb4caff0daf05a25c04b3f5e808f564fdf580b495aac75af145664ee024e30c",
+      "raw_output_sha256": "adb4caff0daf05a25c04b3f5e808f564fdf580b495aac75af145664ee024e30c",
+      "executed_test_count": 21
+    },
+    {
+      "id": "alternative_gate_regressions",
+      "tier": "foundation",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "verification/tests",
+        "-v"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.053,
+      "log": "logs/alternative_gate_regressions.log",
+      "log_sha256": "9d995518447a284d45c405142938586b0aea3b78dcc7df6c487016f140e9475c",
+      "raw_output_sha256": "9d995518447a284d45c405142938586b0aea3b78dcc7df6c487016f140e9475c",
+      "executed_test_count": 14
+    },
+    {
+      "id": "accounting_native_link",
+      "tier": "linked_native_evidence",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "verification/link_native.py",
+        "--report",
+        "/workspace/scratch/930c38487b1a/alternative-evidence/accounting-run-02/report.json",
+        "--output",
+        "/workspace/scratch/930c38487b1a/native-integration-evidence/regression-exact-01/artifacts/accounting-native-link.json",
+        "--expected-sha",
+        "a9400f6f4b9066f5487f16cd45268728920e5672"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 600,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.031,
+      "log": "logs/accounting_native_link.log",
+      "log_sha256": "cebbdea112b34168a51bb9ac15af7f3446b5bdceb500b6d6ccebbb6f881a3abd",
+      "raw_output_sha256": "cebbdea112b34168a51bb9ac15af7f3446b5bdceb500b6d6ccebbb6f881a3abd"
+    },
+    {
+      "id": "service_uid_isolation",
+      "tier": "security",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Distinct non-root UIDs/mounts unavailable in this executor; remains G1"
+    },
+    {
+      "id": "real_queue_and_api_bypass",
+      "tier": "integration",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Bounded native RQ authorization and HTTP mutation guards are probed separately; complete queue/IC/recovery/transport acceptance remains incomplete"
+    },
+    {
+      "id": "wms_ui_native_e2e",
+      "tier": "integration",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Full current WMS UI/native bundle parent/dispatch/cancel races unimplemented; remains G3"
+    },
+    {
+      "id": "dutch_accountant_signoff",
+      "tier": "fiscal_review",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Qualified accountant has not reviewed/signed policy; remains G4"
+    },
+    {
+      "id": "fresh_full_engine_build_upgrade",
+      "tier": "operations",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Fresh complete ERPNext asset/framework/business-schema and restore/load acceptance not implemented; remains G5"
+    },
+    {
+      "id": "live_integrations",
+      "tier": "live",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "No authorized live bank/tax/bol/Peppol mutation or live acceptance environment"
+    },
+    {
+      "id": "fresh_engine_bootstrap",
+      "tier": "operations",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Fresh API-only ERPNext16.52 sites are probed separately; complete asset build, non-root service separation and full WMS workflow/bootstrap acceptance remain incomplete"
+    },
+    {
+      "id": "native_fiscal_enforcement",
+      "tier": "native_fiscal",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Accountant goldens and direct native posting enforcement not implemented"
+    },
+    {
+      "id": "native_finance_workflow",
+      "tier": "native_financial",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Complete native invoice/credit/APAR/bank-import workflow acceptance beyond prototypes not implemented"
+    },
+    {
+      "id": "stock_valuation_acceptance",
+      "tier": "native_valuation",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Full landed/backdated/returns/assets/COGS/GL acceptance for Surooh workflows not implemented"
+    },
+    {
+      "id": "cross_system_integration_acceptance",
+      "tier": "integration",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Marketplace/Warehouse/SAM/IC real implementation and fake-provider recovery acceptance not implemented"
+    },
+    {
+      "id": "synthetic_migration_reconciliation",
+      "tier": "migration",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Complete synthetic source disposition/mapping/replay/reconciliation not implemented"
+    },
+    {
+      "id": "complete_financial_acceptance",
+      "tier": "acceptance",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Full financial acceptance matrix/reports not executed on shipped Surooh app"
+    },
+    {
+      "id": "bundle_full_reservation_acceptance",
+      "tier": "native_stock",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Nested/serial/batch/order lifecycle and cancel/dispatch full bundle adapter acceptance not implemented"
+    },
+    {
+      "id": "warehouse_receipt_count_acceptance",
+      "tier": "native_stock",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Retained WMS UI/native receipt/count/location acceptance not implemented"
+    },
+    {
+      "id": "return_inspection_transfer_acceptance",
+      "tier": "native_stock",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Full authorized native inspection/returns/transfer acceptance not implemented"
+    },
+    {
+      "id": "quota_drift_acceptance",
+      "tier": "integration",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Full scoped native quota/projection-lag/drift acceptance not implemented"
+    },
+    {
+      "id": "postgres_adapter_guard_regressions",
+      "tier": "foundation",
+      "command": [
+        "node",
+        "--test",
+        "tests/foundation/postgres-adapter.test.mjs"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 60,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.322,
+      "log": "logs/postgres_adapter_guard_regressions.log",
+      "log_sha256": "bf0a31fa360cde13c0262b6a4e6bcfd05618346743037469215bce2e78d3b2eb",
+      "raw_output_sha256": "bf0a31fa360cde13c0262b6a4e6bcfd05618346743037469215bce2e78d3b2eb",
+      "executed_test_count": 6
+    },
+    {
+      "id": "postgres_host_identity_isolation",
+      "tier": "security",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Executor maps only UID0; explicit local libc compatibility is not OS/mount/service identity isolation"
+    },
+    {
+      "id": "legacy_http_auth_boundary",
+      "tier": "integration",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "verification/postgres/check_trusted.py",
+        "--artifact-dir",
+        "/workspace/scratch/930c38487b1a/native-integration-evidence/regression-exact-01/artifacts"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 60,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.031,
+      "log": "logs/legacy_http_auth_boundary.log",
+      "log_sha256": "7c1754c3b7b2c87a63494963b16ed045d0ae3f5fc224d409a87e67908c074a75",
+      "raw_output_sha256": "7c1754c3b7b2c87a63494963b16ed045d0ae3f5fc224d409a87e67908c074a75",
+      "executed_test_count": 18
+    },
+    {
+      "id": "trusted_boundary_guard_regressions",
+      "tier": "foundation",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "verification/postgres/tests",
+        "-v"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "timeout_seconds": 60,
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_seconds": 0.057,
+      "log": "logs/trusted_boundary_guard_regressions.log",
+      "log_sha256": "43426714fd90797af70cf0c7c5d5cde70f8ce29847a0cb1f8a869883716cb22c",
+      "raw_output_sha256": "43426714fd90797af70cf0c7c5d5cde70f8ce29847a0cb1f8a869883716cb22c",
+      "executed_test_count": 6
+    },
+    {
+      "id": "deployed_wms_identity_integration",
+      "tier": "integration",
+      "status": "BLOCKED",
+      "exit_code": null,
+      "command": null,
+      "reason": "Real native HTTP/WMS-service and RQ probes exist separately; full rendered WMS UI, native pick handoff and deployed identity/operational parity remain unaccepted"
+    }
+  ],
+  "open_gate_policy": "G1-G6 remain independently required; local evidence is not hosted CI or production approval",
+  "input_hashes": {
+    "bun.lock": "3712617b3e818ec1525fb11a8165960ce4af6c70731a1bf47a38fcdcff3efbe2",
+    "verification/tool-versions.json": "735b2d4c62ec29de1829f67f26b0df411bf915d310004a10a64a9162e35ef234",
+    "contracts/shared-core-authority.json": "01c792be997043eea23630d436242415bf55ac8543edfe17fe3919bf81d2c8b6"
+  },
+  "source_after": {
+    "commit_sha": "9827f7252d74849bba5dc5f130a4fc6d6e6d5d2c",
+    "tree_sha": "d22499518b037abf38b455519772c9752f316424",
+    "dirty_tracked": false
+  },
+  "tracked_diff": "",
+  "finished_at_utc": "2026-10-22T01:20:53.039610+00:00",
+  "summary": {
+    "PASS": 17,
+    "FAIL": 0,
+    "BLOCKED": 19
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/accounting-native-link.json",
+      "sha256": "8db2c80c31528ae627a9ecf68e24f6fcbfea58a064bc4ae47a3bc9c7cf943a50"
+    },
+    {
+      "path": "artifacts/build-output-manifest.json",
+      "sha256": "e950dc25b9d36767d0d73a2b7a6da0203b52159119065aa4e3197891afccfbde"
+    },
+    {
+      "path": "artifacts/linked-isolation-results.json",
+      "sha256": "d3dde5f3e36e4582c2a70be0a514d37787462fddcec7779b433765d6397f03c8"
+    },
+    {
+      "path": "artifacts/linked-native-results.json",
+      "sha256": "851b1595d29b5ec5b6f193bfc23cb91f235aef54e36da070c1f66389846b9d81"
+    },
+    {
+      "path": "artifacts/linked-runtime.json",
+      "sha256": "94f5dfac079c3daa232004acc7eb7d5975b970dd462217782e4910034ae6de14"
+    },
+    {
+      "path": "artifacts/postgres/database-results.json",
+      "sha256": "29d5c1bc860e697c21fcddc4d7237deaa66bf639895d911d03c2b3bfc99e6874"
+    },
+    {
+      "path": "artifacts/postgres/initdb.log",
+      "sha256": "4c517087152c20dd033d8a55cf0ea8504f6ef0fde8fcdabeb0dca88820da244b"
+    },
+    {
+      "path": "artifacts/postgres/pg-dump.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/postgres/pg-restore.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/postgres/postgres.log",
+      "sha256": "6e9fefd5b9c7db605e11e21a9194d095d494123914f5368d82a04b50d8bfdaec"
+    },
+    {
+      "path": "artifacts/postgres/trusted-http-audit.json",
+      "sha256": "147ce20039e29175f0ce33044eff8ea3c39f6e5ea428678c02909d1ae6581003"
+    },
+    {
+      "path": "artifacts/postgres/trusted-http.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/postgres/uid-compat-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "evidence_review": {
+    "decision": null,
+    "reviewer": null,
+    "review_reference": null
+  }
+}

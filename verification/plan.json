@@ -206,6 +206,26 @@
       "build",
       "generated_cleanliness",
       "alternative_gate_regressions"
+    ],
+    "NATIVE_INTEGRATION_PREPARATION": [
+      "foundation",
+      "shared_integrity",
+      "stage_gate_regressions",
+      "authority_holds",
+      "dependency_install",
+      "unit_tests",
+      "typecheck",
+      "lint",
+      "build",
+      "legacy_db_adapter",
+      "alternative_gate_regressions",
+      "accounting_native_link",
+      "fresh_engine_bootstrap",
+      "postgres_adapter_guard_regressions",
+      "postgres_host_identity_isolation",
+      "legacy_http_auth_boundary",
+      "trusted_boundary_guard_regressions",
+      "deployed_wms_identity_integration"
     ]
   },
   "tests": [
@@ -364,7 +384,7 @@
     {
       "id": "real_queue_and_api_bypass",
       "tier": "integration",
-      "reason": "Real RQ lifecycle/mutation/direct endpoint closure unimplemented; remains G2"
+      "reason": "Bounded native RQ authorization and HTTP mutation guards are probed separately; complete queue/IC/recovery/transport acceptance remains incomplete"
     },
     {
       "id": "wms_ui_native_e2e",
@@ -389,7 +409,7 @@
     {
       "id": "fresh_engine_bootstrap",
       "tier": "operations",
-      "reason": "Fresh pinned ERPNext/site/service bootstrap with isolated identities is not implemented by seeded replay"
+      "reason": "Fresh API-only ERPNext16.52 sites are probed separately; complete asset build, non-root service separation and full WMS workflow/bootstrap acceptance remain incomplete"
     },
     {
       "id": "native_fiscal_enforcement",
@@ -487,7 +507,7 @@
     {
       "id": "deployed_wms_identity_integration",
       "tier": "integration",
-      "reason": "Candidate HTTP is real but deployed WMS/Supabase issuer/proxy/UI/RPC integration and ERPNext parity remain unimplemented"
+      "reason": "Real native HTTP/WMS-service and RQ probes exist separately; full rendered WMS UI, native pick handoff and deployed identity/operational parity remain unaccepted"
     }
   ],
   "not_applicable": {},

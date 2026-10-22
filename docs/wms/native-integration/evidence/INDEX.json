@@ -1,0 +1,37 @@
+{
+  "tested_sources": {
+    "wms": "9827f7252d74849bba5dc5f130a4fc6d6e6d5d2c",
+    "accounting": "f031a73e8ade3ed89c7eeda057566296a5fdc198"
+  },
+  "scope": "synthetic native candidate; PREPARATION/P01 BLOCKED",
+  "archives": [
+    {
+      "path": "native-exact-01.tar.gz",
+      "sha256": "333e4a8e51081463bcd9ca53ac1d3ecdacf96a8366f3e1a41817c403ce55717a",
+      "bytes": 12116,
+      "kind": "EXACT_SOURCE_SCOPED_EVIDENCE_NOT_PHASE_APPROVAL",
+      "files": 15
+    },
+    {
+      "path": "regression-exact-01.tar.gz",
+      "sha256": "29c8049680ea4d2f6bd660865a692e693fcc69fed26cdac829a9516c68523e78",
+      "bytes": 46719,
+      "kind": "EXACT_SOURCE_SCOPED_EVIDENCE_NOT_PHASE_APPROVAL",
+      "files": 41
+    },
+    {
+      "path": "accounting-exact-01.tar.gz",
+      "sha256": "e08ee34ea4b8e3a023aaf7ed67cf95db27f4db39b6de2de8e6872330ba0d21e4",
+      "bytes": 14857,
+      "kind": "EXACT_SOURCE_SCOPED_EVIDENCE_NOT_PHASE_APPROVAL",
+      "files": 8
+    },
+    {
+      "path": "development-history.tar.gz",
+      "sha256": "2cd9a7720ce00c957ce5cff8c158fd3df776378456435c4810482482cd6e3984",
+      "bytes": 45015,
+      "kind": "UNCLEAN_DEVELOPMENT_ONLY_RETAINS_FAILURES_AND_RESOURCE_BLOCK",
+      "files": 54
+    }
+  ]
+}

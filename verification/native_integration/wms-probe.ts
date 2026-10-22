@@ -1,5 +1,19 @@
-import { configureNativeLab } from "../../src/lib/native-lab-client";
-import { placeOrder, fulfillOrder, cancelOrder, listComponents } from "../../src/lib/inventory";
+import {
+  nativeComponents,
+  nativeOrders,
+  nativeSnapshot,
+  nativeProducts,
+  nativeBom,
+} from "../../src/lib/native-projection";
+import { configureNativeLab, nativeOrderAction } from "../../src/lib/native-lab-client";
+import {
+  placeOrder,
+  fulfillOrder,
+  cancelOrder,
+  listComponents,
+  postMovement,
+  setBundleContents,
+} from "../../src/lib/inventory";
 const data = await Bun.stdin.json();
 configureNativeLab({
   syntheticOnly: true,
@@ -28,4 +42,98 @@ if (data.operation === "order") {
       throw error;
   }
   console.log(JSON.stringify({ legacy_disabled: true }));
+}
+
+if (data.operation === "projection") {
+  const components = await nativeComponents();
+  const products = await nativeProducts();
+  const bom = await nativeBom();
+  const orders = await nativeOrders();
+  const snapshot = await nativeSnapshot();
+  if (!snapshot.warehouse || components.some((x) => !x.created_at || !x.updated_at))
+    throw new Error("Incomplete native projection");
+  if (!products.some((x) => x.product_type === "BUNDLE") || bom.length < 2)
+    throw new Error("Bundle projection missing");
+  console.log(
+    JSON.stringify({
+      company: snapshot.company,
+      warehouse: snapshot.warehouse,
+      stock_rows: components.length,
+      products: products.length,
+      bom: bom.length,
+      orders: orders.length,
+      movements: snapshot.movements.length,
+    }),
+  );
+}
+
+if (data.operation === "screens") {
+  const before = await nativeSnapshot();
+  await setBundleContents(
+    "TEST-KIT",
+    [
+      { product_id: "TEST-C1", qty: 1 },
+      { product_id: "TEST-C2", qty: 1 },
+    ],
+    "screens:bundle:B",
+  );
+  await setBundleContents(
+    "TEST-KIT",
+    [
+      { product_id: "TEST-C1", qty: 1 },
+      { product_id: "TEST-C2", qty: 2 },
+    ],
+    "screens:bundle:A",
+  );
+  const reverted = (await nativeSnapshot()).items.find((x) => x.id === "TEST-KIT");
+  if (reverted?.parts.find((x) => x.item === "TEST-C2")?.quantity !== 2)
+    throw new Error("Bundle A-B-A edit did not persist");
+  const receipt = {
+    componentId: "TEST-C1",
+    type: "receipt" as const,
+    reason: "Synthetic UI service receipt",
+    quantity: 2,
+    reference: "screens:receipt",
+    nativeRate: 10,
+  };
+  await postMovement(receipt);
+  await postMovement(receipt);
+  const id = await placeOrder({
+    lines: [{ product_id: "TEST-KIT", quantity: 1 }],
+    externalRef: "screens:order",
+  });
+  await nativeOrderAction("pick", id);
+  await nativeOrderAction("pick", id);
+  await nativeOrderAction("pack", id);
+  const shipped = await nativeOrderAction("ship", id);
+  const afterShip = await nativeSnapshot();
+  const ledger = (
+    afterShip as unknown as {
+      general_ledger: { voucher_no: string; debit: number; credit: number }[];
+    }
+  ).general_ledger.filter((x) => x.voucher_no === shipped["delivery_note"]);
+  if (
+    ledger.reduce((n, x) => n + Number(x.debit), 0) !== 50 ||
+    ledger.reduce((n, x) => n + Number(x.debit) - Number(x.credit), 0) !== 0
+  )
+    throw new Error("Native GL/COGS mismatch");
+  await nativeOrderAction("return", id, String(shipped["delivery_note"]));
+  await nativeOrderAction("return", id, String(shipped["delivery_note"]));
+  const after = await nativeSnapshot();
+  const value = (x: typeof after) => x.items.reduce((n, i) => n + Number(i.value), 0);
+  if (value(after) !== value(before) + 20) throw new Error("Native stock valuation mismatch");
+  console.log(
+    JSON.stringify({
+      actual_screen_services: true,
+      rendered_browser: false,
+      native_order: id,
+      delivery_note: shipped["delivery_note"],
+      COGS: 50,
+      balanced_GL: true,
+      before_value: value(before),
+      after_value: value(after),
+      receipt_replay_once: true,
+      bundle_A_B_A: true,
+    }),
+  );
 }

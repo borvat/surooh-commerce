@@ -3,6 +3,7 @@ import {
   configureNativeLab,
   nativeLabCommand,
   nativeLabConfigured,
+  nativeOrderAction,
 } from "../src/lib/native-lab-client";
 import { listComponents } from "../src/lib/inventory";
 
@@ -51,4 +52,22 @@ describe("bounded native lab guard regressions (not native integration evidence)
     configureNativeLab(undefined);
     expect(nativeLabConfigured()).toBe(false);
   });
+});
+
+describe("native UI command guard regressions (no browser or engine claim)", () => {
+  test("URL query/hash cannot carry synthetic credentials", () => {
+    for (const suffix of ["?token=unsafe", "#token=unsafe"])
+      expect(() =>
+        configureNativeLab({
+          syntheticOnly: true,
+          url: `http://127.0.0.1/${suffix}`,
+          company: "TEST-A",
+          token: () => "",
+        }),
+      ).toThrow();
+  });
+  test("unknown native UI action never dispatches", () =>
+    expect(() => nativeOrderAction("adjust", "test")).toThrow("Unsupported"));
+  test("return requires a submitted native document reference", () =>
+    expect(() => nativeOrderAction("return", "test")).toThrow("delivery note"));
 });

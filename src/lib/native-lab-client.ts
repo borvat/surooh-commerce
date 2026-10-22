@@ -17,7 +17,9 @@ export function configureNativeLab(value: NativeLabConfig | undefined) {
       url.hostname !== "127.0.0.1" ||
       url.username ||
       url.password ||
-      url.pathname !== "/"
+      url.pathname !== "/" ||
+      url.search ||
+      url.hash
     )
       throw new Error("Only explicit loopback synthetic native sessions are allowed");
   }
@@ -58,4 +60,41 @@ export async function nativeLabCommand(
   const body = (await response.json()) as { message?: Record<string, unknown> };
   if (!body.message) throw new Error("Missing native command result");
   return body.message;
+}
+
+declare global {
+  interface Window {
+    __SUROOH_NATIVE_SESSION__?: { url: string; token: string };
+  }
+}
+if (
+  typeof window !== "undefined" &&
+  import.meta.env["VITE_SUROOH_NATIVE_LAB"] === "true" &&
+  window.location.hostname === "127.0.0.1"
+) {
+  const session = window.__SUROOH_NATIVE_SESSION__;
+  if (session)
+    configureNativeLab({
+      syntheticOnly: true,
+      url: session.url,
+      company: "TEST-A",
+      token: () => session.token,
+    });
+}
+
+/** One full-order command identity per native UI action, retry-safe across reloads. */
+export function nativeOrderAction(
+  operation: string,
+  orderId: string,
+  deliveryNote?: string | null,
+) {
+  if (!["pick", "pack", "ship", "cancel", "return"].includes(operation))
+    throw new Error("Unsupported native order action");
+  if (operation === "return" && !deliveryNote)
+    throw new Error("Native return requires its submitted delivery note");
+  return nativeLabCommand(
+    operation,
+    operation === "return" ? { delivery_note: deliveryNote } : { order_id: orderId },
+    `ui:${operation}:${orderId}`,
+  );
 }

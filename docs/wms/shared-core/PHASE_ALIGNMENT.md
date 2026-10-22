@@ -19,3 +19,6 @@ Future rollback: stop isolated consumers, retain evidence/outbox state, revert/r
 
 
 Verification transport update: G0 is HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED. Every wave uses the independent local/isolated runner and evidence gate; no wave must wait for a billing fix, but all required security/fiscal/native integration evidence and owner start approval remain mandatory.
+
+
+Current bounded follow-up: ../atomic-pick/RESULTS.md and NEXT_REVIEW_PACKET.md. Native atomic pick candidate passes; rendered UI and actual non-root operational isolation remain BLOCKED. P01–P09/Codex are not started or approved. Historical NI-F01 missing-handoff statements are superseded only for this exact tested candidate.

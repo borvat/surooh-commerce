@@ -1,3 +1,4 @@
+import { nativeLabConfigured } from "@/lib/native-lab-client";
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
@@ -44,7 +45,12 @@ function StockPage() {
             <Button size="lg" onClick={() => setStock({ mode: "receive" })}>
               + استلام بضاعة
             </Button>
-            <Button size="lg" variant="outline" onClick={() => setStock({ mode: "adjust" })}>
+            <Button
+              size="lg"
+              variant="outline"
+              disabled={nativeLabConfigured()}
+              onClick={() => setStock({ mode: "adjust" })}
+            >
               تعديل / جرد
             </Button>
             <Button size="lg" variant="ghost" asChild>
@@ -99,7 +105,11 @@ function StockPage() {
                   {c.is_low && <Tag tone="warning">منخفض</Tag>}
                   {perm.canOperate && (
                     <>
-                      <Button size="sm" onClick={() => setStock({ mode: "adjust", id: c.id! })}>
+                      <Button
+                        size="sm"
+                        disabled={nativeLabConfigured()}
+                        onClick={() => setStock({ mode: "adjust", id: c.id! })}
+                      >
                         تحديد الكمية
                       </Button>
                       <Button

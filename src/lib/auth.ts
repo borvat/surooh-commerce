@@ -1,3 +1,4 @@
+import { nativeLabConfigured, nativeLabCommand } from "./native-lab-client";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import type { Role } from "./inventory";
@@ -7,6 +8,10 @@ export function useMe() {
     queryKey: ["me"],
     staleTime: 60_000,
     queryFn: async () => {
+      if (nativeLabConfigured()) {
+        const me = await nativeLabCommand("identity", {}, `identity:${crypto.randomUUID()}`);
+        return { id: String(me["id"]), email: String(me["email"]), role: me["role"] as Role };
+      }
       const { data: u } = await supabase.auth.getUser();
       const { data, error } = await supabase.rpc("bootstrap_user");
       if (error) throw error;

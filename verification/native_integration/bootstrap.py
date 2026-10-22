@@ -340,6 +340,30 @@ def main():
             report.setdefault("log_hashes", {})[p.name] = hashlib.sha256(
                 p.read_bytes()
             ).hexdigest()
+        report["source_after"] = {
+            "wms_sha": subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
+            ).strip(),
+            "accounting_sha": subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], cwd=accounting, text=True
+            ).strip(),
+            "wms_dirty": bool(
+                subprocess.check_output(
+                    ["git", "status", "--porcelain"], cwd=ROOT, text=True
+                ).strip()
+            ),
+            "accounting_dirty": bool(
+                subprocess.check_output(
+                    ["git", "status", "--porcelain"], cwd=accounting, text=True
+                ).strip()
+            ),
+        }
+        for name in ["native-tests.json"]:
+            p = out / name
+            if p.is_file():
+                report.setdefault("artifact_hashes", {})[name] = hashlib.sha256(
+                    p.read_bytes()
+                ).hexdigest()
         (out / "bootstrap-results.json").write_text(json.dumps(report, indent=2) + "\n")
     print(report["status"], flush=True)
     return 0 if report["status"] == "NATIVE_CANDIDATE_EXECUTED" else 2

@@ -1,3 +1,5 @@
+import { nativeLabConfigured } from "@/lib/native-lab-client";
+import { NativeOrderActions } from "@/components/app/native-order-actions";
 import { useMemo, useState } from "react";
 import { filterLoadedOrders, toOrderSearchOptions } from "@/lib/order-filters";
 import { WarehousePrint } from "@/components/app/warehouse-print";
@@ -161,6 +163,11 @@ function OrdersPage() {
   return (
     <Page
       title="الطلبات"
+      actions={
+        nativeLabConfigured() && perm.canOperate ? (
+          <Button onClick={() => setOpen(true)}>إنشاء طلب اختبار</Button>
+        ) : undefined
+      }
       intro="طلبات البيع من حساباتك. المخزون الداخلي يتغيّر فقط للطلبات التي «تُشحن من مستودعنا»؛ طلبات «تشحنها bol.com» تُسجَّل فقط."
     >
       <div className="mb-4 flex gap-1">
@@ -298,7 +305,7 @@ function OrdersPage() {
           تعذّر تحميل الطلبات. لا تعتمد العدد المعروض، وأعد المحاولة.
         </p>
       )}
-      {perm.canOperate && (
+      {perm.canOperate && !nativeLabConfigured() && (
         <div className="mb-3 flex flex-wrap items-center gap-2 rounded border p-3 text-sm">
           <span>مختار من هذه الصفحة: {batchCandidates.length} طلب</span>
           <Button
@@ -416,7 +423,8 @@ function OrdersPage() {
                     ورقة المستودع
                   </Button>
                 )}
-                {perm.canOperate && o.status === "placed" && (
+                {perm.canOperate && nativeLabConfigured() && <NativeOrderActions orderId={o.id} />}
+                {perm.canOperate && !nativeLabConfigured() && o.status === "placed" && (
                   <div className="flex justify-end gap-1">
                     <Button
                       size="sm"

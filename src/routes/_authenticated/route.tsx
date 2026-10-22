@@ -1,3 +1,4 @@
+import { nativeLabConfigured, nativeLabCommand, configureNativeLab } from "@/lib/native-lab-client";
 import { createFileRoute, Outlet, redirect, Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import {
@@ -32,6 +33,10 @@ import { useMe } from "@/lib/auth";
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
   beforeLoad: async () => {
+    if (nativeLabConfigured()) {
+      const me = await nativeLabCommand("identity", {}, `route:${crypto.randomUUID()}`);
+      return { user: { id: String(me["id"]), email: String(me["email"]) } };
+    }
     const { data, error } = await supabase.auth.getUser();
     if (error || !data.user) throw redirect({ to: "/auth" });
     return { user: data.user };
@@ -52,7 +57,10 @@ function Shell() {
   async function signOut() {
     await qc.cancelQueries();
     qc.clear();
-    await supabase.auth.signOut();
+    if (nativeLabConfigured()) {
+      configureNativeLab(undefined);
+      delete window.__SUROOH_NATIVE_SESSION__;
+    } else await supabase.auth.signOut();
     navigate({ to: "/auth", replace: true });
   }
   return (

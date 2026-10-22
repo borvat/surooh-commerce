@@ -1,3 +1,5 @@
+import { nativeLabConfigured } from "@/lib/native-lab-client";
+import { NativeLedger } from "@/components/app/native-ledger";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -28,7 +30,7 @@ export const Route = createFileRoute("/_authenticated/movements")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
-  component: HistoryPage,
+  component: () => (nativeLabConfigured() ? <NativeLedger /> : <HistoryPage />),
 });
 
 type Mv = Awaited<ReturnType<typeof listMovements>>["rows"][number];

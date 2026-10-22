@@ -5,6 +5,12 @@ import { spawn } from "node:child_process";
 import assert from "node:assert/strict";
 import { once } from "node:events";
 import net from "node:net";
+import {
+  waitForReady,
+  beginErrorObservation,
+  requireFreshError,
+  isOrderRequest,
+} from "./browser-helpers.mjs";
 let input = "";
 for await (const chunk of process.stdin) input += chunk;
 const config = JSON.parse(input);
@@ -65,22 +71,19 @@ try {
     serverError = error;
   });
   const origin = "http://127.0.0.1:18081";
-  let ready = false;
-  for (let attempt = 0; attempt < 60; attempt++) {
-    if (serverError) throw serverError;
-    if (server.exitCode !== null) throw new Error("Owned UI server exited before readiness");
-    try {
-      const response = await fetch(origin, { signal: AbortSignal.timeout(1000) });
+  await waitForReady({
+    checkProcess: () => {
+      if (serverError) throw serverError;
+      if (server.exitCode !== null) throw new Error("Owned UI server exited before readiness");
+    },
+    probe: async (remainingMs) => {
+      const response = await fetch(origin, {
+        signal: AbortSignal.timeout(Math.max(1, Math.floor(remainingMs))),
+      });
       await response.body?.cancel();
-      if (response.ok) {
-        ready = true;
-        break;
-      }
-    } catch {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-    }
-  }
-  if (!ready) throw new Error("Owned UI server did not become ready; B01 NOT RUN");
+      return response.ok;
+    },
+  });
   const context = await browser.newContext();
   context.setDefaultTimeout(10000);
   context.setDefaultNavigationTimeout(15000);
@@ -273,14 +276,15 @@ try {
     committedPick = (await response.json()).message;
     await route.abort("failed");
   };
+  const pickErrorBoundary = await beginErrorObservation(page, "pick", retryOrder.order_id);
   await page.route(endpoint, loseResponse);
   await Promise.all([
     page.waitForEvent("requestfailed", {
-      predicate: (request) => request.postDataJSON()?.envelope?.operation === "pick",
+      predicate: (request) => isOrderRequest(request, "pick", retryOrder.order_id),
     }),
     retryRow.getByRole("button", { name: "تجهيز", exact: true }).click(),
   ]);
-  await page.locator('[data-sonner-toast][data-type="error"]').last().waitFor();
+  await requireFreshError(page, pickErrorBoundary, "Failed to fetch");
   await page.unroute(endpoint, loseResponse);
   assert.ok(committedPick?.pick_list, "Lost response did not commit a native pick");
   const committed = await api("snapshot");
@@ -304,14 +308,15 @@ try {
     route.request().postDataJSON().envelope.operation === "pack"
       ? route.abort("failed")
       : route.fallback();
+  const packErrorBoundary = await beginErrorObservation(page, "pack", retryOrder.order_id);
   await page.route(endpoint, abortPack);
   await Promise.all([
     page.waitForEvent("requestfailed", {
-      predicate: (request) => request.postDataJSON()?.envelope?.operation === "pack",
+      predicate: (request) => isOrderRequest(request, "pack", retryOrder.order_id),
     }),
     retryRow.getByRole("button", { name: "تعبئة", exact: true }).click(),
   ]);
-  await page.locator('[data-sonner-toast][data-type="error"]').last().waitFor();
+  await requireFreshError(page, packErrorBoundary, "Failed to fetch");
   await page.unroute(endpoint, abortPack);
   assert.deepEqual(await api("snapshot"), errorBefore);
   await clickCommand("pack", () =>
@@ -328,14 +333,18 @@ try {
   // Another real native command invalidates the screen's cached projection.
   await api("cancel", { order_id: staleOrder.order_id });
   const staleBaseline = await api("snapshot");
-  const rejection = page.waitForResponse(
-    (response) =>
-      response.url().includes("native_lab.api.command") &&
-      response.request().postDataJSON()?.envelope.operation === "pick",
+  const staleErrorBoundary = await beginErrorObservation(page, "pick", staleOrder.order_id);
+  const rejection = page.waitForResponse((response) =>
+    isOrderRequest(response.request(), "pick", staleOrder.order_id),
   );
   await staleRow.getByRole("button", { name: "تجهيز", exact: true }).click();
-  assert.equal((await rejection).ok(), false, "Stale cancelled order must reject pick");
-  await page.locator('[data-sonner-toast][data-type="error"]').last().waitFor();
+  const rejected = await rejection;
+  assert.equal(rejected.ok(), false, "Stale cancelled order must reject pick");
+  await requireFreshError(
+    page,
+    staleErrorBoundary,
+    `Native boundary rejected request: ${rejected.status()}`,
+  );
   assert.deepEqual(await api("snapshot"), staleBaseline);
   await page.reload();
   await page.getByText(staleOrder.order_id, { exact: true }).waitFor();

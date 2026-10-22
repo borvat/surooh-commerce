@@ -66,3 +66,23 @@ remain evidence for their original tested sources, not this revision.
 Rollback: discard this continuation branch and its synthetic evidence. Original
 PR22/PR31, existing evidence, application code, stock authority and all gates stay
 unchanged. ERPNext remains the sole stock/reservation/valuation/ledger writer.
+
+## Review follow-up: readiness and fresh error feedback
+
+`browser-helpers.mjs` now bounds readiness by elapsed time (30 seconds), caps each
+probe to the remaining budget and backs off after both non-ready HTTP responses
+and connection failures. A late response cannot pass after the deadline.
+
+Error scenarios first wait for previous errors to disappear and mark all existing
+toast DOM nodes. Their failure event must match the command endpoint, operation,
+order and deterministic request ID. Each assertion then requires a new visible
+error node with the exact expected network message or actual rejected HTTP status.
+Old nodes, including nodes that reappear with identical text, cannot satisfy it.
+Native stock/ledger checks remain independent.
+
+Deterministic helper regressions (fake clock/DOM records only, no browser/native
+acceptance or network):
+
+```sh
+node --test verification/native_integration/browser-helpers.test.mjs
+```

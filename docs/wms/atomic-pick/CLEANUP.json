@@ -1,0 +1,19 @@
+{
+  "checked_at": "2026-10-22T02:13:19.414203+00:00",
+  "removed_owned_completed_synthetic_roots": [
+    "surooh-new-native-tdq9t9gm"
+  ],
+  "remaining_owned_roots": [],
+  "loopback_ports": {
+    "14306": "UNBOUND",
+    "17379": "UNBOUND",
+    "18080": "UNBOUND",
+    "18081": "UNBOUND",
+    "15432": "UNBOUND",
+    "13306": "UNBOUND",
+    "16379": "UNBOUND"
+  },
+  "scope": "independent external check after all owned sessions exited; driver flags alone are not proof",
+  "operational_isolation": "BLOCKED",
+  "no_production": true
+}

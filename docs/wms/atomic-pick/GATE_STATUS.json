@@ -1,0 +1,42 @@
+{
+  "tested_sources": {
+    "wms": "920e3a12a0136ad51975c5a55dc5871645d5d7e3",
+    "accounting": "97c22b594fa37e2fe1e12458cf1a0f7edeec5432"
+  },
+  "G0": {
+    "status": "HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED",
+    "alternative": "EXECUTED_EXACT_SOURCE_READY_FOR_HUMAN_EVIDENCE_REVIEW",
+    "hosted": "BLOCKED",
+    "owner_phase_approval": false
+  },
+  "G1": "BLOCKED_NONROOT_SERVICE_STORAGE_FILE_KEY_BACKUP_ISOLATION",
+  "G2": "PARTIAL_BLOCKED_NATIVE_HTTP_RQ_SCOPED_ONLY",
+  "G3": "PARTIAL_BLOCKED_ATOMIC_PICK_CANDIDATE_PASSES_RENDERED_UI_NOT_EXECUTED",
+  "G4": "BLOCKED_QUALIFIED_DUTCH_ACCOUNTANT_AND_NATIVE_FISCAL_ACCEPTANCE",
+  "G5": "PARTIAL_BLOCKED_FULL_UPGRADE_RESTORE_LOAD_AND_DEPLOYED_RUNTIME",
+  "G6": "BLOCKED_EFFECTIVE_PROTECTION_REVIEW_AND_OWNER_START_APPROVAL",
+  "NI-F01": "CANDIDATE_REMEDIATION_READY_FOR_HUMAN_REVIEW",
+  "full_rendered_UI": "BLOCKED_NO_RUNNABLE_BROWSER",
+  "native_summary": {
+    "PASS": 29,
+    "FAIL": 0,
+    "BLOCKED": 1
+  },
+  "wms_summary": {
+    "PASS": 17,
+    "FAIL": 0,
+    "BLOCKED": 19
+  },
+  "accounting_summary": {
+    "PASS": 13,
+    "FAIL": 0,
+    "BLOCKED": 17
+  },
+  "PREPARATION": "BLOCKED",
+  "P01": "BLOCKED",
+  "M1": "BLOCKED",
+  "phase_complete": false,
+  "codex_start_authorized": false,
+  "merge_authorized": false,
+  "deploy_authorized": false
+}

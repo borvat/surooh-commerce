@@ -34,3 +34,8 @@ Owner accepted preparatory research only. No engine is selected. See [the latest
 
 
 Current verification decision: independent local/isolated runner and evidence gate in `verification/README.md`. G0 HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED; no billing repair or repeated Actions. Required build/type/lint/native/security/integration tests and owner/accountant review remain mandatory; no phase start or completion is authorized.
+
+
+## Atomic pick / retained React candidate (current follow-up)
+
+See [atomic-pick results](atomic-pick/RESULTS.md), paired Draft PR22/Accounting31. Exact WMS920e3a12a0136ad51975c5a55dc5871645d5d7e3 / Accounting97c22b594fa37e2fe1e12458cf1a0f7edeec5432: native29 PASS/0 FAIL/1 browser BLOCKED; WMS109, PG21+18, type/lint/build/generated clean PASS;15 existing lint warnings retained. NI-F01 native handoff is a review-ready bounded candidate, not production acceptance. Existing screens are wired in synthetic mode and their services run against native HTTP; a rendered browser cycle is NOT EXECUTED. Actual non-root service/storage/key isolation remains BLOCKED. PREPARATION/P01, Codex/merge/deploy and all G1–G6 approvals remain held. Hosted Actions stays BLOCKED. Future packet in atomic-pick/NEXT_REVIEW_PACKET.md grants no execution permission.

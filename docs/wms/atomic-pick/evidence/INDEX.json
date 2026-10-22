@@ -1,0 +1,51 @@
+{
+  "tested_sources": {
+    "wms": "920e3a12a0136ad51975c5a55dc5871645d5d7e3",
+    "accounting": "97c22b594fa37e2fe1e12458cf1a0f7edeec5432"
+  },
+  "scope": "synthetic bounded candidate; PREPARATION/P01 BLOCKED; no hosted-CI success",
+  "archives": [
+    {
+      "path": "native-exact-02.tar.gz",
+      "sha256": "04c047900fd7e7507df472bff9e002013fe8de6c77a8c60245db0541604f901e",
+      "bytes": 12465,
+      "files": 11,
+      "kind": "EXACT_PAIR_NATIVE_29_PASS_1_BROWSER_BLOCKED"
+    },
+    {
+      "path": "wms-exact-02.tar.gz",
+      "sha256": "b419751fcb2449aeef9eebe4f2ab4a1cec3e011940c793c1baa5cd53392dfb55",
+      "bytes": 44950,
+      "files": 32,
+      "kind": "EXACT_WMS_FULL_RUN_17_PASS_19_BLOCKED"
+    },
+    {
+      "path": "accounting-exact-01.tar.gz",
+      "sha256": "f21f994166feb1e1da472b222abf96c58d74a05c357d20aea98366d0aecd4acd",
+      "bytes": 34856,
+      "files": 22,
+      "kind": "EXACT_ACCOUNTING_FULL_RUN_13_PASS_17_BLOCKED"
+    },
+    {
+      "path": "supplement-and-gates-exact-02.tar.gz",
+      "sha256": "535418dbbf4bd2d8265dad0f091359e3dc14b5b6fb1bafc72ea0676299b7f8a3",
+      "bytes": 35789,
+      "files": 21,
+      "kind": "REVIEW_ONLY_GATES_NO_PHASE_APPROVAL"
+    },
+    {
+      "path": "development-and-prior-exact-history.tar.gz",
+      "sha256": "c2e32d61f81c5ce86bc1153cef1903a08997e48554dceefa377935e650f37ce4",
+      "bytes": 153868,
+      "files": 108,
+      "kind": "UNCLEAN_DEVELOPMENT_FAILURES_AND_PRIOR_EXACT_GATE_FALSE_NEGATIVE_RETAINED_NOT_FINAL_ACCEPTANCE"
+    },
+    {
+      "path": "browser-and-cleanup.tar.gz",
+      "sha256": "a9a8214e1b89e7312335161f9a8892d720ef1e0628c621f5b812122941a77a32",
+      "bytes": 1650,
+      "files": 5,
+      "kind": "BROWSER_AND_NONROOT_ISOLATION_BLOCKED"
+    }
+  ]
+}

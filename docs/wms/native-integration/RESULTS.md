@@ -1,3 +1,5 @@
+> Follow-up candidate after owner review: [Atomic Pick results](../atomic-pick/RESULTS.md), paired PR22/PR31. NI-F01 now has bounded native evidence; full browser and operational isolation remain BLOCKED. Historical run below is preserved.
+
 # Final native integration results — preparation remains blocked
 
 Paired Draft PRs: [WMS21](https://github.com/borvat/surooh-commerce/pull/21) / [Accounting30](https://github.com/borvat/surooh-accounting/pull/30). Exact tested source pair: **WMS9827f7252d74849bba5dc5f130a4fc6d6e6d5d2c / Accountingf031a73e8ade3ed89c7eeda057566296a5fdc198**. Both were clean and already published when executed. Later commits contain documentation/evidence only, not a claimed newly tested application revision.

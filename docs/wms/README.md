@@ -30,3 +30,8 @@ Read [OSS evaluation and proposed decision](oss/README.md) before any phase. P01
 ## Current decision review
 
 Research acceptance does not select an engine. Read [the three-architecture evidence report](oss/DECISION_CLOSURE.md). P01 is not eligible for Codex handoff; native PostgreSQL/application tests are blocked by the isolated test connection setup. No production resource or application code was changed.
+
+
+## Atomic pick / retained React candidate (current follow-up)
+
+See [atomic-pick results](atomic-pick/RESULTS.md), paired Draft PR22/Accounting31. Exact WMS920e3a12a0136ad51975c5a55dc5871645d5d7e3 / Accounting97c22b594fa37e2fe1e12458cf1a0f7edeec5432: native29 PASS/0 FAIL/1 browser BLOCKED; WMS109, PG21+18, type/lint/build/generated clean PASS;15 existing lint warnings retained. NI-F01 native handoff is a review-ready bounded candidate, not production acceptance. Existing screens are wired in synthetic mode and their services run against native HTTP; a rendered browser cycle is NOT EXECUTED. Actual non-root service/storage/key isolation remains BLOCKED. PREPARATION/P01, Codex/merge/deploy and all G1–G6 approvals remain held. Hosted Actions stays BLOCKED. Future packet in atomic-pick/NEXT_REVIEW_PACKET.md grants no execution permission.

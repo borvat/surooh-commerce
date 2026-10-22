@@ -1,3 +1,4 @@
+import { nativeLabConfigured } from "@/lib/native-lab-client";
 import { useEffect, useState, type ReactNode } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -261,9 +262,13 @@ export function StockDialog({
   const [kind, setKind] = useState<"count" | "damaged" | "return">("count");
   const [qty, setQty] = useState("");
   const [note, setNote] = useState("");
+  const [rate, setRate] = useState("");
+  const [requestId, setRequestId] = useState("");
   useEffect(() => {
     if (open) {
       setCid(itemId ?? "");
+      setRate("");
+      setRequestId(`receipt:${crypto.randomUUID()}`);
       setQty("");
       setNote("");
       setKind("count");
@@ -280,6 +285,7 @@ export function StockDialog({
           type: "receipt",
           quantity: q,
           reason: note || "استلام بضاعة",
+          ...(nativeLabConfigured() ? { reference: requestId, nativeRate: Number(rate) } : {}),
         });
       if (kind === "damaged")
         return postMovement({
@@ -312,7 +318,7 @@ export function StockDialog({
   });
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent dir="rtl">
+      <DialogContent dir="rtl" data-testid="native-stock-dialog">
         <DialogHeader>
           <DialogTitle>{mode === "receive" ? "استلام بضاعة" : "تعديل المخزون"}</DialogTitle>
           <DialogDescription>
@@ -322,8 +328,25 @@ export function StockDialog({
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4">
+          {nativeLabConfigured() && mode === "receive" && (
+            <F label="تكلفة الوحدة EUR (مختبر)">
+              <Input
+                aria-label="تكلفة الوحدة EUR"
+                type="number"
+                min="0.01"
+                step="0.01"
+                value={rate}
+                onChange={(e) => setRate(e.target.value)}
+              />
+            </F>
+          )}
           <F label="القطعة">
-            <select className={sel} value={cid} onChange={(e) => setCid(e.target.value)}>
+            <select
+              data-testid="stock-component"
+              className={sel}
+              value={cid}
+              onChange={(e) => setCid(e.target.value)}
+            >
               <option value="">اختر…</option>
               {(comps.data ?? [])
                 .filter((c) => c.active)
@@ -361,7 +384,13 @@ export function StockDialog({
                 : undefined
             }
           >
-            <Input type="number" min={0} value={qty} onChange={(e) => setQty(e.target.value)} />
+            <Input
+              data-testid="stock-quantity"
+              type="number"
+              min={0}
+              value={qty}
+              onChange={(e) => setQty(e.target.value)}
+            />
           </F>
           <F label="ملاحظة (اختياري)">
             <Input
@@ -374,7 +403,14 @@ export function StockDialog({
         <DialogFooter>
           <Button
             size="lg"
-            disabled={!cid || !qty || q < 0 || m.isPending}
+            disabled={
+              !cid ||
+              !qty ||
+              q < 0 ||
+              m.isPending ||
+              (nativeLabConfigured() &&
+                (q <= 0 || !Number.isFinite(Number(rate)) || Number(rate) <= 0))
+            }
             onClick={() => m.mutate()}
           >
             تأكيد
@@ -620,6 +656,7 @@ export function NewOrderDialog({
   const prods = useQuery({ queryKey: ["products-all"], queryFn: allProducts, enabled: open });
   const chans = useQuery({ queryKey: ["channels"], queryFn: listChannels, enabled: open });
   const [channel, setChannel] = useState("");
+  const [requestId, setRequestId] = useState("");
   const [lines, setLines] = useState<{ pid: string; qty: string; fm: FulfillmentMethod }[]>([
     { pid: "", qty: "1", fm: "FBR" },
   ]);
@@ -627,6 +664,7 @@ export function NewOrderDialog({
     if (open) {
       setLines([{ pid: "", qty: "1", fm: "FBR" }]);
       setChannel("");
+      setRequestId(`order:${crypto.randomUUID()}`);
     }
   }, [open]);
   const valid = lines.filter((l) => l.pid && parseInt(l.qty, 10) > 0);
@@ -639,6 +677,7 @@ export function NewOrderDialog({
           fulfillment_method: l.fm,
         })),
         ...(channel ? { channelId: channel } : {}),
+        ...(nativeLabConfigured() ? { externalRef: requestId } : {}),
       }),
     onSuccess: () => {
       toast.success("تم إنشاء الطلب — القطع محجوزة الآن");
@@ -649,7 +688,7 @@ export function NewOrderDialog({
   });
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent dir="rtl" className="max-w-xl">
+      <DialogContent dir="rtl" className="max-w-xl" data-testid="native-order-dialog">
         <DialogHeader>
           <DialogTitle>طلب اختبار (بيئة الاختبار)</DialogTitle>
           <DialogDescription>جرّب كيف يتغيّر المخزون عند البيع.</DialogDescription>
@@ -677,6 +716,7 @@ export function NewOrderDialog({
               />
               <select
                 className={sel}
+                data-testid="order-product"
                 value={l.pid}
                 onChange={(e) =>
                   setLines(lines.map((x, j) => (j === i ? { ...x, pid: e.target.value } : x)))
@@ -703,7 +743,9 @@ export function NewOrderDialog({
                 }
               >
                 <option value="FBR">يُشحن من مستودعنا (يحجز من مخزوننا)</option>
-                <option value="FBB">تشحنه bol.com (لا يغيّر مخزوننا)</option>
+                {!nativeLabConfigured() && (
+                  <option value="FBB">تشحنه bol.com (لا يغيّر مخزوننا)</option>
+                )}
               </select>
             </div>
           ))}

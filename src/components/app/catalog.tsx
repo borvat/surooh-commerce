@@ -134,6 +134,7 @@ export function BundleEditor({
   const [q, setQ] = useState("");
   useEffect(() => {
     if (!product) return;
+    setRequestId(`bundle:${crypto.randomUUID()}`);
     const existing = product.isBundle
       ? product.contents
           .filter((c) => c.product_id)
@@ -143,6 +144,7 @@ export function BundleEditor({
     setQ("");
     setShowSearch(!!existing.length);
   }, [product]);
+  const [requestId, setRequestId] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const suggested = product ? suggestComponents(product, rows) : [];
   const options = rows.filter(
@@ -166,6 +168,7 @@ export function BundleEditor({
       setBundleContents(
         product!.id,
         valid.map((l) => ({ product_id: l.pid, qty: parseInt(l.qty, 10) })),
+        requestId,
       ),
     onSuccess: () => {
       toast.success("تم حفظ مكوّنات البندل");

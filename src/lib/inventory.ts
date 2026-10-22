@@ -1,3 +1,10 @@
+import {
+  nativeComponents,
+  nativeProducts,
+  nativeBom,
+  nativeLinks,
+  nativeOrders,
+} from "./native-projection";
 /**
  * Inventory service layer. All UI and future channel integrations (bol.com)
  * go through this module. Every stock mutation is executed by a transactional
@@ -40,6 +47,10 @@ function check<T>(res: { data: T; error: unknown; count?: number | null }) {
 
 /** The signed-in user's company. The database also enforces/derives it on insert. */
 export async function orgId(): Promise<string> {
+  if (nativeLabConfigured())
+    return String(
+      (await nativeLabCommand("identity", {}, `identity:${crypto.randomUUID()}`))["company"],
+    );
   const { data, error } = await supabase.rpc("current_org_id");
   if (error) throw error;
   if (!data) throw new Error("You are not a member of any company");
@@ -67,6 +78,7 @@ export async function listComponents(opts: { search?: string; page?: number; sta
 }
 
 export async function allComponents() {
+  if (nativeLabConfigured()) return nativeComponents();
   return check(await supabase.from("v_component_availability").select("*").order("sku")) ?? [];
 }
 
@@ -152,6 +164,7 @@ export async function listProducts(opts: {
 }
 
 export async function allProducts() {
+  if (nativeLabConfigured()) return nativeProducts();
   return check(await supabase.from("v_product_availability").select("*").order("sku")) ?? [];
 }
 
@@ -192,6 +205,7 @@ export async function getBom(productId: string) {
 }
 
 export async function allBomLines() {
+  if (nativeLabConfigured()) return nativeBom();
   return (
     check(
       await supabase
@@ -246,7 +260,26 @@ export async function postMovement(input: {
   quantity: number;
   reason: string;
   reference?: string;
+  nativeRate?: number;
 }) {
+  if (nativeLabConfigured()) {
+    if (
+      input.type !== "receipt" ||
+      !input.reference ||
+      !input.nativeRate ||
+      !Number.isFinite(input.nativeRate) ||
+      input.nativeRate <= 0
+    )
+      throw new Error(
+        "Native receipt requires a stable request ID and positive unit cost; other adjustments are unsupported",
+      );
+    await nativeLabCommand(
+      "receive",
+      { items: [{ item: input.componentId, qty: input.quantity, rate: input.nativeRate }] },
+      input.reference,
+    );
+    return;
+  }
   check(
     await supabase.rpc("post_stock_movement", {
       _component_id: input.componentId,
@@ -271,6 +304,18 @@ export type OrderSearchOptions = {
  * Product text and SKU require a verified server-side search RPC and are not supported here.
  */
 export async function listOrders(opts: OrderSearchOptions) {
+  if (nativeLabConfigured()) {
+    const rows = (await nativeOrders()).filter(
+      (x) =>
+        (!opts.status || opts.status === "all" || x.status === opts.status) &&
+        (!opts.externalRef || x.external_ref?.includes(opts.externalRef)) &&
+        (!opts.accountId || x.channel_id === opts.accountId) &&
+        (!opts.from || Date.parse(x.created_at) >= Date.parse(`${opts.from}T00:00:00Z`)) &&
+        (!opts.to || Date.parse(x.created_at) < Date.parse(`${opts.to}T00:00:00Z`) + 86400000),
+    );
+    const start = (opts.page ?? 0) * PAGE_SIZE;
+    return { rows: rows.slice(start, start + PAGE_SIZE), count: rows.length };
+  }
   const page = opts.page ?? 0;
   let q = supabase
     .from("orders")
@@ -341,6 +386,7 @@ export async function cancelOrder(id: string) {
 
 // ---------- Channels / Settings ----------
 export async function listChannels() {
+  if (nativeLabConfigured()) return [];
   return (
     check(
       await supabase.from("sales_channels").select("*, channel_listings(count)").order("code"),
@@ -481,6 +527,7 @@ export async function runAcceptanceTest() {
 
 // ---------- bol-first catalog ----------
 export async function listCatalogListings() {
+  if (nativeLabConfigured()) return [];
   return (
     check(
       await supabase
@@ -494,6 +541,7 @@ export async function listCatalogListings() {
   );
 }
 export async function listProductLinks() {
+  if (nativeLabConfigured()) return nativeLinks();
   return (
     check(
       await supabase
@@ -516,7 +564,13 @@ export async function channelCredentialStatus() {
 export async function setBundleContents(
   productId: string,
   items: { product_id: string; qty: number }[],
+  requestId?: string,
 ) {
+  if (nativeLabConfigured()) {
+    if (!requestId) throw new Error("Native bundle edits require a stable command identity");
+    await nativeLabCommand("bundle", { product_id: productId, contents: items }, requestId);
+    return;
+  }
   check(await supabase.rpc("set_bundle_contents", { _product_id: productId, _items: items }));
 }
 export async function setProductNormal(productId: string) {
@@ -623,6 +677,7 @@ export type StoredAttribute = {
   updated_at: string;
 };
 export async function listProductAttributes() {
+  if (nativeLabConfigured()) return [];
   return (check(
     await supabase
       .from("product_attributes" as never)
@@ -631,6 +686,7 @@ export async function listProductAttributes() {
   ) ?? []) as StoredAttribute[];
 }
 export async function listFamilies() {
+  if (nativeLabConfigured()) return [];
   return (check(
     await supabase
       .from("product_families" as never)

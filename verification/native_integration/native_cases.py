@@ -31,7 +31,9 @@ def run(config):
             {
                 "cases": rows,
                 "site": site,
-                "full_rendered_UI_proven": False,
+                "full_rendered_UI_proven": any(
+                    x["id"].startswith("B01_") and x["status"] == "PASS" for x in rows
+                ),
                 "os_isolation_proven": False,
                 "fresh_site": True,
             },
@@ -491,36 +493,27 @@ def run(config):
         case("N04_native_durable_payload_conflict", conflict)
 
         def pick():
-            status, data = request(
-                "POST",
-                "/api/method/surooh_accounting.native_lab.api.command",
+            result = call("pick", {"order_id": ctx["order"]}, "PICK-1")
+            replay = call("pick", {"order_id": ctx["order"]}, "PICK-1")
+            assert replay == result
+            state = bins()
+            assert state["TEST-C1"][1] == 1 and state["TEST-C2"][1] == 2, state
+            packed = call("pack", {"order_id": ctx["order"]}, "PACK-1")
+            assert bins() == state
+            rows.append(
                 {
-                    "envelope": dict(
-                        company="TEST-A",
-                        source="lab-manual",
-                        request_id="PICK-1",
-                        operation="pick",
-                        payload={"order_id": ctx["order"]},
-                    )
-                },
-                token(),
+                    "id": "N05_full_pick_pack_handoff",
+                    "status": "PASS",
+                    "evidence": {
+                        "pick": result,
+                        "pack": packed,
+                        "one_reservation_per_component": True,
+                        "physical_and_value_unchanged": True,
+                    },
+                }
             )
-            if status != 200:
-                assert "reserved stock" in json.dumps(data), (status, data)
-                rows.append(
-                    {
-                        "id": "N05_full_pick_pack_handoff",
-                        "status": "BLOCKED",
-                        "evidence": {
-                            "HTTP_status": status,
-                            "reason": "Native create_pick_list rejects reserved Sales Order; safe atomic handoff not implemented",
-                            "existing_reservation_preserved": bins()["TEST-C1"][1] == 1,
-                        },
-                    }
-                )
-                save()
-                return {"native_guard_preserved": True, "full_pick_pack": "BLOCKED"}
-            return data
+            save()
+            return {"native_atomic_handoff": True, "replay": replay}
 
         case("N05a_native_pick_handoff_guard", pick)
 
@@ -694,6 +687,17 @@ def run(config):
                     "status": status,
                 }
             )
+            for doctype in ["Pick List", "Packing Slip"]:
+                status, data = request(
+                    "POST",
+                    "/api/method/frappe.client.insert",
+                    {"doc": {"doctype": doctype}},
+                    native_auth=ctx["native_auth"],
+                )
+                assert status != 200 and "trusted command boundary" in json.dumps(
+                    data
+                ), (doctype, status, data)
+                checks.append({"doctype": doctype, "raw_native_API_denied": status})
             return {
                 "real_native_HTTP_bypass_denials": checks,
                 "WMS_legacy_fallback": wms("legacy-denial"),
@@ -1079,6 +1083,33 @@ def run(config):
             }
 
         case("N18_two_fresh_sites_DB_credentials_and_HTTP_identity", two_sites)
+        from atomic_cases import run as atomic_run
+
+        atomic_run(case, call, token, owner, bins, wms)
+        browser = subprocess.run(
+            [
+                os.environ["SUROOH_BUN"],
+                str(
+                    Path(os.environ["SUROOH_WMS_ROOT"])
+                    / "verification/native_integration/browser-cycle.mjs"
+                ),
+            ],
+            input=json.dumps(
+                {
+                    "token": token(),
+                    "bun": os.environ["SUROOH_BUN"],
+                    "wmsRoot": os.environ["SUROOH_WMS_ROOT"],
+                }
+            ),
+            text=True,
+            capture_output=True,
+            timeout=180,
+        )
+        (out / "browser-cycle.log").write_text(browser.stdout + browser.stderr)
+        browser_row = json.loads(browser.stdout.strip().splitlines()[-1])
+        browser_row["exit_code"] = browser.returncode
+        rows.append(browser_row)
+        save()
     finally:
         if process:
             process.terminate()
@@ -1093,7 +1124,10 @@ def run(config):
         save()
     expected = {f"N{i:02d}" for i in range(1, 19)} | {"N01b", "N05a"}
     actual = {x["id"].split("_")[0] for x in rows}
-    if actual != expected or len(rows) != 20:
+    if (
+        actual != expected | {f"A{i:02d}" for i in range(1, 10)} | {"B01"}
+        or len(rows) != 30
+    ):
         raise RuntimeError("Missing/duplicate native cases")
     if any(x["status"] == "FAIL" for x in rows):
         raise RuntimeError(

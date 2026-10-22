@@ -1,0 +1,13 @@
+test_ambient_browser_settings_are_not_inherited (test_browser_config.BrowserHarnessTests.test_ambient_browser_settings_are_not_inherited) ... ok
+test_blocked_child_is_never_pass (test_browser_config.BrowserHarnessTests.test_blocked_child_is_never_pass) ... ok
+test_cli_reaches_private_browser_input (test_browser_config.BrowserHarnessTests.test_cli_reaches_private_browser_input) ... ok
+test_inconsistent_pass_exit_fails (test_browser_config.BrowserHarnessTests.test_inconsistent_pass_exit_fails) ... ok
+test_malformed_child_output_fails_and_redacts (test_browser_config.BrowserHarnessTests.test_malformed_child_output_fails_and_redacts) ... ok
+test_missing_runner_is_blocked (test_browser_config.BrowserHarnessTests.test_missing_runner_is_blocked) ... ok
+test_real_js_harness_missing_browser_is_blocked (test_browser_config.BrowserHarnessTests.test_real_js_harness_missing_browser_is_blocked) ... ok
+test_timeout_preserved_as_failure (test_browser_config.BrowserHarnessTests.test_timeout_preserved_as_failure) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.331s
+
+OK

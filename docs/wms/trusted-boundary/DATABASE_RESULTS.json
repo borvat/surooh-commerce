@@ -1,0 +1,2111 @@
+{
+  "source_sha": "6b637b698be0990a1b6dfe373ce071295fc51ee5",
+  "source_dirty_tracked": false,
+  "driver_sha256": "fd31c9919ea7bec1a926fd5bdf54781087fa8f45eade57b5f1396420043239d1",
+  "expected_case_count": 21,
+  "started_at_utc": "2026-10-22T00:47:31.836963+00:00",
+  "engine": "real standalone PostgreSQL processes and independent TCP sessions",
+  "psycopg": "3.3.6",
+  "libpq_version": 180006,
+  "runtime_pins_sha256": "6a64a661133daa2fc51bc79a6a3fd136646afe829be3ac71e76ab93af9247ae2",
+  "compatibility_sha256": "e61235f9ee0395e91f0fa4c59504d354fb859e4cc04e8990396dc4ad360e6159",
+  "migrations": [
+    {
+      "file": "20260927102344_55393e9a-8fa7-4ae2-9ebf-f9033548d5c2.sql",
+      "sha256": "968a2aeda86665f4ddd012cc95cd6548e9b16f68c7a41966f606a0b7cff125c2",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927102354_6bb88873-7478-48e1-9f96-da0486b1ca2d.sql",
+      "sha256": "507dac47f0875def01e0004c649238c57b753677a6314b81a4748f852c3f5901",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927104753_c649a1fe-71fd-4fff-b0da-34d38c7308d5.sql",
+      "sha256": "86f0df86d7f06a149b1450a1eb0d2c8eeae9c2ff84130d00442183bab77ec471",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927104802_ab14cb98-0056-4ef1-ab4b-d5bce3d820f6.sql",
+      "sha256": "6f5b1793f0366f51e4d4693e4d5e3ebd0204e47a61b481899c7096e1b624bd97",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927105731_c465ac92-7fc3-4a00-b80d-4ea652fe047c.sql",
+      "sha256": "a0e101942a43972fec0e2c69b820e990a77c799be48c53b3af34264f980d2fbb",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927105742_92ab0011-e71b-42ec-8bec-88645b181936.sql",
+      "sha256": "539f9d2c6ab335ca25ae46195ecb54250833202b3c01bf5a11e41c9f9a5d2c98",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927111500_578ab1ab-d75a-4dd2-a5c5-c1e6e1371d68.sql",
+      "sha256": "07c60ef21585892d5446a8837ee027cb96c55b0c8ebbab63c486498bb06e6553",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927113054_c0ea03da-9204-48e2-831a-7f138b3cd21d.sql",
+      "sha256": "359254a68a9f50330ef691c8fafaaa3e01a5917ff964b5485853d89793f30fad",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927120453_e66158e5-cc3a-4cf5-afd4-833e2cc7adea.sql",
+      "sha256": "01368669c80099b5506298db567ed604e52bd35a31292fc7edd0a252b3e9067d",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927123427_8897b13b-4dc4-460c-b8e4-5de334619bbc.sql",
+      "sha256": "251f543b1322c0d7caf88d72e52307c38ead082efacbaa5ea78fad97c4679472",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927123439_8c25e043-6508-424e-9abf-8cb739adb50f.sql",
+      "sha256": "446efafe411dceaca93b33291cb51a335d222c440696bd5b408a5347a6cb798b",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927124023_82621cb6-867f-4521-907c-96fc8c71eaa6.sql",
+      "sha256": "58cea0b017f793c1c5b3d0681def799c51994839b171d052340bee88984a665f",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927125439_7d5387e8-3e4a-465b-a50d-517127320868.sql",
+      "sha256": "80ca97010941f2c2da6e833272f399e4559fa1b7adb79e345aa4a47b3154e63d",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927130542_e0017dc8-c098-4075-ae35-8b277c6f3267.sql",
+      "sha256": "580d2cbdd2f33db471217fd0d49995c0f57db81e745ef21e18f2efd4e68a80e4",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927133410_ac9bcfe0-c954-482a-baa9-135f4c08b87d.sql",
+      "sha256": "d10b6ee0fed6c56354a9dfab93d406019765fdadc9ae2f7c66208fd6279d023a",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927134326_c3e6f8a7-8e92-4f28-a8cb-5f0a8864362a.sql",
+      "sha256": "76fd8e49b77b0f027295bc8ca66f813d0402d2db62be4ce4217610e8191201c8",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927134604_212434ca-0020-4cac-9448-c9ee5a7b0af8.sql",
+      "sha256": "68cecfeb138231f146267fdc60922b393b65ca096b673063983adb77331c5008",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927151326_1c10f59a-7bd1-4b45-a826-0b3919d2478b.sql",
+      "sha256": "e3c12c7280c0b65decfad60e84cfcdb6343de53ba1d36b88bbad4a488725b1d3",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927151334_813bc44d-7104-4174-9c67-397ccf6738d7.sql",
+      "sha256": "05baf992504b0ef444109e4ea200cf5cdaf1c242ce6bde4e413d6ddb8feaf200",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927163030_d436d779-7a35-4dc4-afaa-360ac77eec12.sql",
+      "sha256": "b3ad65b6250e80aa633f38931c89feac4a998b442a0ba325e86410d70e10c210",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927221842_aea451ef-3a19-4849-b43d-b9fd4a74a2af.sql",
+      "sha256": "b43384e27212c30d8247a8e96374b352caee56410396e905a99e09baabbbd7ed",
+      "status": "PASS"
+    },
+    {
+      "file": "20260927221851_db4e5ba1-0601-44b5-9a53-a8b2289c719c.sql",
+      "sha256": "60945947127390756ae7f77c2d6ee6adf38ffc4861bc67853c6b9c2478010e95",
+      "status": "PASS"
+    },
+    {
+      "file": "20261010213000_warehouse_events_staging.sql",
+      "sha256": "374ab4cb00cb6d32b737c8fbfdac7214612e375b44cd22a23625d6de4012a110",
+      "status": "PASS"
+    }
+  ],
+  "cases": [
+    {
+      "id": "D01_all_original_migrations",
+      "started_at_utc": "2026-10-22T00:47:33.038264+00:00",
+      "evidence": {
+        "applied": 23,
+        "historical_files_modified": false
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D02_real_restricted_login_roles",
+      "started_at_utc": "2026-10-22T00:47:33.038912+00:00",
+      "evidence": [
+        [
+          "fixture_a_admin",
+          "fixture_a_admin",
+          false,
+          false,
+          "on",
+          "4200d99d-2d60-4963-a874-9ad1e6f4f3e1",
+          212
+        ],
+        [
+          "fixture_a_warehouse",
+          "fixture_a_warehouse",
+          false,
+          false,
+          "on",
+          "c3fca60a-a56d-4ca0-8b44-02067a50bbe6",
+          213
+        ],
+        [
+          "fixture_a_viewer",
+          "fixture_a_viewer",
+          false,
+          false,
+          "on",
+          "fe6dd0c2-2d08-4187-bfb8-d03458608f3e",
+          214
+        ],
+        [
+          "fixture_b_admin",
+          "fixture_b_admin",
+          false,
+          false,
+          "on",
+          "effa9839-ec3e-4404-b168-f70e46928f9a",
+          215
+        ],
+        [
+          "fixture_b_warehouse",
+          "fixture_b_warehouse",
+          false,
+          false,
+          "on",
+          "090a3db5-2ae9-4a17-b2d0-729a5e069644",
+          216
+        ],
+        [
+          "fixture_b_viewer",
+          "fixture_b_viewer",
+          false,
+          false,
+          "on",
+          "033bbc84-98ef-401b-a39b-142e6eec9a82",
+          217
+        ],
+        [
+          "fixture_outsider",
+          "fixture_outsider",
+          false,
+          false,
+          "on",
+          "99a063cf-ce29-4886-b9ed-51f844cc0899",
+          218
+        ],
+        [
+          "fixture_missing",
+          "fixture_missing",
+          false,
+          false,
+          "on",
+          null,
+          219
+        ],
+        [
+          "fixture_anon",
+          "fixture_anon",
+          false,
+          false,
+          "on",
+          null,
+          220
+        ]
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "D03_company_user_select_isolation",
+      "started_at_utc": "2026-10-22T00:47:33.134119+00:00",
+      "evidence": [
+        {
+          "label": "a_admin",
+          "visible": [
+            "2a58cbcd-5d28-4379-b26f-a474f4c72eda"
+          ]
+        },
+        {
+          "label": "a_warehouse",
+          "visible": [
+            "2a58cbcd-5d28-4379-b26f-a474f4c72eda"
+          ]
+        },
+        {
+          "label": "a_viewer",
+          "visible": [
+            "2a58cbcd-5d28-4379-b26f-a474f4c72eda"
+          ]
+        },
+        {
+          "label": "b_admin",
+          "visible": [
+            "7f235d92-b5ee-4e2b-8cc3-70dee83e14e2"
+          ]
+        },
+        {
+          "label": "b_warehouse",
+          "visible": [
+            "7f235d92-b5ee-4e2b-8cc3-70dee83e14e2"
+          ]
+        },
+        {
+          "label": "b_viewer",
+          "visible": [
+            "7f235d92-b5ee-4e2b-8cc3-70dee83e14e2"
+          ]
+        },
+        {
+          "label": "outsider",
+          "visible": []
+        },
+        {
+          "label": "missing",
+          "visible": []
+        },
+        {
+          "label": "anon",
+          "visible": []
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "D04_direct_CRUD_matrix",
+      "started_at_utc": "2026-10-22T00:47:33.191408+00:00",
+      "evidence": {
+        "denied_operations": 41,
+        "own_admin_crud": "PASS; disposable transaction rolled back",
+        "denials": [
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "new row violates row-level security policy for table \"products\""
+          },
+          {
+            "denied": "42501",
+            "message": "permission denied for table products"
+          },
+          {
+            "denied": "42501",
+            "message": "permission denied for table products"
+          },
+          {
+            "denied": "42501",
+            "message": "permission denied for table bom_lines"
+          },
+          {
+            "denied": "42501",
+            "message": "permission denied for table products"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "zero_rows"
+          },
+          {
+            "denied": "42501",
+            "message": "permission denied for table products"
+          }
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D05_definer_RPC_and_helper_bypass_denial",
+      "started_at_utc": "2026-10-22T00:47:33.344801+00:00",
+      "evidence": [
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function place_order"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function _apply_stock"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function place_order"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function _apply_stock"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function place_order"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function _apply_stock"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function place_order"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function _apply_stock"
+        },
+        {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function place_order"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function _apply_stock"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function place_order"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function place_order"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function place_order"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function place_order"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "D06_browser_roles_cannot_read_credentials",
+      "started_at_utc": "2026-10-22T00:47:33.406213+00:00",
+      "evidence": [
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table channel_credentials"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "D07_shared_bundle_concurrent_shortage",
+      "started_at_utc": "2026-10-22T00:47:33.451714+00:00",
+      "evidence": {
+        "connections": [
+          {
+            "pid": 269,
+            "status": "OK",
+            "value": "55d8cb8b-684b-4dbe-848f-5295eef00fc4"
+          },
+          {
+            "pid": 270,
+            "status": "ERROR",
+            "sqlstate": "P0001",
+            "error": "Insufficient stock for FIXTURE-C1-897620dbfc72: need 2, available 1"
+          }
+        ],
+        "stock": [
+          [
+            "342e86c3-e92d-4a08-9fa6-3813d2f0a9fd",
+            3,
+            1
+          ],
+          [
+            "3ecec190-6207-4a98-8883-1e957659a766",
+            3,
+            2
+          ]
+        ],
+        "atomic_loser": "no partial reservation"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D08_whole_bundle_atomic_rollback",
+      "started_at_utc": "2026-10-22T00:47:33.498543+00:00",
+      "evidence": {
+        "stock": [
+          [
+            "365a20dc-2f45-40b6-83b3-5f287520f873",
+            1,
+            0
+          ],
+          [
+            "47d84e2b-a4cb-4eea-9c11-d3f1b10c6ee1",
+            1,
+            0
+          ]
+        ],
+        "rolled_back_order": true
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D09_cancel_ship_race_and_replay",
+      "started_at_utc": "2026-10-22T00:47:33.544970+00:00",
+      "evidence": {
+        "order": "ffbd68c0-c6be-451e-8d02-cf39db4af665",
+        "status": "fulfilled",
+        "connections": [
+          {
+            "pid": 281,
+            "status": "OK",
+            "value": "('',)"
+          },
+          {
+            "pid": 282,
+            "status": "ERROR",
+            "sqlstate": "P0001",
+            "error": "Only placed orders can be cancelled (current: fulfilled)"
+          }
+        ],
+        "stock": [
+          [
+            "1328be88-173e-42a2-b569-8ea1e441e2f3",
+            19,
+            0
+          ],
+          [
+            "2db7b550-2bd9-44b3-b0db-cd4d4d724cfa",
+            18,
+            0
+          ]
+        ],
+        "terminal_replays": "rejected without duplicate effect"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D10_terminated_transaction_rollback_and_retry",
+      "started_at_utc": "2026-10-22T00:47:33.612367+00:00",
+      "evidence": {
+        "terminated_backend_pid": 288,
+        "uncommitted_order_absent": true,
+        "successful_retry": "d553792f-e9ed-47fc-9570-302ea2c0ac93"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D11_external_idempotency_required",
+      "started_at_utc": "2026-10-22T00:47:33.696265+00:00",
+      "evidence": {
+        "connections": [
+          {
+            "pid": 298,
+            "status": "OK",
+            "value": "74f10828-68ac-4510-a91f-84578ea0929e"
+          },
+          {
+            "pid": 299,
+            "status": "OK",
+            "value": "74f10828-68ac-4510-a91f-84578ea0929e"
+          }
+        ],
+        "orders": 1,
+        "stock": [
+          [
+            "686aec0a-e236-4754-ad03-7dd3a60cddc4",
+            50,
+            1
+          ],
+          [
+            "89400975-f80f-4e06-b769-1870786b1ca8",
+            50,
+            1
+          ]
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D12_execution_time_membership_revocation",
+      "started_at_utc": "2026-10-22T00:47:33.744445+00:00",
+      "evidence": {
+        "denial": {
+          "denied": "P0001",
+          "message": "Insufficient permissions"
+        },
+        "visible_after_revoke": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D13_view_and_report_isolation",
+      "started_at_utc": "2026-10-22T00:47:33.800363+00:00",
+      "evidence": [
+        {
+          "view": "v_stock_reconciliation",
+          "rows": 14
+        },
+        {
+          "view": "v_component_availability",
+          "rows": 14
+        },
+        {
+          "view": "v_product_availability",
+          "rows": 14
+        },
+        {
+          "view": "v_listing_sync",
+          "rows": 0
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "D14_temp_schema_shadow_resistance",
+      "started_at_utc": "2026-10-22T00:47:33.815972+00:00",
+      "evidence": {
+        "foreign_admin": false
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D15_direct_SQL_claim_spoof_boundary",
+      "started_at_utc": "2026-10-22T00:47:33.825691+00:00",
+      "evidence": {
+        "restricted_login": "fixture_a_viewer",
+        "forged_subject": "fixture_b_admin",
+        "foreign_visible": 0,
+        "boundary": "custom request claims are trusted API inputs, not authentication for arbitrary SQL clients"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D16_restart_durability_reconnect",
+      "started_at_utc": "2026-10-22T00:47:33.833620+00:00",
+      "evidence": {
+        "persisted_order_status": "placed",
+        "stock": [
+          [
+            "7de9e7e4-aaf1-4919-93d0-db7ec3d079da",
+            20,
+            1
+          ],
+          [
+            "cba1018a-4b31-4c6e-939b-b505e8416a6e",
+            20,
+            2
+          ]
+        ],
+        "recovery": "fsync enabled clean fast-stop/restart; not power-loss or off-host restore"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D17_all_public_table_read_surfaces",
+      "started_at_utc": "2026-10-22T00:47:34.066952+00:00",
+      "evidence": [
+        {
+          "table": "audit_log",
+          "rows": 69,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "bom_lines",
+          "rows": 28,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "channel_credentials",
+          "access": "denied"
+        },
+        {
+          "table": "channel_listings",
+          "rows": 0,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "component_stock",
+          "rows": 14,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "components",
+          "rows": 14,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "inventory_outbox",
+          "rows": 0,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "order_lines",
+          "rows": 5,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "order_reservations",
+          "rows": 10,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "orders",
+          "rows": 5,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "organization_members",
+          "rows": 3,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "organizations",
+          "rows": 1,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "product_attributes",
+          "rows": 0,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "product_families",
+          "rows": 0,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "product_review_decisions",
+          "rows": 0,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "products",
+          "rows": 14,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "profiles",
+          "rows": 3,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "sales_channels",
+          "rows": 7,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "stock_movements",
+          "rows": 12,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "user_roles",
+          "rows": 0,
+          "foreign_fixture_rows": 0
+        },
+        {
+          "table": "warehouse_events",
+          "access": "denied"
+        },
+        {
+          "table": "warehouses",
+          "rows": 7,
+          "foreign_fixture_rows": 0
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "D18_null_channel_external_replay",
+      "started_at_utc": "2026-10-22T00:47:34.088874+00:00",
+      "evidence": {
+        "connections": [
+          {
+            "pid": 325,
+            "status": "OK",
+            "value": "{'order_id': '5fd53c6c-87a8-4584-87b8-7274cd5f7035'}"
+          },
+          {
+            "pid": 327,
+            "status": "OK",
+            "value": "{'order_id': '5fd53c6c-87a8-4584-87b8-7274cd5f7035'}"
+          }
+        ],
+        "orders": 1,
+        "stock": [
+          [
+            "ab77e669-6139-4151-bf57-89dcc9c04c62",
+            50,
+            1
+          ],
+          [
+            "f1ce14cc-a49b-4b6f-afe5-6190a3a67df7",
+            50,
+            1
+          ]
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D19_separate_ship_and_cancel_lifecycles",
+      "started_at_utc": "2026-10-22T00:47:34.141805+00:00",
+      "evidence": [
+        {
+          "operation": "fulfill_order",
+          "stock": [
+            [
+              "0dce3779-7e91-4c67-b0d1-455916a2c36d",
+              19,
+              0
+            ],
+            [
+              "6497b747-ebe6-4b3c-89fd-264cc52523e0",
+              18,
+              0
+            ]
+          ]
+        },
+        {
+          "operation": "cancel_order",
+          "stock": [
+            [
+              "42a08819-ef79-493f-9eb9-843fa40e312d",
+              20,
+              0
+            ],
+            [
+              "d4e2afea-5024-43dd-b719-5e524d9a271a",
+              20,
+              0
+            ]
+          ]
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "D20_real_dump_restore_and_RLS_recheck",
+      "started_at_utc": "2026-10-22T00:47:34.250402+00:00",
+      "evidence": {
+        "matching_relations": 28,
+        "restored_role_RLS": "foreign denied; own visible",
+        "private_dump_exported": false,
+        "scope": "same isolated cluster, separate restored DB; not off-host/key/SLA recovery"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "D21_anonymous_role_denials",
+      "started_at_utc": "2026-10-22T00:47:34.804499+00:00",
+      "evidence": [
+        {
+          "denied": "42501",
+          "message": "permission denied to set role \"authenticated\""
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for table products"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function bootstrap_user"
+        },
+        {
+          "denied": "42501",
+          "message": "permission denied for function place_order"
+        }
+      ],
+      "status": "PASS"
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "gcc",
+        "-shared",
+        "-fPIC",
+        "/workspace/scratch/930c38487b1a/alternative-wms/verification/postgres/uid_compat.c",
+        "-o",
+        "/tmp/wms-pg-synthetic-7w6mq7y3/uid_compat.so",
+        "-ldl"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "exit_code": 0,
+      "log": "uid-compat-build.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "duration_seconds": 0.039
+    },
+    {
+      "argv": [
+        "/workspace/scratch/930c38487b1a/pg-runtime/embedded_postgres/pginstall/bin/initdb",
+        "-D",
+        "/tmp/wms-pg-synthetic-7w6mq7y3/cluster",
+        "-U",
+        "fixture_owner",
+        "--no-locale",
+        "--encoding=UTF8",
+        "--auth=scram-sha-256",
+        "--pwfile",
+        "[PRIVATE_PWFILE]"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "exit_code": 0,
+      "log": "initdb.log",
+      "log_sha256": "36c96af84f27f025918c5fb62cff17975edca34d638af0a6b1b14cd6000ae59b",
+      "duration_seconds": 0.764
+    },
+    {
+      "argv": [
+        "/workspace/scratch/930c38487b1a/pg-runtime/embedded_postgres/pginstall/bin/postgres",
+        "-D",
+        "/tmp/wms-pg-synthetic-7w6mq7y3/cluster",
+        "-h",
+        "127.0.0.1",
+        "-p",
+        "15432",
+        "-k",
+        "",
+        "-c",
+        "shared_buffers=16MB",
+        "-c",
+        "max_connections=25",
+        "-c",
+        "fsync=on",
+        "-c",
+        "synchronous_commit=on"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "purpose": "owned ephemeral server start",
+      "pid": 199,
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/930c38487b1a/pg-runtime/embedded_postgres/pginstall/bin/postgres",
+        "-D",
+        "/tmp/wms-pg-synthetic-7w6mq7y3/cluster",
+        "-h",
+        "127.0.0.1",
+        "-p",
+        "15432",
+        "-k",
+        "",
+        "-c",
+        "shared_buffers=16MB",
+        "-c",
+        "max_connections=25",
+        "-c",
+        "fsync=on",
+        "-c",
+        "synchronous_commit=on"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "purpose": "owned ephemeral server start",
+      "pid": 310,
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/930c38487b1a/pg-runtime/embedded_postgres/pginstall/bin/pg_dump",
+        "-h",
+        "127.0.0.1",
+        "-p",
+        "15432",
+        "-U",
+        "fixture_owner",
+        "-d",
+        "wms_test_alternative",
+        "-Fc",
+        "-f",
+        "/tmp/wms-pg-synthetic-7w6mq7y3/private.dump"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "exit_code": 0,
+      "log": "pg-dump.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "duration_seconds": 0.08
+    },
+    {
+      "argv": [
+        "/workspace/scratch/930c38487b1a/pg-runtime/embedded_postgres/pginstall/bin/pg_restore",
+        "-h",
+        "127.0.0.1",
+        "-p",
+        "15432",
+        "-U",
+        "fixture_owner",
+        "-d",
+        "wms_test_restore_8ca8b1ad02",
+        "--exit-on-error",
+        "--no-owner",
+        "/tmp/wms-pg-synthetic-7w6mq7y3/private.dump"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "exit_code": 0,
+      "log": "pg-restore.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "duration_seconds": 0.31
+    },
+    {
+      "argv": [
+        "/workspace/scratch/930c38487b1a/oss-lab/tryton-venv/bin/python",
+        "/workspace/scratch/930c38487b1a/alternative-wms/candidate/trusted_boundary/http_server.py",
+        "--config",
+        "/tmp/wms-pg-synthetic-7w6mq7y3/http-private.json"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "pid": 346,
+      "purpose": "owned synthetic HTTP service; private config not exported",
+      "exit_code": -15
+    },
+    {
+      "argv": [
+        "/workspace/scratch/930c38487b1a/oss-lab/tryton-venv/bin/python",
+        "/workspace/scratch/930c38487b1a/alternative-wms/candidate/trusted_boundary/http_server.py",
+        "--config",
+        "/tmp/wms-pg-synthetic-7w6mq7y3/http-private.json"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "pid": 364,
+      "purpose": "owned synthetic HTTP service; private config not exported",
+      "exit_code": -9
+    },
+    {
+      "argv": [
+        "/workspace/scratch/930c38487b1a/oss-lab/tryton-venv/bin/python",
+        "/workspace/scratch/930c38487b1a/alternative-wms/candidate/trusted_boundary/http_server.py",
+        "--config",
+        "/tmp/wms-pg-synthetic-7w6mq7y3/http-private.json"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "pid": 395,
+      "purpose": "owned synthetic HTTP service; private config not exported",
+      "exit_code": -15
+    },
+    {
+      "argv": [
+        "/workspace/scratch/930c38487b1a/oss-lab/tryton-venv/bin/python",
+        "/workspace/scratch/930c38487b1a/alternative-wms/candidate/trusted_boundary/http_server.py",
+        "--config",
+        "/tmp/wms-pg-synthetic-7w6mq7y3/http-private.json"
+      ],
+      "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+      "pid": 432,
+      "purpose": "owned synthetic HTTP service; private config not exported",
+      "exit_code": -15
+    }
+  ],
+  "runtime_binary_hashes": {
+    "postgres": "8a5fa2b4644be7fed5c8ace3c94989132ff95dcf3ddf178ce777bdd6dda357e8",
+    "initdb": "9c93d1e2112cf30669bd22f9d474313d3aec8a22041ebb0157f758c57614f61e",
+    "pg_ctl": "dd458781620f016af2d6edb76b84f5246e106a1db43cdd9979d552d96d65068c",
+    "pg_dump": "b0efe5ee27b4090a16c742169e7de580d399388c6486bcaed3ae59b1cda7bca1",
+    "pg_restore": "358b4481213f1c2c61b4440920d898ba9da65964d3149c222bc3337fe7ead5b2"
+  },
+  "host_isolation_proven": false,
+  "http_postgrest_jwt_proven": false,
+  "trusted_cases": [
+    {
+      "id": "H01_signed_JWT_company_RLS",
+      "status": "PASS",
+      "evidence": {
+        "company_A_visible": true,
+        "company_B_visible": true,
+        "cross_company_rows": 0
+      }
+    },
+    {
+      "id": "H02_invalid_expired_forged_and_wrong_algorithm_JWT",
+      "status": "PASS",
+      "evidence": {
+        "real_HTTP_rejections": 8,
+        "algorithm_allowlist": "HS256 only"
+      }
+    },
+    {
+      "id": "H03_revoked_JWT_persistent_rejection",
+      "status": "PASS",
+      "evidence": {
+        "revocation_persisted_across_process_restart": true
+      }
+    },
+    {
+      "id": "H04_subject_company_and_header_spoof_denials",
+      "status": "PASS",
+      "evidence": {
+        "unsigned_identity_overrides": "ignored or rejected",
+        "signed_cross_membership": "denied"
+      }
+    },
+    {
+      "id": "H05_role_claim_escalation_and_non_member_denial",
+      "status": "PASS",
+      "evidence": {
+        "JWT_role_does_not_grant_DB_role": true,
+        "non_member_denied": true
+      }
+    },
+    {
+      "id": "H06_trusted_source_and_null_channel_policy",
+      "status": "PASS",
+      "evidence": {
+        "external_channel_required": true,
+        "unknown_or_mismatched_source_denied": true,
+        "valid_result": {
+          "order_id": "1ed21eca-41fb-4967-a051-21787650594d"
+        }
+      }
+    },
+    {
+      "id": "H07_two_PostgreSQL_connections_exactly_one_effect",
+      "status": "PASS",
+      "evidence": {
+        "independent_backends": [
+          {
+            "pid": 382,
+            "status": "OK",
+            "value": "{'order_id': '1fa0a0f4-01e6-4785-b828-e48664b5a91a'}"
+          },
+          {
+            "pid": 383,
+            "status": "OK",
+            "value": "{'order_id': '1fa0a0f4-01e6-4785-b828-e48664b5a91a'}"
+          }
+        ],
+        "orders": 1,
+        "commands": 1,
+        "reservation_orders": 1,
+        "stock": [
+          [
+            "7c1bdd1a-1787-41a1-94c6-1160bf0218ba",
+            10,
+            1
+          ],
+          [
+            "c2ce095c-8a39-4189-9b14-6903cdb41d92",
+            10,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "H08_lost_HTTP_response_returns_durable_result",
+      "status": "PASS",
+      "evidence": {
+        "previous_result_returned": {
+          "order_id": "a36da109-0a7e-4b86-8821-d314436929c5"
+        },
+        "reservation_effects_per_component": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "H09_killed_HTTP_process_and_replay",
+      "status": "PASS",
+      "evidence": {
+        "prior_process": 364,
+        "new_process": 395,
+        "same_result": {
+          "order_id": "a36da109-0a7e-4b86-8821-d314436929c5"
+        },
+        "stock_unchanged": true
+      }
+    },
+    {
+      "id": "H10_payload_hash_conflict_no_write",
+      "status": "PASS",
+      "evidence": {
+        "changed_payload_status": 409,
+        "no_second_effect": true
+      }
+    },
+    {
+      "id": "H11_company_source_request_key_scope",
+      "status": "PASS",
+      "evidence": {
+        "company_and_source_scoped_results": [
+          {
+            "order_id": "2dea796c-dd3b-477c-bc8e-d5ca66218d8b"
+          },
+          {
+            "order_id": "369606bc-f0d3-49da-af50-f3d37c05a0c3"
+          },
+          {
+            "order_id": "9a2a620d-ced6-4fa6-a3f2-cd69dec946b4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "H12_single_connection_pool_no_identity_bleed",
+      "status": "PASS",
+      "evidence": {
+        "reused_backend_pid": 396,
+        "alternating_requests": 9,
+        "resets_verified_after_success_and_failure": true
+      }
+    },
+    {
+      "id": "H13_DB_membership_rechecked_on_replay",
+      "status": "PASS",
+      "evidence": {
+        "old_token_cannot_replay_after_membership_revocation": true
+      }
+    },
+    {
+      "id": "H14_untrusted_raw_RPC_and_SQL_routes_denied",
+      "status": "PASS",
+      "evidence": {
+        "raw_write_RPC_and_arbitrary_HTTP_SQL": "denied"
+      }
+    },
+    {
+      "id": "H15_direct_SQL_identity_cannot_be_replaced_by_claims",
+      "status": "PASS",
+      "evidence": {
+        "identity_bound_to_session_user": true,
+        "protected_map_and_service_credential_boundary": true
+      }
+    },
+    {
+      "id": "H16_source_grant_revocation",
+      "status": "PASS",
+      "evidence": {
+        "revoked_source_grant_blocks_cached_result": true
+      }
+    },
+    {
+      "id": "H17_concurrent_HTTP_requests_two_native_connections",
+      "status": "PASS",
+      "evidence": {
+        "HTTP_responses": [
+          [
+            200,
+            {
+              "order_id": "9328f5e3-c5fb-47fa-9138-0e3af86fe98f"
+            }
+          ],
+          [
+            200,
+            {
+              "order_id": "9328f5e3-c5fb-47fa-9138-0e3af86fe98f"
+            }
+          ]
+        ],
+        "independent_HTTP_SQL_backend_pids": [
+          433,
+          434
+        ],
+        "orders": 1,
+        "one_effect_per_component": true
+      }
+    },
+    {
+      "id": "H18_multi_company_JWT_only_subject_scope",
+      "status": "PASS",
+      "evidence": {
+        "JWT_only_subject_has_no_SQL_login_mapping": true,
+        "token_company_narrows_multi_company_membership": true
+      }
+    }
+  ],
+  "pyjwt": "2.15.1",
+  "codex_start_authorized": false,
+  "production_authority_changed": false,
+  "uid_compat": {
+    "actual_uid": 0,
+    "observed_uid": 1,
+    "source_sha256": "dfd766a3cb228d6a3f9c4e6adf59f12db35ef60fa4ab86c4f5d181a183733390",
+    "library_sha256": "ddbfb13e1c68b338c2851fd01cc173fe8c7028da1019bd77333908f29ea3a8fc",
+    "scope": "child processes only; libc UID/stat observations; NOT OS or filesystem isolation"
+  },
+  "server_version": "PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 14.2.1 20250110 (Red Hat 14.2.1-11), 64-bit",
+  "candidate_migration": {
+    "file": "candidate/trusted_boundary/001_boundary.sql",
+    "sha256": "14aa38a4acf8bdebba83f6762d82244f58901e94f7f0b074ef45d5a41fcafaa0",
+    "historical_count": 23
+  },
+  "rls_catalog": [
+    {
+      "table": "audit_log",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "bom_lines",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "channel_credentials",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "channel_listings",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "component_stock",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "components",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "inventory_outbox",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "order_lines",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "order_reservations",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "orders",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "organization_members",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "organizations",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "product_attributes",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "product_families",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "product_review_decisions",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "products",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "profiles",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "sales_channels",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "stock_movements",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "user_roles",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "warehouse_events",
+      "enabled": true,
+      "forced": false
+    },
+    {
+      "table": "warehouses",
+      "enabled": true,
+      "forced": false
+    }
+  ],
+  "definer_catalog": [
+    {
+      "signature": "_apply_stock(uuid,uuid,movement_type,integer,integer,text,text,uuid,uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": false,
+      "anon_execute": false
+    },
+    {
+      "signature": "_ensure_primary(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": false,
+      "anon_execute": false
+    },
+    {
+      "signature": "_product_for_ean(uuid,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": false,
+      "anon_execute": false
+    },
+    {
+      "signature": "apply_bol_attributes(uuid,jsonb)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "apply_bol_enrichment(uuid,jsonb)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "audit_trigger()",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": false,
+      "anon_execute": false
+    },
+    {
+      "signature": "bootstrap_user()",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "cancel_order(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "channel_credential_status()",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "confirm_listing(uuid,uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "current_org_id()",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "default_warehouse_id(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": false,
+      "anon_execute": false
+    },
+    {
+      "signature": "fulfill_order(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "has_any_role(uuid,app_role[])",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "has_org_role(uuid,app_role[])",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "has_role(uuid,app_role)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "import_bom(jsonb,boolean)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "import_components(jsonb,boolean)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "import_listings(jsonb,boolean)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "import_products(jsonb,boolean)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "is_org_member(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "merge_products(uuid,uuid[],integer,boolean,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "place_order(jsonb,uuid,text,text,uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": false,
+      "anon_execute": false
+    },
+    {
+      "signature": "plan_stock_sync(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "post_stock_movement(uuid,movement_type,integer,text,text,uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "remove_member(uuid,uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "reset_product_attribute(uuid,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "run_acceptance_test()",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_bundle_contents(uuid,jsonb)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_channel_company(uuid,jsonb)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_channel_retailer(uuid,jsonb)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_channel_status(uuid,text,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_listing_variant(uuid,text,text,integer)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_member_role(uuid,text,app_role)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_org()",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": false,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_primary_listing(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_product_as_stock_item(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_product_attribute(uuid,text,text,text,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_product_bom(uuid,jsonb)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_product_family(uuid,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_product_master(uuid,text,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_product_normal(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "set_product_relationship(uuid,text,text)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "unmerge_listing(uuid)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    },
+    {
+      "signature": "upsert_bol_offers(uuid,jsonb,boolean)",
+      "config": [
+        "search_path=public"
+      ],
+      "authenticated_execute": true,
+      "anon_execute": false
+    }
+  ],
+  "restart_fixture": {
+    "warehouse": "16b27de4-aaaa-4fca-a7c4-e165c4b9866c",
+    "order": "d553792f-e9ed-47fc-9570-302ea2c0ac93",
+    "stock": [
+      [
+        "7de9e7e4-aaf1-4919-93d0-db7ec3d079da",
+        20,
+        1
+      ],
+      [
+        "cba1018a-4b31-4c6e-939b-b505e8416a6e",
+        20,
+        2
+      ]
+    ]
+  },
+  "duplicate_external_observation": {
+    "connections": [
+      {
+        "pid": 298,
+        "status": "OK",
+        "value": "74f10828-68ac-4510-a91f-84578ea0929e"
+      },
+      {
+        "pid": 299,
+        "status": "OK",
+        "value": "74f10828-68ac-4510-a91f-84578ea0929e"
+      }
+    ],
+    "orders": 1,
+    "stock": [
+      [
+        "686aec0a-e236-4754-ad03-7dd3a60cddc4",
+        50,
+        1
+      ],
+      [
+        "89400975-f80f-4e06-b769-1870786b1ca8",
+        50,
+        1
+      ]
+    ]
+  },
+  "claim_spoof_observation": {
+    "restricted_login": "fixture_a_viewer",
+    "forged_subject": "fixture_b_admin",
+    "foreign_visible": 0,
+    "boundary": "custom request claims are trusted API inputs, not authentication for arbitrary SQL clients"
+  },
+  "null_channel_replay_observation": {
+    "connections": [
+      {
+        "pid": 325,
+        "status": "OK",
+        "value": "{'order_id': '5fd53c6c-87a8-4584-87b8-7274cd5f7035'}"
+      },
+      {
+        "pid": 327,
+        "status": "OK",
+        "value": "{'order_id': '5fd53c6c-87a8-4584-87b8-7274cd5f7035'}"
+      }
+    ],
+    "orders": 1,
+    "stock": [
+      [
+        "ab77e669-6139-4151-bf57-89dcc9c04c62",
+        50,
+        1
+      ],
+      [
+        "f1ce14cc-a49b-4b6f-afe5-6190a3a67df7",
+        50,
+        1
+      ]
+    ]
+  },
+  "backup_restore_fingerprints": [
+    {
+      "table": "auth.users",
+      "count": 9,
+      "sha256": "b4ee7473fcdd571588849d2e67f92a65a265209db66c12b94d5ce210215f81ba"
+    },
+    {
+      "table": "public.audit_log",
+      "count": 157,
+      "sha256": "24b7533063745c9ee73c6ce3517ad3fb6e9b980dd2749b4551ec7e7ca51349a9"
+    },
+    {
+      "table": "public.bom_lines",
+      "count": 53,
+      "sha256": "2b27090cf8d5843217f249c717ce028328877ab6e1eab3fdecad84ce81b4c0bd"
+    },
+    {
+      "table": "public.channel_credentials",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.channel_listings",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.component_stock",
+      "count": 25,
+      "sha256": "6f499b8a5ddf7902dde865837c4d5651278e061948c51f19f93279bc56880c8a"
+    },
+    {
+      "table": "public.components",
+      "count": 25,
+      "sha256": "ef7f0030361d2d01360e3e20452f55539747b259945dadf1313e40da5c2198e5"
+    },
+    {
+      "table": "public.inventory_outbox",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.order_lines",
+      "count": 8,
+      "sha256": "3e8be71a01b4a1718b8487573c05123936e16c66573227124fcf88754e47820a"
+    },
+    {
+      "table": "public.order_reservations",
+      "count": 16,
+      "sha256": "c0f18c292762fccd79596ce717a00dd0562d770635f0b147122f77a93dcb3540"
+    },
+    {
+      "table": "public.orders",
+      "count": 8,
+      "sha256": "3a2a1fbcfa3bf0b6665ddfeec05f6234db3d80f8f206973d20364acfda64a323"
+    },
+    {
+      "table": "public.organization_members",
+      "count": 6,
+      "sha256": "d4017c3b7310bb30144094894234324c4fdb369d5924f451784564829a90d1a0"
+    },
+    {
+      "table": "public.organizations",
+      "count": 3,
+      "sha256": "3b594d8dd1845f7ee64b06d24e54f0fde3d562140c7b56701ab874e8fb131e5c"
+    },
+    {
+      "table": "public.product_attributes",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.product_families",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.product_review_decisions",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.products",
+      "count": 29,
+      "sha256": "1ff73f8903310d9ec368269fa6b89bbc11ea5a18dd1d740456647eca5d2c5ad8"
+    },
+    {
+      "table": "public.profiles",
+      "count": 9,
+      "sha256": "a31e3ef1cf9f27ba427b9b3373cd3f5a8fbef06800c0eca13f09274e28bf71a1"
+    },
+    {
+      "table": "public.sales_channels",
+      "count": 13,
+      "sha256": "d6ba466d7f5c0e037766bffc15915c55e2d7b1c0f7c5eec72c810ac7131a1ed9"
+    },
+    {
+      "table": "public.stock_movements",
+      "count": 25,
+      "sha256": "6f34f7dd6b043cc070e4d0564c7bb6ebea4c60420c0d5d905d3805fec514d011"
+    },
+    {
+      "table": "public.user_roles",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.warehouse_events",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "public.warehouses",
+      "count": 12,
+      "sha256": "1916d5f9fd7b1176fcd3a7f15cf3d69cba1a3f2354d2dca9459f6600a35fb210"
+    },
+    {
+      "table": "surooh_boundary.commands",
+      "count": 8,
+      "sha256": "e5dddfe51759e6d746cab6955c9ec1e9a38d0275adc0343e0c1df417eccc91fa"
+    },
+    {
+      "table": "surooh_boundary.login_principals",
+      "count": 7,
+      "sha256": "e435c0ed753d109dfa4fa41738a9c32964ffcf9c7451b84f842c1a22964f89f2"
+    },
+    {
+      "table": "surooh_boundary.revoked_tokens",
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "table": "surooh_boundary.source_grants",
+      "count": 12,
+      "sha256": "ee6afe81823d74a0f03609f6c5ecd05ce5b1b02d6651a4cf48e1cff14f30ff1c"
+    },
+    {
+      "table": "surooh_boundary.sources",
+      "count": 6,
+      "sha256": "6301693221a670b03a6636ee4d16aa1633055fa8c4777857aac39ba0d419dd82"
+    }
+  ],
+  "http_service_cleanup": {
+    "stopped": true,
+    "private_config_exported": false,
+    "binding": "127.0.0.1",
+    "pool_size": 2
+  },
+  "trusted_http_jwt_proven": true,
+  "http_boundary_kind": "real candidate HTTP with PyJWT; not PostgREST or deployed WMS/ERP integration",
+  "cleanup": {
+    "server_stopped": true,
+    "private_cluster_removed": true
+  },
+  "finished_at_utc": "2026-10-22T00:47:36.077740+00:00",
+  "summary": {
+    "PASS": 21,
+    "FAIL": 0
+  },
+  "unexecuted_requirements": [
+    "Deployed WMS/Supabase PostgREST and native ERP integration parity",
+    "separate real OS identities/mounts",
+    "native ERPNext integration",
+    "real background-worker transport",
+    "fresh full ERPNext bootstrap",
+    "off-host backup/key custody and crash/power-loss durability"
+  ],
+  "unexecuted_case_ids": [],
+  "trusted_summary": {
+    "PASS": 18,
+    "FAIL": 0
+  }
+}

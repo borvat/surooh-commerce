@@ -1,6 +1,6 @@
 # Reproduce safely
 
-Use a disposable local environment, no production credentials. Runtime versions/hashes: `verification/postgres/runtime-pins.json` (PostgreSQL18.6 embedded wheel18.6.3, psycopg3.3.6, PyJWT2.15.1); Bun1.3.13, Node24.19.0, Python3.12. Refer to existing `verification/postgres/README.md` and `verification/README.md` for binary provisioning and independent-runner details. Install PyJWT2.15.1 into the same **venv path** passed as `--db-python`; do not resolve its Python symlink out of the venv.
+Use a disposable local environment, no production credentials. Runtime versions/hashes: `verification/postgres/runtime-pins.json` (PostgreSQL18.6 embedded wheel18.6.3, psycopg3.3.6, PyJWT2.15.1); Bun1.3.13, Node24.19.0, Python3.12. Refer to existing `docs/wms/postgresql-validation/README.md` and `verification/README.md` for binary provisioning and independent-runner details. Install PyJWT2.15.1 into the same **venv path** passed as `--db-python`; do not resolve its Python symlink out of the venv.
 
 ```sh
 WMS_TEST_ISOLATED=true WMS_TEST_DATABASE_URL=postgresql://fixture:fixture@127.0.0.1:15432/wms_test_alternative \

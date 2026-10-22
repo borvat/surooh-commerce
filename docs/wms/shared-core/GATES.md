@@ -35,3 +35,8 @@ On independent branch remediation/wms-source-quality, tested3a7cfb73850ec89fd918
 ## Executed legacy PostgreSQL candidate — not accepted
 
 At 6066f6a3fbb8f6edd2b6cadb8304b311e2e046bb: real PostgreSQL18.6 applied23 unchanged migrations;21 groups executed (19 PASS,2 FAIL). Adapter now exists; see ../postgresql-validation/RESULTS.md and FINDINGS.md. PREPARATION remains BLOCKED on native invariant failures, host identity isolation and real HTTP/JWT boundary; P01 additionally lacks fresh engine bootstrap. Local PG dump/restore is scoped evidence, not off-host/OS/production approval. G0 hosted Actions stays BLOCKED and G1–G6/Codex/merge/deploy holds are unchanged.
+
+
+## Trusted-boundary bounded candidate
+
+See ../trusted-boundary/DESIGN.md and RESULTS.md. DB-F01/DB-F02 are tested through an additive candidate command/identity boundary; original23 migrations and historical failed evidence remain unchanged. Independent plan now separates real candidate HTTP validation from deployed_wms_identity_integration (BLOCKED). PREPARATION remains BLOCKED on real host identity isolation and deployed integration; P01 additionally on fresh ERPNext bootstrap. A scoped TRUSTED_BOUNDARY review cannot authorize P01–P09/Codex or clear G1–G6. Hosted Actions remains BLOCKED; no rerun or billing change.

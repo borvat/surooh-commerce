@@ -12,6 +12,8 @@ import sys
 import time
 import traceback
 
+from browser_config import browser_input, run_browser
+
 
 def run(config):
     import frappe
@@ -1086,28 +1088,7 @@ def run(config):
         from atomic_cases import run as atomic_run
 
         atomic_run(case, call, token, owner, bins, wms)
-        browser = subprocess.run(
-            [
-                os.environ["SUROOH_BUN"],
-                str(
-                    Path(os.environ["SUROOH_WMS_ROOT"])
-                    / "verification/native_integration/browser-cycle.mjs"
-                ),
-            ],
-            input=json.dumps(
-                {
-                    "token": token(),
-                    "bun": os.environ["SUROOH_BUN"],
-                    "wmsRoot": os.environ["SUROOH_WMS_ROOT"],
-                }
-            ),
-            text=True,
-            capture_output=True,
-            timeout=180,
-        )
-        (out / "browser-cycle.log").write_text(browser.stdout + browser.stderr)
-        browser_row = json.loads(browser.stdout.strip().splitlines()[-1])
-        browser_row["exit_code"] = browser.returncode
+        browser_row = run_browser(browser_input(token()), out / "browser-cycle.log")
         rows.append(browser_row)
         save()
     finally:

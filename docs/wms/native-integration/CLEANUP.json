@@ -1,0 +1,35 @@
+{
+  "timestamp_utc": "2026-10-22T01:24:32.109748+00:00",
+  "owned_roots_removed": [
+    {
+      "owned_synthetic_runtime": "surooh-new-native-nyx86646",
+      "residual_observed_after_driver": true,
+      "removed": true
+    },
+    {
+      "owned_synthetic_runtime": "surooh-new-native-qzqx_g8i",
+      "residual_observed_after_driver": true,
+      "removed": true
+    }
+  ],
+  "remaining_owned_roots": [],
+  "port_checks": [
+    {
+      "loopback_port": 14306,
+      "released": true
+    },
+    {
+      "loopback_port": 17379,
+      "released": true
+    },
+    {
+      "loopback_port": 18080,
+      "released": true
+    },
+    {
+      "loopback_port": 15432,
+      "released": true
+    }
+  ],
+  "note": "External follow-up is authoritative over driver self-report: residual synthetic roots were observed and explicitly removed. No private config/keys/dumps exported."
+}

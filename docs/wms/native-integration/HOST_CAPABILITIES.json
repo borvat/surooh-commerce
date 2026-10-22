@@ -1,0 +1,48 @@
+{
+  "source_sha": "9827f7252d74849bba5dc5f130a4fc6d6e6d5d2c",
+  "timestamp_utc": "2026-10-22T01:24:31.998835+00:00",
+  "commands": [
+    {
+      "command": [
+        "id"
+      ],
+      "exit_code": 0,
+      "stdout": "uid=0(root) gid=0(root) groups=0(root)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "cat",
+        "/proc/self/uid_map"
+      ],
+      "exit_code": 0,
+      "stdout": "         0          0          1\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "cat",
+        "/proc/self/gid_map"
+      ],
+      "exit_code": 0,
+      "stdout": "         0          0          1\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "unshare",
+        "--user",
+        "--map-user=1000",
+        "--map-group=1000",
+        "id"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "unshare: write failed /proc/self/uid_map: Operation not permitted\n"
+    }
+  ],
+  "docker_cli_available": false,
+  "status": "BLOCKED_REAL_NONROOT_SERVICE_STORAGE_KEY_ISOLATION",
+  "native_UID_shim_used": false,
+  "legacy_PG_regression_UID_shim_disclosed_separately": true
+}

@@ -1,0 +1,28 @@
+{
+  "tested_sources": {
+    "wms": "9827f7252d74849bba5dc5f130a4fc6d6e6d5d2c",
+    "accounting": "f031a73e8ade3ed89c7eeda057566296a5fdc198"
+  },
+  "native_summary": {
+    "PASS": 19,
+    "FAIL": 0,
+    "BLOCKED": 1
+  },
+  "regression_summary": {
+    "PASS": 17,
+    "FAIL": 0,
+    "BLOCKED": 19
+  },
+  "status": "PARTIAL_BLOCKED",
+  "full_rendered_UI": "BLOCKED",
+  "native_pick_pack_handoff": "BLOCKED_NI_F01",
+  "nonroot_operational_isolation": "BLOCKED",
+  "PREPARATION": "BLOCKED",
+  "P01": "BLOCKED",
+  "hosted_ci": "BLOCKED",
+  "human_review_required": true,
+  "phase_complete": false,
+  "codex_start_authorized": false,
+  "merge_authorized": false,
+  "deploy_authorized": false
+}

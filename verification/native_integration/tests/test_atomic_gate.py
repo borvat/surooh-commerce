@@ -91,3 +91,20 @@ class EvidenceGate(unittest.TestCase):
         self.report["source_after"]["wms_dirty"] = True
         self.write()
         self.assertEqual(self.evaluate()["native_atomic_candidate"], "BLOCKED")
+
+    def test_owned_service_requires_actual_shutdown_exit(self):
+        self.report["commands"].append({"kind": "owned service", "log": "native.log"})
+        self.write()
+        self.assertEqual(self.evaluate()["native_atomic_candidate"], "BLOCKED")
+        self.report["service_shutdown"] = [{"name": "native", "exit_code": 0}]
+        self.write()
+        self.assertEqual(
+            self.evaluate()["native_atomic_candidate"],
+            "READY_FOR_HUMAN_EVIDENCE_REVIEW",
+        )
+
+    def test_failed_owned_service_shutdown_rejected(self):
+        self.report["commands"].append({"kind": "owned service", "log": "native.log"})
+        self.report["service_shutdown"] = [{"name": "native", "exit_code": 1}]
+        self.write()
+        self.assertEqual(self.evaluate()["native_atomic_candidate"], "BLOCKED")

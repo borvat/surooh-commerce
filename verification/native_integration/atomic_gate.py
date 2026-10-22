@@ -34,8 +34,19 @@ def evaluate(base, wms_sha, accounting_sha):
     }:
         errors.append("source changed or not checked after execution")
     commands = report.get("commands", [])
-    if not commands or any(row.get("exit_code") != 0 for row in commands):
-        errors.append("bootstrap/native command did not succeed")
+    shutdown = {
+        row.get("name"): row.get("exit_code")
+        for row in report.get("service_shutdown", [])
+    }
+    if not commands:
+        errors.append("bootstrap/native commands missing")
+    for row in commands:
+        if row.get("kind") == "owned service":
+            name = Path(row.get("log", "")).stem
+            if not name or shutdown.get(name) != 0:
+                errors.append("owned service shutdown did not succeed: " + name)
+        elif row.get("exit_code") != 0:
+            errors.append("bootstrap/native command did not succeed")
     for name, digest in {
         **report.get("log_hashes", {}),
         **report.get("artifact_hashes", {}),

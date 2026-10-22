@@ -33,10 +33,14 @@ def validate(report):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--report", type=Path, required=True)
+    parser.add_argument("--artifact-dir", type=Path, required=True)
     args = parser.parse_args()
     try:
-        count = validate(json.loads(args.report.read_text()))
+        count = validate(
+            json.loads(
+                (args.artifact_dir / "postgres/database-results.json").read_text()
+            )
+        )
     except (ValueError, KeyError, OSError, TypeError) as error:
         print(f"BLOCKED: {error}")
         return 1

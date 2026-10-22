@@ -463,8 +463,8 @@
       "command": [
         "{python}",
         "verification/postgres/check_trusted.py",
-        "--report",
-        "{artifact_dir}/postgres/database-results.json"
+        "--artifact-dir",
+        "{artifact_dir}"
       ],
       "timeout": 60,
       "min_executed_tests": 18

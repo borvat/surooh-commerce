@@ -3,7 +3,17 @@
  * go through this module. Every stock mutation is executed by a transactional
  * database function — never computed in client state.
  */
-import { supabase } from "@/integrations/supabase/client";
+import { supabase as legacySupabase } from "@/integrations/supabase/client";
+import { nativeLabCommand, nativeLabConfigured } from "./native-lab-client";
+
+// A selected native session may never silently reach the legacy stock writer.
+const supabase = new Proxy(legacySupabase, {
+  get(target, property, receiver) {
+    if (nativeLabConfigured())
+      throw new Error("Legacy inventory access disabled during native lab session");
+    return Reflect.get(target, property, receiver);
+  },
+});
 import type { Database } from "@/integrations/supabase/types";
 
 export type MovementType = Database["public"]["Enums"]["movement_type"];
@@ -297,6 +307,13 @@ export async function placeOrder(input: {
   externalRef?: string;
   note?: string;
 }) {
+  if (nativeLabConfigured()) {
+    if (!input.externalRef) throw new Error("Native order requires a stable external request ID");
+    if (input.channelId || input.lines.some((line) => line.fulfillment_method === "FBB"))
+      throw new Error("Only synthetic manual internal orders are supported by this native probe");
+    const result = await nativeLabCommand("order", { lines: input.lines }, input.externalRef);
+    return String(result["order_id"]);
+  }
   return check(
     await supabase.rpc("place_order", {
       _lines: input.lines,
@@ -308,9 +325,17 @@ export async function placeOrder(input: {
 }
 
 export async function fulfillOrder(id: string) {
+  if (nativeLabConfigured()) {
+    await nativeLabCommand("ship", { order_id: id }, `ship:${id}`);
+    return;
+  }
   check(await supabase.rpc("fulfill_order", { _order_id: id }));
 }
 export async function cancelOrder(id: string) {
+  if (nativeLabConfigured()) {
+    await nativeLabCommand("cancel", { order_id: id }, `cancel:${id}`);
+    return;
+  }
   check(await supabase.rpc("cancel_order", { _order_id: id }));
 }
 

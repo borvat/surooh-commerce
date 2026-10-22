@@ -1,0 +1,12 @@
+{
+  "status": "READY_FOR_HUMAN_EVIDENCE_REVIEW",
+  "errors": [],
+  "scope": "TRUSTED_BOUNDARY",
+  "tested_commit": "6b637b698be0990a1b6dfe373ce071295fc51ee5",
+  "hosted_ci": "BLOCKED",
+  "phase_complete": false,
+  "codex_start_authorized": false,
+  "merge_authorized": false,
+  "deploy_authorized": false,
+  "human_review_required": true
+}

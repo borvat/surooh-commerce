@@ -20,6 +20,7 @@ from urllib.parse import urlparse
 import uuid
 
 import psycopg
+import jwt
 from psycopg import sql
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -52,7 +53,10 @@ def main():
     out.mkdir(parents=True)
     binaries = a.postgres_bin.resolve()
     pins = json.loads((ROOT / "verification/postgres/runtime-pins.json").read_text())
-    if psycopg.__version__ != pins["psycopg_version"]:
+    if (
+        psycopg.__version__ != pins["psycopg_version"]
+        or jwt.__version__ != pins["pyjwt_version"]
+    ):
         ap.error("Pinned psycopg version required")
     for name in ["postgres", "initdb", "pg_ctl", "pg_dump", "pg_restore"]:
         p = binaries / name
@@ -93,6 +97,8 @@ def main():
         },
         "host_isolation_proven": False,
         "http_postgrest_jwt_proven": False,
+        "trusted_cases": [],
+        "pyjwt": jwt.__version__,
         "codex_start_authorized": False,
         "production_authority_changed": False,
     }
@@ -309,15 +315,20 @@ def main():
             ).fetchall()
 
     def place(c, x, reference, product="p"):
-        return c.execute(
-            "select public.place_order(%s::jsonb,%s,%s,null,%s)",
+        company = c.execute(
+            "select organization_id from public.warehouses where id=%s", (x["wh"],)
+        ).fetchone()[0]
+        result = c.execute(
+            "select surooh_boundary.submit_order(%s,'fixture-manual',%s,%s::jsonb,%s,%s,null)",
             (
+                company,
+                reference,
                 json.dumps([{"product_id": str(x[product]), "quantity": 1}]),
                 x["channel"],
-                reference,
                 x["wh"],
             ),
         ).fetchone()[0]
+        return uuid.UUID(result["order_id"])
 
     def race(actions):
         b = threading.Barrier(len(actions))
@@ -408,6 +419,23 @@ def main():
                     raise
                 report["migrations"].append(row)
                 save()
+            candidate = ROOT / "candidate/trusted_boundary/001_boundary.sql"
+            c.execute(candidate.read_text())
+            report["candidate_migration"] = {
+                "file": str(candidate.relative_to(ROOT)),
+                "sha256": HASH(candidate.read_bytes()),
+                "historical_count": 23,
+            }
+            roles["trusted_wms_http"] = secrets.token_urlsafe(24)
+            c.execute(
+                sql.SQL(
+                    "CREATE ROLE trusted_wms_http LOGIN INHERIT NOSUPERUSER NOBYPASSRLS NOCREATEDB NOCREATEROLE PASSWORD {}"
+                ).format(sql.Literal(roles["trusted_wms_http"]))
+            )
+            c.execute("GRANT authenticated TO trusted_wms_http")
+            c.execute(
+                "GRANT SELECT ON surooh_boundary.revoked_tokens TO trusted_wms_http"
+            )
             for org, oid in orgs.items():
                 c.execute(
                     "insert into organizations(id,name,slug) values(%s,%s,%s)",
@@ -453,6 +481,28 @@ def main():
                         "insert into organization_members(organization_id,user_id,role) values(%s,%s,%s)",
                         (orgs[label[0].upper()], uid, label.split("_")[1]),
                     )
+            # Direct fixture SQL logins are authenticated by session_user, never by client claims.
+            for label, uid in ids.items():
+                if label not in ["missing", "anon"]:
+                    c.execute(
+                        "insert into surooh_boundary.login_principals values(%s,%s)",
+                        ("fixture_" + label, uid),
+                    )
+            for company in orgs.values():
+                for source in ["fixture-manual", "fixture-bol", "fixture-other"]:
+                    c.execute(
+                        "insert into surooh_boundary.sources values(%s,%s,%s)",
+                        (company, source, source != "fixture-bol"),
+                    )
+                    for label, uid in ids.items():
+                        if (
+                            label.endswith(("_admin", "_warehouse"))
+                            and orgs[label[0].upper()] == company
+                        ):
+                            c.execute(
+                                "insert into surooh_boundary.source_grants values(%s,%s,%s)",
+                                (company, source, uid),
+                            )
             report["rls_catalog"] = [
                 dict(zip(["table", "enabled", "forced"], r))
                 for r in c.execute(
@@ -841,7 +891,7 @@ def main():
             )
             with connect() as c:
                 count = c.execute(
-                    "select count(*) from orders where warehouse_id=%s and external_ref='SAME-EXTERNAL'",
+                    "select count(*) from orders where warehouse_id=%s",
                     (x["wh"],),
                 ).fetchone()[0]
             report["duplicate_external_observation"] = {
@@ -1009,14 +1059,18 @@ def main():
 
             def run(c):
                 return c.execute(
-                    "select place_order(%s::jsonb,null,'NULL-CHANNEL-REPLAY',null,%s)",
-                    (json.dumps([{"product_id": str(x["p"]), "quantity": 1}]), x["wh"]),
+                    "select surooh_boundary.submit_order(%s,'fixture-manual','NULL-CHANNEL-REPLAY',%s::jsonb,null,%s,null)",
+                    (
+                        orgs["A"],
+                        json.dumps([{"product_id": str(x["p"]), "quantity": 1}]),
+                        x["wh"],
+                    ),
                 ).fetchone()[0]
 
             results = race([("a_admin", run), ("a_warehouse", run)])
             with connect() as c:
                 count = c.execute(
-                    "select count(*) from orders where warehouse_id=%s and external_ref='NULL-CHANNEL-REPLAY'",
+                    "select count(*) from orders where warehouse_id=%s",
                     (x["wh"],),
                 ).fetchone()[0]
             report["null_channel_replay_observation"] = {
@@ -1056,10 +1110,9 @@ def main():
 
             def fingerprint(c):
                 rows = []
-                for (table,) in c.execute(
-                    "select tablename from pg_tables where schemaname in ('public','auth') order by schemaname,tablename"
+                for schema, table in c.execute(
+                    "select schemaname,tablename from pg_tables where schemaname in ('public','auth','surooh_boundary') order by schemaname,tablename"
                 ).fetchall():
-                    schema = "auth" if table == "users" else "public"
                     data = c.execute(
                         sql.SQL(
                             "select row_to_json(t)::text from {}.{} t order by row_to_json(t)::text"
@@ -1175,6 +1228,33 @@ def main():
             return result
 
         case("D21_anonymous_role_denials", anonymous_boundary)
+        from trusted_cases import run_trusted_cases
+
+        run_trusted_cases(
+            dict(
+                ROOT=ROOT,
+                out=out,
+                temp=temp,
+                env=env,
+                report=report,
+                connect=connect,
+                session=session,
+                scenario=scenario,
+                stock=stock,
+                race=race,
+                orgs=orgs,
+                ids=ids,
+                roles=roles,
+                connections=connections,
+                db=db,
+            )
+        )
+        report["trusted_http_jwt_proven"] = bool(report["trusted_cases"]) and all(
+            x["status"] == "PASS" for x in report["trusted_cases"]
+        )
+        report["http_boundary_kind"] = (
+            "real candidate HTTP with PyJWT; not PostgREST or deployed WMS/ERP integration"
+        )
 
     except Exception as e:
         report["fatal"] = {
@@ -1201,7 +1281,7 @@ def main():
             s: sum(r["status"] == s for r in report["cases"]) for s in ["PASS", "FAIL"]
         }
         report["unexecuted_requirements"] = [
-            "HTTP/PostgREST JWT validation",
+            "Deployed WMS/Supabase PostgREST and native ERP integration parity",
             "separate real OS identities/mounts",
             "native ERPNext integration",
             "real background-worker transport",
@@ -1222,6 +1302,10 @@ def main():
             for value in [owner_password, *roles.values()]:
                 data = data.replace(value, "[REDACTED]")
             log.write_text(data)
+        report["trusted_summary"] = {
+            s: sum(x["status"] == s for x in report["trusted_cases"])
+            for s in ["PASS", "FAIL"]
+        }
         save()
     count = len(report["cases"])
     print(f"Ran {count} tests")
@@ -1233,6 +1317,9 @@ def main():
         or not stop_ok
         or temp.exists()
         or report["unexecuted_case_ids"]
+        or len(report["trusted_cases"]) != 18
+        or len({x["id"].split("_")[0] for x in report["trusted_cases"]}) != 18
+        or report["trusted_summary"]["FAIL"]
         else 0
     )
 

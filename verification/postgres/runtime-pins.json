@@ -11,5 +11,6 @@
     "pg_ctl": "dd458781620f016af2d6edb76b84f5246e106a1db43cdd9979d552d96d65068c",
     "pg_dump": "b0efe5ee27b4090a16c742169e7de580d399388c6486bcaed3ae59b1cda7bca1",
     "pg_restore": "358b4481213f1c2c61b4440920d898ba9da65964d3149c222bc3337fe7ead5b2"
-  }
+  },
+  "pyjwt_version": "2.15.1"
 }

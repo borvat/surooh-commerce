@@ -1,0 +1,27 @@
+{
+  "scope": "synthetic candidate boundary only; no phase/production/Codex approval",
+  "tested_source_sha": "6b637b698be0990a1b6dfe373ce071295fc51ee5",
+  "archives": [
+    {
+      "path": "exact-run-01.tar.gz",
+      "bytes": 52611,
+      "sha256": "3756d615d8554977e6ac310925bc83298ef6963c7f28ab0b54fe17e2b6c5e8b8",
+      "kind": "RETAINED_FAILED_RUN_OLD_PLAN",
+      "files": 41
+    },
+    {
+      "path": "exact-run-02.tar.gz",
+      "bytes": 52534,
+      "sha256": "35ffeb8df41ad275591e8301150d5ca39d9ef16db7743cc148f1e2ba84d215a5",
+      "kind": "READY_FOR_SCOPED_HUMAN_REVIEW_ONLY",
+      "files": 41
+    },
+    {
+      "path": "development-history.tar.gz",
+      "bytes": 41101,
+      "sha256": "a7b0753f504e2c17ff485950ebe304a946f47a4b4a4db2aa50ad454190efd623",
+      "kind": "UNCLEAN_DEVELOPMENT_ONLY_INCLUDES_HARNESS_FAILURE",
+      "files": 27
+    }
+  ]
+}

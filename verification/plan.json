@@ -20,7 +20,9 @@
       "accounting_native_link",
       "postgres_adapter_guard_regressions",
       "postgres_host_identity_isolation",
-      "legacy_http_auth_boundary"
+      "legacy_http_auth_boundary",
+      "trusted_boundary_guard_regressions",
+      "deployed_wms_identity_integration"
     ],
     "P01": [
       "foundation",
@@ -38,7 +40,9 @@
       "fresh_engine_bootstrap",
       "postgres_adapter_guard_regressions",
       "postgres_host_identity_isolation",
-      "legacy_http_auth_boundary"
+      "legacy_http_auth_boundary",
+      "trusted_boundary_guard_regressions",
+      "deployed_wms_identity_integration"
     ],
     "P02": [
       "foundation",
@@ -188,7 +192,20 @@
       "postgres_adapter_guard_regressions",
       "alternative_gate_regressions",
       "postgres_host_identity_isolation",
-      "legacy_http_auth_boundary"
+      "legacy_http_auth_boundary",
+      "trusted_boundary_guard_regressions",
+      "deployed_wms_identity_integration"
+    ],
+    "TRUSTED_BOUNDARY": [
+      "legacy_db_adapter",
+      "legacy_http_auth_boundary",
+      "trusted_boundary_guard_regressions",
+      "unit_tests",
+      "typecheck",
+      "lint",
+      "build",
+      "generated_cleanliness",
+      "alternative_gate_regressions"
     ]
   },
   "tests": [
@@ -443,7 +460,34 @@
     {
       "id": "legacy_http_auth_boundary",
       "tier": "integration",
-      "reason": "Real PostgREST/JWT verification, connection-pool reset and unauthenticated HTTP entrypoints not implemented by SQL auth fixtures"
+      "command": [
+        "{python}",
+        "verification/postgres/check_trusted.py",
+        "--artifact-dir",
+        "{artifact_dir}"
+      ],
+      "timeout": 60,
+      "min_executed_tests": 18
+    },
+    {
+      "id": "trusted_boundary_guard_regressions",
+      "tier": "foundation",
+      "command": [
+        "{python}",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "verification/postgres/tests",
+        "-v"
+      ],
+      "timeout": 60,
+      "min_executed_tests": 6
+    },
+    {
+      "id": "deployed_wms_identity_integration",
+      "tier": "integration",
+      "reason": "Candidate HTTP is real but deployed WMS/Supabase issuer/proxy/UI/RPC integration and ERPNext parity remain unimplemented"
     }
   ],
   "not_applicable": {},

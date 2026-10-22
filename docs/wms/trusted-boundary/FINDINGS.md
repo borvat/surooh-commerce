@@ -1,0 +1,18 @@
+# Finding disposition — candidate boundary, not production closure
+
+| Finding | Tested disposition | Evidence | Remaining constraint |
+|---|---|---|---|
+| DB-F01 duplicate orders with absent channel | CLOSED AT CANDIDATE COMMAND BOUNDARY; human review pending | D18, H06–H11, H16–H17 | Raw historical place_order is revoked, not rewritten. Current UI/external-ref mapping, ERPNext facade/outbox and deployed provider retry integration are not implemented. |
+| DB-F02 client-replaceable SQL identity | CLOSED FOR CANDIDATE IDENTITY MODELS; human review pending | D15, H01–H05, H12–H15, H18 | Trusted service credentials/host/issuer must remain inaccessible to tenants. No deployed Supabase/PostgREST parity or production trust-chain proof. |
+| ENV01 OS/service/file isolation | BLOCKED | HOST_CAPABILITIES.json: UID0-only map; nested non-root unshare denied (exit1) | Need real non-root identities, separate filesystem/mount/config/key/backup custody; scoped libc shim is not a solution. |
+| INT01 real HTTP vs deployed integration | REAL CANDIDATE HTTP PASS; DEPLOYED INTEGRATION BLOCKED | H01–H18 with separate HTTP process, PyJWT and native SQL pool | Only loopback stdlib HTTP and synthetic HS256 issuer, no production TLS/JWKS/issuer rotation, frontend or worker adapter; service compromise outside lab model. |
+| ERP01 authority/fresh bootstrap | BLOCKED | Existing owner holds, unchanged authority contract | Fresh pinned ERPNext/bootstrap/Surooh app and retained-WMS/native integration, quantities/reservations/COGS/GL reconciliation. No second writable stock/valuation authority. |
+| OPS01 recovery scope | PARTIAL | D16 real PG restart; D20 separate-DB dump/restore; H08–H09 response loss/HTTP process crash | Off-host backup, power failure, crash-during-commit/failover, key recovery, sized load/SLA and shutdown during live work untested. |
+
+No new production claim follows from replaying the 21 old groups through a candidate. D11/D18 intentionally call the new boundary; H14 separately asserts own-company raw RPC access denied. Original failure reports in PR19 are immutable and still accurately describe the original code/compatibility fixture. D15 still asserts zero foreign reads after a malicious SQL claim substitution; its expectation was not relaxed.
+
+Permissions cover original role catalog, all22 public tables for reads, scoped representative CRUD/RPC, privileged function catalog and direct helper denial; they are not an exhaustive proof of every deployed function, third-party extension, SQL injection path, transport or tenant threat. H18 adds a subject with memberships in both companies and no SQL-login map: verified token company constrains its HTTP reads/writes. An owner-configured source grant can be revoked and prevents cached-result access. No user-controlled role claim raises privileges.
+
+Development03 and exact runs exercised actual independent PostgreSQL connections (H07 recorded two PIDs; H17 recorded two HTTP SQL backend PIDs). Every bundle component is reserved once per command; a bundle legitimately has multiple component reservation rows. “One reservation” therefore means one order-level reservation effect, not one row regardless of bundle size.
+
+The initial clean exact run failed only the evidence-check command because an embedded path token was not substituted; its full exit1 report/log/archive remains. A second published code commit passes the artifact root as a standalone argument, preserving every check and threshold. The final exact run exits2 because19 declared future/environment requirements remain BLOCKED, with17 executed checks PASS and zero FAIL. No failure is converted to PASS or hidden by changing a lint/compiler/security rule.

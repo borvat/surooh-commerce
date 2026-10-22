@@ -1,0 +1,15 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "required test not executed successfully: postgres_host_identity_isolation",
+    "required test not executed successfully: deployed_wms_identity_integration"
+  ],
+  "scope": "PREPARATION",
+  "tested_commit": "6b637b698be0990a1b6dfe373ce071295fc51ee5",
+  "hosted_ci": "BLOCKED",
+  "phase_complete": false,
+  "codex_start_authorized": false,
+  "merge_authorized": false,
+  "deploy_authorized": false,
+  "human_review_required": true
+}

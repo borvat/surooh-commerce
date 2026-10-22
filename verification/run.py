@@ -110,6 +110,9 @@ def main():
     parser.add_argument("--accounting-report", type=Path)
     parser.add_argument("--expected-sha")
     parser.add_argument("--accounting-expected-sha")
+    parser.add_argument("--postgres-bin", type=Path)
+    parser.add_argument("--db-python", type=Path)
+    parser.add_argument("--allow-uid-compat", action="store_true")
     args = parser.parse_args()
     output = args.output.resolve()
     if output.is_relative_to(ROOT):
@@ -204,7 +207,28 @@ def main():
     for test in plan["tests"]:
         row = {"id": test["id"], "tier": test["tier"]}
         command = test.get("command")
-        if test.get("native"):
+        if test.get("postgres"):
+            if args.postgres_bin is None or args.db_python is None:
+                row.update(
+                    status="BLOCKED",
+                    exit_code=None,
+                    command=None,
+                    reason="Explicit pinned local PostgreSQL/Python runtime required",
+                )
+            else:
+                command = [
+                    "node",
+                    "scripts/wms/db-check.mjs",
+                    "--postgres-bin",
+                    str(args.postgres_bin.resolve()),
+                    "--db-python",
+                    str(args.db_python.resolve()),
+                    "--artifact-dir",
+                    str(output / "artifacts/postgres"),
+                ]
+                if args.allow_uid_compat:
+                    command.append("--allow-uid-compat")
+        elif test.get("native"):
             if args.lab_root is None:
                 row.update(
                     status="BLOCKED",

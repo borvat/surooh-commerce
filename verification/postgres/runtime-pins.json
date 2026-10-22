@@ -1,0 +1,15 @@
+{
+  "distribution": "embedded-postgres",
+  "version": "18.6.3",
+  "wheel": "embedded_postgres-18.6.3-py3-none-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+  "wheel_sha256": "321a60b1875b9f1c1856c421ab20dd011d9d5cb58beba8de6551534e64643f65",
+  "postgres_version": "18.6",
+  "psycopg_version": "3.3.6",
+  "binaries": {
+    "postgres": "8a5fa2b4644be7fed5c8ace3c94989132ff95dcf3ddf178ce777bdd6dda357e8",
+    "initdb": "9c93d1e2112cf30669bd22f9d474313d3aec8a22041ebb0157f758c57614f61e",
+    "pg_ctl": "dd458781620f016af2d6edb76b84f5246e106a1db43cdd9979d552d96d65068c",
+    "pg_dump": "b0efe5ee27b4090a16c742169e7de580d399388c6486bcaed3ae59b1cda7bca1",
+    "pg_restore": "358b4481213f1c2c61b4440920d898ba9da65964d3149c222bc3337fe7ead5b2"
+  }
+}

@@ -1,3 +1,5 @@
+> Latest bounded review follow-up: [review-01 exact-source results](review-01/RESULTS.md). The original results and failures below are preserved.
+
 # Browser harness continuation — native B01 NOT RUN
 
 WMS source tested clean before/after: `32f3df82d3ff5227c522e98165ac3837345a7b85`

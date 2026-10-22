@@ -1,0 +1,12 @@
+test_dirty_after_rejected (test_atomic_gate.EvidenceGate.test_dirty_after_rejected) ... ok
+test_failed_owned_service_shutdown_rejected (test_atomic_gate.EvidenceGate.test_failed_owned_service_shutdown_rejected) ... ok
+test_missing_case_rejected_even_with_fresh_hash (test_atomic_gate.EvidenceGate.test_missing_case_rejected_even_with_fresh_hash) ... ok
+test_native_success_never_grants_UI_or_phase_approval (test_atomic_gate.EvidenceGate.test_native_success_never_grants_UI_or_phase_approval) ... ok
+test_owned_service_requires_actual_shutdown_exit (test_atomic_gate.EvidenceGate.test_owned_service_requires_actual_shutdown_exit) ... ok
+test_stale_pair_rejected (test_atomic_gate.EvidenceGate.test_stale_pair_rejected) ... ok
+test_tampered_native_artifact_rejected (test_atomic_gate.EvidenceGate.test_tampered_native_artifact_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.005s
+
+OK

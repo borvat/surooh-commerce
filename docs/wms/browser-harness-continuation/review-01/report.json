@@ -1,0 +1,158 @@
+{
+  "tested_wms_sha": "1b163dd88e4558bdccdc439cedcf18c6c2742da6",
+  "tested_tree": "83df73e2143671b8f7d984854f4f0f963ac96c7e",
+  "accounting_reference_sha": "34adb0e16be584b5e3823b2cb46a80abb5eaf869",
+  "accounting_executed": false,
+  "source_before": "",
+  "utc": "2026-10-22T05:30:24.133446+00:00",
+  "checks": [
+    {
+      "name": "browser-helper-regressions",
+      "argv": [
+        "node",
+        "--test",
+        "verification/native_integration/browser-helpers.test.mjs"
+      ],
+      "stdin": null,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "browser-helper-regressions.txt",
+      "sha256": "009f76cf03eab4b567ff0c37ba1bc4171c99888ffb62aee5a6f7cc531f758a92"
+    },
+    {
+      "name": "harness-regressions",
+      "argv": [
+        "python3",
+        "-W",
+        "error::ResourceWarning",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "verification/native_integration",
+        "-p",
+        "test_browser_config.py",
+        "-v"
+      ],
+      "stdin": null,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "harness-regressions.txt",
+      "sha256": "de9074207949e6b0294864e0e59a31b18f8768a1732eb1e0a0f660d3622057b6"
+    },
+    {
+      "name": "atomic-gate-regressions",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "verification/native_integration/tests",
+        "-v"
+      ],
+      "stdin": null,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "atomic-gate-regressions.txt",
+      "sha256": "809fb27f9508f0694741869dc6465ecc4893b7e8a57bd51ad584b4fa4a7d90e2"
+    },
+    {
+      "name": "verification-gate-regressions",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "verification/tests",
+        "-v"
+      ],
+      "stdin": null,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "verification-gate-regressions.txt",
+      "sha256": "9d995518447a284d45c405142938586b0aea3b78dcc7df6c487016f140e9475c"
+    },
+    {
+      "name": "javascript-syntax",
+      "argv": [
+        "node",
+        "--check",
+        "verification/native_integration/browser-cycle.mjs"
+      ],
+      "stdin": null,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "javascript-syntax.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "browser-format",
+      "argv": [
+        "node",
+        "/workspace/surooh-continuation/tools/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "verification/native_integration/browser-cycle.mjs",
+        "verification/native_integration/browser-helpers.mjs",
+        "verification/native_integration/browser-helpers.test.mjs"
+      ],
+      "stdin": null,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "browser-format.txt",
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "name": "bootstrap-cli",
+      "argv": [
+        "python3",
+        "verification/native_integration/bootstrap.py",
+        "--help"
+      ],
+      "stdin": null,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "bootstrap-cli.txt",
+      "sha256": "78d74cbb518db081474787b1670cb5bf3cb2ac118ccfb6c6e5a68e81c8fd559f"
+    },
+    {
+      "name": "python-syntax",
+      "argv": [
+        "python3",
+        "-c",
+        "import ast; from pathlib import Path; files=['bootstrap.py','native_cases.py','browser_config.py','test_browser_config.py']; [ast.parse((Path('verification/native_integration')/f).read_text()) for f in files]; print('4 Python sources parsed')"
+      ],
+      "stdin": null,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "python-syntax.txt",
+      "sha256": "1dea38f4a017d77604d63e1a8bdeff294ecdfb6b6a6b0c4f24d42485da063ac1"
+    },
+    {
+      "name": "whitespace",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "stdin": null,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "whitespace.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "B01": "NOT RUN/BLOCKED: missing marked synthetic native runtime, Bun1.3.13 and locked WMS dependencies",
+  "PREPARATION": "BLOCKED",
+  "P01": "BLOCKED",
+  "M1": "BLOCKED",
+  "native_acceptance_claimed": false,
+  "scope": "Bounded review corrections: fresh error feedback and elapsed readiness. No browser launch/navigation/download or native engine execution in this run.",
+  "source_after": "",
+  "runtime": {
+    "python": "Python 3.12.14",
+    "node": "v24.19.0",
+    "chromium": "Chromium 154.0.8037.57 built on Debian GNU/Linux 13 (trixie)"
+  }
+}

@@ -1,0 +1,19 @@
+test_changed_plan_blocks (test_gate.IndependentGateTests.test_changed_plan_blocks) ... ok
+test_changed_source_blocks (test_gate.IndependentGateTests.test_changed_source_blocks) ... ok
+test_complete_evidence_only_recommends_review (test_gate.IndependentGateTests.test_complete_evidence_only_recommends_review) ... ok
+test_failed_or_skipped_test_cannot_complete (test_gate.IndependentGateTests.test_failed_or_skipped_test_cannot_complete) ... ok
+test_fake_pass_without_command_blocks (test_gate.IndependentGateTests.test_fake_pass_without_command_blocks) ... ok
+test_manifest_cannot_authorize_execution (test_gate.IndependentGateTests.test_manifest_cannot_authorize_execution) ... ok
+test_missing_log_blocks (test_gate.IndependentGateTests.test_missing_log_blocks) ... ok
+test_missing_required_test_blocks (test_gate.IndependentGateTests.test_missing_required_test_blocks) ... ok
+test_outside_log_blocks (test_gate.IndependentGateTests.test_outside_log_blocks) ... ok
+test_reference_is_not_native_evidence (test_gate.IndependentGateTests.test_reference_is_not_native_evidence) ... ok
+test_stale_sha_blocks (test_gate.IndependentGateTests.test_stale_sha_blocks) ... ok
+test_tampered_log_blocks (test_gate.IndependentGateTests.test_tampered_log_blocks) ... ok
+test_unknown_phase_blocks (test_gate.IndependentGateTests.test_unknown_phase_blocks) ... ok
+test_zero_executed_count_blocks (test_gate.IndependentGateTests.test_zero_executed_count_blocks) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.007s
+
+OK

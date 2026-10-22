@@ -16,6 +16,8 @@ import tempfile
 import time
 import traceback
 
+from browser_config import add_arguments, configure_environment
+
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -25,6 +27,7 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--accounting-root", type=Path, required=True)
     parser.add_argument("--bun", type=Path, required=True)
+    add_arguments(parser)
     args = parser.parse_args()
     lab, out = args.runtime_root.resolve(), args.output.resolve()
     accounting = args.accounting_root.resolve()
@@ -83,6 +86,7 @@ def main():
     )
     env["SUROOH_WMS_ROOT"] = str(ROOT)
     env["SUROOH_BUN"] = str(args.bun.absolute())
+    configure_environment(args, env)
     env["LC_ALL"] = "C.UTF-8"
     private_values = [password]
 

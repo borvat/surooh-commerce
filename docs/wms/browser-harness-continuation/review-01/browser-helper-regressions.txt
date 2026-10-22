@@ -1,0 +1,22 @@
+✔ reproduces old rapid HTTP503 exhaustion with no elapsed startup time (1.096635ms)
+✔ 503 responses back off until eventual readiness (5.129594ms)
+✔ connection failures and503 share backoff before readiness (0.269406ms)
+✔ repeated503 stops at elapsed deadline and caps final probe/backoff (0.726559ms)
+✔ repeated connection failure stops at elapsed deadline (0.435327ms)
+✔ immediate readiness does not delay (0.202983ms)
+✔ owned process failure is not swallowed as a connection error (0.228637ms)
+✔ reproduces stale generic toast false positive; boundary rejects identical old error (0.455159ms)
+✔ new visible error with expected text passes after boundary (0.359404ms)
+✔ fresh unrelated error or wrong status cannot satisfy operation feedback (0.321663ms)
+✔ new hidden error does not establish visible feedback (0.285875ms)
+✔ feedback request matches endpoint, operation, order and deterministic command identity (0.334715ms)
+✔ old hidden toast reappearing after boundary still cannot pass (0.148968ms)
+✔ late successful probe cannot pass after deadline (0.368721ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 91.979524

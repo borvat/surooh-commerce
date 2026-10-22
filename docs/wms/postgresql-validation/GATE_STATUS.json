@@ -1,0 +1,28 @@
+{
+  "source": "6066f6a3fbb8f6edd2b6cadb8304b311e2e046bb",
+  "tested_tree": "b02c4792f55d9945b7c2906832ac13c4a58ee053",
+  "database_adapter": "IMPLEMENTED_AND_EXECUTED",
+  "database_cases": {
+    "PASS": 19,
+    "FAIL": 2
+  },
+  "migrations_applied": 23,
+  "POSTGRESQL_VALIDATION": "BLOCKED",
+  "PREPARATION": "BLOCKED",
+  "P01": "BLOCKED",
+  "SOURCE_QUALITY": "READY_FOR_HUMAN_EVIDENCE_REVIEW",
+  "hosted_ci": "BLOCKED",
+  "host_isolation_proven": false,
+  "http_postgrest_jwt_proven": false,
+  "phase_complete": false,
+  "codex_start_authorized": false,
+  "merge_authorized": false,
+  "deploy_authorized": false,
+  "owner_review": null,
+  "blocked_by": [
+    "DB-F01 nullable-channel duplicate effect",
+    "DB-F02 direct SQL trusted-claim boundary / real HTTP authentication unproven",
+    "ENV01 actual OS/service identities and mounts",
+    "P01 fresh engine bootstrap and existing G1-G6 requirements"
+  ]
+}

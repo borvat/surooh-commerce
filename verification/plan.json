@@ -17,7 +17,10 @@
       "build",
       "legacy_db_adapter",
       "alternative_gate_regressions",
-      "accounting_native_link"
+      "accounting_native_link",
+      "postgres_adapter_guard_regressions",
+      "postgres_host_identity_isolation",
+      "legacy_http_auth_boundary"
     ],
     "P01": [
       "foundation",
@@ -32,7 +35,10 @@
       "legacy_db_adapter",
       "alternative_gate_regressions",
       "accounting_native_link",
-      "fresh_engine_bootstrap"
+      "fresh_engine_bootstrap",
+      "postgres_adapter_guard_regressions",
+      "postgres_host_identity_isolation",
+      "legacy_http_auth_boundary"
     ],
     "P02": [
       "foundation",
@@ -173,6 +179,16 @@
       "alternative_gate_regressions",
       "source_quality_regressions",
       "generated_cleanliness"
+    ],
+    "POSTGRESQL_VALIDATION": [
+      "foundation",
+      "shared_integrity",
+      "authority_holds",
+      "legacy_db_adapter",
+      "postgres_adapter_guard_regressions",
+      "alternative_gate_regressions",
+      "postgres_host_identity_isolation",
+      "legacy_http_auth_boundary"
     ]
   },
   "tests": [
@@ -296,14 +312,12 @@
     {
       "id": "legacy_db_adapter",
       "tier": "database",
-      "command": [
-        "node",
-        "scripts/wms/db-check.mjs"
-      ],
       "timeout": 600,
       "blocked_exit_codes": [
         2
-      ]
+      ],
+      "postgres": true,
+      "min_executed_tests": 21
     },
     {
       "id": "alternative_gate_regressions",
@@ -409,6 +423,27 @@
       "id": "quota_drift_acceptance",
       "tier": "integration",
       "reason": "Full scoped native quota/projection-lag/drift acceptance not implemented"
+    },
+    {
+      "id": "postgres_adapter_guard_regressions",
+      "tier": "foundation",
+      "command": [
+        "node",
+        "--test",
+        "tests/foundation/postgres-adapter.test.mjs"
+      ],
+      "min_executed_tests": 6,
+      "timeout": 60
+    },
+    {
+      "id": "postgres_host_identity_isolation",
+      "tier": "security",
+      "reason": "Executor maps only UID0; explicit local libc compatibility is not OS/mount/service identity isolation"
+    },
+    {
+      "id": "legacy_http_auth_boundary",
+      "tier": "integration",
+      "reason": "Real PostgREST/JWT verification, connection-pool reset and unauthenticated HTTP entrypoints not implemented by SQL auth fixtures"
     }
   ],
   "not_applicable": {},

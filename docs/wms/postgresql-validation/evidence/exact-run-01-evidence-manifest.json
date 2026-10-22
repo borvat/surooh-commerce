@@ -1,0 +1,161 @@
+{
+  "tested_source": "cf4863623a5c3e42fb850b0b5942bc17e58ba72f",
+  "scope": "exact-source alternative WMS/real PostgreSQL verification; no production acceptance",
+  "files": [
+    {
+      "path": "report.json",
+      "bytes": 18164,
+      "sha256": "e261757b0f534d080de421601969b72b3bb6e9dbe6024bce51c647b1477817f7"
+    },
+    {
+      "path": "run-invocation.json",
+      "bytes": 1106,
+      "sha256": "b039083630e0c61435b36935ccb29e1f5543d056466d7b7c0d048285f8ff92ef"
+    },
+    {
+      "path": "gate-invocations.json",
+      "bytes": 2116,
+      "sha256": "62cff4f68d26cfee4562e53fbad9601d0df91bb945799e33e95de5d912440017"
+    },
+    {
+      "path": "runner-console.log",
+      "bytes": 1195,
+      "sha256": "b0853f0e05fdfa9cb72effa4fb3b4cb0b8fcb89d4c0628414bc2e6943ad265ac"
+    },
+    {
+      "path": "gate-P01.json",
+      "bytes": 655,
+      "sha256": "242b898bb9c3bd57bd88102c0254d74ee2b0b164cc4c02d4049ddc5af542673a"
+    },
+    {
+      "path": "gate-POSTGRESQL_VALIDATION.json",
+      "bytes": 602,
+      "sha256": "8476a309b919279ac2353c9278c38749c74dda5c29a0434c1888154aab0c4365"
+    },
+    {
+      "path": "gate-PREPARATION.json",
+      "bytes": 592,
+      "sha256": "488feddb9d3bfb380b163ca73a275f8d8ef1cc48700fba980a477e9b537dae06"
+    },
+    {
+      "path": "gate-SOURCE_QUALITY.json",
+      "bytes": 338,
+      "sha256": "2fcbb72f9d5a4b01d5dd853194afb13e232e49e2deb8b8ea548687d778da51ea"
+    },
+    {
+      "path": "logs/accounting_native_link.log",
+      "bytes": 75,
+      "sha256": "cebbdea112b34168a51bb9ac15af7f3446b5bdceb500b6d6ccebbb6f881a3abd"
+    },
+    {
+      "path": "logs/alternative_gate_regressions.log",
+      "bytes": 1551,
+      "sha256": "09a8f869c238e24abd8e1fe719c41e49e8077a9860265f701a8651ee799df532"
+    },
+    {
+      "path": "logs/authority_holds.log",
+      "bytes": 712,
+      "sha256": "3b7f57f9fc77bd691c11521ace10c4d1dab2a7b5896496a24166a17063b89da4"
+    },
+    {
+      "path": "logs/build.log",
+      "bytes": 26646,
+      "sha256": "2a3845801915fda5b5d3b7a6e1f2d9de4dfcb70da5cd45292aa8fec72441d2b3"
+    },
+    {
+      "path": "logs/dependency_install.log",
+      "bytes": 96,
+      "sha256": "5c98830d9dbebe0728f00267c58b196a49570a0722b344b0631f93aa1836fcff"
+    },
+    {
+      "path": "logs/foundation.log",
+      "bytes": 110,
+      "sha256": "16c50c626e196c38ebd952f76379fece6eeec304782e924c399b01c14f00fa6d"
+    },
+    {
+      "path": "logs/generated_cleanliness.log",
+      "bytes": 134,
+      "sha256": "5ac7d439105a9ee9efd923a7f5bce7b29982eab8b85a708b0343d45db517925f"
+    },
+    {
+      "path": "logs/legacy_db_adapter.log",
+      "bytes": 214,
+      "sha256": "b20ce513982fb95cfd581fa07ab5bebc4e9f877e588e098617dc1b636228ce14"
+    },
+    {
+      "path": "logs/lint.log",
+      "bytes": 3834,
+      "sha256": "12c22d6577056a511d810dd2d4790c6166291046ee5d77784c9baf6b719eff74"
+    },
+    {
+      "path": "logs/postgres_adapter_guard_regressions.log",
+      "bytes": 482,
+      "sha256": "fbffd9f6419e8ebe4881e099a1b36033ea0aaefffc340351ca40acc8e20fb1fc"
+    },
+    {
+      "path": "logs/shared_integrity.log",
+      "bytes": 188,
+      "sha256": "2a3af38e90315db7dfaeedfa0940a409fdcf4397d377308140e1ab2c082dafbf"
+    },
+    {
+      "path": "logs/source_quality_regressions.log",
+      "bytes": 1145,
+      "sha256": "2075bdf2bdf713ad6e29cbf65c27755ef0c5be0eac0f73695ec356374dba930d"
+    },
+    {
+      "path": "logs/stage_gate_regressions.log",
+      "bytes": 1392,
+      "sha256": "a45787b2a96915b82a914d021c41eca3e8576dc6d83d679d3b21d5a328582741"
+    },
+    {
+      "path": "logs/typecheck.log",
+      "bytes": 15,
+      "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "path": "logs/unit_tests.log",
+      "bytes": 10768,
+      "sha256": "297b03d08f6fea7183a6078511146b31ce414114b0a00dadb017b8cf5b8b36ec"
+    },
+    {
+      "path": "artifacts/accounting-native-link.json",
+      "bytes": 850,
+      "sha256": "8db2c80c31528ae627a9ecf68e24f6fcbfea58a064bc4ae47a3bc9c7cf943a50"
+    },
+    {
+      "path": "artifacts/build-output-manifest.json",
+      "bytes": 23767,
+      "sha256": "3ad6729d81b10b62dd1bbb90b7a1d5d6193d7e683de1a5100f391361419e102e"
+    },
+    {
+      "path": "artifacts/linked-isolation-results.json",
+      "bytes": 4091,
+      "sha256": "d3dde5f3e36e4582c2a70be0a514d37787462fddcec7779b433765d6397f03c8"
+    },
+    {
+      "path": "artifacts/linked-native-results.json",
+      "bytes": 2912,
+      "sha256": "851b1595d29b5ec5b6f193bfc23cb91f235aef54e36da070c1f66389846b9d81"
+    },
+    {
+      "path": "artifacts/linked-runtime.json",
+      "bytes": 7679,
+      "sha256": "94f5dfac079c3daa232004acc7eb7d5975b970dd462217782e4910034ae6de14"
+    },
+    {
+      "path": "review/capabilities.json",
+      "bytes": 365,
+      "sha256": "c9afa9bb8ce299948ede7251b1342ca10c6fae7246531bfcf01cb71688aa8491"
+    },
+    {
+      "path": "review/source-boundaries.json",
+      "bytes": 324,
+      "sha256": "ae47c73e099b9ec1ae5af94c6e17e094e7e413e0e807e2790e94d66d142a0383"
+    },
+    {
+      "path": "review/source-diff.patch",
+      "bytes": 74040,
+      "sha256": "7056be866c958aa8843ef25158a72e9b45da219bc34f8399f1832690b8389e32"
+    }
+  ]
+}

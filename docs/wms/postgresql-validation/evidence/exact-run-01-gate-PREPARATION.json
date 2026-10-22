@@ -1,0 +1,17 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "required test not executed successfully: legacy_db_adapter",
+    "no positive executed test count: legacy_db_adapter",
+    "required test not executed successfully: postgres_host_identity_isolation",
+    "required test not executed successfully: legacy_http_auth_boundary"
+  ],
+  "scope": "PREPARATION",
+  "tested_commit": "cf4863623a5c3e42fb850b0b5942bc17e58ba72f",
+  "hosted_ci": "BLOCKED",
+  "phase_complete": false,
+  "codex_start_authorized": false,
+  "merge_authorized": false,
+  "deploy_authorized": false,
+  "human_review_required": true
+}

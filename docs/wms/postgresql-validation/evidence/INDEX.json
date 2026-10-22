@@ -1,0 +1,150 @@
+{
+  "latest_tested_source": "6066f6a3fbb8f6edd2b6cadb8304b311e2e046bb",
+  "base": "9c14f77a72ac2d36dd906909b481758b7cc7c3e7",
+  "runs": [
+    {
+      "run": "exact-run-01",
+      "source": {
+        "commit_sha": "cf4863623a5c3e42fb850b0b5942bc17e58ba72f",
+        "tree_sha": "05b893a0888af12e99f09261a6f0deb3eca582ae",
+        "dirty_tracked": false
+      },
+      "source_after": {
+        "commit_sha": "cf4863623a5c3e42fb850b0b5942bc17e58ba72f",
+        "tree_sha": "05b893a0888af12e99f09261a6f0deb3eca582ae",
+        "dirty_tracked": false
+      },
+      "summary": {
+        "PASS": 14,
+        "FAIL": 1,
+        "BLOCKED": 19
+      },
+      "archive": "exact-run-01.tar.gz",
+      "archive_sha256": "50e1e818735f12b642eb7be5c76240b6b25302c6b39d4917472f419cbb55f303",
+      "archive_bytes": 50419,
+      "files": [
+        {
+          "path": "exact-run-01-report.json",
+          "sha256": "e261757b0f534d080de421601969b72b3bb6e9dbe6024bce51c647b1477817f7"
+        },
+        {
+          "path": "exact-run-01-run-invocation.json",
+          "sha256": "b039083630e0c61435b36935ccb29e1f5543d056466d7b7c0d048285f8ff92ef"
+        },
+        {
+          "path": "exact-run-01-gate-invocations.json",
+          "sha256": "62cff4f68d26cfee4562e53fbad9601d0df91bb945799e33e95de5d912440017"
+        },
+        {
+          "path": "exact-run-01-evidence-manifest.json",
+          "sha256": "d3e5616675127fd6a2c37e7798a95ceb521dc056eee3323ed6308bb007393234"
+        },
+        {
+          "path": "exact-run-01-gate-P01.json",
+          "sha256": "242b898bb9c3bd57bd88102c0254d74ee2b0b164cc4c02d4049ddc5af542673a"
+        },
+        {
+          "path": "exact-run-01-gate-POSTGRESQL_VALIDATION.json",
+          "sha256": "8476a309b919279ac2353c9278c38749c74dda5c29a0434c1888154aab0c4365"
+        },
+        {
+          "path": "exact-run-01-gate-PREPARATION.json",
+          "sha256": "488feddb9d3bfb380b163ca73a275f8d8ef1cc48700fba980a477e9b537dae06"
+        },
+        {
+          "path": "exact-run-01-gate-SOURCE_QUALITY.json",
+          "sha256": "2fcbb72f9d5a4b01d5dd853194afb13e232e49e2deb8b8ea548687d778da51ea"
+        },
+        {
+          "path": "exact-run-01-gate-invocations.json",
+          "sha256": "62cff4f68d26cfee4562e53fbad9601d0df91bb945799e33e95de5d912440017"
+        }
+      ],
+      "outer_exit_code": 1,
+      "native_database_executed": false
+    },
+    {
+      "run": "exact-run-02",
+      "source": {
+        "commit_sha": "6066f6a3fbb8f6edd2b6cadb8304b311e2e046bb",
+        "tree_sha": "b02c4792f55d9945b7c2906832ac13c4a58ee053",
+        "dirty_tracked": false
+      },
+      "source_after": {
+        "commit_sha": "6066f6a3fbb8f6edd2b6cadb8304b311e2e046bb",
+        "tree_sha": "b02c4792f55d9945b7c2906832ac13c4a58ee053",
+        "dirty_tracked": false
+      },
+      "summary": {
+        "PASS": 14,
+        "FAIL": 1,
+        "BLOCKED": 19
+      },
+      "archive": "exact-run-02.tar.gz",
+      "archive_sha256": "fc84df2c5744dc01588869b63b2ea45c2dc40b8432a3b393c8e78fc9995ee6bd",
+      "archive_bytes": 68938,
+      "files": [
+        {
+          "path": "exact-run-02-report.json",
+          "sha256": "d490c34126a61c0a3464cf7ea70cbcb6804502b6ca8e42b4d9a0e013e6df00c9"
+        },
+        {
+          "path": "exact-run-02-run-invocation.json",
+          "sha256": "1e3ee5597b2f9d44335dc77564d1090de670264e18300e07a7a3b60cbfd8e14c"
+        },
+        {
+          "path": "exact-run-02-gate-invocations.json",
+          "sha256": "f1a7da4f2e22e742bb4036d072d3862795893efe9f412a6c78b415d09aa870cd"
+        },
+        {
+          "path": "exact-run-02-evidence-manifest.json",
+          "sha256": "e0c0f4b3c6b45e317688dfd8f014c57c96490c4ff1f2fbc1b217113855e1bc07"
+        },
+        {
+          "path": "exact-run-02-gate-P01.json",
+          "sha256": "a9e1d1870f59717a7c724d6fc838c8a119c537a2d15d34a0effd0a08e65754fd"
+        },
+        {
+          "path": "exact-run-02-gate-POSTGRESQL_VALIDATION.json",
+          "sha256": "c66735bc7387b2c0a730d41481d4c5ad50d89654260fb3f6f208967fdc867d01"
+        },
+        {
+          "path": "exact-run-02-gate-PREPARATION.json",
+          "sha256": "bd3c5a5ec15c9ffc5010fd52960b15f6785eccba89407009241470dccf5a50d3"
+        },
+        {
+          "path": "exact-run-02-gate-SOURCE_QUALITY.json",
+          "sha256": "c2387754d23756463018819e54f1cef0f42ab6fc3adb8c4de4e81b547c9a5406"
+        },
+        {
+          "path": "exact-run-02-gate-invocations.json",
+          "sha256": "f1a7da4f2e22e742bb4036d072d3862795893efe9f412a6c78b415d09aa870cd"
+        },
+        {
+          "path": "exact-run-02-database-results.json",
+          "sha256": "604ca7fcc8f14afac27126ebf9b568ae3c2dc251c20139a65dc6c90207497144"
+        }
+      ],
+      "outer_exit_code": 1,
+      "native_database_executed": true,
+      "database_summary": {
+        "PASS": 19,
+        "FAIL": 2
+      },
+      "migrations_applied": 23
+    }
+  ],
+  "hosted_ci": "BLOCKED",
+  "postgresql_validation": "BLOCKED",
+  "preparation": "BLOCKED",
+  "p01": "BLOCKED",
+  "codex_start_authorized": false,
+  "merge_authorized": false,
+  "deploy_authorized": false,
+  "development_history": {
+    "archive": "development-history.tar.gz",
+    "sha256": "fb783d377c929c768caa17ade479349891afbe93d3ca6f926be198e886fb8f07",
+    "bytes": 36828,
+    "scope": "UNCLEAN_DEVELOPMENT_ONLY; fixture/runtime setup failures and exploratory results, never exact-source acceptance"
+  }
+}

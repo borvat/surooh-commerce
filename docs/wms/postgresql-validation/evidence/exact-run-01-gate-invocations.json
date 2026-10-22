@@ -1,0 +1,66 @@
+[
+  {
+    "argv": [
+      "python3",
+      "verification/gate.py",
+      "--report",
+      "/workspace/scratch/930c38487b1a/postgres-evidence/exact-run-01/report.json",
+      "--phase",
+      "POSTGRESQL_VALIDATION",
+      "--expected-sha",
+      "cf4863623a5c3e42fb850b0b5942bc17e58ba72f"
+    ],
+    "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+    "exit_code": 2,
+    "gate_source_sha": "6066f6a3fbb8f6edd2b6cadb8304b311e2e046bb",
+    "stdout_sha256": "8476a309b919279ac2353c9278c38749c74dda5c29a0434c1888154aab0c4365"
+  },
+  {
+    "argv": [
+      "python3",
+      "verification/gate.py",
+      "--report",
+      "/workspace/scratch/930c38487b1a/postgres-evidence/exact-run-01/report.json",
+      "--phase",
+      "PREPARATION",
+      "--expected-sha",
+      "cf4863623a5c3e42fb850b0b5942bc17e58ba72f"
+    ],
+    "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+    "exit_code": 2,
+    "gate_source_sha": "6066f6a3fbb8f6edd2b6cadb8304b311e2e046bb",
+    "stdout_sha256": "488feddb9d3bfb380b163ca73a275f8d8ef1cc48700fba980a477e9b537dae06"
+  },
+  {
+    "argv": [
+      "python3",
+      "verification/gate.py",
+      "--report",
+      "/workspace/scratch/930c38487b1a/postgres-evidence/exact-run-01/report.json",
+      "--phase",
+      "P01",
+      "--expected-sha",
+      "cf4863623a5c3e42fb850b0b5942bc17e58ba72f"
+    ],
+    "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+    "exit_code": 2,
+    "gate_source_sha": "6066f6a3fbb8f6edd2b6cadb8304b311e2e046bb",
+    "stdout_sha256": "242b898bb9c3bd57bd88102c0254d74ee2b0b164cc4c02d4049ddc5af542673a"
+  },
+  {
+    "argv": [
+      "python3",
+      "verification/gate.py",
+      "--report",
+      "/workspace/scratch/930c38487b1a/postgres-evidence/exact-run-01/report.json",
+      "--phase",
+      "SOURCE_QUALITY",
+      "--expected-sha",
+      "cf4863623a5c3e42fb850b0b5942bc17e58ba72f"
+    ],
+    "cwd": "/workspace/scratch/930c38487b1a/alternative-wms",
+    "exit_code": 0,
+    "gate_source_sha": "6066f6a3fbb8f6edd2b6cadb8304b311e2e046bb",
+    "stdout_sha256": "2fcbb72f9d5a4b01d5dd853194afb13e232e49e2deb8b8ea548687d778da51ea"
+  }
+]

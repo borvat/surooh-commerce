@@ -302,6 +302,38 @@ try {
     await row.waitFor({ state: "hidden" });
     mark(`cancel_${stage}_reload_reservations_released`);
   }
+  const scannerBaseline = await api("snapshot");
+  const scanOrder = await createOrder();
+  const scanRow = page.locator(`[data-native-order="${scanOrder.order_id}"]`);
+  await scanRow.getByRole("button", { name: "تجهيز بالمسح", exact: true }).click();
+  const scanner = page.getByRole("dialog");
+  const scanInput = scanner.getByLabel("رمز المنتج أو الباركود", { exact: true });
+  const submitScan = async (code) => {
+    await scanInput.fill(code);
+    await scanInput.press("Enter");
+  };
+  await submitScan("NO-SUCH-SYNTHETIC");
+  await scanner.getByRole("alert").waitFor();
+  for (const code of ["SYNTHETIC-C1", "SYNTHETIC-C2", "SYNTHETIC-C2"]) await submitScan(code);
+  await scanner.getByRole("button", { name: "تراجع عن آخر مسح", exact: true }).click();
+  assert.equal(
+    await scanner.getByRole("button", { name: "تأكيد التجهيز", exact: true }).isDisabled(),
+    true,
+  );
+  await submitScan("SYNTHETIC-C2");
+  const scanPick = await clickCommand("scan_pick", () =>
+    scanner.getByRole("button", { name: "تأكيد التجهيز", exact: true }).click(),
+  );
+  await scanRow.getByRole("button", { name: "تعبئة", exact: true }).waitFor();
+  assert.equal(
+    (await api("snapshot")).orders.find((row) => row.id === scanOrder.order_id).pick_list,
+    scanPick.pick_list,
+  );
+  await clickCommand("cancel", () =>
+    scanRow.getByRole("button", { name: "إلغاء", exact: true }).click(),
+  );
+  assert.deepEqual(ledger(await api("snapshot")), ledger(scannerBaseline));
+  mark("scanner_unknown_code_undo_complete_native_pick_and_cancel");
   const retryBaseline = await api("snapshot");
   const retryOrder = await createOrder();
   const retryRow = page.locator(`[data-native-order="${retryOrder.order_id}"]`);

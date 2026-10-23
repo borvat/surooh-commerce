@@ -6,6 +6,7 @@ import { nativeOrderAction } from "@/lib/native-lab-client";
 import { stockLocations, quarantineReturn } from "@/lib/native-stock-operations";
 import { useRef, useState } from "react";
 import { nativeSnapshot } from "@/lib/native-projection";
+import { NativeScannerPick } from "./native-scanner-pick";
 
 export function NativeOrderActions({ orderId }: { orderId: string }) {
   const qc = useQueryClient();
@@ -64,6 +65,13 @@ export function NativeOrderActions({ orderId }: { orderId: string }) {
   };
   return (
     <div className="flex gap-1" data-native-order={orderId}>
+      {next === "pick" && query.data && (
+        <NativeScannerPick
+          snapshot={query.data}
+          orderId={orderId}
+          disabled={mutation.isPending || query.isFetching}
+        />
+      )}
       {next === "return" && (
         <label className="text-xs">
           موقع حجر المرتجع

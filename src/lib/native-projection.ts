@@ -5,6 +5,7 @@ export type NativeItem = {
   id: string;
   name: string;
   stock: boolean;
+  barcodes?: string[];
   uom: string;
   created_at: string;
   updated_at: string;

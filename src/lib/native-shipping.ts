@@ -5,6 +5,7 @@ export function shipmentRequest(order: NativeOrder, units: number, batchId: stri
   const plan = order.shipment_plan;
   if (
     order.status !== "placed" ||
+    order.remainder_closed ||
     !plan ||
     !Number.isSafeInteger(units) ||
     units < 1 ||
@@ -35,4 +36,34 @@ export function shipmentAction(
     { order_id: orderId, pick_list: pickList },
     `${operation}:${pickList}`,
   );
+}
+
+/** Freeze this payload and its request ID until the result is known. */
+export function remainderCloseRequest(order: NativeOrder, reason: string) {
+  const batches = order.shipment_batches ?? [];
+  if (
+    order.status !== "placed" ||
+    order.remainder_closed ||
+    !order.shipment_plan ||
+    order.shipment_plan.remaining_units < 1 ||
+    !batches.some((batch) => batch.shipped) ||
+    batches.some((batch) => !batch.shipped && !batch.cancelled) ||
+    reason !== reason.trim() ||
+    reason.length < 3 ||
+    reason.length > 500
+  )
+    throw new Error("حدّث الطلب وألغِ تجهيز الدفعة النشطة، ثم أدخل سبب إغلاق الباقي.");
+  return {
+    order_id: order.id,
+    expected_picks: batches.map((batch) => batch.pick_list).sort(),
+    expected_remaining_units: order.shipment_plan.remaining_units,
+    reason,
+  };
+}
+
+export function closeRemainder(
+  payload: ReturnType<typeof remainderCloseRequest>,
+  requestId: string,
+) {
+  return nativeLabCommand("close_remainder", payload, requestId);
 }

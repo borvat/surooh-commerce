@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { shipmentRequest } from "../src/lib/native-shipping";
+import { remainderCloseRequest, shipmentRequest } from "../src/lib/native-shipping";
 import type { NativeOrder } from "../src/lib/native-projection";
 
 const order: NativeOrder = {
@@ -90,4 +90,86 @@ test("cancelled batch stays in history without blocking its replacement", () => 
   expect(
     shipmentRequest({ ...order, shipment_batches: [cancelled] }, 1, "replacement").expected_picks,
   ).toEqual(["P-CANCELLED"]);
+});
+
+const partlyShipped: NativeOrder = {
+  ...order,
+  shipment_plan: { ...order.shipment_plan!, remaining_units: 2 },
+  shipment_batches: [
+    {
+      pick_list: "P1",
+      shipped: true,
+      delivery_note: "D1",
+      packing_slip: "S1",
+      return_note: null,
+      lines: [],
+    },
+    {
+      pick_list: "P0",
+      shipped: false,
+      cancelled: true,
+      delivery_note: null,
+      packing_slip: null,
+      return_note: null,
+      lines: [],
+    },
+  ],
+};
+
+test("closing binds the explicit reason, remainder and cancelled pick history", () => {
+  expect(remainderCloseRequest(partlyShipped, "طلب العميل")).toEqual({
+    order_id: "SO-1",
+    expected_picks: ["P0", "P1"],
+    expected_remaining_units: 2,
+    reason: "طلب العميل",
+  });
+});
+
+test("closing refuses active batches, absent shipments and completed orders", () => {
+  expect(() => remainderCloseRequest(order, "طلب العميل")).toThrow();
+  expect(() =>
+    remainderCloseRequest(
+      { ...partlyShipped, status: "fulfilled" },
+      "طلب العميل",
+    ),
+  ).toThrow();
+  expect(() =>
+    remainderCloseRequest(
+      {
+        ...partlyShipped,
+        shipment_plan: { ...partlyShipped.shipment_plan!, remaining_units: 0 },
+      },
+      "طلب العميل",
+    ),
+  ).toThrow();
+  expect(() =>
+    remainderCloseRequest(
+      {
+        ...partlyShipped,
+        shipment_batches: [
+          ...partlyShipped.shipment_batches!,
+          {
+            pick_list: "P-ACTIVE",
+            shipped: false,
+            delivery_note: null,
+            packing_slip: null,
+            return_note: null,
+            lines: [],
+          },
+        ],
+      },
+      "طلب العميل",
+    ),
+  ).toThrow();
+});
+
+test("closed remainders cannot create a new shipment or new close intent", () => {
+  const closed = { ...partlyShipped, remainder_closed: true };
+  expect(() => shipmentRequest(closed, 1, "late-batch")).toThrow();
+  expect(() => remainderCloseRequest(closed, "طلب العميل")).toThrow();
+});
+
+test("closing requires a bounded trimmed reason", () => {
+  for (const reason of ["", " ", "ab", " reason", "reason ", "x".repeat(501)])
+    expect(() => remainderCloseRequest(partlyShipped, reason)).toThrow();
 });

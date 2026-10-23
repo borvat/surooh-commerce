@@ -51,6 +51,8 @@ export function NativeOrderActions({ orderId }: { orderId: string }) {
   if (!order || order.status === "cancelled") return null;
   if (order.shipment_batches?.length)
     return <NativeShipmentBatches order={order} refreshing={query.isFetching} />;
+  if (order.remainder_closed)
+    return <span className="text-xs">أُغلق باقي الطلب وتحرر حجزه.</span>;
   if (order.return_note)
     return <span className="text-xs">تم استلام المرتجع · {order.return_note}</span>;
   const next = order.delivery_note

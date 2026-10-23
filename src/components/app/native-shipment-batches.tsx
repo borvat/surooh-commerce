@@ -3,7 +3,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import type { NativeOrder } from "@/lib/native-projection";
-import { pickShipment, shipmentAction, shipmentRequest } from "@/lib/native-shipping";
+import {
+  closeRemainder,
+  pickShipment,
+  remainderCloseRequest,
+  shipmentAction,
+  shipmentRequest,
+} from "@/lib/native-shipping";
 import { quarantineReturn, stockLocations } from "@/lib/native-stock-operations";
 
 export function NativeShipmentBatches({
@@ -16,6 +22,11 @@ export function NativeShipmentBatches({
   const qc = useQueryClient();
   const [units, setUnits] = useState(1);
   const [target, setTarget] = useState("");
+  const [reason, setReason] = useState("");
+  const closing = useRef<{
+    payload: ReturnType<typeof remainderCloseRequest>;
+    request: string;
+  } | null>(null);
   const sent = useRef<{ payload: ReturnType<typeof shipmentRequest>; request: string } | null>(
     null,
   );
@@ -23,15 +34,24 @@ export function NativeShipmentBatches({
   const locations = useQuery({ queryKey: ["native-locations"], queryFn: stockLocations });
   const mutation = useMutation({
     mutationFn: async (action: {
-      kind: "pick" | "batch_pack" | "batch_ship" | "batch_cancel" | "return";
+      kind: "pick" | "close" | "batch_pack" | "batch_ship" | "batch_cancel" | "return";
       id?: string;
     }) => {
+      if (closing.current && !order.remainder_closed && action.kind !== "close")
+        throw new Error("تحقق من نتيجة الإغلاق بإعادة محاولة نفس الإجراء أولاً.");
       if (action.kind === "pick") {
         sent.current ??= {
           payload: shipmentRequest(order, units, crypto.randomUUID()),
           request: `batch:${crypto.randomUUID()}`,
         };
         return pickShipment(sent.current.payload, sent.current.request);
+      }
+      if (action.kind === "close") {
+        closing.current ??= {
+          payload: remainderCloseRequest(order, reason),
+          request: `close:${crypto.randomUUID()}`,
+        };
+        return closeRemainder(closing.current.payload, closing.current.request);
       }
       if (!action.id) throw new Error("مستند الدفعة مطلوب.");
       if (action.kind === "return") {
@@ -42,6 +62,7 @@ export function NativeShipmentBatches({
     },
     onSuccess: () => {
       sent.current = null;
+      closing.current = null;
       qc.invalidateQueries();
     },
     onError: (error) => {
@@ -52,6 +73,7 @@ export function NativeShipmentBatches({
   const batches = order.shipment_batches ?? [];
   const active = batches.some((batch) => !batch.shipped && !batch.cancelled);
   const frozen = !!sent.current;
+  const closeFrozen = !!closing.current && !order.remainder_closed;
   const disabled = refreshing || mutation.isPending;
   return (
     <div className="space-y-2 rounded border p-2 text-xs" data-native-batches={order.id}>
@@ -60,6 +82,9 @@ export function NativeShipmentBatches({
         {order.shipment_plan?.lines.map((line) => `${line.quantity} × ${line.item}`).join("، ")}
       </p>
       <p>الوحدات المتبقية: {order.shipment_plan?.remaining_units ?? "تحتاج مراجعة"}</p>
+      {order.remainder_closed && (
+        <p role="status">أُغلق باقي الطلب وتحرر حجزه. الشحنات السابقة محفوظة.</p>
+      )}
       {batches.map((batch) => (
         <div key={batch.pick_list} className="flex flex-wrap items-center gap-2">
           <span>
@@ -73,7 +98,7 @@ export function NativeShipmentBatches({
                   : "مجهزة"}
           </span>
           <span>{batch.delivery_note}</span>
-          {!batch.shipped && !batch.cancelled && (
+          {!order.remainder_closed && !batch.shipped && !batch.cancelled && (
             <Button
               size="sm"
               disabled={disabled}
@@ -87,7 +112,7 @@ export function NativeShipmentBatches({
               {batch.packing_slip ? "شحن الدفعة" : "تعبئة الدفعة"}
             </Button>
           )}
-          {!batch.shipped && !batch.cancelled && (
+          {!order.remainder_closed && !batch.shipped && !batch.cancelled && (
             <Button
               size="sm"
               variant="ghost"
@@ -104,7 +129,7 @@ export function NativeShipmentBatches({
               <Button
                 size="sm"
                 variant="outline"
-                disabled={disabled || !target || locations.isFetching || locations.isError}
+                disabled={disabled || closeFrozen || !target || locations.isFetching || locations.isError}
                 onClick={() => mutation.mutate({ kind: "return", id: batch.delivery_note! })}
               >
                 مرتجع هذه الشحنة
@@ -143,7 +168,7 @@ export function NativeShipmentBatches({
           )}
         </label>
       )}
-      {!active && (order.shipment_plan?.remaining_units ?? 0) > 0 && (
+      {!order.remainder_closed && !active && (order.shipment_plan?.remaining_units ?? 0) > 0 && (
         <div className="flex items-center gap-2">
           <label>
             وحدات هذه الدفعة{" "}
@@ -154,7 +179,7 @@ export function NativeShipmentBatches({
               max={order.shipment_plan?.remaining_units}
               value={units}
               className="w-16 rounded border p-1"
-              disabled={disabled || frozen}
+              disabled={disabled || frozen || closeFrozen}
               onChange={(e) => setUnits(Number(e.target.value))}
             />
           </label>
@@ -162,6 +187,7 @@ export function NativeShipmentBatches({
             size="sm"
             disabled={
               disabled ||
+              closeFrozen ||
               !Number.isSafeInteger(units) ||
               units < 1 ||
               units > (order.shipment_plan?.remaining_units ?? 0)
@@ -172,7 +198,41 @@ export function NativeShipmentBatches({
           </Button>
         </div>
       )}
-      {active && <p>اشحن الدفعة الحالية قبل تجهيز الدفعة التالية.</p>}
+      {!order.remainder_closed &&
+        !active &&
+        (order.shipment_plan?.remaining_units ?? 0) > 0 &&
+        batches.some((batch) => batch.shipped) && (
+          <div className="flex flex-wrap items-center gap-2">
+            <label>
+              سبب إغلاق باقي الطلب
+              <input
+                aria-label="سبب إغلاق باقي الطلب"
+                value={reason}
+                maxLength={500}
+                disabled={disabled || closeFrozen || frozen}
+                className="rounded border p-1"
+                onChange={(e) => setReason(e.target.value)}
+              />
+            </label>
+            <Button
+              size="sm"
+              variant="outline"
+              disabled={
+                disabled ||
+                frozen ||
+                reason !== reason.trim() ||
+                reason.length < 3 ||
+                reason.length > 500
+              }
+              onClick={() => mutation.mutate({ kind: "close" })}
+            >
+              {closeFrozen ? "إعادة محاولة نفس الإغلاق" : "إغلاق الباقي وتحرير الحجز"}
+            </Button>
+          </div>
+        )}
+      {active && !order.remainder_closed && (
+        <p>اشحن الدفعة الحالية أو ألغِ تجهيزها قبل تجهيز دفعة أخرى أو إغلاق الباقي.</p>
+      )}
     </div>
   );
 }

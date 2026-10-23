@@ -6,6 +6,7 @@ import { nativeOrderAction } from "@/lib/native-lab-client";
 import { stockLocations, quarantineReturn } from "@/lib/native-stock-operations";
 import { useRef, useState } from "react";
 import { nativeSnapshot } from "@/lib/native-projection";
+import { NativeShipmentBatches } from "./native-shipment-batches";
 import { NativeScannerPick } from "./native-scanner-pick";
 
 export function NativeOrderActions({ orderId }: { orderId: string }) {
@@ -48,6 +49,8 @@ export function NativeOrderActions({ orderId }: { orderId: string }) {
       </div>
     );
   if (!order || order.status === "cancelled") return null;
+  if (order.shipment_batches?.length)
+    return <NativeShipmentBatches order={order} refreshing={query.isFetching} />;
   if (order.return_note)
     return <span className="text-xs">تم استلام المرتجع · {order.return_note}</span>;
   const next = order.delivery_note
@@ -65,6 +68,9 @@ export function NativeOrderActions({ orderId }: { orderId: string }) {
   };
   return (
     <div className="flex gap-1" data-native-order={orderId}>
+      {next === "pick" && (order.shipment_plan?.total_units ?? 0) > 1 && (
+        <NativeShipmentBatches order={order} refreshing={query.isFetching || mutation.isPending} />
+      )}
       {next === "pick" && query.data && (
         <NativeScannerPick
           snapshot={query.data}

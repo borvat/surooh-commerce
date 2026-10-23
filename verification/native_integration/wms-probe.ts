@@ -16,6 +16,7 @@ import {
   postMovement,
   setBundleContents,
 } from "../../src/lib/inventory";
+import { shipmentRequest, pickShipment } from "../../src/lib/native-shipping";
 const data = await Bun.stdin.json();
 configureNativeLab({
   syntheticOnly: true,
@@ -24,7 +25,15 @@ configureNativeLab({
   token: () => data.token,
 });
 const input = { lines: [{ product_id: "TEST-KIT", quantity: 1 }], externalRef: data.request };
-if (data.operation === "scanner-pick") {
+if (data.operation === "batch-pick") {
+  const order = (await nativeSnapshot()).orders.find((row) => row.id === data.order_id);
+  if (!order) throw new Error("Order missing");
+  const payload = shipmentRequest(order, data.units, data.batch_id);
+  const first = await pickShipment(payload, data.request);
+  const replay = await pickShipment(payload, data.request);
+  if (JSON.stringify(first) !== JSON.stringify(replay)) throw new Error("Batch replay mismatch");
+  console.log(JSON.stringify(first));
+} else if (data.operation === "scanner-pick") {
   const plan = scanPlan(await nativeSnapshot(), data.order_id);
   const counts = scannedCounts(plan, data.scans);
   if (!plan.every((line) => counts[line.item] === line.quantity))

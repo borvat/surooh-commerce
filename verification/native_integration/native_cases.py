@@ -1095,6 +1095,9 @@ def run(config):
         from scanner_cases import run as scanner_run
 
         scanner_run(case, call, token, owner, bins, wms)
+        from shipping_cases import run as shipping_run
+
+        shipping_run(case, call, token, owner, bins, wms)
         browser_row = run_browser(browser_input(token()), out / "browser-cycle.log")
         rows.append(browser_row)
         save()
@@ -1110,12 +1113,17 @@ def run(config):
             p.write_text(data)
         frappe.destroy()
         save()
-    expected = {f"N{i:02d}" for i in range(1, 19)} | {"N01b", "N05a"}
+    expected = (
+        {f"N{i:02d}" for i in range(1, 19)}
+        | {"N01b", "N05a"}
+        | {f"A{i:02d}" for i in range(1, 10)}
+        | {f"O{i:02d}" for i in range(1, 10)}
+        | {f"S{i:02d}" for i in range(1, 4)}
+        | {f"P{i:02d}" for i in range(1, 9)}
+        | {"B01"}
+    )
     actual = {x["id"].split("_")[0] for x in rows}
-    if (
-        actual != expected | {f"A{i:02d}" for i in range(1, 10)} | {f"O{i:02d}" for i in range(1, 10)} | {f"S{i:02d}" for i in range(1, 4)} | {"B01"}
-        or len(rows) != 42
-    ):
+    if actual != expected or len(rows) != len(expected):
         raise RuntimeError("Missing/duplicate native cases")
     if any(x["status"] == "FAIL" for x in rows):
         raise RuntimeError(

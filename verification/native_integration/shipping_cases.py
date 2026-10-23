@@ -383,3 +383,181 @@ raise RuntimeError('injection not reached')
         }
 
     case("P06_packed_batch_cancel_restores_reservation_and_keeps_history", cancelled)
+
+    def old_snapshot(operation, payload, request, while_waiting, *, rejection=None):
+        import json
+        import os
+        import subprocess
+        import sys
+
+        envelope = dict(
+            company="TEST-A",
+            source="lab-manual",
+            request_id=request,
+            operation=operation,
+            payload=payload,
+        )
+        # Force a real old REPEATABLE READ view before a different HTTP actor
+        # commits the conflicting operation. No timing sleeps or mocked SQL.
+        code = """import sys,json,frappe
+frappe.init('wms-native-a.invalid');frappe.connect();frappe.set_user('Guest')
+from surooh_accounting.native_lab.api import _execute
+v=json.loads(sys.stdin.readline())
+frappe.db.rollback()
+frappe.db.sql('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ')
+before=frappe.db.sql('SELECT count(*) FROM `tabPick List`')[0][0]
+view=frappe.db.sql('SELECT count(*),coalesce(sum(docstatus),0) FROM `tabDelivery Note`')[0]
+print('SNAPSHOT_HELD',flush=True)
+assert sys.stdin.readline().strip()=='resume'
+assert frappe.db.sql('SELECT count(*) FROM `tabPick List`')[0][0]==before
+assert frappe.db.sql('SELECT count(*),coalesce(sum(docstatus),0) FROM `tabDelivery Note`')[0]==view
+try:
+ result=_execute(v['envelope'],v['token'])
+ if v['rejection']: raise AssertionError('Stale snapshot mutation unexpectedly succeeded')
+ print(json.dumps({'result':result}),flush=True)
+except frappe.ValidationError as exc:
+ if not v['rejection'] or v['rejection'].lower() not in str(exc).lower(): raise
+ print(json.dumps({'rejected':str(exc)}),flush=True)
+finally:
+ frappe.db.rollback();frappe.destroy()
+"""
+        child = subprocess.Popen(
+            [sys.executable, "-c", code],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            env=os.environ.copy(),
+        )
+        try:
+            child.stdin.write(
+                json.dumps(
+                    {
+                        "envelope": envelope,
+                        "token": token(sub="second-operator@example.invalid"),
+                        "rejection": rejection,
+                    }
+                )
+                + "\n"
+            )
+            child.stdin.flush()
+            # select imposes a real deadline while the child holds its old view.
+            import select
+
+            assert select.select([child.stdout], [], [], 30)[0], (
+                "Snapshot child did not start"
+            )
+            assert child.stdout.readline().strip() == "SNAPSHOT_HELD"
+            parent_result = while_waiting()
+            child.stdin.write("resume\n")
+            child.stdin.flush()
+            stdout, stderr = child.communicate(timeout=60)
+            assert child.returncode == 0, (child.returncode, stderr, stdout)
+            return parent_result, json.loads(stdout.strip().splitlines()[-1])
+        finally:
+            if child.poll() is None:
+                child.kill()
+                child.wait(timeout=10)
+            for stream in [child.stdin, child.stdout, child.stderr]:
+                stream.close()
+
+    def stale_transaction():
+        name = order("P07:order", 2)
+        before = bins()
+        payload = {
+            "order_id": name,
+            "batch_id": "P07:stale",
+            "units": 1,
+            "expected_picks": [],
+        }
+        winner, stale = old_snapshot(
+            "batch_pick",
+            payload,
+            "P07:old-transaction",
+            lambda: pick(name, "P07:winner"),
+            rejection="history changed",
+        )
+        assert "history changed" in stale["rejected"].lower()
+        assert bins() == before
+        owner()
+        assert frappe.db.count("Pick List Item", {"sales_order": name}) == 2
+        ship(name, winner, "P07:first")
+        remainder = pick(name, "P07:remainder", expected=[winner["pick_list"]])
+        ship(name, remainder, "P07:remainder")
+        return {
+            "forced_old_REPEATABLE_READ_view": True,
+            "different_HTTP_actor_committed_first": True,
+            "current_native_history_rejected_stale_new_batch": stale,
+            "one_native_pick_and_unchanged_reservations_before_ship": True,
+        }
+
+    case("P07_old_DB_snapshot_cannot_hide_committed_batch_history", stale_transaction)
+
+    def stale_pack_and_ship():
+        name = order("P08:order", 1)
+        picked = pick(name, "P08:batch")
+        payload = {"order_id": name, "pick_list": picked["pick_list"]}
+        packed, old_pack = old_snapshot(
+            "batch_pack",
+            payload,
+            "P08:old-pack",
+            lambda: call("batch_pack", payload, "P08:pack"),
+        )
+        assert packed == old_pack["result"]
+        shipped, old_ship = old_snapshot(
+            "batch_ship",
+            payload,
+            "P08:old-ship",
+            lambda: call("batch_ship", payload, "P08:ship"),
+        )
+        assert shipped == old_ship["result"]
+        owner()
+        assert (
+            frappe.db.count(
+                "Packing Slip",
+                {"delivery_note": packed["delivery_note"], "docstatus": 1},
+            )
+            == 1
+        )
+        sle = frappe.db.sql(
+            "SELECT sum(actual_qty),sum(stock_value_difference) FROM `tabStock Ledger Entry` WHERE voucher_no=%s AND is_cancelled=0",
+            shipped["delivery_note"],
+        )[0]
+        assert tuple(map(float, sle)) == (-3.0, -50.0)
+        cancelled_order = order("P08:cancel-order", 2)
+        before_cancel = bins()
+        cancel_pick = pick(cancelled_order, "P08:cancel-pick")
+        cancel_payload = {
+            "order_id": cancelled_order,
+            "pick_list": cancel_pick["pick_list"],
+        }
+        packed_before_cancel, cancelled = old_snapshot(
+            "batch_cancel",
+            cancel_payload,
+            "P08:old-cancel",
+            lambda: call("batch_pack", cancel_payload, "P08:pack-before-cancel"),
+        )
+        assert cancelled["result"]["cancelled"] is True and bins() == before_cancel
+        owner()
+        assert not frappe.db.exists(
+            "Delivery Note", packed_before_cancel["delivery_note"]
+        )
+        replacement = pick(
+            cancelled_order,
+            "P08:replacement",
+            units=2,
+            expected=[cancel_pick["pick_list"]],
+        )
+        ship(cancelled_order, replacement, "P08:replacement")
+        return {
+            "forced_old_REPEATABLE_READ_views": 3,
+            "packed_cancel_saw_current_slip_and_restored_reservations": True,
+            "same_native_delivery_and_slip": packed,
+            "same_native_shipment": shipped,
+            "one_SLE_effect": list(map(float, sle)),
+        }
+
+    case(
+        "P08_old_DB_snapshot_pack_ship_cancel_keep_one_native_effect",
+        stale_pack_and_ship,
+    )

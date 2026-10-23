@@ -361,7 +361,11 @@ function OrdersPage() {
         {filtered.map((o) => {
           const lines = o.order_lines ?? [];
           const fms = new Set(lines.map((l) => l.fulfillment_method));
-          const [label, tone] = statusAr[o.status as keyof typeof statusAr] ?? [
+          const remainderClosed =
+            "native_remainder_closed" in o && o.native_remainder_closed === true;
+          const [label, tone] = remainderClosed
+            ? (["أُغلق باقي الطلب", "neutral"] as const)
+            : statusAr[o.status as keyof typeof statusAr] ?? [
             o.status,
             "neutral",
           ];
@@ -376,6 +380,7 @@ function OrdersPage() {
                     !perm.canOperate ||
                     account === "all" ||
                     o.channel_id !== account ||
+                    remainderClosed ||
                     o.status !== "placed" ||
                     !o.external_ref ||
                     !lines.some((l) => l.fulfillment_method !== "FBB")

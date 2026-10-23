@@ -23,6 +23,7 @@ export type NativeOrder = {
   packing_slip: string | null;
   delivery_note: string | null;
   return_note?: string | null;
+  remainder_closed?: boolean;
   shipment_plan?: {
     total_units: number;
     remaining_units: number;
@@ -159,6 +160,7 @@ export async function nativeLinks() {
   }));
 }
 type OrderProjection = Database["public"]["Tables"]["orders"]["Row"] & {
+  native_remainder_closed?: boolean;
   sales_channels: { name: string } | null;
   order_lines: {
     quantity: number;
@@ -180,6 +182,7 @@ export async function nativeOrders(): Promise<OrderProjection[]> {
     organization_id: data.company,
     warehouse_id: data.warehouse,
     status: x.status,
+    native_remainder_closed: x.remainder_closed === true,
     created_at: x.created_at,
     updated_at: x.updated_at,
     created_by: null as string | null,

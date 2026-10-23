@@ -568,3 +568,7 @@ finally:
         "P08_old_DB_snapshot_pack_ship_cancel_keep_one_native_effect",
         stale_pack_and_ship,
     )
+
+    from closing_cases import run as closing_run
+
+    closing_run(case, call, token, owner, bins, old_snapshot)

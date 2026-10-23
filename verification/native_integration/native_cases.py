@@ -1119,7 +1119,7 @@ def run(config):
         | {f"A{i:02d}" for i in range(1, 10)}
         | {f"O{i:02d}" for i in range(1, 10)}
         | {f"S{i:02d}" for i in range(1, 4)}
-        | {f"P{i:02d}" for i in range(1, 9)}
+        | {f"P{i:02d}" for i in range(1, 13)}
         | {"B01"}
     )
     actual = {x["id"].split("_")[0] for x in rows}

@@ -25,7 +25,7 @@ class EvidenceGate(unittest.TestCase):
             + [f"A{x:02d}" for x in range(1, 10)]
             + [f"O{x:02d}" for x in range(1, 10)]
             + [f"S{x:02d}" for x in range(1, 4)]
-            + [f"P{x:02d}" for x in range(1, 9)]
+            + [f"P{x:02d}" for x in range(1, 13)]
         )
         self.rows = [{"id": i + "_unit_fixture", "status": "PASS"} for i in ids] + [
             {"id": "B01_unit_fixture", "status": "BLOCKED"}
@@ -124,5 +124,13 @@ class EvidenceGate(unittest.TestCase):
 
     def test_previous_scanner_coverage_cannot_accept_shipments(self):
         self.rows = [row for row in self.rows if not row["id"].startswith("P")]
+        self.write()
+        self.assertEqual(self.evaluate()["native_atomic_candidate"], "BLOCKED")
+
+    def test_previous_shipping_results_cannot_accept_untested_remainder_close(self):
+        self.rows = [
+            row for row in self.rows
+            if row["id"].split("_")[0] not in {"P09", "P10", "P11", "P12"}
+        ]
         self.write()
         self.assertEqual(self.evaluate()["native_atomic_candidate"], "BLOCKED")

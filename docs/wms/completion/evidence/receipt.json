@@ -1,0 +1,105 @@
+{
+  "tested_source": "9eeb743027d0db0eb575fdc413cbb11cb32170bc",
+  "source_tree": "139d070c17f4d5c915231a801370a60d640c3bd4",
+  "source_after": "9eeb743027d0db0eb575fdc413cbb11cb32170bc",
+  "tracked_changes_after": "",
+  "archive": "verification.tar.gz",
+  "archive_sha256": "21b70ff976c4f8bac26c5b481f54a5cae9322fa9ac3a04ec1d6972d05b182c3d",
+  "checks": [
+    {
+      "name": "application-units",
+      "command": [
+        "npm",
+        "exec",
+        "--yes",
+        "--package=bun@1.3.13",
+        "--",
+        "bun",
+        "test",
+        "tests/commerce-copilot.test.ts",
+        "tests/native-lab.test.ts",
+        "tests/native-order-actions.test.ts",
+        "tests/native-transport.test.ts",
+        "tests/order-economics.test.ts",
+        "tests/order-filters.test.ts",
+        "tests/product-family-reference.test.ts",
+        "tests/shipping-label-contract.test.ts",
+        "tests/source-quality.test.ts",
+        "tests/stockitup-identity.test.ts",
+        "tests/stockitup-review-queue.test.ts",
+        "tests/warehouse-audit.test.ts",
+        "tests/warehouse-batch.test.ts",
+        "tests/warehouse-command-contract.test.ts",
+        "tests/warehouse-flow.test.ts",
+        "tests/warehouse-migration.test.ts",
+        "tests/warehouse-print.test.ts"
+      ],
+      "exit_code": 0,
+      "log": "application-units.txt",
+      "sha256": "8571c30bbbbe1e96c560097f6ae1c809cb3608082ecfcac2f6aae37347fdd375"
+    },
+    {
+      "name": "foundation-exact",
+      "command": [
+        "node",
+        "--test",
+        "tests/foundation/architecture-decision.test.mjs",
+        "tests/foundation/gates.test.mjs",
+        "tests/foundation/postgres-adapter.test.mjs"
+      ],
+      "exit_code": 0,
+      "log": "foundation-exact.txt",
+      "sha256": "fe6cc60c5d58b3630c06a2655de8d8b412f64e2bad98c25a1281f6ef5a97bd11"
+    },
+    {
+      "name": "typecheck-exact",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "log": "typecheck-exact.txt",
+      "sha256": "ae791f9f57ffbb3c0a592b6a34e25250c1f7f6f13fde4d05f77a0d4e7681f89a"
+    },
+    {
+      "name": "lint-exact",
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "exit_code": 0,
+      "log": "lint-exact.txt",
+      "sha256": "3889d219d51feb60090fbcbbb3f46d2f2af0603017635fa0a67ba8f505ac7c8a"
+    },
+    {
+      "name": "build-exact",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "log": "build-exact.txt",
+      "sha256": "c65c75a621503c31854205d5919d3cf284caf300983af04c1c9f256867c2ef5e"
+    }
+  ],
+  "application_tests": 120,
+  "foundation_tests": 25,
+  "extra_harness_checks": {
+    "node_helpers": 14,
+    "python_browser_runner": 8,
+    "python_atomic_gate": 7,
+    "python_general_gate": 14,
+    "tested_source": "9fc6529883694201358623b3b33c80df21477c10",
+    "same_source_tree": "139d070c17f4d5c915231a801370a60d640c3bd4"
+  },
+  "lint": {
+    "errors": 0,
+    "pre_existing_warnings": 15
+  },
+  "browser_native_cycle": "NOT_RUN/BLOCKED",
+  "complete_wms_goal": "OPEN",
+  "production_ready": false
+}

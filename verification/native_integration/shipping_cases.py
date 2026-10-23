@@ -415,6 +415,7 @@ assert frappe.db.sql('SELECT count(*),coalesce(sum(docstatus),0) FROM `tabDelive
 try:
  result=_execute(v['envelope'],v['token'])
  if v['rejection']: raise AssertionError('Stale snapshot mutation unexpectedly succeeded')
+ frappe.db.commit()  # Match the successful native HTTP transaction boundary.
  print(json.dumps({'result':result}),flush=True)
 except frappe.ValidationError as exc:
  if not v['rejection'] or v['rejection'].lower() not in str(exc).lower(): raise

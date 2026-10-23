@@ -29,7 +29,18 @@
 - Unified stock: a canonical product owns ONE stock pool and ONE master_reference; every confirmed FBR offer's target qty = canonical available (cap 999) and target ref = master_reference, computed in src/lib/unified-stock.ts; bol quantities/references are drift observations, never summed, and SUGGESTED offers are excluded — why: many EANs are sales representations of the same physical product.
 - Same-product linking: compareSame hard-blocks only when both sides have confirmed non-inferred Product Master values that differ (brand, model/mpn, color, size, pack, unit qty); title-derived/unknown/offer-conflict values are warn-only — why: title guesses must never block the owner.
 
-## WMS engineering foundation — owner execution hold
+## Current owner mandate — 2026-10-23
+
+The owner explicitly assigned completion of this WMS as a full engineering goal
+in the current conversation on 2026-10-23. This supersedes historical preparation-only,
+Codex-start and per-step permission holds for implementation and isolated testing.
+Continue from the existing ERPNext direction and retained UI on independent branches.
+Do not interpret this mandate as a passing technical test or accountant signoff.
+Preserve the safety and source-of-truth rules above. Deliver reviewable draft PRs
+with exact-source evidence; do not merge or deploy an unvalidated candidate.
+See `docs/wms/completion/PLAN.md` for the delivery criteria and current work.
+
+## Historical WMS engineering foundation — owner execution hold
 
 - Read docs/wms/README.md, BASELINE.md, STAGES.md and STAGE_GATES.md before work.
 - Preparation is authorized; Codex execution is NOT yet authorized. Do not assign, launch or trigger an agent from Issues or CI. P01 awaits explicit owner start approval; P02–P09 are locked.

@@ -12,8 +12,26 @@ export function NativeOrderActions({ orderId }: { orderId: string }) {
   const mutation = useMutation({
     mutationFn: (operation: string) => nativeOrderAction(operation, orderId, order?.delivery_note),
     onSuccess: () => qc.invalidateQueries(),
-    onError: (error) => toast.error(error.message),
+    onError: (error) => {
+      // A lost response is not proof of rollback. Re-read before offering another transition.
+      qc.invalidateQueries({ queryKey: ["native-progress"] });
+      toast.error(error.message);
+    },
   });
+  if (query.isError)
+    return (
+      <div role="alert" className="flex items-center gap-2 text-sm">
+        <span>تعذّر تحديث حالة الطلب.</span>
+        <Button
+          size="sm"
+          variant="outline"
+          disabled={query.isFetching}
+          onClick={() => query.refetch()}
+        >
+          إعادة المحاولة
+        </Button>
+      </div>
+    );
   if (!order || order.status === "cancelled") return null;
   const next = order.delivery_note
     ? "return"
@@ -32,7 +50,7 @@ export function NativeOrderActions({ orderId }: { orderId: string }) {
     <div className="flex gap-1" data-native-order={orderId}>
       <Button
         size="sm"
-        disabled={mutation.isPending || query.isError}
+        disabled={mutation.isPending || query.isFetching}
         onClick={() => mutation.mutate(next)}
       >
         {labels[next]}
@@ -41,7 +59,7 @@ export function NativeOrderActions({ orderId }: { orderId: string }) {
         <Button
           size="sm"
           variant="ghost"
-          disabled={mutation.isPending}
+          disabled={mutation.isPending || query.isFetching}
           onClick={() => mutation.mutate("cancel")}
         >
           إلغاء

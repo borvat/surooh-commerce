@@ -4,8 +4,13 @@ type NativeLabConfig = {
   url: string;
   token: () => string;
   company: "TEST-A";
+  commandTimeoutMs?: number;
 };
 let config: NativeLabConfig | undefined;
+const pending = new Map<
+  string,
+  { body: string; controller: AbortController; result: Promise<Record<string, unknown>> }
+>();
 
 export function configureNativeLab(value: NativeLabConfig | undefined) {
   if (value) {
@@ -22,8 +27,17 @@ export function configureNativeLab(value: NativeLabConfig | undefined) {
       url.hash
     )
       throw new Error("Only explicit loopback synthetic native sessions are allowed");
+    if (
+      value.commandTimeoutMs !== undefined &&
+      (!Number.isInteger(value.commandTimeoutMs) ||
+        value.commandTimeoutMs < 1 ||
+        value.commandTimeoutMs > 60_000)
+    )
+      throw new Error("Invalid native command timeout");
   }
-  config = value;
+  for (const command of pending.values()) command.controller.abort();
+  pending.clear();
+  config = value ? { ...value } : undefined;
 }
 
 export function nativeLabConfigured() {
@@ -36,30 +50,73 @@ export async function nativeLabCommand(
   requestId: string,
 ): Promise<Record<string, unknown>> {
   if (!config) throw new Error("Native lab is disabled");
-  const response = await fetch(
-    `${config.url.replace(/\/$/, "")}/api/method/surooh_accounting.native_lab.api.command`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Frappe-Site-Name": "wms-native-a.invalid",
-        "X-Surooh-Synthetic-JWT": config.token(),
-      },
-      body: JSON.stringify({
-        envelope: {
-          company: config.company,
-          source: "lab-manual",
-          request_id: requestId,
-          operation,
-          payload,
-        },
-      }),
+  const session = config;
+  const body = JSON.stringify({
+    envelope: {
+      company: session.company,
+      source: "lab-manual",
+      request_id: requestId,
+      operation,
+      payload,
     },
-  );
-  if (!response.ok) throw new Error(`Native boundary rejected request: ${response.status}`);
-  const body = (await response.json()) as { message?: Record<string, unknown> };
-  if (!body.message) throw new Error("Missing native command result");
-  return body.message;
+  });
+  const existing = pending.get(requestId);
+  if (existing) {
+    if (existing.body !== body)
+      throw new Error("Native command already pending with different payload");
+    return existing.result;
+  }
+  const controller = new AbortController();
+  const entry = {
+    body,
+    controller,
+    result: Promise.resolve({}) as Promise<Record<string, unknown>>,
+  };
+  entry.result = Promise.resolve().then(async () => {
+    let timedOut = false;
+    const timer = setTimeout(() => {
+      timedOut = true;
+      controller.abort();
+    }, session.commandTimeoutMs ?? 15_000);
+    try {
+      if (config !== session) throw new Error("Native session changed; reload current data");
+      const response = await fetch(
+        `${session.url.replace(/\/$/, "")}/api/method/surooh_accounting.native_lab.api.command`,
+        {
+          method: "POST",
+          signal: controller.signal,
+          redirect: "error",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Frappe-Site-Name": "wms-native-a.invalid",
+            "X-Surooh-Synthetic-JWT": session.token(),
+          },
+          body,
+        },
+      );
+      if (!response.ok) {
+        await response.body?.cancel();
+        throw new Error(`Native boundary rejected request: ${response.status}`);
+      }
+      const result = (await response.json()) as { message?: unknown };
+      if (!result.message || typeof result.message !== "object" || Array.isArray(result.message))
+        throw new Error("Missing native command result");
+      if (config !== session) throw new Error("Native session changed; reload current data");
+      return result.message as Record<string, unknown>;
+    } catch (error) {
+      if (config !== session) throw new Error("Native session changed; reload current data");
+      if (timedOut)
+        throw new Error(
+          "انتهت مهلة الاتصال. قد تكون العملية نُفذت؛ أعد المحاولة بنفس الإجراء للتحقق.",
+        );
+      throw error;
+    } finally {
+      clearTimeout(timer);
+      if (pending.get(requestId) === entry) pending.delete(requestId);
+    }
+  });
+  pending.set(requestId, entry);
+  return entry.result;
 }
 
 declare global {

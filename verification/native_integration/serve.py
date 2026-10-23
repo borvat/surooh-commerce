@@ -7,7 +7,18 @@ def main():
 
     assert os.environ.get("SUROOH_NATIVE_INTEGRATION") == "true"
     import frappe.app
+    import traceback
     from werkzeug.serving import run_simple
+
+    # Test-only telemetry: framework-handled exceptions otherwise hide the failing frame.
+    # No locals, request bodies or credentials are logged; bootstrap redacts generated secrets.
+    original_handler = frappe.app.handle_exception
+
+    def report_exception(error):
+        traceback.print_exception(type(error), error, error.__traceback__)
+        return original_handler(error)
+
+    frappe.app.handle_exception = report_exception
 
     frappe.app._sites_path = "."
     run_simple(

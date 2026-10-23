@@ -171,6 +171,14 @@ try {
   await clickCommand("receive", () =>
     receipt.getByRole("button", { name: "تأكيد", exact: true }).click(),
   );
+  const storagePanel = page.getByRole("region", { name: "مواقع التخزين والجرد" });
+  await storagePanel.getByLabel("العملية", { exact: true }).selectOption("location_create");
+  await storagePanel.getByLabel("اسم الموقع", { exact: true }).fill("TEST-BROWSER-QUARANTINE");
+  await storagePanel.getByLabel("موقع حجر للبضاعة").check();
+  const quarantine = await clickCommand("location_create", () =>
+    storagePanel.getByRole("button", { name: "تأكيد العملية", exact: true }).click(),
+  );
+  mark("create_quarantine_location_from_storage_screen");
   await page.goto(`${origin}/bundles`);
   await page.getByRole("button", { name: "تعديل المكوّنات", exact: true }).first().click();
   await clickCommand("bundle", () =>
@@ -212,20 +220,52 @@ try {
     cogs.reduce((sum, x) => sum + Number(x.debit), 0) !== 50
   )
     throw new Error("Native shipment GL/COGS mismatch");
-  await clickCommand("return", () =>
+  await order.getByLabel("موقع حجر المرتجع", { exact: true }).selectOption(quarantine.warehouse);
+  const returnedCommand = await clickCommand("return_quarantine", () =>
     order.getByRole("button", { name: "مرتجع", exact: true }).click(),
   );
   const returned = await api("snapshot");
   await page.reload();
-  await clickCommand("return", () =>
-    order.getByRole("button", { name: "مرتجع", exact: true }).click(),
-  );
+  await page
+    .getByText(`تم استلام المرتجع · ${returnedCommand.return_note}`, { exact: true })
+    .waitFor();
+  assert.equal(await order.getByRole("button", { name: "مرتجع", exact: true }).count(), 0);
   assert.deepEqual(
     ledger(await api("snapshot")),
     ledger(returned),
     "Reload return replay duplicated ledger",
   );
-  mark("return_replay_after_reload_no_duplicate_ledger");
+  mark("quarantine_return_reload_shows_completed_document_without_duplicate_action");
+  assert.deepEqual(
+    stock(returned),
+    stock(shippedState),
+    "Quarantined return changed sellable stock",
+  );
+  await page.goto(`${origin}/components`);
+  for (const [item, quantity] of [
+    ["TEST-C1", 1],
+    ["TEST-C2", 2],
+  ]) {
+    await storagePanel.getByLabel("العملية", { exact: true }).selectOption("stock_transfer");
+    await storagePanel
+      .getByLabel("الموقع المصدر", { exact: true })
+      .selectOption(quarantine.warehouse);
+    await storagePanel
+      .getByLabel("الموقع الوجهة", { exact: true })
+      .selectOption(returned.warehouse);
+    await storagePanel.getByLabel("رمز المنتج", { exact: true }).fill(item);
+    await storagePanel.getByLabel("الكمية المنقولة", { exact: true }).fill(String(quantity));
+    await storagePanel
+      .getByLabel("سبب العملية", { exact: true })
+      .fill("Synthetic return inspection approved");
+    await clickCommand("stock_transfer", () =>
+      storagePanel.getByRole("button", { name: "تأكيد العملية", exact: true }).click(),
+    );
+    await storagePanel
+      .getByRole("button", { name: "بدء عملية جديدة بعد مراجعة الرصيد", exact: true })
+      .click();
+  }
+  mark("inspection_release_via_native_transfer_from_storage_screen");
   const after = await api("snapshot");
   const value = (x) => x.items.reduce((sum, item) => sum + Number(item.value), 0);
   if (value(after) !== value(before) + 20)

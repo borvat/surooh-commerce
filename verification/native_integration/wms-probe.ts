@@ -6,6 +6,7 @@ import {
   nativeBom,
 } from "../../src/lib/native-projection";
 import { configureNativeLab, nativeOrderAction } from "../../src/lib/native-lab-client";
+import { stockLocations, quarantineReturn } from "../../src/lib/native-stock-operations";
 import {
   placeOrder,
   fulfillOrder,
@@ -22,6 +23,23 @@ configureNativeLab({
   token: () => data.token,
 });
 const input = { lines: [{ product_id: "TEST-KIT", quantity: 1 }], externalRef: data.request };
+if (data.operation === "stock-locations") {
+  const snapshot = await stockLocations();
+  console.log(
+    JSON.stringify({
+      company: snapshot.company,
+      locations: snapshot.locations.length,
+      bins: snapshot.bins.length,
+    }),
+  );
+}
+if (data.operation === "return-quarantine") {
+  const first = await quarantineReturn(data.delivery_note, data.warehouse);
+  const replay = await quarantineReturn(data.delivery_note, data.warehouse);
+  if (JSON.stringify(first) !== JSON.stringify(replay))
+    throw new Error("Quarantine return replay changed");
+  console.log(JSON.stringify(first));
+}
 if (data.operation === "order") {
   const first = await placeOrder(input);
   const replay = await placeOrder(input);

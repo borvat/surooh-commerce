@@ -61,7 +61,7 @@ describe("native order recovery controls with stale cached order", () => {
     const html = render("refreshing");
     expect(html).toContain("تجهيز");
     expect(html).toContain("إلغاء");
-    expect(html.match(/disabled=""/g)).toHaveLength(2);
+    expect(html.match(/disabled=""/g)).toHaveLength(3);
   });
   test("fresh loaded order has the next action and cancellation enabled", () => {
     const html = render("ready");

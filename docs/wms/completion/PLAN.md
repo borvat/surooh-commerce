@@ -16,7 +16,7 @@ The existing code, migrations and evidence remain preserved.
 | --- | --- | --- |
 | Engine authority | ERPNext owns stock, reservations, valuation, COGS and GL; no second ledger | Existing native synthetic evidence; production adapter and cutover unproven |
 | Receiving and locations | Receipt, putaway, locations, counts, adjustment audit and shortage handling | Native receipt/storage/transfer/count/quarantine-return candidate:38 native PASS; production, partial flows and device acceptance remain open |
-| Fulfillment | Reserve, pick, pack, ship, cancel, return; correct component bundles | Retained29 native cases plus9 storage/count/return cases pass; partial shipment and rendered B01 remain open |
+| Fulfillment | Reserve, pick, pack, ship, cancel, return; correct component bundles | Retained29 native +9 storage/count/return +3 scanner cases pass; partial shipment and rendered B01 remain open |
 | Operator experience | Arabic screens, scanner workflow, errors, retries, permissions and mobile use | Retained React screens; first delivery addresses stalled/duplicate native requests and stale action recovery |
 | Identity and boundaries | Separate legal-company sites, services, storage, credentials and permissions | Native site/DB evidence exists; actual operational isolation incomplete |
 | Channels | Authorized bol imports, mapping, reconciliation and shipment/label contracts | Existing read-only integration; real connector end-to-end acceptance required |
@@ -81,3 +81,14 @@ source mapping/cleanup limitations and replay are preserved. No full goal or
 production acceptance is claimed. Next independent gaps include partial
 fulfillment/returns, scanner workflows and formal inspection/disposal; production
 identity/isolation, channel/device/browser/fiscal/operational review remain open.
+
+## Scanner delivery — 2026-10-23
+
+[Scanner picking](../scanner-picking/RESULTS.md): WMS27 / Accounting35 adds
+barcode/SKU entry, undo, complete component-count checks and trusted native pick
+audit. Forged comments cannot relabel manual picks. Final clean native41 PASS/0
+FAIL/1 browser BLOCKED, including different-actor concurrent replay. Application139,
+foundation25, validator9, mechanics14/config8 and type/build/lint pass;15 existing
+warnings. The operator-input path is implemented; actual browser/device/mobile
+acceptance remains unexecuted. The full goal, partial flows and production/fiscal/
+operational gates remain open.

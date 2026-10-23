@@ -1,0 +1,19 @@
+{
+  "scope": "Transient observations only, not service/OS/storage isolation proof",
+  "observations": [
+    {
+      "run": 1,
+      "owned_root": "/workspace/scratch/d904a080b5d5/surooh-new-native-1pnm3zaf",
+      "found_after_runner_removal_report": true,
+      "files": 1872,
+      "absent_after_external_check": true
+    },
+    {
+      "run": 2,
+      "owned_root": "/workspace/scratch/d904a080b5d5/surooh-new-native-gctgg8ve",
+      "found_after_runner_removal_report": true,
+      "files": 0,
+      "absent_after_external_check": true
+    }
+  ]
+}

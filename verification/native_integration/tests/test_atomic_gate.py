@@ -24,6 +24,7 @@ class EvidenceGate(unittest.TestCase):
             + ["N01b", "N05a"]
             + [f"A{x:02d}" for x in range(1, 10)]
             + [f"O{x:02d}" for x in range(1, 10)]
+            + [f"S{x:02d}" for x in range(1, 4)]
         )
         self.rows = [{"id": i + "_unit_fixture", "status": "PASS"} for i in ids] + [
             {"id": "B01_unit_fixture", "status": "BLOCKED"}
@@ -108,6 +109,11 @@ class EvidenceGate(unittest.TestCase):
             self.evaluate()["native_atomic_candidate"],
             "READY_FOR_HUMAN_EVIDENCE_REVIEW",
         )
+
+    def test_stock_success_cannot_accept_missing_scanner_cases(self):
+        self.rows = [row for row in self.rows if not row["id"].startswith("S")]
+        self.write()
+        self.assertEqual(self.evaluate()["native_atomic_candidate"], "BLOCKED")
 
     def test_failed_owned_service_shutdown_rejected(self):
         self.report["commands"].append({"kind": "owned service", "log": "native.log"})

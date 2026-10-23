@@ -1,0 +1,16 @@
+{
+  "native_atomic_candidate": "READY_FOR_HUMAN_EVIDENCE_REVIEW",
+  "errors": [],
+  "rendered_UI_cycle": "BLOCKED",
+  "operational_service_isolation": "BLOCKED",
+  "hosted_CI": "BLOCKED",
+  "PREPARATION": "BLOCKED",
+  "P01": "BLOCKED",
+  "phase_complete": false,
+  "codex_start_authorized": false,
+  "merge_authorized": false,
+  "deploy_authorized": false,
+  "human_review_required": true,
+  "wms_sha": "68ed97435cb406302b7a58ffc75b2f82b309189e",
+  "accounting_sha": "e9f0550980c21be266925a28efe83153010700b2"
+}

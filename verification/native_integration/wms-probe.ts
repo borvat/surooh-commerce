@@ -7,6 +7,7 @@ import {
 } from "../../src/lib/native-projection";
 import { configureNativeLab, nativeOrderAction } from "../../src/lib/native-lab-client";
 import { stockLocations, quarantineReturn } from "../../src/lib/native-stock-operations";
+import { scannerPick, scanPlan, scannedCounts } from "../../src/lib/native-scanner";
 import {
   placeOrder,
   fulfillOrder,
@@ -23,6 +24,16 @@ configureNativeLab({
   token: () => data.token,
 });
 const input = { lines: [{ product_id: "TEST-KIT", quantity: 1 }], externalRef: data.request };
+if (data.operation === "scanner-pick") {
+  const plan = scanPlan(await nativeSnapshot(), data.order_id);
+  const counts = scannedCounts(plan, data.scans);
+  if (!plan.every((line) => counts[line.item] === line.quantity))
+    throw new Error("Incomplete scan plan");
+  const first = await scannerPick(data.order_id, data.scans, data.request);
+  const replay = await scannerPick(data.order_id, data.scans, data.request);
+  if (JSON.stringify(first) !== JSON.stringify(replay)) throw new Error("Scanner replay changed");
+  console.log(JSON.stringify(first));
+}
 if (data.operation === "stock-locations") {
   const snapshot = await stockLocations();
   console.log(

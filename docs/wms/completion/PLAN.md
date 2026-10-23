@@ -58,3 +58,13 @@ the marked runtime documented in `verification/native_integration/BROWSER.md`.
 Rollback for the first delivery: revert its scoped client/component changes or
 discard the unmerged branch. No data migration or native engine change is present.
 Keep live bol writes disabled and preserve main and existing PRs.
+
+## Verification update — 2026-10-23
+
+The native-runtime prerequisite above was subsequently provisioned and tested.
+[Local native results](../local-native/RESULTS.md) record two fresh runs, each29
+PASS/0 FAIL/1 browser BLOCKED. The latest A09 uses real screen-command coalescing,
+discards a real committed response and recovers the same native pick on retry.
+Browser launch now has a concrete local IPC permission blocker; it is no longer
+accurate to describe the native engine as unavailable here. Full delivered goal
+and operational/fiscal/browser gates remain open.

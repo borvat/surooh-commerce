@@ -35,3 +35,16 @@ Research acceptance does not select an engine. Read [the three-architecture evid
 ## Atomic pick / retained React candidate (current follow-up)
 
 See [atomic-pick results](atomic-pick/RESULTS.md), paired Draft PR22/Accounting31. Exact WMS920e3a12a0136ad51975c5a55dc5871645d5d7e3 / Accounting97c22b594fa37e2fe1e12458cf1a0f7edeec5432: native29 PASS/0 FAIL/1 browser BLOCKED; WMS109, PG21+18, type/lint/build/generated clean PASS;15 existing lint warnings retained. NI-F01 native handoff is a review-ready bounded candidate, not production acceptance. Existing screens are wired in synthetic mode and their services run against native HTTP; a rendered browser cycle is NOT EXECUTED. Actual non-root service/storage/key isolation remains BLOCKED. PREPARATION/P01, Codex/merge/deploy and all G1–G6 approvals remain held. Hosted Actions stays BLOCKED. Future packet in atomic-pick/NEXT_REVIEW_PACKET.md grants no execution permission.
+
+## Local native verification — 2026-10-23
+
+The current owner authorized continued implementation and testing outside Actions.
+See [local native results](local-native/RESULTS.md): two fresh ERPNext/Frappe16.52.0
+runs each29 PASS/0 FAIL/1 browser BLOCKED. Latest tested WMS011c538 includes a real
+screen-command coalescing/committed-response-loss/retry assertion. Native runtime
+provisioning is now demonstrated; browser execution remains blocked by local IPC
+restrictions. App120/foundation25/typecheck/build/lint pass at prior exact source
+7fb1d79; changed-harness lint passes at011c538, with15 existing warnings. Accounting
+native source was a14-blob verified materialization of PR31, not a full checkout.
+No overall phase or production acceptance; latest evidence supersedes historical
+missing-runtime statements only within this bounded native test scope.

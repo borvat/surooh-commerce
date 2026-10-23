@@ -102,8 +102,43 @@ if (data.operation === "screens") {
     lines: [{ product_id: "TEST-KIT", quantity: 1 }],
     externalRef: "screens:order",
   });
-  await nativeOrderAction("pick", id);
-  await nativeOrderAction("pick", id);
+  // Exercise the actual screen command client against the real native server.
+  // Both callers lose the one real response only after reading its committed result.
+  // No successful business response or native effect is fabricated here.
+  const realFetch = globalThis.fetch;
+  let pickDispatches = 0;
+  let committedPick: string | undefined;
+  globalThis.fetch = async (url, init) => {
+    const response = await realFetch(url, init);
+    pickDispatches++;
+    if (!response.ok) throw new Error(`Native pick injection HTTP ${response.status}`);
+    const result = (await response.json()) as { message?: { pick_list?: string } };
+    committedPick = result.message?.pick_list;
+    if (!committedPick) throw new Error("Native pick did not return its committed document");
+    throw new TypeError("Synthetic response loss after real native pick committed");
+  };
+  let interrupted: PromiseSettledResult<Record<string, unknown>>[];
+  try {
+    interrupted = await Promise.allSettled([
+      nativeOrderAction("pick", id),
+      nativeOrderAction("pick", id),
+    ]);
+  } finally {
+    globalThis.fetch = realFetch;
+  }
+  if (
+    pickDispatches !== 1 ||
+    interrupted.some(
+      (x) => x.status !== "rejected" || !String(x.reason).includes("Synthetic response loss"),
+    )
+  )
+    throw new Error("Concurrent screen commands did not share the interrupted native dispatch");
+  const persisted = (await nativeSnapshot()).orders.find((order) => order.id === id);
+  if (persisted?.pick_list !== committedPick)
+    throw new Error("Interrupted command did not persist its native pick");
+  const recovered = await nativeOrderAction("pick", id);
+  if (recovered["pick_list"] !== committedPick)
+    throw new Error("Screen retry did not recover the same committed native pick");
   await nativeOrderAction("pack", id);
   const shipped = await nativeOrderAction("ship", id);
   const afterShip = await nativeSnapshot();
@@ -134,6 +169,10 @@ if (data.operation === "screens") {
       after_value: value(after),
       receipt_replay_once: true,
       bundle_A_B_A: true,
+      concurrent_screen_pick_dispatches: pickDispatches,
+      interrupted_screen_callers: interrupted.length,
+      lost_response_after_actual_commit: true,
+      retry_recovered_same_native_pick: true,
     }),
   );
 }

@@ -1,0 +1,110 @@
+{
+  "runs": [
+    {
+      "archive": "native-run-01.tar.gz",
+      "sha256": "00dcc09a79d5756f1cd545ecbbd17f1f652ff189590724d3c6ba7a6de1e5a567",
+      "files": 19,
+      "tested_wms_sha": "7fb1d79b289be1f5f2139ab3091cd207cb2f9e3c",
+      "accounting_materialized_sha": "0f878c11591c9707727c0d2f87de730086908a25",
+      "canonical_accounting_source": "34adb0e16be584b5e3823b2cb46a80abb5eaf869",
+      "native_summary": {
+        "PASS": 29,
+        "FAIL": 0,
+        "BLOCKED": 1
+      },
+      "bootstrap_exit_code": 2,
+      "atomic_gate_exit_code": 2,
+      "atomic_gate": {
+        "native_atomic_candidate": "READY_FOR_HUMAN_EVIDENCE_REVIEW",
+        "errors": [],
+        "rendered_UI_cycle": "BLOCKED",
+        "operational_service_isolation": "BLOCKED",
+        "hosted_CI": "BLOCKED",
+        "PREPARATION": "BLOCKED",
+        "P01": "BLOCKED",
+        "phase_complete": false,
+        "codex_start_authorized": false,
+        "merge_authorized": false,
+        "deploy_authorized": false,
+        "human_review_required": true,
+        "wms_sha": "7fb1d79b289be1f5f2139ab3091cd207cb2f9e3c",
+        "accounting_sha": "0f878c11591c9707727c0d2f87de730086908a25"
+      },
+      "source_after": {
+        "wms_sha": "7fb1d79b289be1f5f2139ab3091cd207cb2f9e3c",
+        "accounting_sha": "0f878c11591c9707727c0d2f87de730086908a25",
+        "wms_dirty": false,
+        "accounting_dirty": false
+      },
+      "cleanup": {
+        "checked_at_utc": "2026-10-23T05:57:37.970874+00:00",
+        "owned_root": "/workspace/scratch/d904a080b5d5/surooh-new-native-gv3bv9kg",
+        "observed_after_runner_reported_removal": true,
+        "files_observed": 0,
+        "bytes_observed": 0,
+        "independently_removed": true,
+        "exists_after_external_cleanup": false,
+        "scope": "Owned synthetic root only; not operational isolation proof"
+      }
+    },
+    {
+      "archive": "native-run-02.tar.gz",
+      "sha256": "bf35d25e8af97717873e79d6e11554f7896302aec213b62fb4d3357149ab1f10",
+      "files": 15,
+      "tested_wms_sha": "011c5380bf7e97f180798cc2428df17d61f7d7df",
+      "accounting_materialized_sha": "0f878c11591c9707727c0d2f87de730086908a25",
+      "canonical_accounting_source": "34adb0e16be584b5e3823b2cb46a80abb5eaf869",
+      "native_summary": {
+        "PASS": 29,
+        "FAIL": 0,
+        "BLOCKED": 1
+      },
+      "bootstrap_exit_code": 2,
+      "atomic_gate_exit_code": 2,
+      "atomic_gate": {
+        "native_atomic_candidate": "READY_FOR_HUMAN_EVIDENCE_REVIEW",
+        "errors": [],
+        "rendered_UI_cycle": "BLOCKED",
+        "operational_service_isolation": "BLOCKED",
+        "hosted_CI": "BLOCKED",
+        "PREPARATION": "BLOCKED",
+        "P01": "BLOCKED",
+        "phase_complete": false,
+        "codex_start_authorized": false,
+        "merge_authorized": false,
+        "deploy_authorized": false,
+        "human_review_required": true,
+        "wms_sha": "011c5380bf7e97f180798cc2428df17d61f7d7df",
+        "accounting_sha": "0f878c11591c9707727c0d2f87de730086908a25"
+      },
+      "source_after": {
+        "wms_sha": "011c5380bf7e97f180798cc2428df17d61f7d7df",
+        "accounting_sha": "0f878c11591c9707727c0d2f87de730086908a25",
+        "wms_dirty": false,
+        "accounting_dirty": false
+      },
+      "cleanup": {
+        "checked_at_utc": "2026-10-23T06:03:47.061310+00:00",
+        "owned_root": "/workspace/scratch/d904a080b5d5/surooh-new-native-rapofwdh",
+        "observed_after_runner_reported_removal": true,
+        "files_observed": 41,
+        "exists_after_external_cleanup": false,
+        "runner_service_shutdown": [
+          {
+            "name": "redis",
+            "exit_code": 0
+          },
+          {
+            "name": "mariadb",
+            "exit_code": 0
+          }
+        ],
+        "scope": "Owned synthetic root only; not operational isolation proof"
+      }
+    }
+  ],
+  "result": "PARTIAL_NATIVE_EXECUTED",
+  "rendered_browser": "BLOCKED/NOT_RUN",
+  "complete_goal": "OPEN",
+  "production_ready": false
+}

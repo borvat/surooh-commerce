@@ -1,0 +1,20 @@
+{
+  "archives": [
+    {
+      "file": "native-final.tar.gz",
+      "sha256": "01dcbfb6abdb25ea98123b4d4b01f6e2e037df39fbd6b23b1f3cd67f93e34315",
+      "bytes": 23207
+    },
+    {
+      "file": "application-checks.tar.gz",
+      "sha256": "f6fa66754f82312c8080bdce3809f39d71a5257d3c34ef0e8e9b2b8547b57f26",
+      "bytes": 13580
+    },
+    {
+      "file": "development-probe.tar.gz",
+      "sha256": "74ad0ff2be25e1c026a46b377e49eaeba6ab7e2a265d1f760ea53a58a556a6c9",
+      "bytes": 22835
+    }
+  ],
+  "scope": "Synthetic reports and redacted logs; no configs, keys, private files or DB dumps"
+}

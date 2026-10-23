@@ -403,8 +403,9 @@ raise RuntimeError('injection not reached')
 frappe.init('wms-native-a.invalid');frappe.connect();frappe.set_user('Guest')
 from surooh_accounting.native_lab.api import _execute
 v=json.loads(sys.stdin.readline())
+frappe.db.sql('SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ')
 frappe.db.rollback()
-frappe.db.sql('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ')
+assert frappe.db.sql('SELECT @@tx_isolation')[0][0]=='REPEATABLE-READ'
 before=frappe.db.sql('SELECT count(*) FROM `tabPick List`')[0][0]
 view=frappe.db.sql('SELECT count(*),coalesce(sum(docstatus),0) FROM `tabDelivery Note`')[0]
 print('SNAPSHOT_HELD',flush=True)
@@ -447,7 +448,12 @@ finally:
             assert select.select([child.stdout], [], [], 30)[0], (
                 "Snapshot child did not start"
             )
-            assert child.stdout.readline().strip() == "SNAPSHOT_HELD"
+            ready = child.stdout.readline().strip()
+            if ready != "SNAPSHOT_HELD":
+                stdout, stderr = child.communicate(timeout=10)
+                raise AssertionError(
+                    ("Snapshot child failed before ready", ready, stdout, stderr)
+                )
             parent_result = while_waiting()
             child.stdin.write("resume\n")
             child.stdin.flush()

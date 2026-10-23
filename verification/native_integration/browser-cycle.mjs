@@ -185,12 +185,17 @@ try {
     page.getByRole("dialog").getByRole("button", { name: "حفظ", exact: true }).click(),
   );
   await page.goto(`${origin}/orders`);
-  const createOrder = async () => {
+  const createOrder = async (quantity = 1) => {
     await page
       .getByRole("button", { name: /طلب اختبار/ })
       .first()
       .click();
     await page.getByTestId("order-product").selectOption("TEST-KIT");
+    await page
+      .getByTestId("native-order-dialog")
+      .locator('input[type="number"]')
+      .first()
+      .fill(String(quantity));
     return clickCommand("order", () =>
       page
         .getByTestId("native-order-dialog")
@@ -334,6 +339,42 @@ try {
   );
   assert.deepEqual(ledger(await api("snapshot")), ledger(scannerBaseline));
   mark("scanner_unknown_code_undo_complete_native_pick_and_cancel");
+  const batchOrder = await createOrder(2);
+  const batchPanel = page.locator(`[data-native-batches="${batchOrder.order_id}"]`);
+  await batchPanel.getByLabel("وحدات دفعة الشحن", { exact: true }).fill("1");
+  await clickCommand("batch_pick", () =>
+    batchPanel.getByRole("button", { name: "تجهيز دفعة", exact: true }).click(),
+  );
+  await clickCommand("batch_pack", () =>
+    batchPanel.getByRole("button", { name: "تعبئة الدفعة", exact: true }).click(),
+  );
+  await clickCommand("batch_cancel", () =>
+    batchPanel.getByRole("button", { name: "إلغاء تجهيز الدفعة", exact: true }).click(),
+  );
+  for (let index = 0; index < 2; index++) {
+    await batchPanel.getByLabel("وحدات دفعة الشحن", { exact: true }).fill("1");
+    await clickCommand("batch_pick", () =>
+      batchPanel.getByRole("button", { name: "تجهيز دفعة", exact: true }).click(),
+    );
+    await clickCommand("batch_pack", () =>
+      batchPanel.getByRole("button", { name: "تعبئة الدفعة", exact: true }).click(),
+    );
+    await clickCommand("batch_ship", () =>
+      batchPanel.getByRole("button", { name: "شحن الدفعة", exact: true }).click(),
+    );
+    const current = (await api("snapshot")).orders.find((row) => row.id === batchOrder.order_id);
+    assert.equal(current.shipment_plan.remaining_units, 1 - index);
+    assert.equal(current.shipment_batches.filter((row) => row.shipped).length, index + 1);
+  }
+  for (let index = 0; index < 2; index++) {
+    await batchPanel
+      .getByLabel("موقع حجر مرتجع الدفعة", { exact: true })
+      .selectOption(quarantine.warehouse);
+    await clickCommand("return_quarantine", () =>
+      batchPanel.getByRole("button", { name: "مرتجع هذه الشحنة", exact: true }).first().click(),
+    );
+  }
+  mark("proportional_batches_packed_cancel_replacement_two_shipments_and_per_delivery_returns");
   const retryBaseline = await api("snapshot");
   const retryOrder = await createOrder();
   const retryRow = page.locator(`[data-native-order="${retryOrder.order_id}"]`);

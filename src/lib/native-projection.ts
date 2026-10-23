@@ -23,6 +23,20 @@ export type NativeOrder = {
   packing_slip: string | null;
   delivery_note: string | null;
   return_note?: string | null;
+  shipment_plan?: {
+    total_units: number;
+    remaining_units: number;
+    lines: { id: string; item: string; quantity: number }[];
+  } | null;
+  shipment_batches?: {
+    pick_list: string;
+    shipped: boolean;
+    cancelled?: boolean;
+    delivery_note: string | null;
+    packing_slip: string | null;
+    return_note: string | null;
+    lines: { item: string; quantity: number }[];
+  }[];
   lines: { item: string; quantity: number }[];
 };
 export type NativeSnapshot = {

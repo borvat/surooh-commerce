@@ -25,6 +25,7 @@ class EvidenceGate(unittest.TestCase):
             + [f"A{x:02d}" for x in range(1, 10)]
             + [f"O{x:02d}" for x in range(1, 10)]
             + [f"S{x:02d}" for x in range(1, 4)]
+            + [f"P{x:02d}" for x in range(1, 7)]
         )
         self.rows = [{"id": i + "_unit_fixture", "status": "PASS"} for i in ids] + [
             {"id": "B01_unit_fixture", "status": "BLOCKED"}
@@ -118,5 +119,10 @@ class EvidenceGate(unittest.TestCase):
     def test_failed_owned_service_shutdown_rejected(self):
         self.report["commands"].append({"kind": "owned service", "log": "native.log"})
         self.report["service_shutdown"] = [{"name": "native", "exit_code": 1}]
+        self.write()
+        self.assertEqual(self.evaluate()["native_atomic_candidate"], "BLOCKED")
+
+    def test_previous_scanner_coverage_cannot_accept_shipments(self):
+        self.rows = [row for row in self.rows if not row["id"].startswith("P")]
         self.write()
         self.assertEqual(self.evaluate()["native_atomic_candidate"], "BLOCKED")

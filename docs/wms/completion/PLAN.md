@@ -16,7 +16,7 @@ The existing code, migrations and evidence remain preserved.
 | --- | --- | --- |
 | Engine authority | ERPNext owns stock, reservations, valuation, COGS and GL; no second ledger | Existing native synthetic evidence; production adapter and cutover unproven |
 | Receiving and locations | Receipt, putaway, locations, counts, adjustment audit and shortage handling | Native receipt/storage/transfer/count/quarantine-return candidate:38 native PASS; production, partial flows and device acceptance remain open |
-| Fulfillment | Reserve, pick, pack, ship, cancel, return; correct component bundles | Retained29 native +9 storage/count/return +3 scanner cases pass; partial shipment and rendered B01 remain open |
+| Fulfillment | Reserve, pick, pack, ship, cancel, return; correct component bundles | Retained29 native +9 storage/count/return +3 scanner cases pass; proportional partial-shipment candidate under verification; rendered B01 remains open |
 | Operator experience | Arabic screens, scanner workflow, errors, retries, permissions and mobile use | Retained React screens; first delivery addresses stalled/duplicate native requests and stale action recovery |
 | Identity and boundaries | Separate legal-company sites, services, storage, credentials and permissions | Native site/DB evidence exists; actual operational isolation incomplete |
 | Channels | Authorized bol imports, mapping, reconciliation and shipment/label contracts | Existing read-only integration; real connector end-to-end acceptance required |
@@ -92,3 +92,27 @@ foundation25, validator9, mechanics14/config8 and type/build/lint pass;15 existi
 warnings. The operator-input path is implemented; actual browser/device/mobile
 acceptance remains unexecuted. The full goal, partial flows and production/fiscal/
 operational gates remain open.
+
+
+## Proportional shipment batches — 2026-10-23
+
+This candidate adds explicit native Pick List / Packing Slip / Delivery Note
+batches, immutable batch identities, current-history compare-and-set, one active
+batch, per-line reservation invariants and cancellation before shipment.
+Native SRE documents hold both picked and remaining quantities atomically.
+The read model uses native SO delivered_qty + returned_qty for gross fulfillment;
+a quarantine return does not silently request a replacement shipment.
+Earlier delivered SREs stay intact; no quantity/value/GL ledger is introduced.
+
+A shipment unit is the greatest-common-divisor quantum of the submitted native
+SO component rows. This conservative proportional scope preserves the complete
+component ratio captured by the order, independent of later Product Bundle edits.
+It does not support arbitrary per-product split plans, serialized/batched items,
+partial returns within one Delivery Note, labels/carriers or closing an unshipped
+remainder. Each shipped Delivery Note supports a full return to quarantine.
+
+Native regression/evidence results will be recorded in
+`docs/wms/partial-shipping/RESULTS.md`. Browser scenarios are prepared, not executed
+while the host blocks Chromium startup. Production identity, physical scanner,
+actual service/storage isolation, fiscal acceptance and live-channel review
+remain separate prerequisites to release.

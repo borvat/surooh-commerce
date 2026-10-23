@@ -1095,6 +1095,9 @@ def run(config):
         from scanner_cases import run as scanner_run
 
         scanner_run(case, call, token, owner, bins, wms)
+        from shipping_cases import run as shipping_run
+
+        shipping_run(case, call, token, owner, bins, wms)
         browser_row = run_browser(browser_input(token()), out / "browser-cycle.log")
         rows.append(browser_row)
         save()

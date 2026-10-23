@@ -1109,8 +1109,8 @@ def run(config):
     expected = {f"N{i:02d}" for i in range(1, 19)} | {"N01b", "N05a"}
     actual = {x["id"].split("_")[0] for x in rows}
     if (
-        actual != expected | {f"A{i:02d}" for i in range(1, 10)} | {f"O{i:02d}" for i in range(1, 9)} | {"B01"}
-        or len(rows) != 38
+        actual != expected | {f"A{i:02d}" for i in range(1, 10)} | {f"O{i:02d}" for i in range(1, 10)} | {"B01"}
+        or len(rows) != 39
     ):
         raise RuntimeError("Missing/duplicate native cases")
     if any(x["status"] == "FAIL" for x in rows):

@@ -68,7 +68,7 @@ def evaluate(base, wms_sha, accounting_sha):
         {f"N{x:02d}" for x in range(1, 19)}
         | {"N01b", "N05a"}
         | {f"A{x:02d}" for x in range(1, 10)}
-        | {f"O{x:02d}" for x in range(1, 9)}
+        | {f"O{x:02d}" for x in range(1, 10)}
     )
     if len(ids) != len(set(ids)) or set(ids) != required | {"B01"}:
         errors.append("missing/duplicate/unknown native cases")

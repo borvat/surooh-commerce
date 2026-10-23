@@ -11,6 +11,7 @@ export type LocationStock = {
     reserved_stock: number;
     valuation_rate: number;
     stock_value: number;
+    movement_version: string;
   }[];
 };
 
@@ -45,6 +46,8 @@ export async function stockLocations(): Promise<LocationStock> {
       !names.has(bin.warehouse) ||
       typeof bin.item_code !== "string" ||
       !bin.item_code ||
+      typeof bin.movement_version !== "string" ||
+      !bin.movement_version ||
       ![bin.actual_qty, bin.reserved_stock, bin.valuation_rate, bin.stock_value].every(
         (n) => typeof n === "number" && Number.isFinite(n),
       )

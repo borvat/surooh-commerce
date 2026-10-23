@@ -46,6 +46,7 @@ const snapshot = () => ({
       reserved_stock: 0,
       valuation_rate: 5,
       stock_value: 15,
+      movement_version: "SYNTHETIC-MOVEMENT",
     },
   ],
 });

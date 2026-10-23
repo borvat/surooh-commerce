@@ -48,6 +48,16 @@ def run(case, call, token, owner, wms):
         )
 
     def count(wh, qty, expected, key):
+        versions = ctx.setdefault("counts", {})
+        if key not in versions:
+            versions[key] = next(
+                (
+                    row["movement_version"]
+                    for row in snapshot()["bins"]
+                    if row["warehouse"] == wh and row["item_code"] == "TEST-C1"
+                ),
+                "EMPTY",
+            )
         return call(
             "stock_count",
             dict(
@@ -55,6 +65,7 @@ def run(case, call, token, owner, wms):
                 item="TEST-C1",
                 qty=qty,
                 expected_qty=expected,
+                expected_version=versions[key],
                 reason="Synthetic physical count",
             ),
             key,
@@ -340,3 +351,41 @@ def run(case, call, token, owner, wms):
         }
 
     case("O08_return_and_count_boundary_validation", return_boundary)
+
+    def equal_quantity_stale_count():
+        wh = ctx["storage"]
+        baseline = next(
+            row
+            for row in snapshot()["bins"]
+            if row["warehouse"] == wh and row["item_code"] == "TEST-C1"
+        )
+        transfer(ctx["base"], wh, 1, "O09:in")
+        transfer(wh, ctx["base"], 1, "O09:out")
+        assert balance(wh)[0] == baseline["actual_qty"]
+        before = snapshot()["bins"]
+        denied(
+            lambda: call(
+                "stock_count",
+                dict(
+                    warehouse=wh,
+                    item="TEST-C1",
+                    qty=1,
+                    expected_qty=baseline["actual_qty"],
+                    expected_version=baseline["movement_version"],
+                    reason="Old count after movements net to zero",
+                ),
+                "O09:stale",
+            ),
+            "movements changed",
+        )
+        assert snapshot()["bins"] == before
+        return {
+            "equal_quantity_after_in_and_out": True,
+            "old_native_ledger_version_rejected": True,
+            "no_reconciliation_or_quantity_change": True,
+        }
+
+    case(
+        "O09_equal_quantity_does_not_hide_movements_during_count",
+        equal_quantity_stale_count,
+    )

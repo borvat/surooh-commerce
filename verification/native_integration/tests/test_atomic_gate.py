@@ -23,7 +23,7 @@ class EvidenceGate(unittest.TestCase):
             [f"N{x:02d}" for x in range(1, 19)]
             + ["N01b", "N05a"]
             + [f"A{x:02d}" for x in range(1, 10)]
-            + [f"O{x:02d}" for x in range(1, 9)]
+            + [f"O{x:02d}" for x in range(1, 10)]
         )
         self.rows = [{"id": i + "_unit_fixture", "status": "PASS"} for i in ids] + [
             {"id": "B01_unit_fixture", "status": "BLOCKED"}

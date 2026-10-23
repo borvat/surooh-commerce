@@ -25,6 +25,7 @@ export function NativeStockOperations({ canOperate }: { canOperate: boolean }) {
     warehouse: string;
     item: string;
     expected: number;
+    version: string;
   } | null>(null);
   // Once sent, freeze the exact command. Response-loss retries must reuse its key and body.
   const [command, setCommand] = useState<{
@@ -59,6 +60,7 @@ export function NativeStockOperations({ canOperate }: { canOperate: boolean }) {
                 item,
                 qty: Number(qty),
                 expected_qty: countStart!.expected,
+                expected_version: countStart!.version,
                 reason,
                 ...(rate ? { valuation_rate: Number(rate) } : {}),
               },
@@ -208,7 +210,12 @@ export function NativeStockOperations({ canOperate }: { canOperate: boolean }) {
                       variant="outline"
                       disabled={!source || !item || !!countStart}
                       onClick={() =>
-                        setCountStart({ warehouse: source, item, expected: stock?.actual_qty ?? 0 })
+                        setCountStart({
+                          warehouse: source,
+                          item,
+                          expected: stock?.actual_qty ?? 0,
+                          version: stock?.movement_version ?? "EMPTY",
+                        })
                       }
                     >
                       بدء الجرد وحفظ الرصيد للمقارنة

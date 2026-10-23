@@ -100,7 +100,7 @@ This candidate adds explicit native Pick List / Packing Slip / Delivery Note
 batches, immutable batch identities, current-history compare-and-set, one active
 batch, per-line reservation invariants and cancellation before shipment.
 Native SRE documents hold both picked and remaining quantities atomically.
-The read model uses native SO delivered_qty + returned_qty for gross fulfillment;
+The read model sums submitted outgoing native Delivery Note rows for gross fulfillment;
 a quarantine return does not silently request a replacement shipment.
 Earlier delivered SREs stay intact; no quantity/value/GL ledger is introduced.
 

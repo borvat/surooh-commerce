@@ -197,7 +197,13 @@ def run(case, call, token, owner, bins, wms):
         owner()
         doc = frappe.get_doc("Sales Order", name)
         assert [float(x.delivered_qty) for x in doc.items] == [0, 0]
-        assert [float(x.returned_qty) for x in doc.items] == [1, 2]
+        returned_fields = [float(x.returned_qty) for x in doc.items]
+        before_remainder = call("snapshot", {}, "P03:after-return")
+        projected = next(row for row in before_remainder["orders"] if row["id"] == name)
+        assert projected["shipment_plan"]["remaining_units"] == 1
+        assert (
+            projected["shipment_batches"][0]["return_note"] == returned["return_note"]
+        )
         remainder = pick(name, "P03:remainder", expected=[result["pick_list"]])
         ship(name, remainder, "P03:remainder")
         readback = call("snapshot", {}, "P03:readback")
@@ -209,6 +215,8 @@ def run(case, call, token, owner, bins, wms):
             "legacy_and_unpacked_and_foreign_order_commands_denied": True,
             "quarantine_return_for_one_delivery": returned,
             "remaining_order_stays_reserved": True,
+            "native_SO_returned_qty_observed_not_assumed": returned_fields,
+            "gross_fulfillment_from_submitted_outgoing_DN_rows": True,
         }
 
     case("P03_batch_scope_guards_and_per_delivery_quarantine_return", guards)

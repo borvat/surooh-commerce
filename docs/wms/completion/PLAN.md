@@ -15,8 +15,8 @@ The existing code, migrations and evidence remain preserved.
 | Workstream | Required result | Current evidence / remaining work |
 | --- | --- | --- |
 | Engine authority | ERPNext owns stock, reservations, valuation, COGS and GL; no second ledger | Existing native synthetic evidence; production adapter and cutover unproven |
-| Receiving and locations | Receipt, putaway, locations, counts, adjustment audit and shortage handling | Existing receipt service; complete operational scenarios still required |
-| Fulfillment | Reserve, pick, pack, ship, cancel, return; correct component bundles | Prior 29 native cases; rendered B01 still unexecuted |
+| Receiving and locations | Receipt, putaway, locations, counts, adjustment audit and shortage handling | Native receipt/storage/transfer/count/quarantine-return candidate:38 native PASS; production, partial flows and device acceptance remain open |
+| Fulfillment | Reserve, pick, pack, ship, cancel, return; correct component bundles | Retained29 native cases plus9 storage/count/return cases pass; partial shipment and rendered B01 remain open |
 | Operator experience | Arabic screens, scanner workflow, errors, retries, permissions and mobile use | Retained React screens; first delivery addresses stalled/duplicate native requests and stale action recovery |
 | Identity and boundaries | Separate legal-company sites, services, storage, credentials and permissions | Native site/DB evidence exists; actual operational isolation incomplete |
 | Channels | Authorized bol imports, mapping, reconciliation and shipment/label contracts | Existing read-only integration; real connector end-to-end acceptance required |
@@ -68,3 +68,16 @@ discards a real committed response and recovers the same native pick on retry.
 Browser launch now has a concrete local IPC permission blocker; it is no longer
 accurate to describe the native engine as unavailable here. Full delivered goal
 and operational/fiscal/browser gates remain open.
+
+## Storage/return delivery — 2026-10-23
+
+[Stock operations](../stock-operations/RESULTS.md) records the paired WMS26 /
+Accounting34 candidate: locations, unreserved transfers, counts using captured
+quantity/native ledger revision, and full returns into quarantine with separate
+inspection release. Final fresh runtime:38 PASS/0 FAIL/1 browser BLOCKED.
+Application131, foundation25, gate8, mechanics14/config8 and type/build/lint pass;
+15 existing warnings. Failed development probes, native Bin creation race,
+source mapping/cleanup limitations and replay are preserved. No full goal or
+production acceptance is claimed. Next independent gaps include partial
+fulfillment/returns, scanner workflows and formal inspection/disposal; production
+identity/isolation, channel/device/browser/fiscal/operational review remain open.

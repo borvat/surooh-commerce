@@ -1,4 +1,5 @@
 import { nativeLabConfigured } from "@/lib/native-lab-client";
+import { NativeStockOperations } from "@/components/app/native-stock-operations";
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
@@ -139,6 +140,7 @@ function StockPage() {
         mode={stock?.mode ?? "receive"}
         itemId={stock?.id}
       />
+      {nativeLabConfigured() && <NativeStockOperations canOperate={perm.canOperate} />}
       <ItemDialog open={!!edit} onOpenChange={(o) => !o && setEdit(null)} item={edit} />
     </Page>
   );

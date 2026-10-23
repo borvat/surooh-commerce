@@ -1,0 +1,54 @@
+{
+  "scope": "Transient path observations only; no service/OS/storage isolation proof",
+  "observations": [
+    {
+      "run": 1,
+      "owned_root": "/workspace/scratch/d904a080b5d5/surooh-new-native-p9gps_n_",
+      "existed_before_external_check": true,
+      "file_count_observed": 50,
+      "absent_after_check": true
+    },
+    {
+      "run": 2,
+      "owned_root": "/workspace/scratch/d904a080b5d5/surooh-new-native-2anz1i6g",
+      "existed_before_external_check": false,
+      "file_count_observed": 0,
+      "absent_after_check": true
+    },
+    {
+      "run": 3,
+      "owned_root": "/workspace/scratch/d904a080b5d5/surooh-new-native-tvka87pt",
+      "existed_before_external_check": false,
+      "file_count_observed": 0,
+      "absent_after_check": true
+    },
+    {
+      "run": 4,
+      "owned_root": "/workspace/scratch/d904a080b5d5/surooh-new-native-43d306tp",
+      "existed_before_external_check": true,
+      "file_count_observed": 50,
+      "absent_after_check": true
+    },
+    {
+      "run": 5,
+      "owned_root": "/workspace/scratch/d904a080b5d5/surooh-new-native-e6d35lkm",
+      "existed_before_external_check": false,
+      "file_count_observed": 0,
+      "absent_after_check": true
+    },
+    {
+      "run": 6,
+      "owned_root": "/workspace/scratch/d904a080b5d5/surooh-new-native-lsje5gph",
+      "existed_before_external_check": true,
+      "file_count_observed": 527,
+      "absent_after_check": true
+    },
+    {
+      "run": 7,
+      "owned_root": "/workspace/scratch/d904a080b5d5/surooh-new-native-5a4y40ij",
+      "existed_before_external_check": true,
+      "file_count_observed": 525,
+      "absent_after_check": true
+    }
+  ]
+}

@@ -95,8 +95,16 @@ export async function nativeLabCommand(
         },
       );
       if (!response.ok) {
-        await response.body?.cancel();
-        throw new Error(`Native boundary rejected request: ${response.status}`);
+        // Only the boundary's explicit safe message is user-facing; never render tracebacks/HTML.
+        let detail = "";
+        try {
+          const body = (await response.json()) as { _error_message?: unknown };
+          if (typeof body._error_message === "string" && body._error_message.length <= 500)
+            detail = ` · ${body._error_message}`;
+        } catch {
+          // Keep the HTTP rejection when the upstream response is not JSON.
+        }
+        throw new Error(`Native boundary rejected request: ${response.status}${detail}`);
       }
       const result = (await response.json()) as { message?: unknown };
       if (!result.message || typeof result.message !== "object" || Array.isArray(result.message))

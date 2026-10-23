@@ -21,6 +21,7 @@ export type NativeOrder = {
   pick_list: string | null;
   packing_slip: string | null;
   delivery_note: string | null;
+  return_note?: string | null;
   lines: { item: string; quantity: number }[];
 };
 export type NativeSnapshot = {

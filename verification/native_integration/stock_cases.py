@@ -370,7 +370,7 @@ def run(case, call, token, owner, wms):
                     warehouse=wh,
                     item="TEST-C1",
                     qty=1,
-                    expected_qty=baseline["actual_qty"],
+                    expected_qty=int(baseline["actual_qty"]),
                     expected_version=baseline["movement_version"],
                     reason="Old count after movements net to zero",
                 ),

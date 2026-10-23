@@ -1,0 +1,23 @@
+{
+  "archives": [
+    {
+      "file": "native-final.tar.gz",
+      "sha256": "15dc9b41edc54b53e9717e2b1ca3000001b8a87f6383edea0ad68e4f6db37555",
+      "bytes": 22344,
+      "members": 12
+    },
+    {
+      "file": "application-checks.tar.gz",
+      "sha256": "efa0a1a9d9294e4cae1661559b7160e2c5fa4da45673a99fa91e1609c316b9e2",
+      "bytes": 13336,
+      "members": 10
+    },
+    {
+      "file": "development-observations.tar.gz",
+      "sha256": "535076e8db37b05d8ca6549d304195350af26cb3ca006cb72b41caaa2ec95193",
+      "bytes": 121283,
+      "members": 61
+    }
+  ],
+  "contains": "Synthetic reports and redacted logs only; no runtime, site configs, keys or DB dumps"
+}

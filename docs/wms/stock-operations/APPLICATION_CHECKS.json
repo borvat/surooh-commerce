@@ -1,0 +1,125 @@
+{
+  "source_sha": "1bc18be3391878daebd4e5d8c3c30b494a83e31d",
+  "before_status": "",
+  "checks": [
+    {
+      "name": "unit",
+      "argv": [
+        "bun",
+        "test",
+        "tests/commerce-copilot.test.ts",
+        "tests/native-lab.test.ts",
+        "tests/native-order-actions.test.ts",
+        "tests/native-stock-operations.test.ts",
+        "tests/native-transport.test.ts",
+        "tests/order-economics.test.ts",
+        "tests/order-filters.test.ts",
+        "tests/product-family-reference.test.ts",
+        "tests/shipping-label-contract.test.ts",
+        "tests/source-quality.test.ts",
+        "tests/stockitup-identity.test.ts",
+        "tests/stockitup-review-queue.test.ts",
+        "tests/warehouse-audit.test.ts",
+        "tests/warehouse-batch.test.ts",
+        "tests/warehouse-command-contract.test.ts",
+        "tests/warehouse-flow.test.ts",
+        "tests/warehouse-migration.test.ts",
+        "tests/warehouse-print.test.ts"
+      ],
+      "exit_code": 0,
+      "log": "unit.log"
+    },
+    {
+      "name": "foundation",
+      "argv": [
+        "npm",
+        "run",
+        "test:foundation"
+      ],
+      "exit_code": 0,
+      "log": "foundation.log"
+    },
+    {
+      "name": "typecheck",
+      "argv": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "log": "typecheck.log"
+    },
+    {
+      "name": "build",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "log": "build.log"
+    },
+    {
+      "name": "lint",
+      "argv": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "exit_code": 0,
+      "log": "lint.log"
+    },
+    {
+      "name": "evidence-gate",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "verification/native_integration/tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "evidence-gate.log"
+    },
+    {
+      "name": "browser-mechanics",
+      "argv": [
+        "node",
+        "--test",
+        "verification/native_integration/browser-helpers.test.mjs"
+      ],
+      "exit_code": 0,
+      "log": "browser-mechanics.log"
+    },
+    {
+      "name": "browser-config",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "verification/native_integration",
+        "-p",
+        "test_browser_config.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "browser-config.log"
+    }
+  ],
+  "after_status": "",
+  "finished_utc": "2026-10-23T06:50:49.939554+00:00",
+  "log_sha256": {
+    "browser-mechanics.log": "361238a631cc9f0f521a04db2831bccf38bbbd6ca0fcb5ad5a513b9dbfc15f69",
+    "evidence-gate.log": "b5d91b476fa91a3b3d3573fca547f5b7a620eb7ebad765a6ffab62ce885ff09c",
+    "lint.log": "3889d219d51feb60090fbcbbb3f46d2f2af0603017635fa0a67ba8f505ac7c8a",
+    "browser-config.log": "eb7a9c28c2a5ac2f02a43e53fdb23e456232fe2530272ad5b60e97da72c5489c",
+    "typecheck.log": "ae791f9f57ffbb3c0a592b6a34e25250c1f7f6f13fde4d05f77a0d4e7681f89a",
+    "foundation.log": "6b4cd081745a7737ad975b4d205d4e3e0a3b45fa9009dd9ca229c05929974cae",
+    "build.log": "3114def9e78cf5bcb6a2381f4d4c6a1f0079a0f4078b3d11b0c4eb195bdc99a1",
+    "unit.log": "3e62c619de4a5f1617199d8d5925e1fa5045bad6aa9b24ba1d2131376645b419"
+  }
+}

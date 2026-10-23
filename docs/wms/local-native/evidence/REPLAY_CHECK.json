@@ -1,0 +1,16 @@
+[
+  {
+    "archive": "native-run-01.tar.gz",
+    "all_hashes_verified": true,
+    "native_candidate": "READY_FOR_HUMAN_EVIDENCE_REVIEW",
+    "rendered_UI": "BLOCKED",
+    "gate_exit_code": 2
+  },
+  {
+    "archive": "native-run-02.tar.gz",
+    "all_hashes_verified": true,
+    "native_candidate": "READY_FOR_HUMAN_EVIDENCE_REVIEW",
+    "rendered_UI": "BLOCKED",
+    "gate_exit_code": 2
+  }
+]

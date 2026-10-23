@@ -1,0 +1,18 @@
+{
+  "checked_at_utc": "2026-10-23T06:07:34.226202+00:00",
+  "roots": [
+    {
+      "owned_root": "/workspace/scratch/d904a080b5d5/surooh-new-native-gv3bv9kg",
+      "exists_at_final_recheck": true,
+      "files_observed": 0,
+      "exists_after_recheck": false
+    },
+    {
+      "owned_root": "/workspace/scratch/d904a080b5d5/surooh-new-native-rapofwdh",
+      "exists_at_final_recheck": false,
+      "files_observed": 0,
+      "exists_after_recheck": false
+    }
+  ],
+  "scope": "Transient filesystem recheck only; does not prove operational isolation"
+}

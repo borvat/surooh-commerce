@@ -7,6 +7,7 @@ type NativeLabConfig = {
   commandTimeoutMs?: number;
 };
 let config: NativeLabConfig | undefined;
+const reads = new Map<string, Promise<Record<string, unknown>>>();
 const pending = new Map<
   string,
   { body: string; controller: AbortController; result: Promise<Record<string, unknown>> }
@@ -37,11 +38,27 @@ export function configureNativeLab(value: NativeLabConfig | undefined) {
   }
   for (const command of pending.values()) command.controller.abort();
   pending.clear();
+  reads.clear();
   config = value ? { ...value } : undefined;
 }
 
 export function nativeLabConfigured() {
   return config !== undefined;
+}
+
+/** Coalesce only simultaneous empty-payload reads; never retain a completed value. */
+export function nativeLabRead(operation: "snapshot" | "stock_locations") {
+  if (!["snapshot", "stock_locations"].includes(operation))
+    return Promise.reject(new Error("Unsupported native read"));
+  const existing = reads.get(operation);
+  if (existing) return existing;
+  const result = nativeLabCommand(operation, {}, `read:${crypto.randomUUID()}`);
+  reads.set(operation, result);
+  const clear = () => {
+    if (reads.get(operation) === result) reads.delete(operation);
+  };
+  void result.then(clear, clear);
+  return result;
 }
 
 export async function nativeLabCommand(

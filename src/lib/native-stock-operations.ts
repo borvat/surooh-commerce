@@ -1,4 +1,4 @@
-import { nativeLabCommand } from "./native-lab-client";
+import { nativeLabCommand, nativeLabRead } from "./native-lab-client";
 
 export type LocationStock = {
   company: "TEST-A";
@@ -16,7 +16,7 @@ export type LocationStock = {
 };
 
 export async function stockLocations(): Promise<LocationStock> {
-  const result = await nativeLabCommand("stock_locations", {}, crypto.randomUUID());
+  const result = await nativeLabRead("stock_locations");
   if (
     result["company"] !== "TEST-A" ||
     typeof result["fulfillment_warehouse"] !== "string" ||

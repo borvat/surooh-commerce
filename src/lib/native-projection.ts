@@ -1,6 +1,6 @@
 /** Read-only ERPNext projections. Nothing here persists quantities or valuation. */
 import type { Database } from "@/integrations/supabase/types";
-import { nativeLabCommand } from "./native-lab-client";
+import { nativeLabRead } from "./native-lab-client";
 export type NativeItem = {
   id: string;
   name: string;
@@ -56,7 +56,7 @@ export type NativeSnapshot = {
   }[];
 };
 export async function nativeSnapshot(): Promise<NativeSnapshot> {
-  const result = await nativeLabCommand("snapshot", {}, `read:${crypto.randomUUID()}`);
+  const result = await nativeLabRead("snapshot");
   if (
     result["company"] !== "TEST-A" ||
     !Array.isArray(result["items"]) ||

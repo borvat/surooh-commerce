@@ -93,6 +93,7 @@ async function fixture() {
     company: "TEST-A" as const,
     key: randomBytes(32),
     loopbackSite: "wms-native-a.invalid" as const,
+    fixtureTimeoutMs: 250,
   };
   return { state, config, bridge: createAccountingSessionBridge(config) };
 }

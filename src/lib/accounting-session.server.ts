@@ -11,6 +11,7 @@ type BridgeConfig = {
   key: Buffer;
   /** Explicit local integration fixtures only; never read from an HTTP request. */
   loopbackSite?: "wms-native-a.invalid" | "wms-native-b.invalid";
+  fixtureTimeoutMs?: number;
   now?: () => number;
 };
 type Session = { sid: string; nativeCsrf: string; csrf: string; user: string; expires: number };
@@ -67,12 +68,21 @@ export function createAccountingSessionBridge(config: BridgeConfig) {
   if (config.loopbackSite) {
     if (origin.hostname !== "127.0.0.1" || native.hostname !== "127.0.0.1")
       throw new Error("Local fixtures require loopback on both sides");
+    if (
+      config.fixtureTimeoutMs !== undefined &&
+      (!Number.isInteger(config.fixtureTimeoutMs) ||
+        config.fixtureTimeoutMs < 1 ||
+        config.fixtureTimeoutMs > 15_000)
+    )
+      throw new Error("Invalid fixture timeout");
   } else if (
     origin.origin !== "https://surooh-wms-isolated-test.onrender.com" ||
     native.origin !== "https://surooh-accounting-test-b.onrender.com"
   ) {
     throw new Error("Only the verified existing WMS and Accounting TEST-B services are admitted");
   }
+  if (!config.loopbackSite && config.fixtureTimeoutMs !== undefined)
+    throw new Error("Timeout overrides are restricted to local fixtures");
   const aad = Buffer.from(
     JSON.stringify(["accounting-session-v1", origin.origin, native.origin, config.company]),
   );
@@ -137,7 +147,7 @@ export function createAccountingSessionBridge(config: BridgeConfig) {
       return await fetch(native.origin + path, {
         method: body ? "POST" : "GET",
         redirect: "error",
-        signal: AbortSignal.timeout(15_000),
+        signal: AbortSignal.timeout(config.fixtureTimeoutMs ?? 15_000),
         headers: {
           ...(config.loopbackSite ? { "X-Frappe-Site-Name": config.loopbackSite } : {}),
           ...(value ? { Cookie: `sid=${value.sid}`, "X-Frappe-CSRF-Token": value.nativeCsrf } : {}),

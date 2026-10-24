@@ -1,0 +1,666 @@
+{
+  "status": "NATIVE_SESSION_CANDIDATE_VERIFIED_SHARED_WAREHOUSE_CYCLE_BLOCKED",
+  "goal_complete": false,
+  "shared_native_cycle_executed": false,
+  "new_cost_usd": 0,
+  "wms_native_test_source": "9f8eef52323927cc688c959476ddcbcd50100f3e",
+  "wms_native_tree": "028c992576b9f81e1878599f517955ad6f71c783",
+  "application_checks": {
+    "code": "497464529228d3eb82cc72147000b6f488d401ec",
+    "tree": "93ebd76ac925f90767fb1114e1e301e399677bfa",
+    "commands": [
+      {
+        "name": "unit",
+        "argv": [
+          "/root/.npm/_npx/b22965130bfded9d/node_modules/bun/bin/bun.exe",
+          "test",
+          "tests/native-transport.test.ts",
+          "tests/native-stock-operations.test.ts",
+          "tests/stockitup-review-queue.test.ts",
+          "tests/native-read-coalescing.test.ts",
+          "tests/native-dashboard.test.ts",
+          "tests/warehouse-command-contract.test.ts",
+          "tests/warehouse-migration.test.ts",
+          "tests/order-status.test.ts",
+          "tests/accounting-session.test.ts",
+          "tests/warehouse-flow.test.ts",
+          "tests/order-filters.test.ts",
+          "tests/shipping-label-contract.test.ts",
+          "tests/warehouse-print.test.ts",
+          "tests/native-lab.test.ts",
+          "tests/warehouse-batch.test.ts",
+          "tests/stockitup-identity.test.ts",
+          "tests/native-order-actions.test.ts",
+          "tests/product-family-reference.test.ts",
+          "tests/native-stock-journal.test.ts",
+          "tests/source-quality.test.ts",
+          "tests/native-scanner.test.ts",
+          "tests/order-economics.test.ts",
+          "tests/commerce-copilot.test.ts",
+          "tests/csv.test.ts",
+          "tests/warehouse-audit.test.ts",
+          "tests/native-shipping.test.ts"
+        ],
+        "exit_code": 0,
+        "sha256": "5a8cc7883426d6f0561b915bcdf8da5902441f6046c2b55438f93d4e09fef608"
+      },
+      {
+        "name": "type",
+        "argv": [
+          "npm",
+          "run",
+          "typecheck"
+        ],
+        "exit_code": 0,
+        "sha256": "ae791f9f57ffbb3c0a592b6a34e25250c1f7f6f13fde4d05f77a0d4e7681f89a"
+      },
+      {
+        "name": "lint",
+        "argv": [
+          "npm",
+          "run",
+          "lint"
+        ],
+        "exit_code": 0,
+        "sha256": "bd24078753b5642466445ebd7da8eb9927eee78145a9c14216f765314496e8e6"
+      },
+      {
+        "name": "build-node",
+        "argv": [
+          "npm",
+          "run",
+          "build"
+        ],
+        "exit_code": 0,
+        "sha256": "5d60301c848a34b10977ee6eed46b7ba7364e3132cca6c8598992d9b7b131e83"
+      },
+      {
+        "name": "foundation",
+        "argv": [
+          "node",
+          "--test",
+          "tests/foundation/architecture-decision.test.mjs",
+          "tests/foundation/postgres-adapter.test.mjs",
+          "tests/foundation/gates.test.mjs"
+        ],
+        "exit_code": 0,
+        "sha256": "a14cc7ead90660fe18f81b3ff250329581d4cbcbc8039d0f765520bcd8d8e8af"
+      },
+      {
+        "name": "validator",
+        "argv": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "verification/native_integration/tests",
+          "-v"
+        ],
+        "exit_code": 0,
+        "sha256": "582867075eb3acfe7718e5f35f695465a6d815c324e25c15e65cd044c69339bf"
+      },
+      {
+        "name": "browser-config",
+        "argv": [
+          "python3",
+          "-W",
+          "error::ResourceWarning",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "verification/native_integration",
+          "-p",
+          "test_browser_config.py",
+          "-v"
+        ],
+        "exit_code": 0,
+        "sha256": "36d465ee73d9fc5b5cc2a0f9ac56243b0093d46630c676466ac59ef034062348"
+      },
+      {
+        "name": "browser-helpers",
+        "argv": [
+          "node",
+          "--test",
+          "verification/native_integration/browser-helpers.test.mjs"
+        ],
+        "exit_code": 0,
+        "sha256": "acd77e82f0af4a0a6d6b3cc8a1491cae83dd216a9ad410ac440fd3d63f152ac3"
+      }
+    ],
+    "started_utc": "2026-10-24T23:04:28.385935+00:00",
+    "finished_utc": "2026-10-24T23:04:48.070438+00:00"
+  },
+  "application_check_source": "497464529228d3eb82cc72147000b6f488d401ec",
+  "verified_difference_to_final_native_source": [
+    "verification/native_integration/accounting-session-probe.ts"
+  ],
+  "application_server_and_UI_blobs_identical": true,
+  "accounting": {
+    "canonical_app_and_test_source": "27ac683003599d9809728801bc956a7cd522de52",
+    "exact_blobs_matched": 238,
+    "missing": [],
+    "one_local_proposal_change": "validation/invoice_workbench/local_testing/delivery_checks.py respects existing INVOICE_LAB_SITE with standalone fallback",
+    "local_witness": "fea52a54aab97e0d5be288d01ab2928249b5fbb0",
+    "latest_observed_deployed": "4f36f192fc55c5f77d834da6ab5cdb088685e569",
+    "deploy_id": "dep-dbejgtlg1s2s73fq33dg",
+    "deployment_by": "Accounting continuation, not WMS",
+    "current_native_API_files_changed_by_latest_deploy": false,
+    "full_current_hosted_stack_certified": false
+  },
+  "attempts": [
+    {
+      "id": "auth01",
+      "source": "497464529228d3eb82cc72147000b6f488d401ec",
+      "outer_status": "BLOCKED",
+      "outer_exit_code": 2,
+      "native_warehouse_summary": {
+        "PASS": 55,
+        "BLOCKED": 1
+      },
+      "accounting_http_suites": [
+        {
+          "suite": "http_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "receipt_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "purchase_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "quote_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "bank_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "credit_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "supplier_payment_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "reversal_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "document_reversal_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "bank_reversal_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "delivery_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "report_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        }
+      ],
+      "session_probe": {
+        "tier": "actual_native_HTTP_session_bridge_no_browser",
+        "status": "FAIL",
+        "cases": [
+          {
+            "id": "native_guest_denied",
+            "status": "PASS"
+          }
+        ],
+        "hosted_acceptance": false,
+        "warehouse_cycle_acceptance": false,
+        "handler_reconstruction_is_not_service_restart": true
+      },
+      "ledger_checkpoint": {
+        "after": {
+          "GL": [
+            [
+              189,
+              6549.2,
+              6549.2
+            ]
+          ],
+          "SLE": [
+            [
+              73,
+              140.0,
+              2270.0
+            ]
+          ]
+        },
+        "before": {
+          "GL": [
+            [
+              189,
+              6549.2,
+              6549.2
+            ]
+          ],
+          "SLE": [
+            [
+              73,
+              140.0,
+              2270.0
+            ]
+          ]
+        },
+        "unchanged": true
+      },
+      "source_before_clean": true,
+      "source_after": {
+        "wms_sha": "497464529228d3eb82cc72147000b6f488d401ec",
+        "accounting_sha": "fea52a54aab97e0d5be288d01ab2928249b5fbb0",
+        "wms_dirty": false,
+        "accounting_dirty": false
+      },
+      "shutdown": [
+        {
+          "name": "redis",
+          "exit_code": 0
+        },
+        {
+          "name": "mariadb",
+          "exit_code": 0
+        }
+      ],
+      "private_runtime_removed_reported": true,
+      "raw_files_not_published": true,
+      "raw_file_sha256": {
+        "bootstrap-results.json": "62df42003acc02a247fd6349f52e3b8dd6a68bdfe555a41091af649d819009fb",
+        "native-tests.json": "c98025dc75caaa6c93ee95ef72f6e51a6ebf3b1b17f7f9396e5b1381e24ca450",
+        "shared-accounting-results.json": "6aa1586e822e0545f28104e971eecda1f5cb6d8fa2c5d0a8fdddc86465582ba2",
+        "wms-session-bridge.json": "16ea39e6032b05136c983a37b82aca43c884b8067ecf9df2b59fd5c67e55bf95",
+        "wms-session-ledger-checkpoint.json": "b88c6184f002bad77ca1fc29938422c707fe74eedd9e489a525dd98860bcc880"
+      }
+    },
+    {
+      "id": "auth02",
+      "source": "9f8eef52323927cc688c959476ddcbcd50100f3e",
+      "outer_status": "PARTIAL_NATIVE_EXECUTED",
+      "outer_exit_code": 2,
+      "native_warehouse_summary": {
+        "PASS": 55,
+        "BLOCKED": 1
+      },
+      "accounting_http_suites": [
+        {
+          "suite": "http_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "receipt_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "purchase_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "quote_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "bank_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "credit_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "supplier_payment_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "reversal_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "document_reversal_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "bank_reversal_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "delivery_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "suite": "report_checks.py",
+          "status": "PASS",
+          "exit_code": 0
+        }
+      ],
+      "session_probe": {
+        "tier": "actual_native_HTTP_session_bridge_no_browser",
+        "status": "PASS",
+        "cases": [
+          {
+            "id": "native_guest_denied",
+            "status": "PASS"
+          },
+          {
+            "id": "native_writer_authenticated_with_actual_context",
+            "status": "PASS"
+          },
+          {
+            "id": "native_session_not_exposed_to_browser_JSON",
+            "status": "PASS"
+          },
+          {
+            "id": "native_protected_session_read",
+            "status": "PASS"
+          },
+          {
+            "id": "same_key_handler_reconstruction_revalidates_native_session",
+            "status": "PASS"
+          },
+          {
+            "id": "warehouse_contract_still_denied",
+            "status": "PASS"
+          },
+          {
+            "id": "native_logout_requires_proxy_csrf",
+            "status": "PASS"
+          },
+          {
+            "id": "native_reviewer_role_retained",
+            "status": "PASS"
+          },
+          {
+            "id": "native_company_mismatch_denied",
+            "status": "PASS"
+          },
+          {
+            "id": "native_session_logout_confirmed",
+            "status": "PASS"
+          },
+          {
+            "id": "native_logged_out_cookie_denied",
+            "status": "PASS"
+          }
+        ],
+        "hosted_acceptance": false,
+        "warehouse_cycle_acceptance": false,
+        "handler_reconstruction_is_not_service_restart": true
+      },
+      "ledger_checkpoint": {
+        "after": {
+          "GL": [
+            [
+              193,
+              6649.2,
+              6649.2
+            ]
+          ],
+          "SLE": [
+            [
+              77,
+              140.0,
+              2270.0
+            ]
+          ]
+        },
+        "before": {
+          "GL": [
+            [
+              193,
+              6649.2,
+              6649.2
+            ]
+          ],
+          "SLE": [
+            [
+              77,
+              140.0,
+              2270.0
+            ]
+          ]
+        },
+        "unchanged": true
+      },
+      "source_before_clean": true,
+      "source_after": {
+        "wms_sha": "9f8eef52323927cc688c959476ddcbcd50100f3e",
+        "accounting_sha": "fea52a54aab97e0d5be288d01ab2928249b5fbb0",
+        "wms_dirty": false,
+        "accounting_dirty": false
+      },
+      "shutdown": [
+        {
+          "name": "redis",
+          "exit_code": 0
+        },
+        {
+          "name": "mariadb",
+          "exit_code": 0
+        }
+      ],
+      "private_runtime_removed_reported": true,
+      "raw_files_not_published": true,
+      "raw_file_sha256": {
+        "bootstrap-results.json": "ed507f6fdefd43b6224beaabd8457290951eed9edeffc681b0461f1af7bf2323",
+        "native-tests.json": "18ef25da1697b311545a1d1c34dfb9b04dc882f06c2001cf338b4560b3bc48b9",
+        "shared-accounting-results.json": "6aa1586e822e0545f28104e971eecda1f5cb6d8fa2c5d0a8fdddc86465582ba2",
+        "wms-session-bridge.json": "4e0f2e922a49b7aaf7bd0640363dc9b2c0a30930286c8e7725e66341246b375f",
+        "wms-session-ledger-checkpoint.json": "5f4685203e07cf1b931095ad66e0746193b79d8dfa73cbf1e5fe87c777bd28f0"
+      }
+    }
+  ],
+  "retained_failures": [
+    "Pre-final synthetic transport suite:182 PASS/1 default5sec test timeout while native request budget was15sec; explicit250ms loopback-only fixture timeout fixed test bounds, hosted budget remains15sec. Final183 PASS.",
+    "auth01: incorrect test expected writer fixture can_review=false; original Accounting seed grants Accounts Manager to both writer and reviewer. Preserved failure; auth02 checks native declared true without changing any native role or assertion.",
+    "Initial read-only B audit used bench cwd and failed site lookup before connecting; sites cwd read succeeded.",
+    "Local browser launches remain denied by Unix socket restrictions; not retried as successful visual proof."
+  ],
+  "native_gate": {
+    "native_atomic_candidate": "READY_FOR_HUMAN_EVIDENCE_REVIEW",
+    "errors": [],
+    "rendered_UI_cycle": "BLOCKED",
+    "operational_service_isolation": "BLOCKED",
+    "hosted_CI": "BLOCKED",
+    "PREPARATION": "BLOCKED",
+    "P01": "BLOCKED",
+    "phase_complete": false,
+    "codex_start_authorized": false,
+    "merge_authorized": false,
+    "deploy_authorized": false,
+    "human_review_required": true,
+    "wms_sha": "9f8eef52323927cc688c959476ddcbcd50100f3e",
+    "accounting_sha": "fea52a54aab97e0d5be288d01ab2928249b5fbb0"
+  },
+  "independent_cleanup": {
+    "remaining_owned_fixture_directories": 0,
+    "checked_utc": "2026-10-24T23:18:53.184429+00:00"
+  },
+  "hosted_preflight": {
+    "observed_at_utc": "2026-10-24T23:01:40.973008+00:00",
+    "method": "Independent Render Web Shell native SELECT / config flag allowlist / filesystem read only",
+    "service": "srv-dbei3l0ae00c73d7mo80",
+    "instance": "gzfpc",
+    "source": "27ac683003599d9809728801bc956a7cd522de52",
+    "site": "invoice-lab-render",
+    "database": "surooh_invoice_render",
+    "company": "TEST-B",
+    "frappe": "16.52.0",
+    "erpnext": "16.52.0",
+    "installed_apps": [
+      "frappe",
+      "erpnext",
+      "surooh_accounting",
+      "surooh_invoice_workbench"
+    ],
+    "native_lab_enabled": false,
+    "shared_profile": null,
+    "native_users_enabled": [
+      "writer@example.invalid",
+      "reviewer@example.invalid"
+    ],
+    "invoices": [
+      {
+        "name": "ACC-SINV-2026-00001",
+        "docstatus": 1,
+        "grand_total": "20.00",
+        "outstanding": "20.00",
+        "is_return": false
+      },
+      {
+        "name": "ACC-SINV-2026-00002",
+        "docstatus": 1,
+        "grand_total": "29.04",
+        "outstanding": "0.00",
+        "is_return": false
+      },
+      {
+        "name": "ACC-SINV-2026-00003",
+        "docstatus": 1,
+        "grand_total": "-14.52",
+        "outstanding": "-14.52",
+        "is_return": true,
+        "return_against": "ACC-SINV-2026-00002"
+      }
+    ],
+    "SLE_rows": 0,
+    "GL": {
+      "rows": 12,
+      "debit": "92.60",
+      "credit": "92.60"
+    },
+    "disk": {
+      "mounted": true,
+      "mount": "/var/data/surooh-test",
+      "total_bytes": 1020702720,
+      "used_bytes": 626892800,
+      "free_bytes": 377032704
+    },
+    "metrics": {
+      "instance": "gzfpc",
+      "sample_utc": "2026-10-24T22:59:04.858Z",
+      "cpu": 0.0096257,
+      "cpu_limit": 1,
+      "memory_bytes": 486789120,
+      "memory_limit": 2147483600,
+      "instance_count": 1
+    },
+    "writes_reseed_restart_deploy_permissions_changes": false,
+    "no_new_cost": true,
+    "separate_test_records_not_WMS_cycle": true,
+    "initial_read_attempt": "Frappe site initialization from bench cwd failed before DB connection; corrected to sites cwd; no missing-data claim",
+    "capacity_assessment": "Available measured headroom; no new paid resource justified. Disk reserve and test/migration window require Accounting coordination.",
+    "post_concurrent_deploy_readback": {
+      "observed_utc": "2026-10-24T23:22:17.546987+00:00",
+      "method": "Independent same-service Web Shell SELECT and allowlisted config/filesystem reads only",
+      "source": "4f36f192fc55c5f77d834da6ab5cdb088685e569",
+      "instance": "82qpc",
+      "mounted": true,
+      "disk_used_bytes": 628854784,
+      "disk_free_bytes": 375070720,
+      "native_lab_enabled": false,
+      "shared_profile": null,
+      "installed_apps": [
+        "frappe",
+        "erpnext",
+        "surooh_accounting",
+        "surooh_invoice_workbench"
+      ],
+      "original_invoices_00001_00002_00003_same_fields_and_values": true,
+      "additional_observed_invoices": [
+        {
+          "name": "ACC-SINV-2026-00004",
+          "grand_total": "29.04",
+          "outstanding": "0.00"
+        },
+        {
+          "name": "ACC-SINV-2026-00005",
+          "grand_total": "-14.52",
+          "outstanding": "-14.52",
+          "return_against": "ACC-SINV-2026-00004"
+        }
+      ],
+      "SLE_rows": 0,
+      "GL": {
+        "rows": 22,
+        "debit": "165.20",
+        "credit": "165.20"
+      },
+      "WMS_wrote_no_business_records": true,
+      "concurrent_accounting_activity_not_a_WMS_test": true,
+      "not_required_WMS_cycle_restart_acceptance": true
+    }
+  },
+  "browser_environment": {
+    "existing_TEST_B_browser_available": "Accounting published18 actual native browser assertions at1440/390/320 on existing2GB service",
+    "peer_evidence_source": "4f36f192fc55c5f77d834da6ab5cdb088685e569",
+    "peer_evidence_file": "docs/completion/evidence/persistent-20261025/hosted/completion-browser-results-deployed-b-5f-2g.json",
+    "not_WMS_browser_acceptance": true,
+    "WMS_internal_UI_viewports": "NOT_RUN",
+    "linked_WMS_cycle_restart_retention": "NOT_RUN",
+    "handler_reconstruction_not_native_data_or_service_restart": true
+  },
+  "coordination": {
+    "shared_file": "docs/wms/integration/TEST-B-AGREEMENT.md",
+    "WMS_PR": 33,
+    "Accounting_PR": 43,
+    "comments": [
+      6390467481,
+      6390570843,
+      6390671740
+    ],
+    "owner_responsibilities": "Accounting: engine/permissions/contracts. WMS: UI/session adapter/lifecycle. Independent branches; coordinated shared deploy/migration/restart.",
+    "peer_technical_confirmation": "REQUESTED_NOT_YET_ACKNOWLEDGED",
+    "write_or_restart_lease": "NONE",
+    "accounting_changes_by_WMS": []
+  },
+  "deployed_WMS": {
+    "service": "srv-dbe28f7f3r2c73cfhe0g",
+    "commit": "2a1adc7dfc531a13678498745c388e6ef2fe672a",
+    "deploy": "dep-dbe28g7f3r2c73cfhgm0",
+    "new_session_profile_active": false,
+    "new_code_deployed": false
+  },
+  "blocking_dependencies": [
+    "Accounting must supply/review persistent TEST-B warehouse session identity and native operational endpoint/profile; currently native_lab=false, shared profile null, WMS guard absent.",
+    "Shipment-linked invoice and partial-return linked credit mapping/independent review contract not established.",
+    "Accounting review/adoption of test-site correction remains pending.",
+    "Shared test/write/deploy/restart window and baseline/backup lease not confirmed.",
+    "Actual WMS UI1440/390/320 and one linked receipt→shipment→invoice→partial return→credit cycle then restart/readback remain unexecuted."
+  ],
+  "prepared_utc": "2026-10-24T23:18:53.184499+00:00",
+  "least_privilege_warehouse_auth": "NOT_ESTABLISHED: current api.context requires Accounts User; no financial role is granted by this bridge. Accounting must provide a minimal warehouse identity/operations contract."
+}

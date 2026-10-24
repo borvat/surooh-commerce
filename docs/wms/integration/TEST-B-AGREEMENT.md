@@ -140,3 +140,22 @@ site lookup used the bench cwd and failed before connecting; corrected sites cwd
 read succeeded. Native invoice baseline proves current records, not the required
 linked warehouse cycle or future restart retention. Available capacity is not
 load acceptance, but does not justify a new paid resource at this point.
+
+## Final concurrent-deployment readback and least-privilege boundary
+
+Independent SELECT/config/filesystem read on new instance82qpc confirmed actual
+source4f36f192fc55c5f77d834da6ab5cdb088685e569, same mounted volume, free375070720
+bytes. Existing00001/00002/00003 retain identical document values/status/linkage;
+concurrent Accounting tests additionally created00004/credit00005. GL now22 rows,
+165.20 debit=credit, SLE still0. This is preexisting-record retention across an
+Accounting-owned deployment, not a WMS-created cycle or WMS-owned restart test.
+Native lab remains false/shared profile null and installed app set unchanged.
+No WMS business call, restart or service change was made.
+
+The existing native api.context requires Accounts User. The WMS bridge currently
+proves Accounting-session compatibility only. Do not grant financial roles to a
+warehouse clerk merely to make this identity check pass. Accounting must supply
+and review a minimal warehouse identity/capabilities/operations contract; WMS
+will bind to that separately versioned contract while preserving native role
+checks and independent financial review. No warehouse least-privilege acceptance
+is claimed from the Manager-bearing synthetic invoice fixture identities.

@@ -71,5 +71,45 @@
   "no_new_cost": true,
   "separate_test_records_not_WMS_cycle": true,
   "initial_read_attempt": "Frappe site initialization from bench cwd failed before DB connection; corrected to sites cwd; no missing-data claim",
-  "capacity_assessment": "Available measured headroom; no new paid resource justified. Disk reserve and test/migration window require Accounting coordination."
+  "capacity_assessment": "Available measured headroom; no new paid resource justified. Disk reserve and test/migration window require Accounting coordination.",
+  "post_concurrent_deploy_readback": {
+    "observed_utc": "2026-10-24T23:22:17.546987+00:00",
+    "method": "Independent same-service Web Shell SELECT and allowlisted config/filesystem reads only",
+    "source": "4f36f192fc55c5f77d834da6ab5cdb088685e569",
+    "instance": "82qpc",
+    "mounted": true,
+    "disk_used_bytes": 628854784,
+    "disk_free_bytes": 375070720,
+    "native_lab_enabled": false,
+    "shared_profile": null,
+    "installed_apps": [
+      "frappe",
+      "erpnext",
+      "surooh_accounting",
+      "surooh_invoice_workbench"
+    ],
+    "original_invoices_00001_00002_00003_same_fields_and_values": true,
+    "additional_observed_invoices": [
+      {
+        "name": "ACC-SINV-2026-00004",
+        "grand_total": "29.04",
+        "outstanding": "0.00"
+      },
+      {
+        "name": "ACC-SINV-2026-00005",
+        "grand_total": "-14.52",
+        "outstanding": "-14.52",
+        "return_against": "ACC-SINV-2026-00004"
+      }
+    ],
+    "SLE_rows": 0,
+    "GL": {
+      "rows": 22,
+      "debit": "165.20",
+      "credit": "165.20"
+    },
+    "WMS_wrote_no_business_records": true,
+    "concurrent_accounting_activity_not_a_WMS_test": true,
+    "not_required_WMS_cycle_restart_acceptance": true
+  }
 }

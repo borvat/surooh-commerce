@@ -128,10 +128,7 @@ test("closing binds the explicit reason, remainder and cancelled pick history", 
 test("closing refuses active batches, absent shipments and completed orders", () => {
   expect(() => remainderCloseRequest(order, "طلب العميل")).toThrow();
   expect(() =>
-    remainderCloseRequest(
-      { ...partlyShipped, status: "fulfilled" },
-      "طلب العميل",
-    ),
+    remainderCloseRequest({ ...partlyShipped, status: "fulfilled" }, "طلب العميل"),
   ).toThrow();
   expect(() =>
     remainderCloseRequest(

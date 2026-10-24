@@ -12,6 +12,7 @@ import {
  */
 import { supabase as legacySupabase } from "@/integrations/supabase/client";
 import { nativeLabCommand, nativeLabConfigured } from "./native-lab-client";
+import { matchesOrderStatus } from "./order-filters";
 
 // A selected native session may never silently reach the legacy stock writer.
 const supabase = new Proxy(legacySupabase, {
@@ -307,7 +308,7 @@ export async function listOrders(opts: OrderSearchOptions) {
   if (nativeLabConfigured()) {
     const rows = (await nativeOrders()).filter(
       (x) =>
-        (!opts.status || opts.status === "all" || x.status === opts.status) &&
+        matchesOrderStatus(x, opts.status) &&
         (!opts.externalRef || x.external_ref?.includes(opts.externalRef)) &&
         (!opts.accountId || x.channel_id === opts.accountId) &&
         (!opts.from || Date.parse(x.created_at) >= Date.parse(`${opts.from}T00:00:00Z`)) &&

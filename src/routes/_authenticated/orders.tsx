@@ -170,12 +170,13 @@ function OrdersPage() {
       }
       intro="طلبات البيع من حساباتك. المخزون الداخلي يتغيّر فقط للطلبات التي «تُشحن من مستودعنا»؛ طلبات «تشحنها bol.com» تُسجَّل فقط."
     >
-      <div className="mb-4 flex gap-1">
+      <div className="mb-4 flex flex-wrap gap-1">
         {[
           ["all", "الكل"],
           ["placed", "بانتظار الشحن"],
           ["fulfilled", "تم الشحن"],
           ["cancelled", "ملغى"],
+          ...(nativeLabConfigured() ? [["closed", "أُغلق الباقي"]] : []),
         ].map(([k, l]) => (
           <Button
             key={k}
@@ -365,10 +366,7 @@ function OrdersPage() {
             "native_remainder_closed" in o && o.native_remainder_closed === true;
           const [label, tone] = remainderClosed
             ? (["أُغلق باقي الطلب", "neutral"] as const)
-            : statusAr[o.status as keyof typeof statusAr] ?? [
-            o.status,
-            "neutral",
-          ];
+            : (statusAr[o.status as keyof typeof statusAr] ?? [o.status, "neutral"]);
           return (
             <tr key={o.id}>
               <td className="px-4 py-2">

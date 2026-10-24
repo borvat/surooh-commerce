@@ -129,7 +129,9 @@ export function NativeShipmentBatches({
               <Button
                 size="sm"
                 variant="outline"
-                disabled={disabled || closeFrozen || !target || locations.isFetching || locations.isError}
+                disabled={
+                  disabled || closeFrozen || !target || locations.isFetching || locations.isError
+                }
                 onClick={() => mutation.mutate({ kind: "return", id: batch.delivery_note! })}
               >
                 مرتجع هذه الشحنة

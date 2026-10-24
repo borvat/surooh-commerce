@@ -1,0 +1,975 @@
+{
+  "wms_sha": "798e72f65b77a6a05edddf718923489662fb4779",
+  "accounting_canonical_sha": "a2ba7f813561147ef6ea61c4cf3dc93e70ce0714",
+  "accounting_materialization_witness": "add9fbd0a6b2f0b7fa71714d9cc94c99af7b374f",
+  "accounting_materialized_files": 18,
+  "full_accounting_checkout_or_invoice_acceptance": false,
+  "native_cases": [
+    {
+      "id": "N01_native_company_items_bundle_and_app_setup",
+      "status": "PASS"
+    },
+    {
+      "id": "N01b_second_native_site_company_and_credentials",
+      "status": "PASS"
+    },
+    {
+      "id": "N02_HTTP_native_receipt_quantity_and_valuation",
+      "status": "PASS"
+    },
+    {
+      "id": "N03_existing_WMS_order_service_bundle_reservations_and_replay",
+      "status": "PASS"
+    },
+    {
+      "id": "N04_native_durable_payload_conflict",
+      "status": "PASS"
+    },
+    {
+      "id": "N05_full_pick_pack_handoff",
+      "status": "PASS"
+    },
+    {
+      "id": "N05a_native_pick_handoff_guard",
+      "status": "PASS"
+    },
+    {
+      "id": "N06_WMS_ship_native_DeliveryNote_COGS_GL",
+      "status": "PASS"
+    },
+    {
+      "id": "N07_native_return_replay_value_and_GL_reversal",
+      "status": "PASS"
+    },
+    {
+      "id": "N08_WMS_cancel_and_duplicate_event",
+      "status": "PASS"
+    },
+    {
+      "id": "N09_native_HTTP_verified_identity_company_and_role",
+      "status": "PASS"
+    },
+    {
+      "id": "N10_durable_token_revocation_before_replay",
+      "status": "PASS"
+    },
+    {
+      "id": "N11_raw_RPC_API_and_legacy_writer_denial",
+      "status": "PASS"
+    },
+    {
+      "id": "N12_fresh_DB_role_revocation_and_claim_escalation",
+      "status": "PASS"
+    },
+    {
+      "id": "N13_native_HTTP_concurrent_command_replay",
+      "status": "PASS"
+    },
+    {
+      "id": "N14_real_RQ_job_and_execution_time_revocation",
+      "status": "PASS"
+    },
+    {
+      "id": "N15_inflight_HTTP_permission_revocation_current_locking_reads",
+      "status": "PASS"
+    },
+    {
+      "id": "N16_HTTP_private_file_boundary",
+      "status": "PASS"
+    },
+    {
+      "id": "N17_native_lost_response_process_kill_restart_and_replay",
+      "status": "PASS"
+    },
+    {
+      "id": "N18_two_fresh_sites_DB_credentials_and_HTTP_identity",
+      "status": "PASS"
+    },
+    {
+      "id": "A01_atomic_handoff_replay_and_native_links",
+      "status": "PASS"
+    },
+    {
+      "id": "A02_concurrent_pick_same_command",
+      "status": "PASS"
+    },
+    {
+      "id": "A03_pick_cancel_race",
+      "status": "PASS"
+    },
+    {
+      "id": "A04_packed_ship_cancel_retry_race",
+      "status": "PASS"
+    },
+    {
+      "id": "A05_process_death_rolls_back_handoff",
+      "status": "PASS"
+    },
+    {
+      "id": "A06_handoff_vs_competing_shared_bundle",
+      "status": "PASS"
+    },
+    {
+      "id": "A07_actual_WMS_projection_service_over_HTTP",
+      "status": "PASS"
+    },
+    {
+      "id": "A08_packed_cancel_and_pack_replay",
+      "status": "PASS"
+    },
+    {
+      "id": "A09_actual_screen_mutation_services_native_full_cycle",
+      "status": "PASS"
+    },
+    {
+      "id": "O01_native_locations_and_WMS_projection",
+      "status": "PASS"
+    },
+    {
+      "id": "O02_native_transfer_replay_quantity_and_value_conservation",
+      "status": "PASS"
+    },
+    {
+      "id": "O03_warehouse_boundaries_and_quantity_validation",
+      "status": "PASS"
+    },
+    {
+      "id": "O04_reserved_stock_protected_from_transfer_and_count",
+      "status": "PASS"
+    },
+    {
+      "id": "O05_native_count_value_GL_replay_and_stale_count",
+      "status": "PASS"
+    },
+    {
+      "id": "O06_concurrent_last_unit_transfer_and_quarantine",
+      "status": "PASS"
+    },
+    {
+      "id": "O07_native_quarantine_return_replay_GL_and_inspection_release",
+      "status": "PASS"
+    },
+    {
+      "id": "O08_return_and_count_boundary_validation",
+      "status": "PASS"
+    },
+    {
+      "id": "O09_equal_quantity_does_not_hide_movements_during_count",
+      "status": "PASS"
+    },
+    {
+      "id": "S01_invalid_scans_do_not_create_pick_or_change_reservations",
+      "status": "PASS"
+    },
+    {
+      "id": "S02_actual_WMS_scanner_service_native_pick_audit_and_replay",
+      "status": "PASS"
+    },
+    {
+      "id": "S03_manual_pick_evidence_and_cancelled_order_are_not_rewritten",
+      "status": "PASS"
+    },
+    {
+      "id": "P01_three_WMS_batches_preserve_remainder_and_native_SLE_GL",
+      "status": "PASS"
+    },
+    {
+      "id": "P02_concurrent_batch_replay_conflict_and_stale_history",
+      "status": "PASS"
+    },
+    {
+      "id": "P03_batch_scope_guards_and_per_delivery_quarantine_return",
+      "status": "PASS"
+    },
+    {
+      "id": "P04_competing_new_batches_and_concurrent_ship_have_one_effect",
+      "status": "PASS"
+    },
+    {
+      "id": "P05_SIGKILL_after_first_batch_reservation_rolls_back_and_recovers",
+      "status": "PASS"
+    },
+    {
+      "id": "P06_packed_batch_cancel_restores_reservation_and_keeps_history",
+      "status": "PASS"
+    },
+    {
+      "id": "P07_old_DB_snapshot_cannot_hide_committed_batch_history",
+      "status": "PASS"
+    },
+    {
+      "id": "P08_old_DB_snapshot_pack_ship_cancel_keep_one_native_effect",
+      "status": "PASS"
+    },
+    {
+      "id": "P09_close_remainder_releases_only_unused_native_reservations",
+      "status": "PASS"
+    },
+    {
+      "id": "P10_close_refuses_active_batch_and_stale_intent",
+      "status": "PASS"
+    },
+    {
+      "id": "P11_old_snapshot_and_concurrent_close_keep_one_native_effect",
+      "status": "PASS"
+    },
+    {
+      "id": "P12_SIGKILL_between_reservation_release_and_close_rolls_back",
+      "status": "PASS"
+    },
+    {
+      "id": "C01_distinct_orders_compete_for_one_last_native_unit",
+      "status": "PASS"
+    },
+    {
+      "id": "C02_bundle_and_single_compete_for_the_same_last_component",
+      "status": "PASS"
+    },
+    {
+      "id": "B01_rendered_existing_React_full_native_cycle",
+      "status": "PASS"
+    }
+  ],
+  "browser_scenarios": [
+    {
+      "name": "interrupted_receipt_form_no_write",
+      "status": "PASS"
+    },
+    {
+      "name": "fractional_receipt_quantity_is_rejected_without_truncation",
+      "status": "PASS"
+    },
+    {
+      "name": "committed_receipt_lost_response_freezes_intent_and_retries_without_duplicate_stock_or_GL",
+      "status": "PASS"
+    },
+    {
+      "name": "create_quarantine_location_from_storage_screen",
+      "status": "PASS"
+    },
+    {
+      "name": "warehouse_role_reads_native_bundle_without_admin_edit_control",
+      "status": "PASS"
+    },
+    {
+      "name": "reload_retains_native_pick_and_next_action",
+      "status": "PASS"
+    },
+    {
+      "name": "quarantine_return_reload_shows_completed_document_without_duplicate_action",
+      "status": "PASS"
+    },
+    {
+      "name": "inspection_release_via_native_transfer_from_storage_screen",
+      "status": "PASS"
+    },
+    {
+      "name": "native_products_SKU_barcode_ambiguity_bundle_parts_quantities_and_empty_search_without_stock_writes",
+      "status": "PASS"
+    },
+    {
+      "name": "receive_bundle_order_pick_pack_ship_return_and_history",
+      "status": "PASS"
+    },
+    {
+      "name": "cancel_placed_reload_reservations_released",
+      "status": "PASS"
+    },
+    {
+      "name": "cancel_picked_reload_reservations_released",
+      "status": "PASS"
+    },
+    {
+      "name": "cancel_packed_reload_reservations_released",
+      "status": "PASS"
+    },
+    {
+      "name": "scanner_unknown_code_undo_complete_native_pick_and_cancel",
+      "status": "PASS"
+    },
+    {
+      "name": "proportional_batches_packed_cancel_replacement_two_shipments_and_per_delivery_returns",
+      "status": "PASS"
+    },
+    {
+      "name": "close_remainder_releases_only_unused_reservations_filters_reload_and_return_after_close",
+      "status": "PASS"
+    },
+    {
+      "name": "committed_pick_lost_response_native_refresh_and_reload_recover_same_document",
+      "status": "PASS"
+    },
+    {
+      "name": "interrupted_pack_no_write_then_retry_and_cancel",
+      "status": "PASS"
+    },
+    {
+      "name": "stale_cancelled_order_rejected_error_visible_reload_recovers",
+      "status": "PASS"
+    },
+    {
+      "name": "rendered_location_transfer_count_adjustment_matches_native_bin_value_and_balanced_GL",
+      "status": "PASS"
+    },
+    {
+      "name": "desktop_repeat_order_pick_pack_ship_and_quarantine_return_uses_same_native_authority",
+      "status": "PASS"
+    },
+    {
+      "name": "native_entry_dashboard_queue_and_inventory_value_match_engine_without_legacy_writes",
+      "status": "PASS"
+    },
+    {
+      "name": "desktop_and_phone_six_native_screens_no_document_overflow_or_unhandled_JS_errors",
+      "status": "PASS"
+    }
+  ],
+  "viewports": [
+    {
+      "route": "dashboard",
+      "width": 1440,
+      "height": 1000,
+      "dimensions": {
+        "width": 1440,
+        "document": 1440
+      },
+      "screenshot": "browser-dashboard-1440.png"
+    },
+    {
+      "route": "products",
+      "width": 1440,
+      "height": 1000,
+      "dimensions": {
+        "width": 1440,
+        "document": 1440
+      },
+      "screenshot": "browser-products-1440.png"
+    },
+    {
+      "route": "components",
+      "width": 1440,
+      "height": 1000,
+      "dimensions": {
+        "width": 1440,
+        "document": 1440
+      },
+      "screenshot": "browser-components-1440.png"
+    },
+    {
+      "route": "bundles",
+      "width": 1440,
+      "height": 1000,
+      "dimensions": {
+        "width": 1440,
+        "document": 1440
+      },
+      "screenshot": "browser-bundles-1440.png"
+    },
+    {
+      "route": "orders",
+      "width": 1440,
+      "height": 1000,
+      "dimensions": {
+        "width": 1440,
+        "document": 1440
+      },
+      "screenshot": "browser-orders-1440.png"
+    },
+    {
+      "route": "movements",
+      "width": 1440,
+      "height": 1000,
+      "dimensions": {
+        "width": 1440,
+        "document": 1440
+      },
+      "screenshot": "browser-movements-1440.png"
+    },
+    {
+      "route": "dashboard",
+      "width": 390,
+      "height": 844,
+      "dimensions": {
+        "width": 390,
+        "document": 390
+      },
+      "screenshot": "browser-dashboard-390.png"
+    },
+    {
+      "route": "products",
+      "width": 390,
+      "height": 844,
+      "dimensions": {
+        "width": 390,
+        "document": 390
+      },
+      "screenshot": "browser-products-390.png"
+    },
+    {
+      "route": "components",
+      "width": 390,
+      "height": 844,
+      "dimensions": {
+        "width": 390,
+        "document": 390
+      },
+      "screenshot": "browser-components-390.png"
+    },
+    {
+      "route": "bundles",
+      "width": 390,
+      "height": 844,
+      "dimensions": {
+        "width": 390,
+        "document": 390
+      },
+      "screenshot": "browser-bundles-390.png"
+    },
+    {
+      "route": "orders",
+      "width": 390,
+      "height": 844,
+      "dimensions": {
+        "width": 390,
+        "document": 390
+      },
+      "screenshot": "browser-orders-390.png"
+    },
+    {
+      "route": "movements",
+      "width": 390,
+      "height": 844,
+      "dimensions": {
+        "width": 390,
+        "document": 390
+      },
+      "screenshot": "browser-movements-390.png"
+    }
+  ],
+  "page_errors": [],
+  "blocked_external_requests": [
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.googleapis.com/css2"
+  ],
+  "source_archives": {
+    "frappe.tar.gz": "34087f9c8ea018ac79011ee95863c6b57bce6bc19e923b1545723b3ab994268e",
+    "frappe-16.52.0_files_verified": 4141,
+    "erpnext.tar.gz": "cfd1e3d4495a4e70e333a42aec1689552143dc6fc57faac5329cadef08dbc810",
+    "erpnext-16.52.0_files_verified": 5518,
+    "mariadb.tar.gz": "32f8871a2aa38b36aa418b7f4abc6fc0c6ef1ba5a45798cacb2afa52c8a6113b",
+    "mariadb-11.8.9-linux-systemd-x86_64_files_verified": 22614
+  },
+  "application_checks": [
+    {
+      "name": "application",
+      "exit": 0,
+      "log_sha256": "9b72f2dc7ca7ace32febe31f8dfbe4a9ab16af5d453a3411872cebfde3238ebc"
+    },
+    {
+      "name": "typecheck",
+      "exit": 0,
+      "log_sha256": "ae791f9f57ffbb3c0a592b6a34e25250c1f7f6f13fde4d05f77a0d4e7681f89a"
+    },
+    {
+      "name": "lint",
+      "exit": 0,
+      "log_sha256": "927115b911308f3d869184c9dcec4325bfce9ea6b13056f49c219865c02fc600"
+    },
+    {
+      "name": "build",
+      "exit": 0,
+      "log_sha256": "c5b11fdf5e229d215239c4af47e685b36afbc3a83d61d20f981545609d715fef"
+    },
+    {
+      "name": "foundation",
+      "exit": 0,
+      "log_sha256": "1d0007d4117733bdb439b626e3d7862d4d07fa877b3cd3c135f3b78ea952857f"
+    },
+    {
+      "name": "gate",
+      "exit": 0,
+      "log_sha256": "8289862cdfcd87a5ea5744c7f582f9832fc0b476ee96c72adbfb8d2a8df2b25c"
+    },
+    {
+      "name": "browser-config",
+      "exit": 0,
+      "log_sha256": "4f435dd04f228ccd294d3e3f0d459367014d1f689ead214cf7cb4e7956affee5"
+    },
+    {
+      "name": "browser-helpers",
+      "exit": 0,
+      "log_sha256": "b27663246275f177c2f52f4dedc13f1250cf7fff82dfbd62f581f65c31410875"
+    }
+  ],
+  "native_result_sha256": "f06cf00cc16984c22b8b6601dd5290a071e397116a9ffbbffe765702e53a6bd9",
+  "bootstrap_result_sha256": "486ddc8e0162f3ce71213218ff349a10a363fdda060d9ba9fbf8f14f78f1f36b",
+  "image_hashes_internal_QA_only": {
+    "browser-bundles-1440.png": "200fc5a405a7a9a803d865071fab7df06534665074d6dd83faa0944bd0ec9419",
+    "browser-bundles-390.png": "97aac75678f94a0e4ea5a64a3ffe1982a412401cd79a8d8860a49016b6aab597",
+    "browser-components-1440.png": "68f8cae5c9b98cc49e3bb4b157ee1dc0a1601c8aeccc595725573d9ff9181470",
+    "browser-components-390.png": "33b5365ec21c803fb2d0a6c77ab8b4ee5d3547f0a5b51d0132e6fa095340d31e",
+    "browser-dashboard-1440.png": "7be526e98ccc1f15f0b716f3ba3ddf22337d46b340e9ea379830671ebce374e1",
+    "browser-dashboard-390.png": "2a0eb3ebcec43cf130eda823c1815497f01c21a39244c75aeeacb6ab4750109f",
+    "browser-movements-1440.png": "73f395880cdff346dd3c9195bae0257c1b3d77c212a37c468a4f79714d97c204",
+    "browser-movements-390.png": "2f9f9e067e6f5e3329b15ef17eafc5a96188975abeb8de3a39c41a72a6576e38",
+    "browser-orders-1440.png": "d5efe793ce2c66dbea0c4a13027edbe584813495ca69053220fcaa38409698e8",
+    "browser-orders-390.png": "b4488978fc61d94a54be82f584153c36feccb3921c91a81611f0772feae93c68",
+    "browser-products-1440.png": "9893c4d2c5db6785d97b077bea584d7474abf63c2c03bd99a667b1d92e604142",
+    "browser-products-390.png": "d0e48ebe291e7525eba919436f8d86c3776a285c514834c21a517cc7d4c5e578"
+  },
+  "gate": {
+    "native_atomic_candidate": "READY_FOR_HUMAN_EVIDENCE_REVIEW",
+    "errors": [],
+    "rendered_UI_cycle": "READY_FOR_HUMAN_EVIDENCE_REVIEW",
+    "operational_service_isolation": "BLOCKED",
+    "hosted_CI": "BLOCKED",
+    "PREPARATION": "BLOCKED",
+    "P01": "BLOCKED",
+    "phase_complete": false,
+    "codex_start_authorized": false,
+    "merge_authorized": false,
+    "deploy_authorized": false,
+    "human_review_required": true,
+    "wms_sha": "798e72f65b77a6a05edddf718923489662fb4779",
+    "accounting_sha": "add9fbd0a6b2f0b7fa71714d9cc94c99af7b374f"
+  },
+  "prior_attempts": [
+    {
+      "run": 1,
+      "wms_sha": "daca9ec4ecafcc887517e89df2f589940e350ae6",
+      "native_counts": {
+        "PASS": 53
+      },
+      "browser_status": "FAIL",
+      "browser_reason": "selectOption: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('region', { name: 'مواقع التخزين والجرد' }).getByLabel('العملية', { exact: true })\n",
+      "composed_marketplace_attempt": false,
+      "native_result_sha256": "f654436f469cc7d46b493511fb07c5ff03fde21c746a5868aac5661a716ac62d",
+      "full_pinned_MariaDB_extraction_proven": false,
+      "final_acceptance_input": false,
+      "acceptance_kind": null
+    },
+    {
+      "run": 2,
+      "wms_sha": "9309fb0e09de00ec8f5c05c3f7d5acf475c5a765",
+      "native_counts": {
+        "PASS": 53
+      },
+      "browser_status": "FAIL",
+      "browser_reason": "click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'تعديل المكوّنات', exact: true }).first()\n",
+      "composed_marketplace_attempt": false,
+      "native_result_sha256": "31c1e710ddf82a6662dd11ae7f3a76c179c5fd997af40b59024a27532acefab5",
+      "full_pinned_MariaDB_extraction_proven": false,
+      "final_acceptance_input": false,
+      "acceptance_kind": null
+    },
+    {
+      "run": 3,
+      "wms_sha": "b4828b6989d9ef58e21c700d45f76fe04a11ec29",
+      "native_counts": {
+        "PASS": 53
+      },
+      "browser_status": "FAIL",
+      "browser_reason": "waitForEvent: Timeout 10000ms exceeded while waiting for event \"requestfailed\"\n=========================== logs ===========================\nwaiting for event \"requestfailed\"\n============================================================",
+      "composed_marketplace_attempt": false,
+      "native_result_sha256": "3d9100a16dc030a7bffd93a4a5c65e3f582f81c7b67ddadf0bf87ee297c0cb8e",
+      "full_pinned_MariaDB_extraction_proven": false,
+      "final_acceptance_input": false,
+      "acceptance_kind": null
+    },
+    {
+      "run": 4,
+      "wms_sha": "8849656e5070bba4974ea1c555ed283848dfb5e2",
+      "native_counts": {
+        "PASS": 53
+      },
+      "browser_status": "FAIL",
+      "browser_reason": "locator.selectOption: Timeout 10000ms exceeded.\nCall log:\n  - waiting for locator('[data-native-order=\"SAL-ORD-2026-00032\"]').getByLabel('موقع حجر المرتجع', { exact: true })\n    - locator resolved to <select disabled aria-label=\"موقع حجر المرتجع\" data-tsd-source=\"/src/components/app/native-order-actions.tsx:85:11\">…</select>\n  - attempting select option action\n    2 × waiting for element to be visible and enabled\n      - element is not enabled\n    - retrying select option action\n    - waiting 20ms\n    2 × waiting for element to be visible and enabled\n      - element is not enabled\n    - retrying select option action\n      - waiting 100ms\n    20 × waiting for element to be visible and enabled\n       - element is not enabled\n     - retrying select option action\n       - waiting 500ms\n",
+      "composed_marketplace_attempt": false,
+      "native_result_sha256": "ab828db5b176519a2a333b0ec31af6e0386c1335b959a2d44d68e23792a6fff1",
+      "full_pinned_MariaDB_extraction_proven": false,
+      "final_acceptance_input": false,
+      "acceptance_kind": null
+    },
+    {
+      "run": 5,
+      "wms_sha": "943045e9acbc15029a8e1b44f42b59e3043f23e4",
+      "native_counts": {
+        "PASS": 53
+      },
+      "browser_status": "FAIL",
+      "browser_reason": "Invalid browser result: list index out of range",
+      "composed_marketplace_attempt": false,
+      "native_result_sha256": "ff82242bb656c51694632c9b1c9f247436d91acc0ed42f277856e24a5678288d",
+      "full_pinned_MariaDB_extraction_proven": false,
+      "final_acceptance_input": false,
+      "acceptance_kind": null
+    },
+    {
+      "run": 6,
+      "wms_sha": "c201e472c363f5c08f40e598620d78cda0e04b4b",
+      "native_counts": {
+        "PASS": 53,
+        "FAIL": 2
+      },
+      "browser_status": "FAIL",
+      "browser_reason": "locator.selectOption: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('region', { name: 'مواقع التخزين والجرد' }).getByLabel('العملية', { exact: true })\n",
+      "composed_marketplace_attempt": false,
+      "native_result_sha256": "d41c28e63cf0f09c2e7679638a960095507c026f84f2d76d6afe2e72f108760e",
+      "full_pinned_MariaDB_extraction_proven": false,
+      "final_acceptance_input": false,
+      "acceptance_kind": null
+    },
+    {
+      "run": 7,
+      "wms_sha": "582469d37d4ff3f920e009bdd9cfe9ce5a5fe2f0",
+      "native_counts": {
+        "PASS": 55
+      },
+      "browser_status": "PASS",
+      "browser_reason": null,
+      "composed_marketplace_attempt": false,
+      "native_result_sha256": "60e2022316a9171b83a2120d0159d5156281de9625dad333c5af3565aa1a6711",
+      "full_pinned_MariaDB_extraction_proven": false,
+      "final_acceptance_input": false,
+      "acceptance_kind": null
+    },
+    {
+      "run": 8,
+      "wms_sha": "156d5b3e9ad2513bad55c5ab8f0aa473c5aed705",
+      "native_counts": {
+        "PASS": 55
+      },
+      "browser_status": "PASS",
+      "browser_reason": null,
+      "composed_marketplace_attempt": false,
+      "native_result_sha256": "85f75fcf39d0c8102657a361aeab7a8386afca562107804dd60b3fd34ee89a14",
+      "full_pinned_MariaDB_extraction_proven": false,
+      "final_acceptance_input": false,
+      "acceptance_kind": null
+    },
+    {
+      "run": 9,
+      "wms_sha": "fa87088de243b186d6c131f82186231de2c20cf4",
+      "native_counts": {},
+      "browser_status": "NOT_RUN",
+      "browser_reason": "Upstream differs from archive: mariadb-11.8.9-linux-systemd-x86_64/bin/mariadbd",
+      "composed_marketplace_attempt": false,
+      "native_result_sha256": null,
+      "full_pinned_MariaDB_extraction_proven": false,
+      "final_acceptance_input": false,
+      "acceptance_kind": null
+    },
+    {
+      "run": 10,
+      "wms_sha": "fa87088de243b186d6c131f82186231de2c20cf4",
+      "native_counts": {
+        "PASS": 55
+      },
+      "browser_status": "PASS",
+      "browser_reason": null,
+      "composed_marketplace_attempt": false,
+      "native_result_sha256": "9049affd3554629e337cf74f3afa9e4eb5ff03c6624a019f15e2d76dd6a7b1b1",
+      "full_pinned_MariaDB_extraction_proven": true,
+      "final_acceptance_input": false,
+      "acceptance_kind": null
+    },
+    {
+      "run": 11,
+      "wms_sha": "798e72f65b77a6a05edddf718923489662fb4779",
+      "native_counts": {
+        "PASS": 55
+      },
+      "browser_status": "PASS",
+      "browser_reason": null,
+      "composed_marketplace_attempt": false,
+      "native_result_sha256": "f06cf00cc16984c22b8b6601dd5290a071e397116a9ffbbffe765702e53a6bd9",
+      "full_pinned_MariaDB_extraction_proven": true,
+      "final_acceptance_input": true,
+      "acceptance_kind": "standalone"
+    },
+    {
+      "run": 12,
+      "wms_sha": "798e72f65b77a6a05edddf718923489662fb4779",
+      "native_counts": {
+        "PASS": 55
+      },
+      "browser_status": "NOT_RUN",
+      "browser_reason": "site-install failed; see preserved log",
+      "composed_marketplace_attempt": true,
+      "native_result_sha256": "90457d1a157a9a66260c399f8e022c64445a741506dc2d1b6dc53ce08d6bd12f",
+      "full_pinned_MariaDB_extraction_proven": true,
+      "final_acceptance_input": false,
+      "acceptance_kind": null
+    },
+    {
+      "run": 13,
+      "wms_sha": "798e72f65b77a6a05edddf718923489662fb4779",
+      "native_counts": {
+        "PASS": 55
+      },
+      "browser_status": "PASS",
+      "browser_reason": null,
+      "composed_marketplace_attempt": true,
+      "native_result_sha256": "002e7ab62536c1d943605825ca897f87aabeacec28ebce26a827fd3f9675b727",
+      "full_pinned_MariaDB_extraction_proven": true,
+      "final_acceptance_input": true,
+      "acceptance_kind": "composed-server-native"
+    }
+  ],
+  "whole_WMS_goal_complete": false,
+  "BORVAT_composed_server_native": {
+    "status": "PASS",
+    "cases": [
+      {
+        "name": "server-auth-seller-approval-native-quote-order",
+        "status": "PASS"
+      },
+      {
+        "name": "real-native-reservation-and-seller-isolation",
+        "status": "PASS"
+      },
+      {
+        "name": "simulated-payment-separate-native-pick-pack-delivery-invoice",
+        "status": "PASS"
+      },
+      {
+        "name": "single-loyalty-authority-native-invoices-across-two-channel-replays",
+        "status": "PASS"
+      },
+      {
+        "name": "native-partial-return-credit-invoice-replay",
+        "status": "PASS"
+      },
+      {
+        "name": "single-loyalty-authority-native-partial-credits-once",
+        "status": "PASS"
+      },
+      {
+        "name": "native-documents-stock-GL-receipt-and-partial-refund-reconcile",
+        "status": "PASS"
+      },
+      {
+        "name": "distinct-buyer-orders-compete-for-last-native-unit",
+        "status": "PASS"
+      },
+      {
+        "name": "SIGKILL-after-real-remote-commit-and-local-service-restart",
+        "status": "PASS"
+      }
+    ],
+    "projection_readback": {
+      "status": "PASS",
+      "actual_WMS_projection_services": true,
+      "same_native_site": true,
+      "reports": [
+        {
+          "company": "TEST-A",
+          "sales_order": "SAL-ORD-2026-00034",
+          "delivery_note": "MAT-DN-2026-00028",
+          "projected_status": "fulfilled",
+          "stock_vouchers": [
+            "MAT-DN-2026-00029",
+            "MAT-DN-2026-00028"
+          ]
+        }
+      ],
+      "company_B_excluded": true
+    },
+    "source": {
+      "canonical_marketplace_head": "2d2c221a2df56db40bc349e5dbb11d1fcf5f4896",
+      "materialization_witness": "9841610956923cf2f3fedeea04497cf7e07bcb50",
+      "materialized_files": [
+        {
+          "path": "integrations/native-test/borvat_native_test/__init__.py",
+          "git_blob": "90a40c69f37ee729bccfb2081d4677db21b8b0a4",
+          "sha256": "7e4fe6ae62b698d474fde0dcca65dd913cd869bc9b2ec3e939be4dfa46ab4e6b"
+        },
+        {
+          "path": "integrations/native-test/borvat_native_test/api.py",
+          "git_blob": "8566ae631a978510b6030fb9afb3810015e778d3",
+          "sha256": "3bf0a731e45c06bcbc1f81eca5ebfcf7b4a67f89f06639637ee33fe83d793d1e"
+        },
+        {
+          "path": "integrations/native-test/borvat_native_test/hooks.py",
+          "git_blob": "da2e7cc8d28079c1690a2c531ecea5a25ec958db",
+          "sha256": "f640c57f0aeb219430b418e0c05385181b0e20ea62e718ad00b710411cc2fe9e"
+        },
+        {
+          "path": "integrations/native-test/borvat_native_test/modules.txt",
+          "git_blob": "8b137891791fe96927ad78e64b0aad7bded08bdc",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        {
+          "path": "integrations/native-test/pyproject.toml",
+          "git_blob": "fba9d63ff177f907d746985ff98832f5ad42becb",
+          "sha256": "49346923b3ce9591aac569b6c121f230dbcc79a03ce92e483e030dea8ee3f154"
+        },
+        {
+          "path": "packages/commerce-server/http.mjs",
+          "git_blob": "bafc0a6c07653956e94f192bcb7681abf60cd96e",
+          "sha256": "ad366a1b140d6ba6f1e85e394853aa537bcfff1af3d8e780b3f6b5ce495eda15"
+        },
+        {
+          "path": "packages/commerce-server/native-receiver.mjs",
+          "git_blob": "9ebf23b01b2b5ff330e95cdd6ea7b938526baebc",
+          "sha256": "c4b83cddec767885c360c8f6189c008cc0dbe95ec9bd3ed5762adc480d163a71"
+        },
+        {
+          "path": "packages/commerce-server/runtime.d.mts",
+          "git_blob": "fbe47145c4acf5383914b205ca7f393d961f3265",
+          "sha256": "6f8f8d1dd165fa671d43d592de48f87b9cff25a5629b13ff00fa78096f4dfef7"
+        },
+        {
+          "path": "packages/commerce-server/runtime.mjs",
+          "git_blob": "8570b6d8af80a646a321cc8f4dd8e783cb2024e3",
+          "sha256": "9365b2316c1e00b47c83fb0e82b372bfb354146af4ae310b9b5fab2eb34c887f"
+        },
+        {
+          "path": "packages/commerce-server/store.mjs",
+          "git_blob": "daa514e9579a92e7b4f8d416c806e637756ae6d4",
+          "sha256": "51ccc829b08963b7be455fbb558f5a4e1bd53d37c8e1811d95d46657514aae12"
+        },
+        {
+          "path": "packages/loyalty-authority/journal.mjs",
+          "git_blob": "6941ee85c7abf0a4aac2f08215165ca90779e6ea",
+          "sha256": "d554d6dbda8da6644d9ae348138f1c33e46428a631f1218d7008799dc63306ad"
+        },
+        {
+          "path": "scripts/commerce-integration/compiled-native-http.mjs",
+          "git_blob": "8a3a36e41862888d222c0a188ed239f03773bf0b",
+          "sha256": "e8e774df88b75b6382e7f061ea7171bdbe6beb3105b14dd917e0681e950f4563"
+        },
+        {
+          "path": "scripts/commerce-integration/native-bootstrap.py",
+          "git_blob": "befddba2bfe3c10e839bd5b4edf399cc6ec99c1e",
+          "sha256": "232a8ddeb0e460d02fe794508ab6826a35bd2ac4a4de088304344384eaa5a39a"
+        },
+        {
+          "path": "scripts/commerce-integration/native-cycle.mjs",
+          "git_blob": "0ae149ee290953cf5b65224cc0184c38e00b229f",
+          "sha256": "04c0e6676b7d33c940756edda04ec53f7028637084f14c2ebf4262d7a7cc6fd7"
+        },
+        {
+          "path": "scripts/commerce-integration/native-installer.py",
+          "git_blob": "99117dc152ae3b3c2699440cc29e1db173eaadbb",
+          "sha256": "9449ec735bb7279171bb5b8980a22cf7300d69e5b32f6eebcb96c03ea1605ea0"
+        },
+        {
+          "path": "packages/integration-contracts/command-journal.mjs",
+          "git_blob": "5589027b277d84581c1de3fee90a3b1b52973fe8",
+          "sha256": "12e782bda17f5c50e12d8b6d04bba7964f56b7a1470de50ac8f279e3e2841252"
+        },
+        {
+          "path": "AGENTS.md",
+          "git_blob": "e8dd695f4921827f61188a16d38e1c1cf47b9219",
+          "sha256": "752688eaa26afa32788ad5526053923d89a3afc5288f043f3574807ac0a3f59b"
+        },
+        {
+          "path": "README.md",
+          "git_blob": "5bba932bf6f6e53b26add2e1bfb0bab4a1dfb477",
+          "sha256": "af4e8cb7344df7b9a2d14a14254c699e2cbb27ffa971382e0e8fb173b6708cf2"
+        },
+        {
+          "path": "docs/architecture/ADR-008-isolated-server-native-boundary.md",
+          "git_blob": "6ce48985bdc8ec31c1a2dce605b60f3a29d00059",
+          "sha256": "4f8ef840b086f4f744652c6e55289424edeae620e9bdcb2fe65350d939ed8813"
+        }
+      ],
+      "wrapper_sha256": {
+        "market34-bounded-bootstrap.py": "a1826969719a97cf5a1b05959f3e122add4d303000946fc0324359e5c1eb5ca3",
+        "market34-bounded-installer.py": "77cabb8b10aa57fa924414d73c4f67fdea0fa682f4c076cb72cadfcc3e98c725",
+        "market34-wms-readback.ts": "d83dc7555552d4beb26ed7b6d226a40bd9590679264b7eb675391dcd9735b045"
+      },
+      "compiled_marketplace_HTTP_and_browser": "NOT_RUN: no compiled frontend materialized; server-native contract selected explicitly",
+      "WMS_browser": "unchanged full harness on the same fresh sites after server-native cases",
+      "run12": "FAIL: extension missing from HTTP PYTHONPATH; retained",
+      "run13": "inspect corresponding original results; not inferred from source review"
+    },
+    "canonical_result_sha256": "ae12169dfa07ff4876cd9d40460734742fc055950653c9848347beb9df7d4b28",
+    "WMS_repeat_case_count": 56,
+    "WMS_repeat_all_pass": true,
+    "exact_pair_gate": {
+      "native_atomic_candidate": "READY_FOR_HUMAN_EVIDENCE_REVIEW",
+      "errors": [],
+      "rendered_UI_cycle": "READY_FOR_HUMAN_EVIDENCE_REVIEW",
+      "operational_service_isolation": "BLOCKED",
+      "hosted_CI": "BLOCKED",
+      "PREPARATION": "BLOCKED",
+      "P01": "BLOCKED",
+      "phase_complete": false,
+      "codex_start_authorized": false,
+      "merge_authorized": false,
+      "deploy_authorized": false,
+      "human_review_required": true,
+      "wms_sha": "798e72f65b77a6a05edddf718923489662fb4779",
+      "accounting_sha": "add9fbd0a6b2f0b7fa71714d9cc94c99af7b374f"
+    },
+    "private_runtime_removed": true
+  },
+  "current_accounting_branch_comparison": {
+    "head": "05747ceb1fb5d8146082e81d4ad133a12b115c82",
+    "pr": "https://github.com/borvat/surooh-accounting/pull/38",
+    "compared": 17,
+    "differences": [
+      {
+        "path": "AGENTS.md",
+        "before": "c629d436939e7357da96becdd6ab54849d7e373d",
+        "now": "374a9d648ad9736cac62fa923b3153568e43048d"
+      },
+      {
+        "path": "surooh_accounting/native_lab/api.py",
+        "before": "ade67342c4d917a7c732ec9a84df420fcc9a5965",
+        "now": "18e1178c722dcf31b84a1ff5524559ad2ead16cc"
+      },
+      {
+        "path": "surooh_accounting/native_lab/closing.py",
+        "before": "10c8e511c793ce53ff4d12ce16b57e5ae276d94d"
+      },
+      {
+        "path": "surooh_accounting/native_lab/scanner.py",
+        "before": "e072856d29145f523cf2728e8f83fb78d2b8c56c"
+      },
+      {
+        "path": "surooh_accounting/native_lab/shipping.py",
+        "before": "a2dfb74463d0b891a20000fafb1695af1e9a3223"
+      },
+      {
+        "path": "surooh_accounting/native_lab/stock_ops.py",
+        "before": "91cc7b978718d233795832d3e0c72e4683777d87"
+      },
+      {
+        "path": "validation/native_guard/surooh_native_guard/hooks.py",
+        "before": "6fa575c7a37418d4d0176d48e0b785fab4c3b55b",
+        "now": "911a479eb2d60fb156cd40bf4ebfb0098033c210"
+      }
+    ]
+  }
+}

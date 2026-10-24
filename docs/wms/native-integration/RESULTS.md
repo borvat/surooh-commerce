@@ -1,3 +1,5 @@
+> Current evidence (2026-10-24): [PR30 verified native cycle](../verified-cycle/RESULTS.md). NI-F01 has passing bounded real atomic-handoff and browser evidence. Full warehouse scope and separate operational service/storage isolation remain OPEN; the original blocked run below is retained.
+
 > Follow-up candidate after owner review: [Atomic Pick results](../atomic-pick/RESULTS.md), paired PR22/PR31. NI-F01 now has bounded native evidence; full browser and operational isolation remain BLOCKED. Historical run below is preserved.
 
 # Final native integration results — preparation remains blocked

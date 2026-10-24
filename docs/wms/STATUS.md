@@ -1,3 +1,5 @@
+> Current engineering checkpoint (2026-10-24): [verified native cycle](verified-cycle/RESULTS.md), Draft PR30. The current owner mandate authorizes isolated implementation and verification; full WMS completion, formal release, main merge and production deployment remain OPEN/unapproved. Earlier status and preparation holds below are historical.
+
 > Current direction: owner approved shared ERPNext16 accounting/stock/valuation for preparation only. [Shared authority](shared-core/AUTHORITY.md) and [phase alignment](shared-core/PHASE_ALIGNMENT.md) supersede any historical Supabase/Tryton writable-ledger instructions below. Current source/production remains unchanged. Codex, merge, deploy and real migration remain held.
 
 # Foundation delivery status

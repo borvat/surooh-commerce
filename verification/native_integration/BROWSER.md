@@ -1,3 +1,5 @@
+> Current replay/evidence (2026-10-24): [verified-cycle report](../../docs/wms/verified-cycle/RESULTS.md) and [replay](../../docs/wms/verified-cycle/REPLAY.md). Pass `--browser-node /absolute/node-24.19.0` separately from Bun; current acceptance also verifies the complete MariaDB archive/extraction. The original bounded harness packet below is historical.
+
 # Bounded browser harness continuation
 
 This is test-only follow-up to WMS Draft PR22 at

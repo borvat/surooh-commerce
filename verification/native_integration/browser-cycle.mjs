@@ -24,6 +24,7 @@ const result = {
 };
 let server,
   browser,
+  page,
   executing = false;
 try {
   if (!executable || !fs.existsSync(executable))
@@ -96,7 +97,9 @@ try {
     },
     { url: origin, token: config.token },
   );
-  const page = await context.newPage();
+  page = await context.newPage();
+  result.page_errors = [];
+  page.on("pageerror", (error) => result.page_errors.push(error.message));
   const endpoint = "**/api/method/surooh_accounting.native_lab.api.command";
   const api = async (operation, payload = {}) => {
     const response = await fetch(
@@ -171,6 +174,7 @@ try {
   await clickCommand("receive", () =>
     receipt.getByRole("button", { name: "تأكيد", exact: true }).click(),
   );
+  await receipt.waitFor({ state: "hidden" });
   const storagePanel = page.getByRole("region", { name: "مواقع التخزين والجرد" });
   await storagePanel.getByLabel("العملية", { exact: true }).selectOption("location_create");
   await storagePanel.getByLabel("اسم الموقع", { exact: true }).fill("TEST-BROWSER-QUARANTINE");
@@ -475,6 +479,19 @@ try {
   };
 } catch (error) {
   result.reason = error.message.replaceAll(config.token || "__absent__", "[REDACTED]");
+  if (page) {
+    result.visible_text_at_failure = (
+      await page
+        .locator("body")
+        .innerText()
+        .catch(() => "")
+    ).replaceAll(config.token || "__absent__", "[REDACTED]");
+    if (config.artifactDir) {
+      await page
+        .screenshot({ path: `${config.artifactDir}/browser-failure.png`, fullPage: true })
+        .catch(() => {});
+    }
+  }
   if (executing) result.status = "FAIL";
 } finally {
   try {

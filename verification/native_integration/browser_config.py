@@ -38,6 +38,7 @@ def browser_input(token, env=None):
 
 def run_browser(config, output, timeout=480):
     """Keep failed/timeout/malformed browser evidence visible and redact the session."""
+    config = {**config, "artifactDir": str(output.parent.resolve())}
     row = {
         "id": "B01_rendered_existing_React_full_native_cycle",
         "status": "FAIL",

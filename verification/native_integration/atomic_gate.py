@@ -6,11 +6,21 @@ import json
 from pathlib import Path
 import sys
 
+SOURCE_ARCHIVES = {
+    "frappe.tar.gz": ("frappe-16.52.0", "34087f9c8ea018ac79011ee95863c6b57bce6bc19e923b1545723b3ab994268e"),
+    "erpnext.tar.gz": ("erpnext-16.52.0", "cfd1e3d4495a4e70e333a42aec1689552143dc6fc57faac5329cadef08dbc810"),
+    "mariadb.tar.gz": ("mariadb-11.8.9-linux-systemd-x86_64", "32f8871a2aa38b36aa418b7f4abc6fc0c6ef1ba5a45798cacb2afa52c8a6113b"),
+}
+
 
 def evaluate(base, wms_sha, accounting_sha):
     base = Path(base)
     report = json.loads((base / "bootstrap-results.json").read_text())
     errors = []
+    sources = report.get("source_archives", {})
+    for archive, (folder, digest) in SOURCE_ARCHIVES.items():
+        if sources.get(archive) != digest or sources.get(folder + "_files_verified", 0) < 1:
+            errors.append("pinned extracted source not proven: " + archive)
     if (
         report.get("source_sha") != wms_sha
         or report.get("accounting_sha") != accounting_sha

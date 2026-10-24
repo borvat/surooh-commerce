@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -78,6 +78,9 @@ function Importer({ kind }: { kind: ImportKind }) {
   const [rows, setRows] = useState<Record<string, string>[] | null>(null);
   const [fileName, setFileName] = useState("");
   const [result, setResult] = useState<ImportResult | null>(null);
+  const [fileError, setFileError] = useState("");
+  const [reading, setReading] = useState(false);
+  const selection = useRef(0);
   const missing = rows ? t.columns.filter((c) => !(c in (rows[0] ?? {}))) : [];
   const check = useMutation({
     mutationFn: () => runImport(kind, rows!, false),
@@ -95,6 +98,7 @@ function Importer({ kind }: { kind: ImportKind }) {
     },
     onError: (e) => toast.error(errMsg(e)),
   });
+  const busy = reading || check.isPending || apply.isPending;
   return (
     <Panel className="mt-4 p-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -111,13 +115,28 @@ function Importer({ kind }: { kind: ImportKind }) {
         <input
           type="file"
           accept=".csv,text/csv"
-          className="text-sm"
+          disabled={check.isPending || apply.isPending}
+          className="max-w-full min-w-0 text-sm"
           onChange={async (e) => {
+            const current = ++selection.current;
             const f = e.target.files?.[0];
-            if (!f) return;
-            setFileName(f.name);
+            setRows(null);
             setResult(null);
-            setRows(parseCsv(await f.text()));
+            setFileError("");
+            setFileName(f?.name ?? "");
+            if (!f) {
+              setReading(false);
+              return;
+            }
+            setReading(true);
+            try {
+              const parsed = parseCsv(await f.text());
+              if (current === selection.current) setRows(parsed);
+            } catch (error) {
+              if (current === selection.current) setFileError(errMsg(error));
+            } finally {
+              if (current === selection.current) setReading(false);
+            }
           }}
         />
         {rows && (
@@ -126,13 +145,19 @@ function Importer({ kind }: { kind: ImportKind }) {
           </span>
         )}
       </div>
+      {reading && <p role="status">جارٍ قراءة الملف…</p>}
+      {fileError && (
+        <p role="alert" className="mt-2 text-sm text-destructive">
+          {fileError}
+        </p>
+      )}
       {missing.length > 0 && (
         <p className="mt-2 text-sm text-destructive">Missing columns: {missing.join(", ")}</p>
       )}
       <div className="mt-3 flex gap-2">
         <Button
           size="sm"
-          disabled={!rows?.length || missing.length > 0 || check.isPending}
+          disabled={!rows?.length || missing.length > 0 || busy}
           onClick={() => check.mutate()}
         >
           Check file
@@ -140,7 +165,7 @@ function Importer({ kind }: { kind: ImportKind }) {
         <Button
           size="sm"
           variant="default"
-          disabled={!result?.ok || result.applied || apply.isPending}
+          disabled={!result?.ok || result.applied || busy}
           onClick={() =>
             confirm(`Apply ${rows?.length} rows? This saves all of them in one go.`) &&
             apply.mutate()

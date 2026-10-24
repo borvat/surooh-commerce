@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, Empty } from "./page";
+import { useMe } from "@/lib/auth";
+import { nativeLabEndpoint } from "@/lib/native-lab-client";
+import {
+  stockJournalKey,
+  readStockCommand,
+  writeStockCommand,
+  clearStockCommand,
+  type StockCommand,
+} from "@/lib/native-stock-journal";
 import {
   stockLocations,
   runStockOperation,
@@ -11,6 +20,11 @@ import {
 
 export function NativeStockOperations({ canOperate }: { canOperate: boolean }) {
   const qc = useQueryClient();
+  const { data: me } = useMe();
+  const endpoint = nativeLabEndpoint();
+  const journalKey = endpoint && me?.id ? stockJournalKey(endpoint, me.id) : null;
+  const [loadedKey, setLoadedKey] = useState<string | null>(null);
+  const [journalError, setJournalError] = useState("");
   const query = useQuery({ queryKey: ["native-locations"], queryFn: stockLocations });
   const [mode, setMode] = useState<StockOperation>("stock_transfer");
   const [source, setSource] = useState("");
@@ -28,11 +42,21 @@ export function NativeStockOperations({ canOperate }: { canOperate: boolean }) {
     version: string;
   } | null>(null);
   // Once sent, freeze the exact command. Response-loss retries must reuse its key and body.
-  const [command, setCommand] = useState<{
-    operation: StockOperation;
-    payload: Record<string, unknown>;
-    id: string;
-  } | null>(null);
+  const [command, setCommand] = useState<StockCommand | null>(null);
+  useEffect(() => {
+    setLoadedKey(null);
+    setCommand(null);
+    if (!journalKey) return;
+    try {
+      setCommand(readStockCommand(window.sessionStorage, journalKey));
+      setJournalError("");
+      setLoadedKey(journalKey);
+    } catch {
+      setJournalError(
+        "تعذّر قراءة سجل العملية المعلّقة. أوقف الإدخال واطلب مراجعة المستند في المحرك؛ لا تمسح السجل لإعادة التنفيذ.",
+      );
+    }
+  }, [journalKey]);
   const mutation = useMutation({
     mutationFn: (value: NonNullable<typeof command>) =>
       runStockOperation(value.operation, value.payload, value.id),
@@ -41,10 +65,21 @@ export function NativeStockOperations({ canOperate }: { canOperate: boolean }) {
   const snapshot = query.data;
   const stock = snapshot?.bins.find((row) => row.warehouse === source && row.item_code === item);
   const locked = command !== null;
+  const acknowledged = mutation.isSuccess && mutation.variables?.id === command?.id;
   function submit() {
     // A refreshed balance cannot prove whether an unanswered command committed.
     // Keep its identity frozen until the boundary acknowledges that same command.
-    if (locked || mutation.isPending || query.isFetching || query.isError || !snapshot) return;
+    if (
+      locked ||
+      mutation.isPending ||
+      query.isFetching ||
+      query.isError ||
+      !snapshot ||
+      !journalKey ||
+      loadedKey !== journalKey ||
+      journalError
+    )
+      return;
     if (
       mode === "stock_count" &&
       (!countStart || countStart.warehouse !== source || countStart.item !== item)
@@ -68,6 +103,14 @@ export function NativeStockOperations({ canOperate }: { canOperate: boolean }) {
                 ...(rate ? { valuation_rate: Number(rate) } : {}),
               },
     };
+    try {
+      writeStockCommand(window.sessionStorage, journalKey, value);
+    } catch {
+      setJournalError(
+        "تعذّر حفظ هوية العملية قبل الإرسال. لم تُرسل العملية؛ أعد تحميل الصفحة للتحقق من السجل.",
+      );
+      return;
+    }
     setCommand(value);
     mutation.mutate(value);
   }
@@ -111,7 +154,15 @@ export function NativeStockOperations({ canOperate }: { canOperate: boolean }) {
           }}
         >
           <fieldset
-            disabled={locked || query.isFetching || query.isError || !snapshot}
+            disabled={
+              locked ||
+              query.isFetching ||
+              query.isError ||
+              !snapshot ||
+              !journalKey ||
+              loadedKey !== journalKey ||
+              !!journalError
+            }
             className="grid gap-3 sm:grid-cols-2"
           >
             <label>
@@ -254,25 +305,41 @@ export function NativeStockOperations({ canOperate }: { canOperate: boolean }) {
             </Button>
           </fieldset>
           {mutation.isPending && <p role="status">جارٍ تنفيذ العملية…</p>}
-          {mutation.isError && (
+          {journalError && <p role="alert">{journalError}</p>}
+          {command && !acknowledged && !mutation.isPending && (
             <div role="alert" className="space-y-2">
-              <p>{mutation.error.message}</p>
+              <p>
+                {mutation.error?.message ??
+                  "توجد عملية محفوظة لم تُؤكد نتيجتها. تحقّق من نفس العملية قبل بدء عملية أخرى."}
+              </p>
+              <p className="break-all text-xs" dir="ltr">
+                {command.operation} · {command.id}
+              </p>
               <Button
                 type="button"
                 variant="outline"
+                disabled={!journalKey || loadedKey !== journalKey || !!journalError}
                 onClick={() => command && mutation.mutate(command)}
               >
                 إعادة التحقق من نفس العملية
               </Button>
             </div>
           )}
-          {mutation.isSuccess && <p role="status">تم تأكيد العملية وحفظ مستندها.</p>}
-          {locked && mutation.isSuccess && (
+          {acknowledged && <p role="status">تم تأكيد العملية وحفظ مستندها.</p>}
+          {locked && acknowledged && (
             <Button
               type="button"
               variant="ghost"
               disabled={query.isFetching || query.isError}
               onClick={() => {
+                try {
+                  clearStockCommand(window.sessionStorage, journalKey!, command!);
+                } catch {
+                  setJournalError(
+                    "تعذّر إغلاق سجل العملية. أعد تحميل الصفحة قبل إدخال عملية جديدة.",
+                  );
+                  return;
+                }
                 setCommand(null);
                 setCountStart(null);
                 mutation.reset();

@@ -46,6 +46,11 @@ export function nativeLabConfigured() {
   return config !== undefined;
 }
 
+/** Non-secret namespace for actor-bound pending command intents. */
+export function nativeLabEndpoint() {
+  return config ? new URL(config.url).origin : undefined;
+}
+
 /** Coalesce only simultaneous empty-payload reads; never retain a completed value. */
 export function nativeLabRead(operation: "snapshot" | "stock_locations") {
   if (!["snapshot", "stock_locations"].includes(operation))

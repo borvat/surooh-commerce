@@ -42,6 +42,9 @@ export function NativeStockOperations({ canOperate }: { canOperate: boolean }) {
   const stock = snapshot?.bins.find((row) => row.warehouse === source && row.item_code === item);
   const locked = command !== null;
   function submit() {
+    // A refreshed balance cannot prove whether an unanswered command committed.
+    // Keep its identity frozen until the boundary acknowledges that same command.
+    if (locked || mutation.isPending || query.isFetching || query.isError || !snapshot) return;
     if (
       mode === "stock_count" &&
       (!countStart || countStart.warehouse !== source || countStart.item !== item)
@@ -264,7 +267,7 @@ export function NativeStockOperations({ canOperate }: { canOperate: boolean }) {
             </div>
           )}
           {mutation.isSuccess && <p role="status">تم تأكيد العملية وحفظ مستندها.</p>}
-          {locked && !mutation.isPending && (
+          {locked && mutation.isSuccess && (
             <Button
               type="button"
               variant="ghost"

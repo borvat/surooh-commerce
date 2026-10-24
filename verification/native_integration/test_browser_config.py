@@ -26,9 +26,28 @@ class BrowserHarnessTests(unittest.TestCase):
     def test_ambient_browser_settings_are_not_inherited(self):
         parser = argparse.ArgumentParser()
         add_arguments(parser)
-        env = {"SUROOH_BROWSER_EXECUTABLE": "ambient", "SUROOH_PLAYWRIGHT_MODULE": "ambient"}
+        env = {"SUROOH_BROWSER_EXECUTABLE": "ambient", "SUROOH_PLAYWRIGHT_MODULE": "ambient", "SUROOH_BROWSER_NODE": "ambient"}
         configure_environment(parser.parse_args([]), env)
         self.assertEqual(env, {})
+
+    def test_explicit_node_is_forwarded_without_changing_application_bun(self):
+        parser = argparse.ArgumentParser()
+        add_arguments(parser)
+        env = {"SUROOH_BUN": "/tmp/bun", "SUROOH_WMS_ROOT": "/tmp/wms"}
+        configure_environment(parser.parse_args(["--browser-node", sys.executable]), env)
+        config = browser_input("synthetic-session", env)
+        self.assertEqual(config["node"], str(Path(sys.executable).resolve()))
+        self.assertEqual(config["bun"], "/tmp/bun")
+
+    def test_explicit_browser_runtime_is_used_for_real_child_process(self):
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            script = root / "verification/native_integration/browser-cycle.mjs"
+            script.parent.mkdir(parents=True)
+            script.write_text('import json\nprint(json.dumps({"id":"B01_rendered_existing_React_full_native_cycle","status":"PASS","phase_complete":False,"codex_start_authorized":False}))')
+            row = run_browser({"node": sys.executable, "bun": str(root / "absent-bun"), "wmsRoot": str(root), "token": "fixture-secret"}, root / "log")
+            self.assertEqual(row["status"], "PASS")
+            self.assertEqual(row["exit_code"], 0)
 
     def fixture(self, source, timeout=5):
         with tempfile.TemporaryDirectory() as root:

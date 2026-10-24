@@ -8,6 +8,7 @@ from pathlib import Path
 
 
 def add_arguments(parser):
+    parser.add_argument("--browser-node", type=Path)
     parser.add_argument("--browser-executable", type=Path)
     parser.add_argument("--playwright-module", type=Path)
 
@@ -15,6 +16,7 @@ def add_arguments(parser):
 def configure_environment(args, env):
     # Only CLI values enter the sanitized child environment, not ambient overrides.
     for argument, key in [
+        ("browser_node", "SUROOH_BROWSER_NODE"),
         ("browser_executable", "SUROOH_BROWSER_EXECUTABLE"),
         ("playwright_module", "SUROOH_PLAYWRIGHT_MODULE"),
     ]:
@@ -28,6 +30,7 @@ def browser_input(token, env=None):
     env = os.environ if env is None else env
     result = {"token": token, "bun": env["SUROOH_BUN"], "wmsRoot": env["SUROOH_WMS_ROOT"]}
     for key, target in [
+        ("SUROOH_BROWSER_NODE", "node"),
         ("SUROOH_BROWSER_EXECUTABLE", "executable"),
         ("SUROOH_PLAYWRIGHT_MODULE", "playwright"),
     ]:
@@ -48,7 +51,7 @@ def run_browser(config, output, timeout=480):
     process = None
     try:
         process = subprocess.Popen(
-            [config["bun"], str(Path(config["wmsRoot"]) / "verification/native_integration/browser-cycle.mjs")],
+            [config.get("node") or config["bun"], str(Path(config["wmsRoot"]) / "verification/native_integration/browser-cycle.mjs")],
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
             text=True, start_new_session=True,
         )

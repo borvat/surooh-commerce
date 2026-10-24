@@ -85,7 +85,7 @@ def run(config):
                      "quote_checks.py", "bank_checks.py", "credit_checks.py",
                      "supplier_payment_checks.py", "reversal_checks.py",
                      "document_reversal_checks.py", "bank_reversal_checks.py",
-                     "delivery_checks.py"]:
+                     "delivery_checks.py", "report_checks.py"]:
             p = subprocess.run([sys.executable, str(scripts / name)], env=env,
                                capture_output=True, text=True, timeout=360)
             # Original scripts log document IDs/assertions, never credentials.
@@ -103,5 +103,5 @@ def run(config):
             "site": "wms-native-a.invalid", "suites": results,
             "marketplace_acceptance": "NOT_RUN", "hosted_acceptance": "NOT_RUN",
         }, indent=2) + "\n")
-    if len(results) != 11 or any(x["exit_code"] for x in results):
+    if len(results) != 12 or any(x["exit_code"] for x in results):
         raise RuntimeError("Shared Accounting acceptance failed; see retained suite logs")

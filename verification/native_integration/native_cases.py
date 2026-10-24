@@ -424,6 +424,9 @@ def run(config):
     case("N01b_second_native_site_company_and_credentials", setup_b)
     if rows[-1]["status"] != "PASS":
         raise RuntimeError("Second native setup failed")
+    if config.get("shared_workbench"):
+        from shared_cases import prepare
+        prepare(config)
     try:
         log = (out / "frappe-http.log").open("w")
         process = subprocess.Popen(
@@ -1104,6 +1107,9 @@ def run(config):
         browser_row = run_browser(browser_input(token()), out / "browser-cycle.log")
         rows.append(browser_row)
         save()
+        if config.get("shared_workbench"):
+            from shared_cases import run as shared_run
+            shared_run(config)
     finally:
         if process:
             process.terminate()

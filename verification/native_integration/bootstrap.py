@@ -28,6 +28,7 @@ def main():
     parser.add_argument("--accounting-root", type=Path, required=True)
     parser.add_argument("--bun", type=Path, required=True)
     add_arguments(parser)
+    parser.add_argument("--with-accounting-workbench", action="store_true")
     args = parser.parse_args()
     lab, out = args.runtime_root.resolve(), args.output.resolve()
     accounting = args.accounting_root.resolve()
@@ -84,6 +85,8 @@ def main():
     env["PYTHONPATH"] = (
         str(accounting / "validation/native_guard") + os.pathsep + str(accounting)
     )
+    if args.with_accounting_workbench:
+        env["PYTHONPATH"] += os.pathsep + str(accounting / "validation/invoice_workbench") + os.pathsep + str(accounting / "validation/invoice_workbench/local_testing")
     env["SUROOH_WMS_ROOT"] = str(ROOT)
     env["SUROOH_BUN"] = str(args.bun.absolute())
     configure_environment(args, env)
@@ -178,6 +181,16 @@ def main():
         (sites / "apps.txt").write_text(
             "frappe\nerpnext\nsurooh_accounting\nsurooh_native_guard\n"
         )
+        if args.with_accounting_workbench:
+            (bench / "apps/surooh_invoice_workbench").symlink_to(
+                accounting / "validation/invoice_workbench", target_is_directory=True
+            )
+            with (sites / "apps.txt").open("a") as apps:
+                apps.write("surooh_invoice_workbench\n")
+            assets = lab / "assets-bench/sites/assets"
+            if not (assets / "assets.json").is_file():
+                raise RuntimeError("Build the real pinned Frappe website assets before shared acceptance")
+            (sites / "assets").symlink_to(assets, target_is_directory=True)
         common = {
             "redis_cache": "redis://127.0.0.1:17379/0",
             "redis_queue": "redis://127.0.0.1:17379/1",
@@ -274,7 +287,7 @@ def main():
         private = work / "private-bootstrap.json"
         private.write_text(
             json.dumps(
-                {"password": password, "sites": str(sites), "evidence": str(out)}
+                {"password": password, "sites": str(sites), "evidence": str(out), "shared_workbench": args.with_accounting_workbench, "accounting_root": str(accounting)}
             )
         )
         private.chmod(0o600)

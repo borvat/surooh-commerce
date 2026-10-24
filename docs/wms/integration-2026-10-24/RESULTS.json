@@ -1,0 +1,495 @@
+{
+  "status": "BOUNDED_NATIVE_HTTP_PASS_BROWSER_BLOCKED",
+  "full_wms_goal": "OPEN",
+  "release_approved": false,
+  "hosted_acceptance": false,
+  "code_group": {
+    "wms": {
+      "canonical": "874d2019690234e62b3498278965d3161674267e",
+      "tree": "740077372666ba1f2ea25e187a4414db26385df2",
+      "local_witness": "766f3fef55f587989ed8907bbfc8116f27865afa"
+    },
+    "accounting": {
+      "canonical": "87e1b9709db214351c606aa1f99927ba99b059f7",
+      "local_witness": "f79b4baa944c911760c6d12dcb6720bc5241b02b",
+      "exact_app_guard_test_blobs": 212,
+      "missing": [],
+      "changed": []
+    },
+    "marketplace": {
+      "inspected": "a595b3c3996743b3ebb9b86ba97f532f61d47e6a",
+      "acceptance_with_this_group": "NOT_RUN"
+    },
+    "compatible_three_app_release": "NOT_ESTABLISHED"
+  },
+  "fresh_two_company_sites": true,
+  "data": "synthetic_only",
+  "source_unchanged": true,
+  "native_summary": {
+    "PASS": 55,
+    "BLOCKED": 1
+  },
+  "native_cases": [
+    {
+      "id": "N01_native_company_items_bundle_and_app_setup",
+      "status": "PASS"
+    },
+    {
+      "id": "N01b_second_native_site_company_and_credentials",
+      "status": "PASS"
+    },
+    {
+      "id": "N02_HTTP_native_receipt_quantity_and_valuation",
+      "status": "PASS"
+    },
+    {
+      "id": "N03_existing_WMS_order_service_bundle_reservations_and_replay",
+      "status": "PASS"
+    },
+    {
+      "id": "N04_native_durable_payload_conflict",
+      "status": "PASS"
+    },
+    {
+      "id": "N05_full_pick_pack_handoff",
+      "status": "PASS"
+    },
+    {
+      "id": "N05a_native_pick_handoff_guard",
+      "status": "PASS"
+    },
+    {
+      "id": "N06_WMS_ship_native_DeliveryNote_COGS_GL",
+      "status": "PASS"
+    },
+    {
+      "id": "N07_native_return_replay_value_and_GL_reversal",
+      "status": "PASS"
+    },
+    {
+      "id": "N08_WMS_cancel_and_duplicate_event",
+      "status": "PASS"
+    },
+    {
+      "id": "N09_native_HTTP_verified_identity_company_and_role",
+      "status": "PASS"
+    },
+    {
+      "id": "N10_durable_token_revocation_before_replay",
+      "status": "PASS"
+    },
+    {
+      "id": "N11_raw_RPC_API_and_legacy_writer_denial",
+      "status": "PASS"
+    },
+    {
+      "id": "N12_fresh_DB_role_revocation_and_claim_escalation",
+      "status": "PASS"
+    },
+    {
+      "id": "N13_native_HTTP_concurrent_command_replay",
+      "status": "PASS"
+    },
+    {
+      "id": "N14_real_RQ_job_and_execution_time_revocation",
+      "status": "PASS"
+    },
+    {
+      "id": "N15_inflight_HTTP_permission_revocation_current_locking_reads",
+      "status": "PASS"
+    },
+    {
+      "id": "N16_HTTP_private_file_boundary",
+      "status": "PASS"
+    },
+    {
+      "id": "N17_native_lost_response_process_kill_restart_and_replay",
+      "status": "PASS"
+    },
+    {
+      "id": "N18_two_fresh_sites_DB_credentials_and_HTTP_identity",
+      "status": "PASS"
+    },
+    {
+      "id": "A01_atomic_handoff_replay_and_native_links",
+      "status": "PASS"
+    },
+    {
+      "id": "A02_concurrent_pick_same_command",
+      "status": "PASS"
+    },
+    {
+      "id": "A03_pick_cancel_race",
+      "status": "PASS"
+    },
+    {
+      "id": "A04_packed_ship_cancel_retry_race",
+      "status": "PASS"
+    },
+    {
+      "id": "A05_process_death_rolls_back_handoff",
+      "status": "PASS"
+    },
+    {
+      "id": "A06_handoff_vs_competing_shared_bundle",
+      "status": "PASS"
+    },
+    {
+      "id": "A07_actual_WMS_projection_service_over_HTTP",
+      "status": "PASS"
+    },
+    {
+      "id": "A08_packed_cancel_and_pack_replay",
+      "status": "PASS"
+    },
+    {
+      "id": "A09_actual_screen_mutation_services_native_full_cycle",
+      "status": "PASS"
+    },
+    {
+      "id": "O01_native_locations_and_WMS_projection",
+      "status": "PASS"
+    },
+    {
+      "id": "O02_native_transfer_replay_quantity_and_value_conservation",
+      "status": "PASS"
+    },
+    {
+      "id": "O03_warehouse_boundaries_and_quantity_validation",
+      "status": "PASS"
+    },
+    {
+      "id": "O04_reserved_stock_protected_from_transfer_and_count",
+      "status": "PASS"
+    },
+    {
+      "id": "O05_native_count_value_GL_replay_and_stale_count",
+      "status": "PASS"
+    },
+    {
+      "id": "O06_concurrent_last_unit_transfer_and_quarantine",
+      "status": "PASS"
+    },
+    {
+      "id": "O07_native_quarantine_return_replay_GL_and_inspection_release",
+      "status": "PASS"
+    },
+    {
+      "id": "O08_return_and_count_boundary_validation",
+      "status": "PASS"
+    },
+    {
+      "id": "O09_equal_quantity_does_not_hide_movements_during_count",
+      "status": "PASS"
+    },
+    {
+      "id": "S01_invalid_scans_do_not_create_pick_or_change_reservations",
+      "status": "PASS"
+    },
+    {
+      "id": "S02_actual_WMS_scanner_service_native_pick_audit_and_replay",
+      "status": "PASS"
+    },
+    {
+      "id": "S03_manual_pick_evidence_and_cancelled_order_are_not_rewritten",
+      "status": "PASS"
+    },
+    {
+      "id": "P01_three_WMS_batches_preserve_remainder_and_native_SLE_GL",
+      "status": "PASS"
+    },
+    {
+      "id": "P02_concurrent_batch_replay_conflict_and_stale_history",
+      "status": "PASS"
+    },
+    {
+      "id": "P03_batch_scope_guards_and_per_delivery_quarantine_return",
+      "status": "PASS"
+    },
+    {
+      "id": "P04_competing_new_batches_and_concurrent_ship_have_one_effect",
+      "status": "PASS"
+    },
+    {
+      "id": "P05_SIGKILL_after_first_batch_reservation_rolls_back_and_recovers",
+      "status": "PASS"
+    },
+    {
+      "id": "P06_packed_batch_cancel_restores_reservation_and_keeps_history",
+      "status": "PASS"
+    },
+    {
+      "id": "P07_old_DB_snapshot_cannot_hide_committed_batch_history",
+      "status": "PASS"
+    },
+    {
+      "id": "P08_old_DB_snapshot_pack_ship_cancel_keep_one_native_effect",
+      "status": "PASS"
+    },
+    {
+      "id": "P09_close_remainder_releases_only_unused_native_reservations",
+      "status": "PASS"
+    },
+    {
+      "id": "P10_close_refuses_active_batch_and_stale_intent",
+      "status": "PASS"
+    },
+    {
+      "id": "P11_old_snapshot_and_concurrent_close_keep_one_native_effect",
+      "status": "PASS"
+    },
+    {
+      "id": "P12_SIGKILL_between_reservation_release_and_close_rolls_back",
+      "status": "PASS"
+    },
+    {
+      "id": "C01_distinct_orders_compete_for_one_last_native_unit",
+      "status": "PASS"
+    },
+    {
+      "id": "C02_bundle_and_single_compete_for_the_same_last_component",
+      "status": "PASS"
+    },
+    {
+      "id": "B01_rendered_existing_React_full_native_cycle",
+      "status": "BLOCKED"
+    }
+  ],
+  "accounting_suites": [
+    {
+      "program": "http_checks.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertion_pass_lines": 15,
+      "log_sha256": "f0900d44668e3efc0c2ecffd8f50e6025a94883d2f2d4ed379c88cce67185360"
+    },
+    {
+      "program": "receipt_checks.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertion_pass_lines": 26,
+      "log_sha256": "145369c8498bd14dd25b954447ea24e994be4293450097399a641e69028c8f0f"
+    },
+    {
+      "program": "purchase_checks.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertion_pass_lines": 36,
+      "log_sha256": "50a0a46ae61297a076b027043c35b6fce3080074d7b884a973138bdd8a9c8da7"
+    },
+    {
+      "program": "quote_checks.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertion_pass_lines": 25,
+      "log_sha256": "ad60ff9a30bb30abba17658078bb8096aa655550d528d2f632dc9e566d09df28"
+    },
+    {
+      "program": "bank_checks.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertion_pass_lines": 29,
+      "log_sha256": "2691d9e91f333233efee627a0968d76af23bd1cd70bc827b6385640cbe3dbb34"
+    },
+    {
+      "program": "credit_checks.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertion_pass_lines": 35,
+      "log_sha256": "ade59222eea354950c035cc185fde4ffdcce66643b44819f5f12a37fd50f91a2"
+    },
+    {
+      "program": "supplier_payment_checks.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertion_pass_lines": 28,
+      "log_sha256": "6a981ac0e8912a15e05c5da16821568be4b62fd3fda5794c13d4f4ccd530efb2"
+    },
+    {
+      "program": "reversal_checks.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertion_pass_lines": 31,
+      "log_sha256": "b11bdc5506f74be23180b587c68d08b352f06ffcd4483a409d0d23bb3bb74316"
+    },
+    {
+      "program": "document_reversal_checks.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertion_pass_lines": 12,
+      "log_sha256": "fec4f7b21935dbf04c1f2ff53099aa1c1a1f05fe7a9c23ed5b90a9a6813f1c57"
+    },
+    {
+      "program": "bank_reversal_checks.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertion_pass_lines": 11,
+      "log_sha256": "35f8224e3d99ca185fcb24f35dc6d16dfa4c7792bba4f9c60984bf256f532e6f"
+    },
+    {
+      "program": "delivery_checks.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertion_pass_lines": 29,
+      "log_sha256": "a40274f3cd6b271c2acf4c4cd4cc4f4f0339ddbdd419ba31fd86f185d05aed24"
+    },
+    {
+      "program": "report_checks.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertion_pass_lines": 26,
+      "log_sha256": "46cfa8568ee75e3cf4e340cd4d53a54c46313108138ff3284cab2a3be8b987b5"
+    }
+  ],
+  "synthetic_document_ids": [
+    "MAT-DN-2026-00001",
+    "MAT-DN-2026-00002",
+    "MAT-DN-2026-00003",
+    "MAT-DN-2026-00005",
+    "MAT-DN-2026-00007",
+    "MAT-DN-2026-00008",
+    "MAT-DN-2026-00009",
+    "MAT-DN-2026-00010",
+    "MAT-DN-2026-00011",
+    "MAT-DN-2026-00014",
+    "MAT-DN-2026-00015",
+    "MAT-DN-2026-00017",
+    "MAT-DN-2026-00021",
+    "MAT-DN-2026-00024",
+    "MAT-RECO-2026-00001",
+    "MAT-STE-2026-00001",
+    "MAT-STE-2026-00003",
+    "MAT-STE-2026-00004",
+    "SAL-ORD-2026-00001",
+    "SAL-ORD-2026-00002",
+    "SAL-ORD-2026-00003",
+    "SAL-ORD-2026-00004",
+    "SAL-ORD-2026-00005",
+    "SAL-ORD-2026-00006",
+    "SAL-ORD-2026-00007",
+    "SAL-ORD-2026-00008",
+    "SAL-ORD-2026-00009",
+    "SAL-ORD-2026-00010",
+    "SAL-ORD-2026-00011",
+    "SAL-ORD-2026-00012",
+    "SAL-ORD-2026-00013",
+    "SAL-ORD-2026-00016",
+    "SAL-ORD-2026-00018",
+    "SAL-ORD-2026-00019",
+    "SAL-ORD-2026-00022",
+    "SAL-ORD-2026-00023",
+    "SAL-ORD-2026-00024",
+    "SAL-ORD-2026-00026",
+    "SAL-ORD-2026-00028",
+    "SAL-ORD-2026-00029",
+    "SAL-ORD-2026-00030",
+    "SAL-ORD-2026-00031"
+  ],
+  "runtime": {
+    "frappe": "16.52.0",
+    "erpnext": "16.52.0",
+    "mariadb": "11.8.9",
+    "redis": "7.0.15",
+    "python": "3.14.8",
+    "node": "24.22.1",
+    "bun": "1.3.13"
+  },
+  "source_archives": {
+    "frappe.tar.gz": "34087f9c8ea018ac79011ee95863c6b57bce6bc19e923b1545723b3ab994268e",
+    "frappe-16.52.0_files_verified": 4141,
+    "erpnext.tar.gz": "cfd1e3d4495a4e70e333a42aec1689552143dc6fc57faac5329cadef08dbc810",
+    "erpnext-16.52.0_files_verified": 5518,
+    "mariadb.tar.gz": "32f8871a2aa38b36aa418b7f4abc6fc0c6ef1ba5a45798cacb2afa52c8a6113b",
+    "mariadb-11.8.9-linux-systemd-x86_64_files_verified": 22614
+  },
+  "service_shutdown": [
+    {
+      "name": "redis",
+      "exit_code": 0
+    },
+    {
+      "name": "mariadb",
+      "exit_code": 0
+    }
+  ],
+  "runner_reported_private_runtime_removed": true,
+  "raw_artifact_digests": {
+    "native-tests.json": "3b396357ec98ee6bf0714146d49998dcc8657971e05280d639c3b36078100a50",
+    "shared-accounting-results.json": "6aa1586e822e0545f28104e971eecda1f5cb6d8fa2c5d0a8fdddc86465582ba2",
+    "bootstrap-results.json": "6881cbf8456b487d3e6c69cf6fb796994a5b2624cfe1e94e069001167ee4d3b4"
+  },
+  "outer_status": "PARTIAL_NATIVE_EXECUTED",
+  "blocker": null,
+  "public_existing_preview": {
+    "url": "https://surooh-wms-isolated-test.onrender.com/auth",
+    "observed": "HTTP200 and actual Arabic RTL login only",
+    "viewport": {
+      "width": 1363,
+      "height": 936,
+      "document_width": 1363
+    },
+    "branding": "QNAN",
+    "current_deployed_commit": "NOT_VERIFIED",
+    "native_workflow": "NOT_ACCEPTED"
+  },
+  "render_access": "Owner rejected the only exposed workspace; intended workspace unidentified",
+  "not_accepted": [
+    "full Marketplace composition",
+    "hosted native session and durable storage",
+    "operational OS/service/owner isolation",
+    "current-source native backup restore",
+    "complete PO/discrepancy/putaway/catalog/UOM/batch/serial/expiry",
+    "arbitrary partial-line scans and parcels",
+    "carrier sandbox and labels",
+    "formal return/count approvals",
+    "desktop/390/320 full workflow visual QA",
+    "physical camera/scanner"
+  ],
+  "offline": {
+    "wms_application": 159,
+    "wms_foundation": 25,
+    "evidence_validator": 14,
+    "browser_config": 10,
+    "browser_helpers": 14,
+    "accounting_invoicing_policy": 150,
+    "recovery_envelope": 7,
+    "invoice_ui_fake_transport": 4,
+    "note": "Not engine acceptance. Accounting historical-doc foundation check fails in partial doc materialization."
+  },
+  "attempts": [
+    {
+      "id": "run01",
+      "outcome": "BLOCKED_ARCHIVE_EXTRACTION_INTEGRITY"
+    },
+    {
+      "id": "run02",
+      "outcome": "FAIL_MISSING_APP_IN_BENCH_APPS_LIST"
+    },
+    {
+      "id": "run03",
+      "outcome": "55_WMS_PASS_1_BROWSER_BLOCKED_11_ACCOUNTING_PAGE_FAILURES"
+    },
+    {
+      "id": "run04",
+      "outcome": "55_WMS_PASS_1_BROWSER_BLOCKED_9_ACCOUNTING_PROGRAMS_PASS_2_NATIVE_BANK_FIXTURE_FAILURES"
+    },
+    {
+      "id": "run05",
+      "outcome": "see source-bound outcomes in this file"
+    }
+  ],
+  "published_raw_logs_or_credentials": false,
+  "independent_cleanup": {
+    "owned_fixture_directories_remaining": 0,
+    "verified_removed": true
+  },
+  "exact_pair_gate": {
+    "native_atomic_candidate": "READY_FOR_HUMAN_EVIDENCE_REVIEW",
+    "errors": [],
+    "rendered_UI_cycle": "BLOCKED",
+    "operational_service_isolation": "BLOCKED",
+    "phase_complete": false,
+    "exit_code": 2,
+    "artifact_sha256": "db3cdb9691b2e4d2fd9c389c189e29a24eb288c95cb970e6a7f942060aa32690"
+  }
+}

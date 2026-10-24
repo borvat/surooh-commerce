@@ -105,3 +105,27 @@ def run(config):
         }, indent=2) + "\n")
     if len(results) != 12 or any(x["exit_code"] for x in results):
         raise RuntimeError("Shared Accounting acceptance failed; see retained suite logs")
+    if config.get("session_bridge"):
+        import frappe
+
+        def stock_financial_checkpoint():
+            frappe.init("wms-native-a.invalid")
+            frappe.connect()
+            try:
+                return {
+                    "SLE": frappe.db.sql("SELECT count(*),coalesce(sum(actual_qty),0),coalesce(sum(stock_value_difference),0) FROM `tabStock Ledger Entry` WHERE company=%s", ("TEST-A",)),
+                    "GL": frappe.db.sql("SELECT count(*),coalesce(sum(debit),0),coalesce(sum(credit),0) FROM `tabGL Entry` WHERE company=%s", ("TEST-A",)),
+                }
+            finally:
+                frappe.db.rollback()
+                frappe.destroy()
+
+        before = stock_financial_checkpoint()
+        session_env = {**env, "WMS_SESSION_PROBE_OUTPUT": str(out / "wms-session-bridge.json")}
+        probe = subprocess.run([os.environ["SUROOH_BUN"], str(Path(os.environ["SUROOH_WMS_ROOT"]) / "verification/native_integration/accounting-session-probe.ts")], env=session_env, capture_output=True, text=True, timeout=90)
+        (out / "wms-session-bridge.log").write_text(probe.stdout + probe.stderr)
+        after = stock_financial_checkpoint()
+        (out / "wms-session-ledger-checkpoint.json").write_text(frappe.as_json({"before": before, "after": after, "unchanged": before == after}) + "\n")
+        if probe.returncode or before != after:
+            raise RuntimeError("WMS native session proof failed; no acceptance claim")
+

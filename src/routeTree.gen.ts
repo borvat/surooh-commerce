@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AccountingConnectionRouteImport } from './routes/accounting-connection'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedAssistantRouteImport } from './routes/_authenticated/assistant'
@@ -37,6 +38,11 @@ const IndexRoute = IndexRouteImport.update({
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountingConnectionRoute = AccountingConnectionRouteImport.update({
+  id: '/accounting-connection',
+  path: '/accounting-connection',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -135,6 +141,7 @@ const AuthenticatedProductsProductIdRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/accounting-connection': typeof AccountingConnectionRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/assistant': typeof AuthenticatedAssistantRoute
@@ -156,6 +163,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/accounting-connection': typeof AccountingConnectionRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/assistant': typeof AuthenticatedAssistantRoute
@@ -179,6 +187,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/accounting-connection': typeof AccountingConnectionRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/assistant': typeof AuthenticatedAssistantRoute
@@ -202,6 +211,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/accounting-connection'
     | '/auth'
     | '/reset-password'
     | '/assistant'
@@ -223,6 +233,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/accounting-connection'
     | '/auth'
     | '/reset-password'
     | '/assistant'
@@ -245,6 +256,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/accounting-connection'
     | '/auth'
     | '/reset-password'
     | '/_authenticated/assistant'
@@ -268,6 +280,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AccountingConnectionRoute: typeof AccountingConnectionRoute
   AuthRoute: typeof AuthRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
 }
@@ -286,6 +299,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/accounting-connection': {
+      id: '/accounting-connection'
+      path: '/accounting-connection'
+      fullPath: '/accounting-connection'
+      preLoaderRoute: typeof AccountingConnectionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -461,6 +481,7 @@ const AuthenticatedRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AccountingConnectionRoute: AccountingConnectionRoute,
   AuthRoute: AuthRoute,
   ResetPasswordRoute: ResetPasswordRoute,
 }

@@ -19,7 +19,7 @@ service change. A green unit suite is not lifecycle acceptance.
 | TEST-B disk |dsk-dbei4avb9u1s739ptmig;1GB; /var/data/surooh-test|Accounting engineer|Preserve native DB/files/config/key and existing records; no reseed|
 | WMS interface |srv-dbe28f7f3r2c73cfhe0g; https://surooh-wms-isolated-test.onrender.com|WMS engineer|Existing free Node service; no new resource; native auth not enabled|
 | WMS code |integration/wms-auth-cycle-20261025, from PR32 eaba525812c573920bb650a832df4ec4e01631cf|WMS engineer|Independent continuation; do not overwrite PR32/shared branches|
-| Accounting code |completion/persistent-accounting-20261025, PR43|Accounting engineer|Observed branch27ac683003599d9809728801bc956a7cd522de52; observed deployed executable5f77e2dee6ebc985acd6d074a70e7138dfd6726b|
+| Accounting code |completion/persistent-accounting-20261025, PR43|Accounting engineer|Observed branch27ac683003599d9809728801bc956a7cd522de52; independently read deployed executable27ac683003599d9809728801bc956a7cd522de52|
 
 Executable source vs documentation head must always be recorded separately.
 Observed existingB capacity: latest sampled memory456,486,900/2,147,483,600 bytes
@@ -122,3 +122,21 @@ Disable only the new WMS session admission/revert the independent frontend if
 needed. Accounting controls any service rollback, native backup/restore/migration.
 Application rollback does not reverse native business documents or GL. No new
 cost; existing capacity must be measured before proposing a specific increase.
+
+## Independent read-only baseline update
+
+See TEST-B-BASELINE.json. On instance gzfpc, native site invoice-lab-render,
+DB surooh_invoice_render, actual source27ac6830, both engine versions16.52.0.
+The volume is mounted; used626892800/free377032704 of1020702720 bytes.
+At22:59:04Z CPU0.0096257/1, memory486789120/2147483600, one instance.
+Native financial records00001/00002/00003 remain present, amounts20/29.04/-14.52;
+credit00003 links invoice00002;12 GL rows independently sum92.60 on both sides.
+Zero SLE rows: no warehouse receipt/shipment has been tested on this site yet.
+Native lab flag is false and shared profile absent; installed apps omit the
+native WMS stock guard. Do not flip flags to bypass that boundary. Accounting
+must provide the compatible operational profile/permissions/financial mapping.
+No data was written, reinitialized or deleted by this read-only audit. An initial
+site lookup used the bench cwd and failed before connecting; corrected sites cwd
+read succeeded. Native invoice baseline proves current records, not the required
+linked warehouse cycle or future restart retention. Available capacity is not
+load acceptance, but does not justify a new paid resource at this point.

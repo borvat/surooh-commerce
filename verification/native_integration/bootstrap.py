@@ -187,6 +187,10 @@ def main():
             )
             with (sites / "apps.txt").open("a") as apps:
                 apps.write("surooh_invoice_workbench\n")
+            assets = lab / "assets-bench/sites/assets"
+            if not (assets / "assets.json").is_file():
+                raise RuntimeError("Build the real pinned Frappe website assets before shared acceptance")
+            (sites / "assets").symlink_to(assets, target_is_directory=True)
         common = {
             "redis_cache": "redis://127.0.0.1:17379/0",
             "redis_queue": "redis://127.0.0.1:17379/1",

@@ -87,8 +87,7 @@ export function NativeOrderActions({ orderId }: { orderId: string }) {
             value={quarantine}
             disabled={
               mutation.isPending ||
-              mutation.isError ||
-              mutation.isSuccess ||
+              returnTarget.current !== null ||
               locations.isFetching ||
               locations.isError
             }

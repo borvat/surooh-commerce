@@ -10,7 +10,7 @@
 - Accounting PR40 starts at PR38 `05747ceb1fb5d8146082e81d4ad133a12b115c82`,
   restores the missing PR37 native warehouse modules, and incorporates concurrent
   PR39 `429671f4820771b71cc948ea5706d73edf87c10e` as a second parent.
-- Current Accounting code candidate: `cb081de86d70d0386f535b27403b0e5c88fbf6c0`.
+- Current Accounting code candidate: `87e1b9709db214351c606aa1f99927ba99b059f7`.
   All 212 current Accounting app, workbench, native guard and test files were
   independently checked against their GitHub blob hashes: zero missing/changed.
   Historical binary evidence/Git history is not a local full repository checkout.
@@ -42,7 +42,7 @@ checks and the engine's submission/cancellation still run. Scope is removed on
 exceptions; nested scopes are denied. This is not a new GL writer.
 
 The opt-in WMS runner installs the full invoice app on both freshly created WMS
-sites **before** executing warehouse cases, then runs eleven original Accounting
+sites **before** executing warehouse cases, then runs twelve original Accounting
 HTTP programs on the same TEST-A database. Reusable native invoice fixtures are
 shared with the original bootstrap. Original assertions remain intact. Accounting
 test programs accept an explicit optional synthetic test site; application guards
@@ -65,7 +65,7 @@ an empty asset map or replace successful business responses.
   host's Unix-socket restriction. All eleven original Accounting HTTP programs
   FAIL at the workbench-page HTTP500 boundary; no invoice success is inferred.
   This run predates integration of PR39 and does not certify the current source.
-- Current offline Accounting: 149 invoicing/policy tests, seven recovery-envelope
+- Current offline Accounting: 150 invoicing/policy tests, seven recovery-envelope
   tests and four actual-script/fake-transport UI regressions PASS. These are not
   native/restore/browser acceptance. The repository foundation check fails in
   the partial historical-doc materialization; 24 other foundation cases, 28
@@ -75,7 +75,47 @@ an empty asset map or replace successful business responses.
   errors with 15 retained warnings. Transport/mock checks are separate from
   native outcomes. App code is unchanged from PR30; runner changes are separate.
 
-Final fresh run and source-bound outcome will be recorded before handoff.
+## Final fresh source-bound run05
+
+Full co-installation on two freshly created native sites succeeded. All 55 WMS
+native/HTTP/DB cases PASS with both app hook sets installed. All twelve original
+Accounting HTTP programs PASS (303 recorded assertion PASS lines): invoices,
+receipts, purchases/supplier returns, quotations, bank import/matching, credits,
+supplier payments, payment cancellations, invoice/credit cancellations, bank-line
+cancellations, customer/service → quote → discounted invoice → PDF/private mail →
+partial/full receipt → credit, and financial reports tied to the same native GL.
+No live bank, SMTP, carrier, PSP or production data was used.
+
+The stock profile remains restrictive. Original bank acceptance seeds native
+Bank Entry Journal Entry references inside a voucher/company/actor-bound financial
+scope under the marked synthetic fixture Administrator. That helper is not an app
+endpoint. It does not set the stock-command flag, write GL directly or weaken any
+bank matching or native permission assertion. Ordinary unscoped GL stays denied.
+
+Tested code group: WMS `874d2019690234e62b3498278965d3161674267e`
+(tree `740077372666ba1f2ea25e187a4414db26385df2`, exact full local tree match),
+Accounting `87e1b9709db214351c606aa1f99927ba99b059f7`
+(all212 app/guard/test blobs matched). Local execution witnesses and artifact
+hashes are in [RESULTS.json](RESULTS.json). Sources were clean and unchanged
+before/after the run. The original exact-pair gate reports no integrity errors
+and READY_FOR_HUMAN_EVIDENCE_REVIEW for the native candidate; UI/operational gates
+stay BLOCKED (exit2). A first gate invocation used incorrect source arguments and
+was rejected; the retained final invocation uses the exact SHAs from the runner.
+Later continuation commits change reports only.
+
+B01 remains BLOCKED at Chromium launch (`socket() failed: Operation not permitted`).
+No workflow screenshot or desktop/390/320 visual acceptance is claimed. Outer
+bootstrap correctly exits2 / PARTIAL_NATIVE_EXECUTED; passing backend programs
+are not an overall acceptance PASS. Native MariaDB/Redis children shut down with
+exit0; the runner reports removal of the private fixture. The final delivery
+performed a separate filesystem cleanup/readback: zero owned private fixture
+directories remain, recorded in RESULTS.json.
+
+Run04 is retained as a partial predecessor:55 WMS PASS, B01 BLOCKED, nine original
+Accounting programs PASS and two bank fixture programs FAIL. Current run05 fixes
+that native journal fixture conflict and adds the original financial report suite.
+See [REPLAY.md](REPLAY.md). Raw logs, credentials, private configs, PDFs and database
+backups are not published in this public WMS repository.
 
 ## Render, dependencies and remaining acceptance
 
@@ -83,6 +123,15 @@ The current Render connection returned `no workspace selected`. Its workspace
 inventory exposed only `Sam's workspace`; the owner explicitly selected **another
 workspace**, without identifying it. No service inventory or mutation was made in
 the rejected workspace. Prior reports are not current service discovery.
+
+A separate Git branch `deploy/isolated-render-test-20261024` at
+`6796970262f3bf8453c7c411560179f0494a3bf2` documents an existing
+`surooh-wms-isolated-test` service. Its public `/auth` URL was independently opened
+and returned HTTP200; the actual1363×936 browser shows an Arabic RTL QNAN login
+screen with no document overflow. No login or user data operation was attempted.
+That public page does not expose its deployment commit, DB or native session
+binding. No authenticated/native workflow or mobile acceptance is inferred. The
+current deployment source/storage still requires authorized workspace inspection.
 
 Required next environment step: identify/connect the intended Render workspace,
 then inspect any WMS service, deployment source and isolated persistent storage.

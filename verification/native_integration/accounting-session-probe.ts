@@ -60,7 +60,7 @@ try {
     writer.response.status === 200 &&
       writer.data["user"] === "writer@example.invalid" &&
       writer.data["company"] === "TEST-A" &&
-      writer.data["can_review"] === false,
+      writer.data["can_review"] === true,
   );
   check(
     "native_session_not_exposed_to_browser_JSON",

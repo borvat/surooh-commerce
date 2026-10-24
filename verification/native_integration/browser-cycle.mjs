@@ -88,9 +88,13 @@ try {
   const context = await browser.newContext();
   context.setDefaultTimeout(10000);
   context.setDefaultNavigationTimeout(15000);
-  await context.route("**/*", (route) =>
-    new URL(route.request().url()).origin === origin ? route.continue() : route.abort(),
-  );
+  result.blocked_external_requests = [];
+  await context.route("**/*", (route) => {
+    const url = new URL(route.request().url());
+    if (url.origin === origin) return route.continue();
+    result.blocked_external_requests.push(`${url.origin}${url.pathname}`);
+    return route.abort();
+  });
   await context.addInitScript(
     (session) => {
       window.__SUROOH_NATIVE_SESSION__ = session;
@@ -316,6 +320,34 @@ try {
   const value = (x) => x.items.reduce((sum, item) => sum + Number(item.value), 0);
   if (value(after) !== value(before) + 20)
     throw new Error("Receipt/ship/return stock value mismatch");
+  const catalogBefore = await api("snapshot");
+  await page.goto(`${origin}/products`);
+  const catalogSearch = page.getByLabel("بحث منتجات المستودع", { exact: true });
+  await catalogSearch.fill("SYNTHETIC-C1");
+  const catalogC1 = page.locator('[data-native-product="TEST-C1"]');
+  await catalogC1.waitFor();
+  assert.equal(await page.locator("[data-native-product]").count(), 1);
+  const nativeC1 = catalogBefore.items.find((row) => row.id === "TEST-C1");
+  assert.equal(Number(await catalogC1.locator("td").nth(3).textContent()), nativeC1.physical);
+  assert.equal(Number(await catalogC1.locator("td").nth(4).textContent()), nativeC1.reserved);
+  assert.equal(
+    Number(await catalogC1.locator("td").nth(5).textContent()),
+    nativeC1.physical - nativeC1.reserved,
+  );
+  await catalogSearch.fill("TEST-C2");
+  await page.waitForFunction(() => document.querySelectorAll("[data-native-product]").length === 2);
+  assert.equal(await page.locator("[data-native-product]").count(), 2);
+  await catalogSearch.fill("TEST-KIT");
+  const nativeKit = page.locator('[data-native-product="TEST-KIT"]');
+  await nativeKit.waitFor();
+  assert.ok((await nativeKit.textContent()).includes("TEST-C1"));
+  assert.ok((await nativeKit.textContent()).includes("TEST-C2"));
+  await catalogSearch.fill("NO-SUCH-SYNTHETIC-PRODUCT");
+  await page.getByText("لا توجد أصناف مطابقة", { exact: true }).waitFor();
+  assert.deepEqual(ledger(await api("snapshot")), ledger(catalogBefore));
+  mark(
+    "native_products_SKU_barcode_ambiguity_bundle_parts_quantities_and_empty_search_without_stock_writes",
+  );
   await page.goto(`${origin}/movements`);
   await page.getByText(shipped.delivery_note, { exact: false }).first().waitFor();
   mark("receive_bundle_order_pick_pack_ship_return_and_history");
@@ -625,7 +657,7 @@ try {
     { width: 390, height: 844 },
   ]) {
     await page.setViewportSize(viewport);
-    for (const route of ["components", "bundles", "orders", "movements"]) {
+    for (const route of ["products", "components", "bundles", "orders", "movements"]) {
       await page.goto(`${origin}/${route}`);
       await page.getByRole("heading", { level: 1 }).waitFor();
       await page.waitForLoadState("networkidle");
@@ -644,7 +676,12 @@ try {
     }
   }
   assert.deepEqual(result.page_errors, [], "Unhandled browser errors");
-  mark("desktop_and_phone_four_native_screens_no_document_overflow_or_unhandled_JS_errors");
+  assert.equal(
+    result.blocked_external_requests.some((url) => url.includes("supabase")),
+    false,
+    "Native screen attempted a legacy Supabase request",
+  );
+  mark("desktop_and_phone_five_native_screens_no_document_overflow_or_unhandled_JS_errors");
   result.status = "PASS";
   result.evidence = {
     native_order: placed.order_id,
@@ -653,7 +690,7 @@ try {
     value_before: value(before),
     value_after: value(after),
     real_browser: await browser.version(),
-    existing_React_routes: ["/components", "/bundles", "/orders", "/movements"],
+    existing_React_routes: ["/products", "/components", "/bundles", "/orders", "/movements"],
   };
 } catch (error) {
   result.reason = error.message.replaceAll(config.token || "__absent__", "[REDACTED]");

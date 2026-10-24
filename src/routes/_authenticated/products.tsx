@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { nativeLabConfigured } from "@/lib/native-lab-client";
+import { NativeProductCatalog } from "@/components/app/native-product-catalog";
 import { productHealth, resolveMaster } from "@/lib/product-master";
 import { unified, SYNC_AR } from "@/lib/unified-stock";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -49,8 +51,12 @@ export const Route = createFileRoute("/_authenticated/products")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
-  component: CatalogPage,
+  component: ProductsPage,
 });
+
+function ProductsPage() {
+  return nativeLabConfigured() ? <NativeProductCatalog /> : <CatalogPage />;
+}
 
 function CatalogPage() {
   const perm = usePermissions();

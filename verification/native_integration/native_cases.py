@@ -1098,6 +1098,9 @@ def run(config):
         from shipping_cases import run as shipping_run
 
         shipping_run(case, call, token, owner, bins, wms)
+        from last_unit_cases import run as last_unit_run
+
+        last_unit_run(case, call, token, owner)
         browser_row = run_browser(browser_input(token()), out / "browser-cycle.log")
         rows.append(browser_row)
         save()
@@ -1120,6 +1123,7 @@ def run(config):
         | {f"O{i:02d}" for i in range(1, 10)}
         | {f"S{i:02d}" for i in range(1, 4)}
         | {f"P{i:02d}" for i in range(1, 13)}
+        | {"C01", "C02"}
         | {"B01"}
     )
     actual = {x["id"].split("_")[0] for x in rows}

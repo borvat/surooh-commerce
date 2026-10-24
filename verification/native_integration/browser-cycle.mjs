@@ -199,15 +199,17 @@ try {
   assert.equal(await receipt.getByTestId("stock-component").isDisabled(), true);
   const committedReceipt = await api("snapshot");
   await page.unroute(endpoint, loseReceiptResponse);
-  const receiptReplay = page.waitForRequest(
-    (request) =>
-      request.url().includes("native_lab.api.command") &&
-      request.postDataJSON()?.envelope?.operation === "receive",
-  );
-  await clickCommand("receive", () =>
-    receipt.getByRole("button", { name: "إعادة التحقق من نفس الاستلام", exact: true }).click(),
-  );
-  assert.deepEqual((await receiptReplay).postDataJSON().envelope, receivedEnvelope);
+  const [receiptReplay] = await Promise.all([
+    page.waitForRequest(
+      (request) =>
+        request.url().includes("native_lab.api.command") &&
+        request.postDataJSON()?.envelope?.operation === "receive",
+    ),
+    clickCommand("receive", () =>
+      receipt.getByRole("button", { name: "إعادة التحقق من نفس الاستلام", exact: true }).click(),
+    ),
+  ]);
+  assert.deepEqual(receiptReplay.postDataJSON().envelope, receivedEnvelope);
   assert.deepEqual(ledger(await api("snapshot")), ledger(committedReceipt));
   await receipt.waitFor({ state: "hidden" });
   mark("committed_receipt_lost_response_freezes_intent_and_retries_without_duplicate_stock_or_GL");
@@ -498,20 +500,19 @@ try {
   await page.unroute(endpoint, loseResponse);
   assert.ok(committedPick?.pick_list, "Lost response did not commit a native pick");
   const committed = await api("snapshot");
-  const replayRequest = page.waitForRequest(
-    (request) =>
-      request.url().includes("native_lab.api.command") &&
-      request.postDataJSON()?.envelope.operation === "pick",
+  assert.equal(lostEnvelope.payload.order_id, retryOrder.order_id);
+  // A confirmed refresh advances the operator to packing: do not require a
+  // second pick click that the correct current UI deliberately no longer offers.
+  // A09 independently verifies same-key explicit replay through the real client.
+  await retryRow.getByRole("button", { name: "تعبئة", exact: true }).waitFor();
+  assert.equal(
+    committed.orders.find((row) => row.id === retryOrder.order_id).pick_list,
+    committedPick.pick_list,
   );
-  const replayed = await clickCommand("pick", () =>
-    retryRow.getByRole("button", { name: "تجهيز", exact: true }).click(),
-  );
-  assert.deepEqual((await replayRequest).postDataJSON().envelope, lostEnvelope);
-  assert.equal(replayed.pick_list, committedPick.pick_list);
   assert.deepEqual(ledger(await api("snapshot")), ledger(committed));
   await page.reload();
   await retryRow.getByRole("button", { name: "تعبئة", exact: true }).waitFor();
-  mark("committed_pick_lost_response_retry_same_identity_reload");
+  mark("committed_pick_lost_response_native_refresh_and_reload_recover_same_document");
   // A real interruption before dispatch must not mutate the engine.
   const errorBefore = await api("snapshot");
   const abortPack = (route) =>
@@ -544,11 +545,12 @@ try {
   await api("cancel", { order_id: staleOrder.order_id });
   const staleBaseline = await api("snapshot");
   const staleErrorBoundary = await beginErrorObservation(page, "pick", staleOrder.order_id);
-  const rejection = page.waitForResponse((response) =>
-    isOrderRequest(response.request(), "pick", staleOrder.order_id),
-  );
-  await staleRow.getByRole("button", { name: "تجهيز", exact: true }).click();
-  const rejected = await rejection;
+  const [rejected] = await Promise.all([
+    page.waitForResponse((response) =>
+      isOrderRequest(response.request(), "pick", staleOrder.order_id),
+    ),
+    staleRow.getByRole("button", { name: "تجهيز", exact: true }).click(),
+  ]);
   assert.equal(rejected.ok(), false, "Stale cancelled order must reject pick");
   await requireFreshError(
     page,

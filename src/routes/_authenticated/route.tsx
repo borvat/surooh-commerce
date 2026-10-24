@@ -51,6 +51,10 @@ const roleAr: Record<string, string> = {
 };
 
 function Shell() {
+  const native = nativeLabConfigured();
+  const navigation = native
+    ? NAV.filter(({ to }) => !["/review", "/assistant", "/channels", "/settings"].includes(to))
+    : NAV;
   const { data: me } = useMe();
   const qc = useQueryClient();
   const navigate = useNavigate();
@@ -67,11 +71,13 @@ function Shell() {
     <div className="flex min-h-screen flex-col md:flex-row">
       <aside className="hidden w-56 shrink-0 flex-col bg-sidebar text-sidebar-foreground md:flex">
         <div className="border-b border-sidebar-border px-4 py-5">
-          <div className="text-base font-semibold text-sidebar-accent-foreground">QNAN</div>
-          <div className="text-xs">إدارة المخزون</div>
+          <div className="text-base font-semibold text-sidebar-accent-foreground">
+            {native ? "SUROOH WMS" : "QNAN"}
+          </div>
+          <div className="text-xs">{native ? "بيئة اختبار — بيانات مصطنعة" : "إدارة المخزون"}</div>
         </div>
         <nav className="flex-1 space-y-1 p-2 text-[15px]">
-          {NAV.map(({ to, label, Icon }) => (
+          {navigation.map(({ to, label, Icon }) => (
             <Link
               key={to}
               to={to}
@@ -80,7 +86,7 @@ function Shell() {
                 className: "bg-sidebar-accent text-sidebar-accent-foreground font-medium",
               }}
             >
-              <Icon className="h-4 w-4" /> {label}
+              <Icon className="h-4 w-4" /> {native && to === "/products" ? "المنتجات" : label}
             </Link>
           ))}
         </nav>
@@ -98,14 +104,17 @@ function Shell() {
         </div>
       </aside>
       <nav className="flex gap-1 overflow-x-auto bg-sidebar p-2 text-sm text-sidebar-foreground md:hidden">
-        {NAV.map(({ to, label }) => (
+        {native && (
+          <span className="shrink-0 self-center px-2 font-semibold">SUROOH WMS · اختبار</span>
+        )}
+        {navigation.map(({ to, label }) => (
           <Link
             key={to}
             to={to}
             className="whitespace-nowrap rounded px-3 py-1.5"
             activeProps={{ className: "bg-sidebar-accent text-sidebar-accent-foreground" }}
           >
-            {label}
+            {native && to === "/products" ? "المنتجات" : label}
           </Link>
         ))}
       </nav>

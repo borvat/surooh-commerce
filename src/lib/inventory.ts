@@ -266,6 +266,8 @@ export async function postMovement(input: {
   if (nativeLabConfigured()) {
     if (
       input.type !== "receipt" ||
+      !Number.isSafeInteger(input.quantity) ||
+      input.quantity <= 0 ||
       !input.reference ||
       !input.nativeRate ||
       !Number.isFinite(input.nativeRate) ||

@@ -169,12 +169,48 @@ try {
   mark("interrupted_receipt_form_no_write");
   await page.getByRole("button", { name: "+ استلام بضاعة", exact: true }).click();
   await receipt.getByTestId("stock-component").selectOption("TEST-C1");
+  await receipt.getByTestId("stock-quantity").fill("1.5");
+  await receipt.getByLabel("تكلفة الوحدة EUR", { exact: true }).fill("10");
+  assert.equal(
+    await receipt.getByRole("button", { name: "تأكيد", exact: true }).isDisabled(),
+    true,
+  );
+  mark("fractional_receipt_quantity_is_rejected_without_truncation");
   await receipt.getByTestId("stock-quantity").fill("2");
   await receipt.getByLabel("تكلفة الوحدة EUR", { exact: true }).fill("10");
-  await clickCommand("receive", () =>
+  let receivedEnvelope;
+  const loseReceiptResponse = async (route) => {
+    const envelope = route.request().postDataJSON().envelope;
+    if (envelope.operation !== "receive") return route.fallback();
+    receivedEnvelope = envelope;
+    const response = await route.fetch();
+    assert.equal(response.status(), 200);
+    await route.abort("failed");
+  };
+  await page.route(endpoint, loseReceiptResponse);
+  await Promise.all([
+    page.waitForEvent("requestfailed", {
+      predicate: (request) => request.postDataJSON()?.envelope?.operation === "receive",
+    }),
     receipt.getByRole("button", { name: "تأكيد", exact: true }).click(),
+  ]);
+  await receipt.getByRole("alert").waitFor();
+  assert.equal(await receipt.getByTestId("stock-quantity").isDisabled(), true);
+  assert.equal(await receipt.getByTestId("stock-component").isDisabled(), true);
+  const committedReceipt = await api("snapshot");
+  await page.unroute(endpoint, loseReceiptResponse);
+  const receiptReplay = page.waitForRequest(
+    (request) =>
+      request.url().includes("native_lab.api.command") &&
+      request.postDataJSON()?.envelope?.operation === "receive",
   );
+  await clickCommand("receive", () =>
+    receipt.getByRole("button", { name: "إعادة التحقق من نفس الاستلام", exact: true }).click(),
+  );
+  assert.deepEqual((await receiptReplay).postDataJSON().envelope, receivedEnvelope);
+  assert.deepEqual(ledger(await api("snapshot")), ledger(committedReceipt));
   await receipt.waitFor({ state: "hidden" });
+  mark("committed_receipt_lost_response_freezes_intent_and_retries_without_duplicate_stock_or_GL");
   const storagePanel = page.getByRole("region", { name: "مواقع التخزين والجرد" });
   await storagePanel.getByLabel("العملية", { exact: true }).selectOption("location_create");
   await storagePanel.getByLabel("اسم الموقع", { exact: true }).fill("TEST-BROWSER-QUARANTINE");
@@ -184,10 +220,9 @@ try {
   );
   mark("create_quarantine_location_from_storage_screen");
   await page.goto(`${origin}/bundles`);
-  await page.getByRole("button", { name: "تعديل المكوّنات", exact: true }).first().click();
-  await clickCommand("bundle", () =>
-    page.getByRole("dialog").getByRole("button", { name: "حفظ", exact: true }).click(),
-  );
+  await page.getByText("TEST-KIT", { exact: true }).waitFor();
+  assert.equal(await page.getByRole("button", { name: "تعديل المكوّنات", exact: true }).count(), 0);
+  mark("warehouse_role_reads_native_bundle_without_admin_edit_control");
   await page.goto(`${origin}/orders`);
   const createOrder = async (quantity = 1) => {
     await page
@@ -379,6 +414,64 @@ try {
     );
   }
   mark("proportional_batches_packed_cancel_replacement_two_shipments_and_per_delivery_returns");
+  const closeOrder = await createOrder(3);
+  const closePanel = page.locator(`[data-native-batches="${closeOrder.order_id}"]`);
+  await closePanel.getByLabel("وحدات دفعة الشحن", { exact: true }).fill("1");
+  await clickCommand("batch_pick", () =>
+    closePanel.getByRole("button", { name: "تجهيز دفعة", exact: true }).click(),
+  );
+  await clickCommand("batch_pack", () =>
+    closePanel.getByRole("button", { name: "تعبئة الدفعة", exact: true }).click(),
+  );
+  await clickCommand("batch_ship", () =>
+    closePanel.getByRole("button", { name: "شحن الدفعة", exact: true }).click(),
+  );
+  await closePanel
+    .getByLabel("سبب إغلاق باقي الطلب", { exact: true })
+    .fill("Synthetic customer closes the remainder");
+  const closeBefore = await api("snapshot");
+  await clickCommand("close_remainder", () =>
+    closePanel.getByRole("button", { name: "إغلاق الباقي وتحرير الحجز", exact: true }).click(),
+  );
+  const closeAfter = await api("snapshot");
+  assert.equal(
+    closeAfter.orders.find((row) => row.id === closeOrder.order_id).remainder_closed,
+    true,
+  );
+  assert.deepEqual(closeAfter.movements, closeBefore.movements);
+  assert.deepEqual(closeAfter.general_ledger, closeBefore.general_ledger);
+  for (const [item, released] of [
+    ["TEST-C1", 2],
+    ["TEST-C2", 4],
+  ]) {
+    const old = closeBefore.items.find((row) => row.id === item);
+    const current = closeAfter.items.find((row) => row.id === item);
+    assert.equal(current.physical, old.physical);
+    assert.equal(current.value, old.value);
+    assert.equal(current.reserved, old.reserved - released);
+  }
+  await page.getByRole("button", { name: "بانتظار الشحن", exact: true }).click();
+  await page.getByText(closeOrder.order_id, { exact: true }).waitFor({ state: "hidden" });
+  await page.getByRole("button", { name: "أُغلق الباقي", exact: true }).click();
+  await page.getByText(closeOrder.order_id, { exact: true }).waitFor();
+  await page.reload();
+  await closePanel.getByRole("status").filter({ hasText: "أُغلق باقي الطلب" }).waitFor();
+  assert.equal(
+    await closePanel.getByRole("button", { name: "تجهيز دفعة", exact: true }).count(),
+    0,
+  );
+  await closePanel
+    .getByLabel("موقع حجر مرتجع الدفعة", { exact: true })
+    .selectOption(quarantine.warehouse);
+  await clickCommand("return_quarantine", () =>
+    closePanel.getByRole("button", { name: "مرتجع هذه الشحنة", exact: true }).click(),
+  );
+  assert.equal(
+    (await api("snapshot")).orders.find((row) => row.id === closeOrder.order_id).remainder_closed,
+    true,
+  );
+  mark("close_remainder_releases_only_unused_reservations_filters_reload_and_return_after_close");
+  await page.getByRole("button", { name: "الكل", exact: true }).click();
   const retryBaseline = await api("snapshot");
   const retryOrder = await createOrder();
   const retryRow = page.locator(`[data-native-order="${retryOrder.order_id}"]`);
@@ -467,6 +560,89 @@ try {
   await page.getByText(staleOrder.order_id, { exact: true }).waitFor();
   await staleRow.waitFor({ state: "hidden" });
   mark("stale_cancelled_order_rejected_error_visible_reload_recovers");
+  await page.goto(`${origin}/components`);
+  await storagePanel.getByLabel("العملية", { exact: true }).selectOption("location_create");
+  await storagePanel.getByLabel("اسم الموقع", { exact: true }).fill("TEST-BROWSER-COUNT");
+  const countLocation = await clickCommand("location_create", () =>
+    storagePanel.getByRole("button", { name: "تأكيد العملية", exact: true }).click(),
+  );
+  await storagePanel
+    .getByRole("button", { name: "بدء عملية جديدة بعد مراجعة الرصيد", exact: true })
+    .click();
+  const locationsBeforeCount = await api("stock_locations");
+  await storagePanel.getByLabel("العملية", { exact: true }).selectOption("stock_transfer");
+  await storagePanel
+    .getByLabel("الموقع المصدر", { exact: true })
+    .selectOption(locationsBeforeCount.fulfillment_warehouse);
+  await storagePanel
+    .getByLabel("الموقع الوجهة", { exact: true })
+    .selectOption(countLocation.warehouse);
+  await storagePanel.getByLabel("رمز المنتج", { exact: true }).fill("TEST-C1");
+  await storagePanel.getByLabel("الكمية المنقولة", { exact: true }).fill("2");
+  await storagePanel.getByLabel("سبب العملية", { exact: true }).fill("Synthetic count staging");
+  await clickCommand("stock_transfer", () =>
+    storagePanel.getByRole("button", { name: "تأكيد العملية", exact: true }).click(),
+  );
+  await storagePanel
+    .getByRole("button", { name: "بدء عملية جديدة بعد مراجعة الرصيد", exact: true })
+    .click();
+  await storagePanel.getByLabel("العملية", { exact: true }).selectOption("stock_count");
+  await storagePanel
+    .getByLabel("الموقع المعدود", { exact: true })
+    .selectOption(countLocation.warehouse);
+  await storagePanel.getByLabel("رمز المنتج", { exact: true }).fill("TEST-C1");
+  await storagePanel.getByLabel("الكمية المعدودة", { exact: true }).fill("3");
+  await storagePanel
+    .getByRole("button", { name: "بدء الجرد وحفظ الرصيد للمقارنة", exact: true })
+    .click();
+  await storagePanel.getByLabel("سبب العملية", { exact: true }).fill("Synthetic physical count +1");
+  const counted = await clickCommand("stock_count", () =>
+    storagePanel.getByRole("button", { name: "تأكيد العملية", exact: true }).click(),
+  );
+  const locationsAfterCount = await api("stock_locations");
+  const countedBin = locationsAfterCount.bins.find(
+    (row) => row.warehouse === countLocation.warehouse && row.item_code === "TEST-C1",
+  );
+  assert.equal(countedBin.actual_qty, 3);
+  assert.equal(countedBin.stock_value, 30);
+  const countLedger = (await api("snapshot")).general_ledger.filter(
+    (row) => row.voucher_no === counted.stock_reconciliation,
+  );
+  assert.equal(
+    countLedger.reduce((sum, row) => sum + Number(row.debit), 0),
+    10,
+  );
+  assert.equal(
+    countLedger.reduce((sum, row) => sum + Number(row.debit) - Number(row.credit), 0),
+    0,
+  );
+  mark("rendered_location_transfer_count_adjustment_matches_native_bin_value_and_balanced_GL");
+  result.viewports = [];
+  for (const viewport of [
+    { width: 1440, height: 1000 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport);
+    for (const route of ["components", "bundles", "orders", "movements"]) {
+      await page.goto(`${origin}/${route}`);
+      await page.getByRole("heading", { level: 1 }).waitFor();
+      await page.waitForLoadState("networkidle");
+      const dimensions = await page.evaluate(() => ({
+        width: innerWidth,
+        document: document.documentElement.scrollWidth,
+      }));
+      assert.ok(
+        dimensions.document <= dimensions.width + 1,
+        `${route} overflows viewport: ${JSON.stringify(dimensions)}`,
+      );
+      const screenshot = `browser-${route}-${viewport.width}.png`;
+      if (config.artifactDir)
+        await page.screenshot({ path: `${config.artifactDir}/${screenshot}`, fullPage: true });
+      result.viewports.push({ route, ...viewport, dimensions, screenshot });
+    }
+  }
+  assert.deepEqual(result.page_errors, [], "Unhandled browser errors");
+  mark("desktop_and_phone_four_native_screens_no_document_overflow_or_unhandled_JS_errors");
   result.status = "PASS";
   result.evidence = {
     native_order: placed.order_id,

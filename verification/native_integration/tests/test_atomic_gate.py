@@ -26,12 +26,17 @@ class EvidenceGate(unittest.TestCase):
             + [f"O{x:02d}" for x in range(1, 10)]
             + [f"S{x:02d}" for x in range(1, 4)]
             + [f"P{x:02d}" for x in range(1, 13)]
+            + ["C01", "C02"]
         )
         self.rows = [{"id": i + "_unit_fixture", "status": "PASS"} for i in ids] + [
             {"id": "B01_unit_fixture", "status": "BLOCKED"}
         ]
         (self.root / "native.log").write_text("unit fixture, no engine executed\n")
         self.report = dict(
+            source_archives={
+                **{archive: digest for archive, (folder, digest) in gate.SOURCE_ARCHIVES.items()},
+                **{folder + "_files_verified": 1 for folder, digest in gate.SOURCE_ARCHIVES.values()},
+            },
             source_sha=self.w,
             accounting_sha=self.a,
             dirty_tracked=False,
@@ -132,5 +137,20 @@ class EvidenceGate(unittest.TestCase):
             row for row in self.rows
             if row["id"].split("_")[0] not in {"P09", "P10", "P11", "P12"}
         ]
+        self.write()
+        self.assertEqual(self.evaluate()["native_atomic_candidate"], "BLOCKED")
+
+    def test_previous_results_cannot_accept_missing_distinct_last_unit_races(self):
+        self.rows = [row for row in self.rows if not row["id"].startswith("C")]
+        self.write()
+        self.assertEqual(self.evaluate()["native_atomic_candidate"], "BLOCKED")
+
+    def test_missing_complete_mariadb_identity_cannot_accept_native_results(self):
+        self.report["source_archives"].pop("mariadb-11.8.9-linux-systemd-x86_64_files_verified")
+        self.write()
+        self.assertEqual(self.evaluate()["native_atomic_candidate"], "BLOCKED")
+
+    def test_changed_archive_hash_rejected_even_when_files_are_reported_verified(self):
+        self.report["source_archives"]["mariadb.tar.gz"] = "f" * 64
         self.write()
         self.assertEqual(self.evaluate()["native_atomic_candidate"], "BLOCKED")

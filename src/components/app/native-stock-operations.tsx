@@ -114,6 +114,7 @@ export function NativeStockOperations({ canOperate }: { canOperate: boolean }) {
             <label>
               العملية
               <select
+                aria-label="العملية"
                 className="block w-full rounded border p-2"
                 value={mode}
                 onChange={(e) => {
@@ -151,6 +152,7 @@ export function NativeStockOperations({ canOperate }: { canOperate: boolean }) {
                 <label>
                   الموقع {mode === "stock_transfer" ? "المصدر" : "المعدود"}
                   <select
+                    aria-label={mode === "stock_transfer" ? "الموقع المصدر" : "الموقع المعدود"}
                     required
                     className="block w-full rounded border p-2"
                     value={source}
@@ -167,6 +169,7 @@ export function NativeStockOperations({ canOperate }: { canOperate: boolean }) {
                   <label>
                     الموقع الوجهة
                     <select
+                      aria-label="الموقع الوجهة"
                       required
                       className="block w-full rounded border p-2"
                       value={target}

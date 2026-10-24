@@ -121,14 +121,17 @@ def main():
         return result
 
     try:
-        for archive, folder in [
-            ("frappe.tar.gz", "frappe-16.52.0"),
-            ("erpnext.tar.gz", "erpnext-16.52.0"),
+        for archive, folder, expected_digest in [
+            ("frappe.tar.gz", "frappe-16.52.0", "34087f9c8ea018ac79011ee95863c6b57bce6bc19e923b1545723b3ab994268e"),
+            ("erpnext.tar.gz", "erpnext-16.52.0", "cfd1e3d4495a4e70e333a42aec1689552143dc6fc57faac5329cadef08dbc810"),
+            ("mariadb.tar.gz", "mariadb-11.8.9-linux-systemd-x86_64", "32f8871a2aa38b36aa418b7f4abc6fc0c6ef1ba5a45798cacb2afa52c8a6113b"),
         ]:
             p = lab / "src" / archive
-            report["source_archives"][archive] = hashlib.sha256(
-                p.read_bytes()
-            ).hexdigest()
+            with p.open("rb") as stream:
+                digest = hashlib.file_digest(stream, "sha256").hexdigest()
+            report["source_archives"][archive] = digest
+            if digest != expected_digest:
+                raise RuntimeError("Pinned source archive identity differs: " + archive)
             count = 0
             with tarfile.open(p) as tar:
                 for m in tar:
@@ -136,11 +139,11 @@ def main():
                         continue
                     parts = Path(m.name).parts[1:]
                     f = lab / "src" / folder / Path(*parts)
-                    if (
-                        not f.is_file()
-                        or hashlib.sha256(f.read_bytes()).digest()
-                        != hashlib.sha256(tar.extractfile(m).read()).digest()
-                    ):
+                    if not f.is_file():
+                        raise RuntimeError("Upstream file missing: " + str(f))
+                    with f.open("rb") as actual, tar.extractfile(m) as original:
+                        matches = hashlib.file_digest(actual, "sha256").digest() == hashlib.file_digest(original, "sha256").digest()
+                    if not matches:
                         raise RuntimeError(
                             "Upstream differs from archive: "
                             + str(Path(folder) / Path(*parts))

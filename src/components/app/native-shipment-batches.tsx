@@ -60,7 +60,8 @@ export function NativeShipmentBatches({
       }
       return shipmentAction(action.kind, order.id, action.id);
     },
-    onSuccess: () => {
+    onSuccess: (_data, action) => {
+      if (action.kind === "return" && action.id) returns.current.delete(action.id);
       sent.current = null;
       closing.current = null;
       qc.invalidateQueries();
@@ -71,6 +72,10 @@ export function NativeShipmentBatches({
     },
   });
   const batches = order.shipment_batches ?? [];
+  const returnFrozen = batches.some(
+    (batch) =>
+      batch.delivery_note && !batch.return_note && returns.current.has(batch.delivery_note),
+  );
   const active = batches.some((batch) => !batch.shipped && !batch.cancelled);
   const frozen = !!sent.current;
   const closeFrozen = !!closing.current && !order.remainder_closed;
@@ -129,7 +134,9 @@ export function NativeShipmentBatches({
               <Button
                 size="sm"
                 variant="outline"
-                disabled={disabled || closeFrozen || !target || locations.isFetching || locations.isError}
+                disabled={
+                  disabled || closeFrozen || !target || locations.isFetching || locations.isError
+                }
                 onClick={() => mutation.mutate({ kind: "return", id: batch.delivery_note! })}
               >
                 مرتجع هذه الشحنة
@@ -144,7 +151,7 @@ export function NativeShipmentBatches({
           <select
             aria-label="موقع حجر مرتجع الدفعة"
             value={target}
-            disabled={disabled}
+            disabled={disabled || returnFrozen}
             onChange={(e) => setTarget(e.target.value)}
           >
             <option value="">اختر موقع الحجر</option>

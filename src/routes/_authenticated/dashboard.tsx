@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { nativeLabConfigured } from "@/lib/native-lab-client";
+import { NativeDashboard } from "@/components/app/native-dashboard";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { ordersTodayCount } from "@/lib/inventory";
@@ -17,8 +19,12 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
-  component: HomePage,
+  component: DashboardPage,
 });
+
+function DashboardPage() {
+  return nativeLabConfigured() ? <NativeDashboard /> : <HomePage />;
+}
 
 function HomePage() {
   const cat = useCatalog();

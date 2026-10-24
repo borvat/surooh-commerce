@@ -1,5 +1,5 @@
 import { nativeLabConfigured } from "@/lib/native-lab-client";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Plus, Trash2, Info } from "lucide-react";
@@ -264,8 +264,10 @@ export function StockDialog({
   const [note, setNote] = useState("");
   const [rate, setRate] = useState("");
   const [requestId, setRequestId] = useState("");
+  const receiptIntent = useRef<Parameters<typeof postMovement>[0] | null>(null);
   useEffect(() => {
     if (open) {
+      receiptIntent.current = null;
       setCid(itemId ?? "");
       setRate("");
       setRequestId(`receipt:${crypto.randomUUID()}`);
@@ -275,10 +277,29 @@ export function StockDialog({
     }
   }, [open, itemId]);
   const item = (comps.data ?? []).find((c) => c.id === cid);
-  const q = parseInt(qty || "0", 10);
+  const q = nativeLabConfigured() ? Number(qty) : parseInt(qty || "0", 10);
   const delta = mode === "adjust" && kind === "count" && item ? q - (item.physical_qty ?? 0) : 0;
   const m = useMutation({
     mutationFn: async () => {
+      if (mode === "receive" && nativeLabConfigured()) {
+        if (
+          !Number.isSafeInteger(q) ||
+          q < 1 ||
+          !cid ||
+          !Number.isFinite(Number(rate)) ||
+          Number(rate) <= 0
+        )
+          throw new Error("أدخل منتجاً وكمية صحيحة موجبة وتكلفة صالحة.");
+        receiptIntent.current ??= {
+          componentId: cid,
+          type: "receipt",
+          quantity: q,
+          reason: note || "استلام بضاعة",
+          reference: requestId,
+          nativeRate: Number(rate),
+        };
+        return postMovement(receiptIntent.current);
+      }
       if (mode === "receive")
         return postMovement({
           componentId: cid,
@@ -310,14 +331,22 @@ export function StockDialog({
       });
     },
     onSuccess: () => {
+      receiptIntent.current = null;
       toast.success("تم تحديث المخزون");
       refresh();
       onOpenChange(false);
     },
     onError: (e) => toast.error(errMsg(e)),
   });
+  const receiptFrozen = nativeLabConfigured() && !!receiptIntent.current;
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog
+      open={open}
+      onOpenChange={(value) => {
+        if (!value && receiptFrozen) return;
+        onOpenChange(value);
+      }}
+    >
       <DialogContent dir="rtl" data-testid="native-stock-dialog">
         <DialogHeader>
           <DialogTitle>{mode === "receive" ? "استلام بضاعة" : "تعديل المخزون"}</DialogTitle>
@@ -327,7 +356,7 @@ export function StockDialog({
               : "صحّح الكمية بعد الجرد، أو سجّل قطعاً تالفة أو مرتجعة."}
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4">
+        <fieldset className="grid gap-4" disabled={m.isPending || receiptFrozen}>
           {nativeLabConfigured() && mode === "receive" && (
             <F label="تكلفة الوحدة EUR (مختبر)">
               <Input
@@ -399,7 +428,12 @@ export function StockDialog({
               placeholder="مثلاً: شحنة المورّد رقم 42"
             />
           </F>
-        </div>
+        </fieldset>
+        {receiptFrozen && m.isError && (
+          <p role="alert">
+            لم نتأكد من نتيجة الاستلام. أعد التحقق بنفس البيانات والمعرّف قبل بدء استلام آخر.
+          </p>
+        )}
         <DialogFooter>
           <Button
             size="lg"
@@ -409,11 +443,14 @@ export function StockDialog({
               q < 0 ||
               m.isPending ||
               (nativeLabConfigured() &&
-                (q <= 0 || !Number.isFinite(Number(rate)) || Number(rate) <= 0))
+                (!Number.isSafeInteger(q) ||
+                  q <= 0 ||
+                  !Number.isFinite(Number(rate)) ||
+                  Number(rate) <= 0))
             }
             onClick={() => m.mutate()}
           >
-            تأكيد
+            {receiptFrozen && m.isError ? "إعادة التحقق من نفس الاستلام" : "تأكيد"}
           </Button>
         </DialogFooter>
       </DialogContent>

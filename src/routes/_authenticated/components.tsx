@@ -54,9 +54,20 @@ function StockPage() {
             >
               تعديل / جرد
             </Button>
-            <Button size="lg" variant="ghost" asChild>
-              <Link to="/import">استيراد ملف</Link>
-            </Button>
+            {nativeLabConfigured() ? (
+              <Button
+                size="lg"
+                variant="ghost"
+                disabled
+                title="استيراد الأصناف إلى المحرك غير مفعّل بعد"
+              >
+                استيراد ملف · غير مفعّل
+              </Button>
+            ) : (
+              <Button size="lg" variant="ghost" asChild>
+                <Link to="/import">استيراد ملف</Link>
+              </Button>
+            )}
           </>
         )
       }

@@ -1,3 +1,5 @@
+> Current continuation (2026-10-24): [PR30 exact-source verification](../verified-cycle/RESULTS.md) includes the terminal native-remainder filter, real browser checks, last-unit competition and crash recovery. This historical packet is preserved; it is not full WMS acceptance.
+
 # Close an unshipped remainder — UNEXECUTED candidate
 
 This continuation is source work on independent stacked drafts. The execution

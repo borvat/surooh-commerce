@@ -1,5 +1,16 @@
 import type { OrderSearchOptions } from "./inventory";
 
+/** A native closed remainder is terminal even though the legacy enum stays placed. */
+export function matchesOrderStatus(
+  order: { status: string; native_remainder_closed?: boolean },
+  status?: string,
+): boolean {
+  if (!status || status === "all") return true;
+  if (status === "closed") return order.native_remainder_closed === true;
+  if (status === "placed" && order.native_remainder_closed) return false;
+  return order.status === status;
+}
+
 /** Pure, client-side filtering for the currently loaded order page.
  * IMPORTANT: pagination happens on the server. A filtered result is not a global count;
  * for complete historical filtering, add authorized database-side filters.

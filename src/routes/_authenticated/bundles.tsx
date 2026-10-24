@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { nativeLabConfigured } from "@/lib/native-lab-client";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { usePermissions } from "@/lib/auth";
@@ -28,10 +29,14 @@ function BundlesPage() {
   return (
     <Page
       title="البندلات / Sets"
-      intro="المنتجات التي تتكون من منتجات أخرى. الكمية المتاحة تُحسب من مخزون المكوّنات. لتحويل منتج إلى بندل اختر «بندل / طقم» في صفحة منتجات bol."
+      intro={
+        nativeLabConfigured()
+          ? "الباقات ومكوّناتها من محرك المستودع. الكمية المتاحة محسوبة من المكوّنات دون مخزون مستقل للباقة."
+          : "المنتجات التي تتكون من منتجات أخرى. الكمية المتاحة تُحسب من مخزون المكوّنات. لتحويل منتج إلى بندل اختر «بندل / طقم» في صفحة منتجات bol."
+      }
       actions={
         <Button size="lg" variant="outline" asChild>
-          <Link to="/products">منتجات bol</Link>
+          <Link to="/products">{nativeLabConfigured() ? "المنتجات" : "منتجات bol"}</Link>
         </Button>
       }
     >

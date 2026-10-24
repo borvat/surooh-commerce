@@ -714,6 +714,7 @@ try {
   for (const viewport of [
     { width: 1440, height: 1000 },
     { width: 390, height: 844 },
+    { width: 320, height: 720 },
   ]) {
     await page.setViewportSize(viewport);
     for (const route of ["dashboard", "products", "components", "bundles", "orders", "movements"]) {

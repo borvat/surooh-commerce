@@ -102,6 +102,8 @@ try {
     { url: origin, token: config.token },
   );
   page = await context.newPage();
+  await page.setViewportSize({ width: 390, height: 844 });
+  result.workflow_viewport = { width: 390, height: 844 };
   result.page_errors = [];
   page.on("pageerror", (error) => result.page_errors.push(error.message));
   const endpoint = "**/api/method/surooh_accounting.native_lab.api.command";
@@ -324,21 +326,23 @@ try {
   await page.goto(`${origin}/products`);
   const catalogSearch = page.getByLabel("بحث منتجات المستودع", { exact: true });
   await catalogSearch.fill("SYNTHETIC-C1");
-  const catalogC1 = page.locator('[data-native-product="TEST-C1"]');
+  const catalogC1 = page.locator('[data-native-mobile-product="TEST-C1"]');
   await catalogC1.waitFor();
-  assert.equal(await page.locator("[data-native-product]").count(), 1);
+  assert.equal(await page.locator("[data-native-mobile-product]").count(), 1);
   const nativeC1 = catalogBefore.items.find((row) => row.id === "TEST-C1");
-  assert.equal(Number(await catalogC1.locator("td").nth(3).textContent()), nativeC1.physical);
-  assert.equal(Number(await catalogC1.locator("td").nth(4).textContent()), nativeC1.reserved);
+  assert.equal(Number(await catalogC1.locator("dd").nth(0).textContent()), nativeC1.physical);
+  assert.equal(Number(await catalogC1.locator("dd").nth(1).textContent()), nativeC1.reserved);
   assert.equal(
-    Number(await catalogC1.locator("td").nth(5).textContent()),
+    Number(await catalogC1.locator("dd").nth(2).textContent()),
     nativeC1.physical - nativeC1.reserved,
   );
   await catalogSearch.fill("TEST-C2");
-  await page.waitForFunction(() => document.querySelectorAll("[data-native-product]").length === 2);
-  assert.equal(await page.locator("[data-native-product]").count(), 2);
+  await page.waitForFunction(
+    () => document.querySelectorAll("[data-native-mobile-product]").length === 2,
+  );
+  assert.equal(await page.locator("[data-native-mobile-product]").count(), 2);
   await catalogSearch.fill("TEST-KIT");
-  const nativeKit = page.locator('[data-native-product="TEST-KIT"]');
+  const nativeKit = page.locator('[data-native-mobile-product="TEST-KIT"]');
   await nativeKit.waitFor();
   assert.ok((await nativeKit.textContent()).includes("TEST-C1"));
   assert.ok((await nativeKit.textContent()).includes("TEST-C2"));
@@ -651,13 +655,68 @@ try {
     0,
   );
   mark("rendered_location_transfer_count_adjustment_matches_native_bin_value_and_balanced_GL");
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto(`${origin}/orders`);
+  const desktopBefore = await api("stock_locations");
+  const desktopOrder = await createOrder();
+  const desktopActions = page.locator(`[data-native-order="${desktopOrder.order_id}"]`);
+  for (const [operation, label] of [
+    ["pick", "تجهيز"],
+    ["pack", "تعبئة"],
+    ["ship", "شحن"],
+  ]) {
+    await clickCommand(operation, () =>
+      desktopActions.getByRole("button", { name: label, exact: true }).click(),
+    );
+  }
+  await desktopActions
+    .getByLabel("موقع حجر المرتجع", { exact: true })
+    .selectOption(quarantine.warehouse);
+  await clickCommand("return_quarantine", () =>
+    desktopActions.getByRole("button", { name: "مرتجع", exact: true }).click(),
+  );
+  const desktopAfter = await api("stock_locations");
+  assert.equal(
+    desktopAfter.bins.reduce((sum, bin) => sum + bin.stock_value, 0),
+    desktopBefore.bins.reduce((sum, bin) => sum + bin.stock_value, 0),
+  );
+  assert.ok(
+    (await api("snapshot")).orders.find((row) => row.id === desktopOrder.order_id).return_note,
+  );
+  mark("desktop_repeat_order_pick_pack_ship_and_quarantine_return_uses_same_native_authority");
+  const dashboardSnapshot = await api("snapshot");
+  const dashboardLocations = await api("stock_locations");
+  await page.goto(origin);
+  await page.getByRole("link", { name: "ابدأ اختبار المستودع", exact: true }).click();
+  const metric = (key) => page.locator(`[data-native-metric="${key}"] [data-native-value]`);
+  await metric("pending_orders").waitFor();
+  const metricNumber = async (key) => Number((await metric(key).textContent()).replaceAll(",", ""));
+  assert.equal(
+    await metricNumber("pending_orders"),
+    dashboardSnapshot.orders.filter((row) => row.status === "placed" && !row.remainder_closed)
+      .length,
+  );
+  assert.equal(
+    await metricNumber("closed_remainders"),
+    dashboardSnapshot.orders.filter((row) => row.remainder_closed).length,
+  );
+  assert.equal(
+    await metricNumber("stock_skus"),
+    dashboardSnapshot.items.filter((row) => row.stock).length,
+  );
+  assert.equal(
+    await metricNumber("inventory_value"),
+    dashboardLocations.bins.reduce((sum, bin) => sum + bin.stock_value, 0),
+  );
+  assert.deepEqual(ledger(await api("snapshot")), ledger(dashboardSnapshot));
+  mark("native_entry_dashboard_queue_and_inventory_value_match_engine_without_legacy_writes");
   result.viewports = [];
   for (const viewport of [
     { width: 1440, height: 1000 },
     { width: 390, height: 844 },
   ]) {
     await page.setViewportSize(viewport);
-    for (const route of ["products", "components", "bundles", "orders", "movements"]) {
+    for (const route of ["dashboard", "products", "components", "bundles", "orders", "movements"]) {
       await page.goto(`${origin}/${route}`);
       await page.getByRole("heading", { level: 1 }).waitFor();
       await page.waitForLoadState("networkidle");
@@ -681,7 +740,7 @@ try {
     false,
     "Native screen attempted a legacy Supabase request",
   );
-  mark("desktop_and_phone_five_native_screens_no_document_overflow_or_unhandled_JS_errors");
+  mark("desktop_and_phone_six_native_screens_no_document_overflow_or_unhandled_JS_errors");
   result.status = "PASS";
   result.evidence = {
     native_order: placed.order_id,
@@ -690,7 +749,14 @@ try {
     value_before: value(before),
     value_after: value(after),
     real_browser: await browser.version(),
-    existing_React_routes: ["/products", "/components", "/bundles", "/orders", "/movements"],
+    existing_React_routes: [
+      "/dashboard",
+      "/products",
+      "/components",
+      "/bundles",
+      "/orders",
+      "/movements",
+    ],
   };
 } catch (error) {
   result.reason = error.message.replaceAll(config.token || "__absent__", "[REDACTED]");

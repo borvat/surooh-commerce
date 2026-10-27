@@ -1,0 +1,83 @@
+{
+  "observed_at": "2026-10-28",
+  "repository": "borvat/surooh-commerce",
+  "base_branch": "integration/wms-auth-cycle-20261025",
+  "base_head": "4f3ba62633e513c5b08aa8cd3ec06f16dd702e60",
+  "base_tree": "e7443f9485dbe311e24e0c748b80cee2a0482269",
+  "type": "WMS application development",
+  "adaptation": "full-engineering",
+  "context": {
+    "purpose": "Surooh WMS interface with retained catalog/Bol workflows and native ERPNext/Accounting warehouse authority.",
+    "architecture": [
+      "TanStack/React UI and Node server modules; native warehouse commands and durable intent/projection helpers.",
+      "accounting-session-v1 bridge seals native SID/CSRF in server-only authenticated cookies and keeps warehouse capabilities disabled until admitted.",
+      "Accounting owns native financial/stock identity and contracts; WMS owns the operator interface and warehouse lifecycle."
+    ],
+    "modules": [
+      "src/lib/accounting-session.server.ts",
+      "src/lib/native-lab-client.ts",
+      "src/lib/native-stock-journal.ts",
+      "src/lib/native-stock-operations.ts",
+      "src/lib/native-shipping.ts",
+      "src/lib/warehouse-command-contract.ts",
+      "src/routes/",
+      "docs/wms/completion/CURRENT.md"
+    ],
+    "current_state": "Selected PR33 integration/wms-auth-cycle-20261025 at4f3ba62633e513c5b08aa8cd3ec06f16dd702e60 (tree e7443f9485dbe311e24e0c748b80cee2a0482269). CURRENT.md says full WMS goal OPEN and new PR33 source NOT deployed. Its existing Render/native observations are historical; no new deployed/tested identity was verified by this memory task.",
+    "verified_features": [
+      "Historical CURRENT.md records183 source tests at497464529228d3eb82cc72147000b6f488d401ec; final native source9f8eef52323927cc688c959476ddcbcd50100f3e had55 WMS native+12 Accounting HTTP+11 native session cases. These do not certify selected PR33 head or linked lifecycle.",
+      "Source includes disabled native-session bridge with warehouse/shipment-invoice capabilities false; no hosted admission is inferred."
+    ],
+    "blockers": [
+      "Accounting-owned persistent warehouse identity/profile/stock and linked invoice/credit APIs are not admitted.",
+      "No agreed shared write/restart window; required linked UI receipt\u2192shipment\u2192invoice\u2192partial return\u2192credit/restart cycle is NOT_RUN/BLOCKED.",
+      "Native invoice Manager fixture is not proof of minimal warehouse clerk privileges."
+    ],
+    "decisions": [
+      "Reuse docs/wms/completion/CURRENT.md as single state authority; preserve all original contents and source-specific failures/evidence.",
+      "No role grants, synthetic Administrator exposure, flag bypass, real mutation or deployment in the engineering-memory task.",
+      "Keep Bol writes disabled, no parallel stock or financial ledger."
+    ],
+    "unfinished": [
+      "Linked hosted browser/restart cycle, source compatibility and least-privilege native warehouse admission remain open."
+    ],
+    "next_step": "For product continuation, Accounting must admit reviewed native warehouse/financial contracts and a shared test window; for this task add engineering-memory activation and bounded resume references without altering those gates.",
+    "evidence_paths": [
+      "AGENTS.md",
+      "docs/wms/completion/CURRENT.md",
+      "docs/wms/completion/RESULTS.md",
+      "docs/wms/integration/TEST-B-AGREEMENT.md",
+      "docs/wms/integration/SESSION-RESULTS-20261025.json",
+      "package.json"
+    ],
+    "state_path": "docs/wms/completion/CURRENT.md",
+    "history_path": "docs/wms/completion/RESULTS.md"
+  },
+  "inspected_sources": [
+    {
+      "path": "AGENTS.md",
+      "blob_sha": "8caf3e839d3adee251a8f42ba4ca0e65d009db60",
+      "error": false,
+      "url": "https://github.com/borvat/surooh-commerce/blob/4f3ba62633e513c5b08aa8cd3ec06f16dd702e60/AGENTS.md"
+    },
+    {
+      "path": "docs/wms/completion/CURRENT.md",
+      "blob_sha": "ebaf63392044ac57e35683046d85f030cbfb9e26",
+      "error": false,
+      "url": "https://github.com/borvat/surooh-commerce/blob/4f3ba62633e513c5b08aa8cd3ec06f16dd702e60/docs/wms/completion/CURRENT.md"
+    },
+    {
+      "path": "docs/wms/integration/TEST-B-AGREEMENT.md",
+      "blob_sha": "451c996cf929079a2063aa43ed4d30cb626ff84c",
+      "error": false,
+      "url": "https://github.com/borvat/surooh-commerce/blob/4f3ba62633e513c5b08aa8cd3ec06f16dd702e60/docs/wms/integration/TEST-B-AGREEMENT.md"
+    },
+    {
+      "path": "package.json",
+      "blob_sha": "558bf7e789bb08622c70247f1b0d0e090dbb1ebf",
+      "error": false,
+      "url": "https://github.com/borvat/surooh-commerce/blob/4f3ba62633e513c5b08aa8cd3ec06f16dd702e60/package.json"
+    }
+  ],
+  "limits": "Source inspection and historical reports only; no new native tests or deployment observed."
+}

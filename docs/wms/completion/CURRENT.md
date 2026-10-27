@@ -181,3 +181,39 @@ proves only Accounting-user sessions. No financial roles may be granted to WMS
 clerks as a workaround. The Accounting-owned warehouse identity/capabilities and
 native operational contract must support minimal stock roles. The current
 Manager-bearing native invoice fixture is not warehouse least-privilege proof.
+
+<!-- project-memory-state-v1 -->
+```json
+{
+  "event": {
+    "blockers": [
+      "Automatic approval review rejected Accounting/SAM remote tree payloads; same-scope large uploads remain paused. Full task is PARTIAL despite completed local engineering acceptance."
+    ],
+    "deployment": {
+      "status": "unverified"
+    },
+    "evidence": [
+      "docs/engineering-memory/evidence/final-status.json",
+      "docs/engineering-memory/evidence/ordinary-acceptance.json",
+      "docs/engineering-memory/evidence/parent-ordinary-readback.json"
+    ],
+    "id": "surooh-commerce-publication-blocked-20261028",
+    "next_steps": [
+      "Obtain explicit approval for the reviewed engineering payloads to the named owned GitHub repositories and isolated feature/bmad-unified-memory-20261028 branches.",
+      "Publish with expected-head lease, open/update Draft PRs, and verify remote head plus changed blob identities. No merge or deployment."
+    ],
+    "recorded_at": "2026-10-27T23:39:30Z",
+    "schema_version": 1,
+    "source": {
+      "content_sha256": "f7671b0d5a45094333c5d88410181e6b547614f5b0c48519de565df065e89451",
+      "head": "4f3ba62633e513c5b08aa8cd3ec06f16dd702e60"
+    },
+    "status": "blocked",
+    "summary": "Surooh WMS interface with retained catalog/Bol workflows and native ERPNext/Accounting warehouse authority. Architecture: TanStack/React UI and Node server modules; native warehouse commands and durable intent/projection helpers. Modules: src/lib/accounting-session.server.ts, src/lib/native-lab-client.ts, src/lib/native-stock-journal.ts. Selected PR33 integration/wms-auth-cycle-20261025 at4f3ba62633e513c5b08aa8cd3ec06f16dd702e60 (tree e7443f9485dbe311e24e0c748b80cee2a0482269). CURRENT.md says full WMS goal OPEN and new PR33 source NOT deployed. Its existing Render/native observations are historical; no new deployed/tested identity was verified by this memory task.",
+    "tests": []
+  },
+  "event_digest": "15c2c20466576b896726155f89851426d316425781b258dcc1c43e6d3dd17235",
+  "schema_version": 1
+}
+```
+<!-- /project-memory-state -->

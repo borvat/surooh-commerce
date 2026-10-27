@@ -187,32 +187,34 @@ Manager-bearing native invoice fixture is not warehouse least-privilege proof.
 {
   "event": {
     "blockers": [
-      "Automatic approval review rejected Accounting/SAM remote tree payloads; same-scope large uploads remain paused. Full task is PARTIAL despite completed local engineering acceptance."
+      "Accounting-owned persistent warehouse identity/profile/stock and linked invoice/credit APIs are not admitted.",
+      "No agreed shared write/restart window; required linked UI receipt\u2192shipment\u2192invoice\u2192partial return\u2192credit/restart cycle is NOT_RUN/BLOCKED.",
+      "Native invoice Manager fixture is not proof of minimal warehouse clerk privileges."
     ],
     "deployment": {
       "status": "unverified"
     },
     "evidence": [
-      "docs/engineering-memory/evidence/final-status.json",
-      "docs/engineering-memory/evidence/ordinary-acceptance.json",
-      "docs/engineering-memory/evidence/parent-ordinary-readback.json"
+      "docs/engineering-memory/evidence/shared-persistence-20261028.json",
+      "docs/engineering-memory/FINAL-ACCEPTANCE-20261028.md",
+      "docs/engineering-memory/evidence/ordinary-acceptance.json"
     ],
-    "id": "surooh-commerce-publication-blocked-20261028",
+    "id": "surooh-commerce-shared-persisted-20261028",
     "next_steps": [
-      "Obtain explicit approval for the reviewed engineering payloads to the named owned GitHub repositories and isolated feature/bmad-unified-memory-20261028 branches.",
-      "Publish with expected-head lease, open/update Draft PRs, and verify remote head plus changed blob identities. No merge or deployment."
+      "Use original bmad setup/build in this reviewed branch; memory activation and material-result archiving need no per-task memory prompt.",
+      "For application continuation consult the existing source-bound product state and blockers; prior application tests keep their exact historical identity."
     ],
-    "recorded_at": "2026-10-27T23:39:30Z",
+    "recorded_at": "2026-10-27T23:52:20Z",
     "schema_version": 1,
     "source": {
-      "content_sha256": "f7671b0d5a45094333c5d88410181e6b547614f5b0c48519de565df065e89451",
-      "head": "4f3ba62633e513c5b08aa8cd3ec06f16dd702e60"
+      "content_sha256": "d40d0677dd2ee5de4b5ded11aa0f76d7f47d9a5247df983a36e4eab3b3a114b2",
+      "head": "9b2c8eac4640ba8f925a412feaf572f218282123"
     },
-    "status": "blocked",
+    "status": "complete",
     "summary": "Surooh WMS interface with retained catalog/Bol workflows and native ERPNext/Accounting warehouse authority. Architecture: TanStack/React UI and Node server modules; native warehouse commands and durable intent/projection helpers. Modules: src/lib/accounting-session.server.ts, src/lib/native-lab-client.ts, src/lib/native-stock-journal.ts. Selected PR33 integration/wms-auth-cycle-20261025 at4f3ba62633e513c5b08aa8cd3ec06f16dd702e60 (tree e7443f9485dbe311e24e0c748b80cee2a0482269). CURRENT.md says full WMS goal OPEN and new PR33 source NOT deployed. Its existing Render/native observations are historical; no new deployed/tested identity was verified by this memory task.",
     "tests": []
   },
-  "event_digest": "15c2c20466576b896726155f89851426d316425781b258dcc1c43e6d3dd17235",
+  "event_digest": "0598db0ebe7b19ea05971e30ef317d5e3f20efdae94e2d2cd7248143eb77072a",
   "schema_version": 1
 }
 ```

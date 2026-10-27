@@ -1,0 +1,22 @@
+{
+  "name": "surooh-commerce",
+  "repository": "borvat/surooh-commerce",
+  "branch": "feature/bmad-unified-memory-20261028",
+  "head": "9b2c8eac4640ba8f925a412feaf572f218282123",
+  "expected_head": "9b2c8eac4640ba8f925a412feaf572f218282123",
+  "tree": "c91e9a8d1e5d524ff7ad886c770bec59e32ca952",
+  "pr": "https://github.com/borvat/surooh-commerce/pull/34",
+  "pr_number": 34,
+  "draft": true,
+  "merged": false,
+  "state": "open",
+  "base_branch": "integration/wms-auth-cycle-20261025",
+  "verified_paths": 22,
+  "failed_paths": [],
+  "pass": true,
+  "verified_utc": "2026-10-27T23:52:20.310263+00:00",
+  "authorization": "Owner explicitly approved reviewed payloads, isolated branch upload and Draft PRs; no merge/deployment.",
+  "scope": "Authenticated initial publication readback of all reviewed changed blobs and open Draft PR. This receipt precedes the following evidence/state-only commit.",
+  "code_helper_sha256": "ac42c9c53dbafc43ebefcb65a4b79c40421369527318e6e610140bd285796911",
+  "test_limits": "Existing independent frozen-helper and disposable ordinary-session evidence remains source/hash-bound and historical; no tests on a different commit or live application are inferred."
+}

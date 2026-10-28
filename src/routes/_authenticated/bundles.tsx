@@ -20,7 +20,7 @@ function BundlesPage() {
     <Page title="البندلات / Sets" intro="المنتجات التي تتكون من منتجات أخرى. الكمية المتاحة تُحسب من مخزون المكوّنات. لتحويل منتج إلى بندل اختر «بندل / طقم» في صفحة منتجات bol."
       actions={<Button size="lg" variant="outline" asChild><Link to="/products">منتجات bol</Link></Button>}>
       <div className="mb-4"><SharedNote /></div>
-      <Table head={["", "البندل", "يتكون من", "المتاح للبيع", "القطعة التي ستنفد أولاً", ""]}>
+      <Table label="البندلات" head={["", "البندل", "يتكون من", "المتاح للبيع", "القطعة التي ستنفد أولاً", ""]}>
         {rows.length === 0 && <Empty cols={6} text={cat.loaded ? "لا توجد بندلات بعد." : "جارٍ التحميل…"} />}
         {rows.map((r) => (
           <tr key={r.id}>

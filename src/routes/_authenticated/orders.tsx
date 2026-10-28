@@ -40,7 +40,7 @@ function OrdersPage() {
           <Button key={k} size="sm" variant={status === k ? "default" : "outline"} onClick={() => { setStatus(k!); setPage(0); }}>{l}</Button>
         ))}
       </div>
-      <Table head={["الطلب", "الحساب", "التاريخ", "المنتجات", "طريقة الشحن", "الحالة", ""]}>
+      <Table label="الطلبات" head={["الطلب", "الحساب", "التاريخ", "المنتجات", "طريقة الشحن", "الحالة", ""]}>
         {(q.data?.rows ?? []).length === 0 && <Empty cols={7} text={q.isLoading ? "جارٍ التحميل…" : "لا توجد طلبات."} />}
         {(q.data?.rows ?? []).map((o) => {
           const lines = o.order_lines ?? [];

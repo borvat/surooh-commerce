@@ -19,12 +19,13 @@ export function Card({ children, className = "" }: { children: ReactNode; classN
   return <div className={`rounded-xl border bg-card p-5 ${className}`}>{children}</div>;
 }
 
-export function Table({ head, children }: { head: string[]; children: ReactNode }) {
+export function Table({ label, head, children }: { label: string; head: string[]; children: ReactNode }) {
   return (
-    <div className="overflow-x-auto rounded-xl border bg-card">
+    <div role="region" aria-label={label} tabIndex={0} className="max-h-[70vh] max-w-full overflow-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring print:max-h-none print:overflow-visible">
       <table className="w-full text-sm">
-        <thead className="bg-muted/50 text-muted-foreground">
-          <tr>{head.map((h) => <th key={h} className="px-4 py-3 text-start font-medium">{h}</th>)}</tr>
+        <caption className="sr-only">{label}</caption>
+        <thead className="sticky top-0 z-10 bg-muted text-muted-foreground print:static">
+          <tr>{head.map((h, i) => <th key={i} scope="col" className="px-4 py-3 text-start font-medium">{h}</th>)}</tr>
         </thead>
         <tbody className="divide-y">{children}</tbody>
       </table>

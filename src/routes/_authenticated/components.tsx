@@ -31,7 +31,7 @@ function StockPage() {
       </>}
     >
       <Input className="mb-4 max-w-xs" placeholder="بحث…" value={search} onChange={(e) => setSearch(e.target.value)} />
-      <Table head={["", "المنتج", "EAN", "في المستودع", "محجوز للطلبات", "المتاح", ""]}>
+      <Table label="المخزون" head={["", "المنتج", "EAN", "في المستودع", "محجوز للطلبات", "المتاح", ""]}>
         {rows.length === 0 && <Empty cols={7} text={cat.loaded ? "لا توجد منتجات مفردة في المخزون بعد. في «منتجات bol» اضغط «إضافة للمخزون» أو حدّد مكوّنات بندل." : "جارٍ التحميل…"} />}
         {rows.map((r) => {
           const c = r.comp!;

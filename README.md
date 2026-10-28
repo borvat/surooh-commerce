@@ -15,3 +15,5 @@ Status: source snapshot for development and review; NOT production certified.
 Delivery gates: complete source audit, clean build, isolated staging migrations, account isolation tests, bol read-only integration, and approved production readiness assessment.
 
 Stockitup is a functional benchmark; its source code has not been copied.
+
+Upstream adoption decisions and table verification: [Repository review](docs/UPSTREAM_REVIEW.md).

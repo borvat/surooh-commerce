@@ -1,169 +1,235 @@
-# WMS continuation — 25 October 2026 (Asia/Damascus)
+# Current WMS continuation — 25 October2026 (Asia/Damascus)
 
-**Full goal OPEN. No accepted hosted WMS, production release or complete
-shipment/invoice/credit cycle. This is the single current continuation record.**
+**Full WMS goal OPEN. Required linked UI receipt→shipment→invoice→partial
+return→credit cycle and its restart retention are NOT EXECUTED.**
 
-## Source group and preserved concurrent work
+This is the single current record. PR32 evidence remains at eaba5258; do not
+rerun or replace it merely to restore context. Continue on independent PR33,
+branch integration/wms-auth-cycle-20261025. Main/Accounting/Marketplace/SAM
+branches and service configuration were not changed by WMS.
 
-- WMS PR32, branch `completion/wms-20261025`, based on PR31
-  `668eab9a68ed365d50630f6983924e6951b6d875`. Tested application
-  `507c6f509356ee8a0a971575375188e88b489916`, tree
-  `cb6263ef954fd40b6b1ba3ebaac685c79da9fcae`. Later report commits change docs only.
-- Accounting original canonical input `f03dd2fc26fd71cee461feda7853ed3bbb5ab223`:
-  exact239 app/guard/test/metadata blobs materialized and independently verified
-  by Git blob hashes. Local witness `8ddd3e8b021f3554264b1901d7ee761c263c43ca`
-  is NOT a canonical Accounting commit or complete repository checkout.
-- Accounting local proposal witness `fea52a54aab97e0d5be288d01ab2928249b5fbb0`
-  differs only by one test-site selection line in
-  `validation/invoice_workbench/local_testing/delivery_checks.py`. Its explicit
-  `INVOICE_LAB_SITE` must take precedence over the standalone derived site.
-  No application guard, authentication assertion or native source is altered.
-  The private proposed patch is `accounting-delivery-site.patch`; it has not been
-  applied to any Accounting remote branch or service.
-- Concurrent Accounting PR43 advanced to `5f77e2dee6ebc985acd6d074a70e7138dfd6726b`.
-  Independently compared: only persistent_start.py and persistent_restore.py
-  changed after f03dd2fc. Preserve both changes; this WMS run does not execute or
-  certify either changed deployment helper.
-- Engine tag refs independently read from official Git repos: Frappe16.52.0
-  `4515014c87ece6cb20ee91d2cfb121c5cbd1ff4a`, ERPNext16.52.0
-  `90cb7f9243048a44311777d60a1cec8ca05ceec9`. Every regular file from all three
-  pinned Frappe/ERPNext/MariaDB archives was checked by the original runner.
-  Local MariaDB11.8.9, Redis7.0.15, Python3.14.8, Node24.22.1, Bun1.3.13.
+## Owner-assigned shared environment and coordination
 
-## Changes and exact-source checks
+[Shared TEST-B agreement](../integration/TEST-B-AGREEMENT.md) defines existing
+service/disk IDs, responsibility split, source compatibility, secure entry,
+write/deploy/restart lease, expected native audit references and rollback.
+Accounting owns engine/permissions/connection contracts; WMS owns its interface,
+session adapter and warehouse cycle. Technical endpoint confirmation is pending;
+no WMS shared write or restart lease has been recorded. Requests are in Accounting
+PR43 comments6390467481,6390570843 and6390671740. No acknowledgement or completed
+review is inferred from posting a comment.
 
-1. CSV reader rejects duplicate/empty normalized headers, malformed quoting and
-   missing/excess fields with physical row numbers. Retains BOM, quoted delimiters,
-   escaped quotes, multiline cells and valid empty trailing fields. It is shared
-   by legacy imports and bol export parsing; no live bol call was made.
-2. Import UI invalidates old file state before reading and ignores superseded
-   asynchronous reads. Check/apply prevent file replacement while active. Read
-   errors are visible; no malformed file can retain an earlier Apply result.
-   This does NOT add a native ERPNext item import API; that remains missing.
-3. Native stock operations persist frozen intent before dispatch in sessionStorage,
-   keyed by native endpoint, TEST-A and verified signed-in actor. No JWT, password,
-   stock balance or execution receipt is stored. A same-tab reload restores the
-   request ID/body; explicit replay queries native idempotency before effects.
-   Storage failure/corruption blocks dispatch; a different unresolved identity
-   cannot replace the pending one. Acknowledged commands may be cleared only
-   after refreshing current native stock. Closing the browser tab is not a
-   durable recovery guarantee. Definitive rejected-command resolution still
-   needs the proposed native status contract; do not delete an unresolved intent
-   merely to submit a new identity.
+Existing base: surooh-accounting-test-b / srv-dbei3l0ae00c73d7mo80,
+https://surooh-accounting-test-b.onrender.com, one1c-2g instance, own1GB disk
+ dsk-dbei4avb9u1s739ptmig mounted /var/data/surooh-test. No new paid resource/cost.
+Independent read-only native SQL/config/filesystem audit on instance gzfpc:
+source27ac683003599d9809728801bc956a7cd522de52, invoice-lab-render,
+surooh_invoice_render, companyTEST-B; Frappe/ERPNext16.52.0. Existing records:
 
-Final actual exit0 checks on code507c6f50:170 application,25 foundation,14 evidence
-validator,10 browser-config and14 browser-helper tests; TypeScript/build PASS;
-lint0 errors/15 retained warnings. Independent Accounting150 policy/mock,7 recovery
-envelope and4 actual-JS/fake-transport cases PASS. These are separate tiers and
-are not native/browser acceptance. Commands/exits/log hashes are in
-[RESULTS-20261025.json](RESULTS-20261025.json).
+| Native record | Grand total | Outstanding | Link |
+| --- | --- | --- | --- |
+| ACC-SINV-2026-00001 |20.00|20.00|Existing baseline invoice|
+| ACC-SINV-2026-00002 |29.04|0.00|Existing Accounting browser invoice|
+| ACC-SINV-2026-00003 |-14.52|-14.52|Credit against00002|
 
-## Fresh native results and retained failure
+12 GL rows independently balance92.60 debit/credit; SLE count0. This is not a WMS
+receipt/shipment cycle. Disk used626892800/free377032704 of1020702720 bytes,
+mounted; enabled writer/reviewer test users.22:59Z metrics on gzfpc:
+486789120/2147483600 bytes, CPU0.0096257/1, one instance. Limited samples show
+headroom, not load acceptance; no insufficiency/new paid resource is established.
+Accounting must reserve backup/migration disk space before shared writes.
+[Sanitized baseline](../integration/TEST-B-BASELINE.json).
 
-| Attempt | WMS | Accounting HTTP | Browser | Outer result |
-| --- | --- | --- | --- | --- |
-| run01, predecessor WMS5f64f121 / unmodified Accounting subset |55 PASS|Not coinstalled|BLOCKED|exit2|
-| run02, WMS507c6f50 / original Accountingf03dd2fc subset |55 PASS|11 PASS /1 FAIL|BLOCKED|BLOCKED /exit2|
-| run03, WMS507c6f50 / local test-only proposal |55 PASS|12 PASS /306 assertion PASS lines|BLOCKED|PARTIAL_NATIVE_EXECUTED /exit2|
+An initial site read used bench cwd and failed before DB connection. Corrected
+sites cwd read succeeded. No data reset, delete, native financial/stock mutation,
+permission/configuration change or restart was issued by WMS.
 
-The original delivery_checks.py ignored the explicit shared site and tried logging
-into nonexistent invoice-lab-RUN_ID instead of wms-native-a.invalid. Its first
-login failed before any lifecycle assertion. Other eleven original programs
-passed. The unmodified-pair gate remains BLOCKED. The one-line local proposal
-was tested in a fresh copy/site pair, preserving every original assertion; its
-native gate has zero integrity errors and recommends evidence review only.
-It does not certify unmodified remote Accounting or its current hosted service.
+Accounting concurrently deployed4f36f192fc55c5f77d834da6ab5cdb088685e569,
+dep-dbejgtlg1s2s73fq33dg LIVE23:07:01Z. Inspected delta from27ac: static invoice
+JS/completion browser and owned asset-release/boot helpers/docs; native auth API
+files unchanged. Do not attribute old UI/deployment tests to this entire new
+source. Preserve Accounting's current work; WMS did not trigger this deployment.
 
-The full invoice app and native stock guard were installed on BOTH fresh sites
-before WMS tests. Original native55 includes last-unit/bundle competition,
-pick/cancel/ship races, old snapshots, worker kill/rollback and committed-response
-loss, proportional batches, quarantine returns, counts and direct cross-site
-HTTP/SQL/file denial. Twelve original Accounting programs ran on the same TEST-A
-DB after warehouse tests, including discounts, PDF/private mail, receipts/credits,
-purchases, quotations, bank matching/reversals and native reports. This is bounded
-co-installation proof, not automatic linkage of a WMS shipment to its own invoice.
+## Concrete blocking dependency
 
-Example current native audit: receipt MAT-STE-2026-00001 creates C1=10/value100 and
-C2=10/value200; shipment MAT-DN-2026-00001 consumes C1=1/C2=2, balanced COGS/stock50;
-return MAT-DN-2026-00002 restores quantities/value and reverses those native GL
-amounts. Exact synthetic results are in JSON. No second ledger, real payment,
-SMTP, carrier, bol mutation or production data was used.
+The independent hosted read found only frappe/erpnext/surooh_accounting/
+surooh_invoice_workbench installed, surooh_native_lab FALSE, shared profile NULL,
+and no native WMS guard. Existing invoice-session authentication is supported;
+the persistent native warehouse operational endpoint/profile is not admitted.
+Do NOT flip flags or expose the lab Administrator executor to work around it.
+Accounting must prepare/review native stock identity/permissions/profile plus
+shipment-row-linked invoice and partial-return credit mapping with independent
+financial review. WMS cannot invent those endpoints or create another ledger.
+The proposed test-site correction remains for Accounting to review/adopt on its
+own branch. No Accounting remote code change was attempted in this continuation.
 
-Chrome151 downloaded from official Google origin after the standard installer
-returned truncated archives. Actual launch fails at Unix socket creation with
-Operation not permitted. No internal screen,1440/390/320 screenshot, keyboard,
-RTL or device workflow is claimed. No restriction was bypassed.
+Existing TEST-B browser environment is usable according to Accounting's published
+18 native browser assertions at1440/390/320, quote/invoice00002/credit00003.
+Their JSON and those record IDs were reviewed. This is Accounting evidence,
+not WMS visual acceptance, and no screenshots are claimed newly inspected here.
+No new browser resource or paid duplicate stack is needed on that basis.
 
-Both source trees remained clean and unchanged during final runs. Owned MariaDB
-and Redis stopped with exit0. Independent filesystem review found a run02 private
-fixture remaining despite its removal report; it was identified against that
-run's exact datadir and removed after verifying service shutdown. Final independent
-readback: zero owned fixture directories. The discrepancy's cause is unresolved;
-runner self-report alone is not accepted as cleanup evidence. Raw logs, configs,
-credentials, database files and backups are not published in this public repo.
+## WMS session implementation and safety
 
-## Verified Render mapping and safe access
+Native-session code source497464529228d3eb82cc72147000b6f488d401ec;
+final native-test source9f8eef52323927cc688c959476ddcbcd50100f3e, tree
+028c992576b9f81e1878599f517955ad6f71c783. Difference is one native test-role
+expectation only; all application/server/UI blobs are identical.
 
-Workspace `tea-db35rbflot8c739g8rhg` = Sam's workspace / ceo@suroohholdings.com.
+- New server-only accounting-session-v1 bridge consumes existing native login,
+  invoice-workbench CSRF initialization and api.context. Fixed verified WMS and
+  TEST-B origins/company; no browser-controlled endpoint/company/actor selection,
+  external redirect, arbitrary RPC proxy or legacy fallback.
+- Native SID/CSRF sealed with AES-256-GCM in Secure/HttpOnly/SameSite=Strict
+  __Host cookie bound to origin/backend/company;15min TTL. Server-only256bit
+  key, no default key. Credentials/SID/native CSRF never returned to browser JS
+  or stored in localStorage. Every read revalidates native company/current roles.
+- Proxy CSRF/origin checks, bounded request/response bodies, sanitized errors,
+  expiry/tamper/duplicate-cookie/key/company rejection. Logout always clears the
+  local cookie when its response is delivered; native failure is explicitly
+  unconfirmed rather than labelled successful revocation.
+- New /accounting-connection route shows verified company/user/native review
+  role and explains that warehouse cycle admission is still pending. It never
+  calls stock/financial mutations or navigates into the legacy stock writer.
+- Capabilities warehouse_commands and shipment_invoice_cycle are FALSE. A signed
+  identity does not authorize warehouse writes; command route returns409 after
+  authentication. Profile remains OFF by default and is not active on Render.
 
-| Resource | Observed actual state | Scope |
+Server secret names and dedicated HTTPS entry are in the shared agreement; never
+paste a key/password into GitHub/chat or VITE settings. Accounting selects native
+identities/permissions through the protected provider path. WMS owns its cookie
+key/configuration only after a reviewed source group and test window exist.
+
+## Source-bound verification (separate tiers)
+
+| Tier | Observed result | Boundary |
 | --- | --- | --- |
-| WMS srv-dbe28f7f3r2c73cfhe0g |deploy/isolated-render-test-20261024, live2a1adc7dfc531a13678498745c388e6ef2fe672a, dep-dbe28g7f3r2c73cfhgm0; free/no attached disk/auto-deploy OFF|Not changed|
-| Accounting TEST-B srv-dbei3l0ae00c73d7mo80 |Latest observed live5f77e2de, dep-dbeir0qvcj2c73d3imbg; separate disk dsk-dbei4avb9u1s739ptmig|Concurrent Accounting work; not changed by WMS|
-| Accounting TEST-A srv-dbe286vb9u1s73bu9g5g |Existing isolated Accounting service; prior free/resetting candidate|Not restarted, migrated or modified|
-| WMS evidence Postgres dpg-dbcj5o7b9u1s73brr9bg-a |Evidence database, not the native MariaDB tested here|No connection opened|
+| App/source checks at49746452 |183 PASS; type/build-node PASS; lint0errors/15 existing warnings; foundation25/validator14/config10/helper14 PASS|Transport/SSR/helpers are not native/browser proof|
+| Actual built Node route |Disabled auth endpoint returns503; no legacy fallback; server-only key/crypto code absent from public bundle search|No live profile enabled|
+| Native run auth01 at49746452 |55 WMS native PASS;12 Accounting HTTP PASS; new session probe FAIL after guest denial|Wrong test expectation for native writer fixture role; retained|
+| Native run auth02 at9f8eef52 |55 WMS native PASS;12 original Accounting HTTP PASS;11 actual native HTTP session cases PASS|Local fresh coinstalled sites, not hosted B lifecycle|
+| Native session before/after |SLE77/netqty140/value-difference2270 identical; GL193/debit6649.2/credit6649.2 identical|Shows session work caused no stock/GL effect, not requested cycle|
+| Current WMS internal1440/390/320/browser/restart cycle |NOT_RUN /BLOCKED|Requires Accounting operational contract + agreed shared window|
 
-Existing URL: https://surooh-wms-isolated-test.onrender.com — older application,
-NOT an accepted native WMS deliverable. Its external database mapping is not
-established merely from the service inventory. Do not substitute SAM's service
-or database. No Marketplace or SAM resource was used or changed.
+The original Accounting app/guard/test materialization is canonical27ac's exact
+238 matching blobs plus ONE local proposed delivery_checks.py site-selection line;
+local witness fea52a54aab97e0d5be288d01ab2928249b5fbb0 is not a canonical remote
+Accounting commit. Shared original55/12 remain bounded co-installation evidence.
+The host blocks local Chromium Unix sockets; it does not prove existing TEST-B
+cannot run browsers. Native outer/gate exit2 is retained; gate has zero integrity
+errors and recommends native evidence review only. No full goal/release approval.
 
-The current native client deliberately accepts loopback HTTP/TEST-A only; its
-JWT/test-site binding is incompatible with treating a persistent invoice-workbench
-login as a hosted WMS session. The public WMS form is the older Supabase login.
-Do not paste native JWTs, signing keys, Accounting passwords or a SAM bearer there.
-No ready secure hosted WMS login is claimed. Local acceptance generates its own
-private synthetic credentials and passes tokens only through private process input.
-See [coordinated hosted contract proposal](HOSTED-CONTRACT-PROPOSAL.md). It specifies
-same-origin authenticated sessions, per-user/company native binding, server-only
-secrets, native status reads, compatibility gates and rollback; it is not enabled.
+The first session probe incorrectly expected writer can_review=false. Original
+Accounting fixtures explicitly grant Accounts Manager to BOTH writer/reviewer;
+corrected test expects the original declared role. No native role/assertion/guard
+was removed or changed. Earlier synthetic transport suite timed out at its default
+5sec while testing a15sec upstream budget; explicit250ms loopback-only fixture
+budget now tests abort semantics; hosted limit remains15sec. Both failures remain
+recorded. Final source files remained clean/unchanged during native runs.
+Owned MariaDB/Redis stopped exit0, private fixtures removed; independent readback
+found zero remaining owned fixture roots. Raw configs/passwords/session cookies/
+credentials/private logs/databases are not published.
 
-## Remaining scope and next executable work
+[Machine-readable results and hashes](../integration/SESSION-RESULTS-20261025.json).
+Official engine refs unchanged: Frappe4515014c87ece6cb20ee91d2cfb121c5cbd1ff4a,
+ERPNext90cb7f9243048a44311777d60a1cec8ca05ceec9; verified original16.52.0 archives;
+local MariaDB11.8.9/Redis7.0.15/Python3.14.8, Bun1.3.13/Node24.22.1.
 
-| Area | Implemented/evidenced boundary | Next required work |
-| --- | --- | --- |
-| Catalog/import/UOM |Native read projections; structural CSV validation|Native authorized administration/import and conversion contract; batch/serial/expiry scope|
-| Locations/receiving |Native warehouses/quarantine, receipt, transfer/count|PO links, shortages/damage/discrepancies, putaway and complete owner/shelf/bin hierarchy|
-| Fulfillment/bundles |Native reservations, scans, proportional batches, cancel/close/ship and component races|Arbitrary line/fraction splits, multiple parcels, actual device/scanner QA|
-| Return/count |Native quarantine/release and stale-count protection|Formal independent approvals, partial-DN return, inspection/disposal|
-| Accounting |Native stock/value/GL plus coinstalled invoice-workbench tests|Adopt/retest proposed test fix; same-order shipment→invoice→partial credit reference reconciliation|
-| Marketplace |Retained contracts; not executed in these runs|Freeze its actual full candidate and verify origin/review admission and independent WMS reconciliation|
-| Identity/UI |Synthetic JWT/site/DB denial proofs|Coordinated hosted operator contract; current1440/390/320/RTL internal UI and permissions|
-| Durability |Native worker/response recovery|Current-source hosted restart/redeploy/container retention, independent backup/key escrow and restore; service/owner/load isolation|
+## Deployed vs tested; exact next action
 
-Do not overwrite the Accounting developer's current5f77e2de work or use the resetting
-free service as a persistence substitute. Before any shared contract/schema/hosting
-change, agree the exact paired candidate and test in a separately owned target.
-The proposed Accounting correction was not published remotely: automatic approval
-review rejected writing it to that repository because authorization covered a
-proposal, not changes to the Accounting developer's path. The private review file
-and local evidence are the safer completed alternative; no permission bypass.
+Existing WMS srv-dbe28f7f3r2c73cfhe0g still runs
+2a1adc7dfc531a13678498745c388e6ef2fe672a /dep-dbe28g7f3r2c73cfhgm0,
+branch deploy/isolated-render-test-20261024, free/auto-deploy OFF. New PR33 source
+is NOT deployed. Existing URL https://surooh-wms-isolated-test.onrender.com is not
+an accepted native interface; do not paste Accounting/SAM credentials into its
+older Supabase login. Do not use SAM's service/DB or alter current TEST-A.
 
-## Replay and rollback
+Next dependent work: Accounting confirms/adopts site correction and supplies the
+persistent warehouse session/profile/stock and linked financial APIs on its own
+branch, records source compatibility and shared write/restart window. Then WMS
+binds its existing UI, executes one owned synthetic SKU receipt→shipment→THAT
+invoice→partial return→THAT credit with native review and reference/value/GL
+readback at1440/390/320. Accounting performs the coordinated same-service restart;
+WMS re-reads the SAME business records/amounts/attachments. No new identity on an
+uncertain mutation; use native command status first. Separate tests do not close
+any of those missing stages. Do not reset/reseed current B data to start.
 
-Use docs/wms/integration-2026-10-24/REPLAY.md and the original bootstrap with the
-exact code507c6f50 and independently verified Accounting app/guard/test source.
-For original remote behavior, do not apply the proposal: expect delivery suite
-failure. For the proposed comparison, change only the test's site selection to
-honor existing INVOICE_LAB_SITE and retain standalone fallback; record that patch
-and its local witness separately. Use --with-accounting-workbench and fresh output,
-original built Frappe assets, verified upstream archives and private synthetic
-credentials. Do not relabel an outer exit2 as success or reuse predecessor passes.
-Run atomic_gate.py with the actual recorded WMS and local Accounting witness SHAs.
+Replay session proof using the original native bootstrap plus explicit
+--with-accounting-workbench --with-wms-session-bridge, verified sources/assets,
+fresh local evidence and private synthetic credentials. Keep the Accounting
+proposal/source witness distinct and preserve original failures. Use actual
+recorded SHAs for atomic_gate.py. For Node packaging use NITRO_PRESET=node-server.
 
-Discard/revert WMS PR32 to return to PR31; no schema/data rollback is needed for
-these client changes. Pending journal metadata must be reconciled against native
-idempotency before clearing; reverting frontend code does not undo a native
-transaction. Do not restore native data by replacing it with a fixture database.
-There was no deployment, main merge, paid-resource change or new cost from this
-WMS work (USD0); earlier shared approvals are not a new WMS budget.
+Rollback discards/reverts independent PR33; no schema/native data rollback or
+Accounting service change is needed. If later activated, disable only new WMS
+session admission; do not replace native data or clear uncertain command intents.
+No main merge, production action, real provider/mail/payment or new paid resource;
+new infrastructure cost from WMS is USD0. Full goal remains OPEN.
+
+## Final independent readback after concurrent Accounting deploy
+
+On new instance82qpc actual source4f36f192fc55c5f77d834da6ab5cdb088685e569,
+mounted disk free375070720 bytes. Original invoices00001/00002/00003 retain their
+same values/status/linkage. Additional Accounting test invoice00004 and credit
+00005 appeared; GL now22 rows balances165.20/165.20, SLE remains0. These were not
+created by WMS, which issued SELECT/config/filesystem reads only. This verifies
+preexisting document retention across an Accounting-owned deployment, NOT the
+requested WMS cycle or coordinated WMS restart. See updated baseline JSON.
+
+Important auth limit: existing api.context requires Accounts User; current bridge
+proves only Accounting-user sessions. No financial roles may be granted to WMS
+clerks as a workaround. The Accounting-owned warehouse identity/capabilities and
+native operational contract must support minimal stock roles. The current
+Manager-bearing native invoice fixture is not warehouse least-privilege proof.
+
+<!-- project-memory-state-v1 -->
+```json
+{
+  "event": {
+    "blockers": [
+      "Accounting-owned persistent warehouse identity/profile/stock and linked invoice/credit APIs are not admitted.",
+      "No agreed shared write/restart window; required linked UI receipt\u2192shipment\u2192invoice\u2192partial return\u2192credit/restart cycle is NOT_RUN/BLOCKED.",
+      "Native invoice Manager fixture is not proof of minimal warehouse clerk privileges."
+    ],
+    "deployment": {
+      "status": "unverified"
+    },
+    "evidence": [
+      "docs/engineering-memory/evidence/normal-adoption-acceptance-20261028.json",
+      "docs/engineering-memory/evidence/ordinary-acceptance.json"
+    ],
+    "id": "surooh-commerce-normal-adoption-accepted-20261028",
+    "next_steps": [
+      "Use original BMAD ordinary tasks on integration/wms-auth-cycle-20261025; current Git outranks stored prose, candidates remain inactive, and source-bound historical suites are not a new runtime PASS.",
+      "Use original bmad setup/build in this reviewed branch; memory activation and material-result archiving need no per-task memory prompt.",
+      "For application continuation consult the existing source-bound product state and blockers; prior application tests keep their exact historical identity.",
+      "Preserve current project/application blockers and historical test identities; no operational delivery is implied."
+    ],
+    "recorded_at": "2026-10-28T00:52:43Z",
+    "schema_version": 1,
+    "source": {
+      "content_sha256": "78487b01730d1ccff2c434e808046a5e05ad2ca168719b79e9d1e73ecf7c646c",
+      "head": "fdb14873e119a0469277cd15c6804e303d6a503d"
+    },
+    "status": "complete",
+    "summary": "Development memory adoption is integrated and authenticated on integration/wms-auth-cycle-20261025. Original BMAD clean setup/activation/retrieval and independent ordinary acceptance passed. Helper unchanged; tests keep historical identities; project/operational gates remain separate. Surooh WMS interface with retained catalog/Bol workflows and native ERPNext/Accounting warehouse authority. Architecture: TanStack/React UI and Node server modules; native warehouse commands and durable intent/projection helpers. Modules: src/lib/accounting-session.server.ts, src/lib/native-lab-client.ts, src/lib/native-stock-journal.ts. Selected PR33 integration/wms-auth-cycle-20261025 at4f3ba62633e513c5b08aa8cd3ec06f16dd702e60 (tree e7443f9485dbe311e24e0c748b80cee2a0482269). CURRENT.md says full WMS goal OPEN and new PR33 source NOT deployed. Its existing Render/native observations are historical; no new deployed/tested identity was verified by this memory task.",
+    "tests": [
+      {
+        "evidence": [
+          "docs/engineering-memory/evidence/normal-adoption-acceptance-20261028.json"
+        ],
+        "name": "Clean original BMAD setup activation audit brief and source-bound retrieval",
+        "scope": "historical",
+        "source": {
+          "content_sha256": "91c9e9586ada73826ea6a4cc16479e891edc486fe96947a7829fda59bba5a27c",
+          "head": "fdb14873e119a0469277cd15c6804e303d6a503d"
+        },
+        "status": "pass"
+      }
+    ]
+  },
+  "event_digest": "64fff72c491f87c3213ad83df2a401e3ff683d3003ea21086857e300a02e7007",
+  "schema_version": 1
+}
+```
+<!-- /project-memory-state -->

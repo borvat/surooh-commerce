@@ -29,7 +29,10 @@ def main():
     parser.add_argument("--bun", type=Path, required=True)
     add_arguments(parser)
     parser.add_argument("--with-accounting-workbench", action="store_true")
+    parser.add_argument("--with-wms-session-bridge", action="store_true")
     args = parser.parse_args()
+    if args.with_wms_session_bridge and not args.with_accounting_workbench:
+        parser.error("Session bridge proof requires the full shared Accounting fixture")
     lab, out = args.runtime_root.resolve(), args.output.resolve()
     accounting = args.accounting_root.resolve()
     if not (accounting / "surooh_accounting/native_lab/api.py").is_file():
@@ -287,7 +290,7 @@ def main():
         private = work / "private-bootstrap.json"
         private.write_text(
             json.dumps(
-                {"password": password, "sites": str(sites), "evidence": str(out), "shared_workbench": args.with_accounting_workbench, "accounting_root": str(accounting)}
+                {"password": password, "sites": str(sites), "evidence": str(out), "shared_workbench": args.with_accounting_workbench, "session_bridge": args.with_wms_session_bridge, "accounting_root": str(accounting)}
             )
         )
         private.chmod(0o600)

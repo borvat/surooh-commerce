@@ -189,35 +189,46 @@ Manager-bearing native invoice fixture is not warehouse least-privilege proof.
     "blockers": [
       "Accounting-owned persistent warehouse identity/profile/stock and linked invoice/credit APIs are not admitted.",
       "No agreed shared write/restart window; required linked UI receipt\u2192shipment\u2192invoice\u2192partial return\u2192credit/restart cycle is NOT_RUN/BLOCKED.",
-      "Native invoice Manager fixture is not proof of minimal warehouse clerk privileges.",
-      "Development integration and post-merge readback pending"
+      "Native invoice Manager fixture is not proof of minimal warehouse clerk privileges."
     ],
     "deployment": {
       "status": "unverified"
     },
     "evidence": [
-      "docs/engineering-memory/evidence/adoption-review-20261028.json",
-      "docs/engineering-memory/evidence/ordinary-acceptance.json",
-      "docs/engineering-memory/evidence/adoption-quick-review-20261028.json"
+      "docs/engineering-memory/evidence/normal-adoption-acceptance-20261028.json",
+      "docs/engineering-memory/evidence/ordinary-acceptance.json"
     ],
-    "id": "surooh-commerce-adoption-continuity-20261028",
+    "id": "surooh-commerce-normal-adoption-accepted-20261028",
     "next_steps": [
+      "Use original BMAD ordinary tasks on integration/wms-auth-cycle-20261025; current Git outranks stored prose, candidates remain inactive, and source-bound historical suites are not a new runtime PASS.",
       "Use original bmad setup/build in this reviewed branch; memory activation and material-result archiving need no per-task memory prompt.",
       "For application continuation consult the existing source-bound product state and blockers; prior application tests keep their exact historical identity.",
-      "Integrate reviewed memory-only changes into integration/wms-auth-cycle-20261025 after dependency and server-protection checks.",
       "Preserve current project/application blockers and historical test identities; no operational delivery is implied."
     ],
-    "recorded_at": "2026-10-28T00:27:56Z",
+    "recorded_at": "2026-10-28T00:52:43Z",
     "schema_version": 1,
     "source": {
-      "content_sha256": "96033249635a4f9b22ac92d827937059e6dd040b9ce2777ba817f4db52d602f2",
-      "head": "2cee6eaa4ce0b19703c436a3b846ec83df3e8ca5"
+      "content_sha256": "78487b01730d1ccff2c434e808046a5e05ad2ca168719b79e9d1e73ecf7c646c",
+      "head": "fdb14873e119a0469277cd15c6804e303d6a503d"
     },
-    "status": "partial",
-    "summary": "Surooh WMS interface with retained catalog/Bol workflows and native ERPNext/Accounting warehouse authority. Architecture: TanStack/React UI and Node server modules; native warehouse commands and durable intent/projection helpers. Modules: src/lib/accounting-session.server.ts, src/lib/native-lab-client.ts, src/lib/native-stock-journal.ts. Selected PR33 integration/wms-auth-cycle-20261025 at4f3ba62633e513c5b08aa8cd3ec06f16dd702e60 (tree e7443f9485dbe311e24e0c748b80cee2a0482269). CURRENT.md says full WMS goal OPEN and new PR33 source NOT deployed. Its existing Render/native observations are historical; no new deployed/tested identity was verified by this memory task.",
-    "tests": []
+    "status": "complete",
+    "summary": "Development memory adoption is integrated and authenticated on integration/wms-auth-cycle-20261025. Original BMAD clean setup/activation/retrieval and independent ordinary acceptance passed. Helper unchanged; tests keep historical identities; project/operational gates remain separate. Surooh WMS interface with retained catalog/Bol workflows and native ERPNext/Accounting warehouse authority. Architecture: TanStack/React UI and Node server modules; native warehouse commands and durable intent/projection helpers. Modules: src/lib/accounting-session.server.ts, src/lib/native-lab-client.ts, src/lib/native-stock-journal.ts. Selected PR33 integration/wms-auth-cycle-20261025 at4f3ba62633e513c5b08aa8cd3ec06f16dd702e60 (tree e7443f9485dbe311e24e0c748b80cee2a0482269). CURRENT.md says full WMS goal OPEN and new PR33 source NOT deployed. Its existing Render/native observations are historical; no new deployed/tested identity was verified by this memory task.",
+    "tests": [
+      {
+        "evidence": [
+          "docs/engineering-memory/evidence/normal-adoption-acceptance-20261028.json"
+        ],
+        "name": "Clean original BMAD setup activation audit brief and source-bound retrieval",
+        "scope": "historical",
+        "source": {
+          "content_sha256": "91c9e9586ada73826ea6a4cc16479e891edc486fe96947a7829fda59bba5a27c",
+          "head": "fdb14873e119a0469277cd15c6804e303d6a503d"
+        },
+        "status": "pass"
+      }
+    ]
   },
-  "event_digest": "2378f7e8489a36912349ca826318b9ac9da02e36821e5adec64401594c640752",
+  "event_digest": "64fff72c491f87c3213ad83df2a401e3ff683d3003ea21086857e300a02e7007",
   "schema_version": 1
 }
 ```

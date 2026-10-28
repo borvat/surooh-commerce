@@ -64,3 +64,16 @@ Owner approved the engineering direction only: shared native accounting/stock/va
 ## Owner-approved alternative verification preparation
 
 G0 = HOSTED_CI_BLOCKED — ALTERNATIVE_VERIFICATION_REQUIRED. The current user authorizes local/isolated synthetic testing and preparation of `verification/` without launching Codex. Do not repair billing or repeatedly rerun Actions. Use `[skip ci]` for preparation commits. Follow `verification/README.md`; require real exit/log/artifact/SHA evidence and human review. No automatic phase completion, other-gate bypass, production change, paid service or main merge.
+
+<!-- bmad:context -->
+<!-- Verified 2026-10-28 against 4f3ba62633e513c5b08aa8cd3ec06f16dd702e60. Existing instructions retained. -->
+
+## Engineering continuity
+
+- For BMAD engineering work, run `python3 tools/project_memory.py resume`, then the engineering learning audit and brief before planning or edits; ordinary original `_bmad/custom/bmad-build.toml` supplies the full workflow.
+- Reuse `docs/wms/completion/CURRENT.md` and `docs/wms/completion/RESULTS.md`; do not duplicate operational memory, auto-promote candidates or treat historical tests as current PASS.
+- Archive material results through the evidence-linked contract in `docs/engineering-memory/README.md`; persist only task-owned changes under existing authority.
+
+<!-- /bmad:context -->
+
+

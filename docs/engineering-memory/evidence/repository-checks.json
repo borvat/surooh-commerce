@@ -1,0 +1,61 @@
+{
+  "repository": "borvat/surooh-commerce",
+  "tested_source": {
+    "content_sha256": "5fb78fc15d044cf5fba8b565b1a8d6d5b00a2bd047b790269b76365bcbd586b6",
+    "head": "4f3ba62633e513c5b08aa8cd3ec06f16dd702e60"
+  },
+  "code_sha256": {
+    "tools/project_memory.py": "cfa3781f74527e9513ff870bfbbdebf20266d5959acd62fca227f2ee066cb417",
+    "tools/agent_learning.py": "679a3fe7a3404c33c57f19dfeba4bc3adeeb30333c8453bc35f966129048eada",
+    "tests/project_memory/test_memory.py": "ae276dc0dc50c2d413a1a8acbdbde1111d57b7fa4716d9533a459f5920e28ee5"
+  },
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "tools/agent_learning.py",
+        "audit"
+      ],
+      "start_utc": "2026-10-27T23:17:03.916504+00:00",
+      "seconds": 0.03729095599919674,
+      "exit_code": 0,
+      "stdout": "VALID lessons=0, verified=0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "tools/agent_learning.py",
+        "brief",
+        "--tag",
+        "engineering"
+      ],
+      "start_utc": "2026-10-27T23:17:03.953814+00:00",
+      "seconds": 0.03415180099909776,
+      "exit_code": 0,
+      "stdout": "No verified lessons match. UNKNOWN is not PASS.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/agent_learning",
+        "-v"
+      ],
+      "start_utc": "2026-10-27T23:17:03.987991+00:00",
+      "seconds": 0.9815031189991714,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_empty_fixture_reports_no_verified_guidance (test_engineering_learning.EngineeringLearningTests.test_empty_fixture_reports_no_verified_guidance) ... ok\ntest_fresh_cli_excludes_candidate_and_preserves_approved_bytes (test_engineering_learning.EngineeringLearningTests.test_fresh_cli_excludes_candidate_and_preserves_approved_bytes) ... ok\ntest_invalid_candidate_metadata_refuses_without_changing_bytes (test_engineering_learning.EngineeringLearningTests.test_invalid_candidate_metadata_refuses_without_changing_bytes) ... ok\ntest_invalid_existing_metadata_prevents_append (test_engineering_learning.EngineeringLearningTests.test_invalid_existing_metadata_prevents_append) ... ok\ntest_retirement_fixture_removes_target_from_brief (test_engineering_learning.EngineeringLearningTests.test_retirement_fixture_removes_target_from_brief) ... ok\ntest_unicode_append_frames_missing_final_newline (test_engineering_learning.EngineeringLearningTests.test_unicode_append_frames_missing_final_newline) ... ok\ntest_unsafe_or_missing_evidence_refuses_without_changing_bytes (test_engineering_learning.EngineeringLearningTests.test_unsafe_or_missing_evidence_refuses_without_changing_bytes) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.936s\n\nOK\n"
+    }
+  ],
+  "portable_core": "20 regressions and 11 independent scenarios ran on frozen identical helper separately; not duplicated here",
+  "limits": "Engineering only. No native application/database tests, live providers, deployment or product acceptance."
+}
